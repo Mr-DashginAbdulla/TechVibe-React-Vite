@@ -17,7 +17,12 @@ const ProfileSidebar = () => {
   const { user, logout, getInitials } = useAuth();
 
   const menuItems = [
-    { name: t("profile.overview"), href: "/profile/overview", icon: User, end: true },
+    {
+      name: t("profile.overview"),
+      href: "/profile/overview",
+      icon: User,
+      end: true,
+    },
     { name: t("profile.myOrders"), href: "/profile/orders", icon: ShoppingBag },
     {
       name: t("profile.myAddresses"),

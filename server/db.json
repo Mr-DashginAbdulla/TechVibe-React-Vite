@@ -1,141 +1,22 @@
 {
   "users": [
     {
-      "id": "1",
-      "firstName": "John",
-      "lastName": "Doe",
-      "email": "john@example.com",
-      "password": "123456",
-      "phone": "+994501112233",
-      "isVerified": true,
-      "avatar": "",
-      "createdAt": "2024-12-15T10:00:00.000Z",
-      "memberSince": "2024-12-15T10:00:00.000Z"
-    },
-    {
-      "id": "9314",
+      "id": "mkth60qz-s7vce3",
       "firstName": "John",
       "lastName": "Doe",
       "email": "example@example.com",
       "password": "Qwerty123@",
-      "avatar": "data:image/jpeg;base64,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",
       "phone": "",
-      "createdAt": "2026-01-23T03:18:20.938Z"
+      "isVerified": false,
+      "avatar": "data:image/jpeg;base64,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",
+      "createdAt": "2026-01-25T08:26:50.315Z",
+      "memberSince": "2026-01-25T08:26:50.315Z"
     }
   ],
-  "addresses": [
-    {
-      "id": "1",
-      "userId": "1",
-      "label": "Home",
-      "firstName": "John",
-      "lastName": "Doe",
-      "address": "Nizami 12, m. 24",
-      "city": "Baku",
-      "state": "Yasamal",
-      "zipCode": "AZ1000",
-      "country": "Azerbaijan",
-      "phone": "+994501112233",
-      "isDefault": true
-    }
-  ],
-  "orders": [
-    {
-      "id": "1",
-      "userId": "1",
-      "orderNumber": "ORD-2025-0001",
-      "status": "delivered",
-      "subtotal": 179.98,
-      "shipping": 20,
-      "total": 199.98,
-      "items": [
-        {
-          "productId": 101,
-          "name": "Wireless Headphones",
-          "brand": "SoundMax",
-          "color": "Black",
-          "quantity": 1,
-          "price": 119.99,
-          "image": "https://images.unsplash.com/photo-1518443952241-1e1f61e99ad7?w=400&q=80"
-        },
-        {
-          "productId": 102,
-          "name": "Smart Watch",
-          "brand": "FitPulse",
-          "color": "Silver",
-          "quantity": 1,
-          "price": 59.99,
-          "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80"
-        }
-      ],
-      "shippingAddress": {
-        "name": "John Doe",
-        "address": "Nizami 12, m. 24",
-        "city": "Baku",
-        "country": "Azerbaijan"
-      },
-      "timeline": [
-        {
-          "status": "ordered",
-          "date": "2024-12-28T10:00:00.000Z",
-          "description": "Order placed"
-        },
-        {
-          "status": "processing",
-          "date": "2024-12-28T12:00:00.000Z",
-          "description": "Preparing order"
-        },
-        {
-          "status": "shipped",
-          "date": "2024-12-29T09:00:00.000Z",
-          "description": "Shipped out"
-        },
-        {
-          "status": "delivered",
-          "date": "2024-12-31T15:30:00.000Z",
-          "description": "Delivered"
-        }
-      ],
-      "createdAt": "2024-12-28T10:00:00.000Z"
-    }
-  ],
-  "products": [
-    {
-      "id": 101,
-      "name": "Wireless Headphones",
-      "brand": "SoundMax",
-      "price": 119.99,
-      "image": "https://images.unsplash.com/photo-1518443952241-1e1f61e99ad7?w=400&q=80",
-      "inStock": true,
-      "rating": 4.6
-    },
-    {
-      "id": 102,
-      "name": "Smart Watch",
-      "brand": "FitPulse",
-      "price": 59.99,
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
-      "inStock": true,
-      "rating": 4.4
-    },
-    {
-      "id": 201,
-      "name": "Noise Cancelling Earbuds",
-      "brand": "AudioPro",
-      "price": 89.99,
-      "originalPrice": 109.99,
-      "discount": 18,
-      "image": "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80",
-      "inStock": true,
-      "rating": 4.7
-    }
-  ],
-  "wishlist": [
-    {
-      "id": "w1",
-      "userId": "1",
-      "productId": 201,
-      "addedAt": "2025-01-02T09:00:00.000Z"
-    }
-  ]
+  "products": [],
+  "categories": [],
+  "cart": [],
+  "wishlist": [],
+  "addresses": [],
+  "orders": []
 }
