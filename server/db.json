@@ -1,22 +1,1180 @@
 {
   "users": [
     {
+      "id": "admin-001",
+      "firstName": "Admin",
+      "lastName": "User",
+      "email": "admin@techvibe.com",
+      "password": "admin",
+      "role": "admin",
+      "phone": "",
+      "isVerified": true,
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&q=80",
+      "createdAt": "2026-01-20T10:00:00.000Z"
+    },
+    {
       "id": "mkth60qz-s7vce3",
       "firstName": "John",
       "lastName": "Doe",
       "email": "example@example.com",
       "password": "Qwerty123@",
-      "phone": "",
+      "role": "user",
+      "phone": "+994501234567",
       "isVerified": false,
-      "avatar": "data:image/jpeg;base64,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",
-      "createdAt": "2026-01-25T08:26:50.315Z",
-      "memberSince": "2026-01-25T08:26:50.315Z"
+      "avatar": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&q=80",
+      "createdAt": "2026-01-25T08:26:50.315Z"
     }
   ],
-  "products": [],
-  "categories": [],
+  "categories": [
+    {
+      "id": "audio",
+      "name": "Audio",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80"
+    },
+    {
+      "id": "laptops",
+      "name": "Laptops",
+      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80"
+    },
+    {
+      "id": "smartphones",
+      "name": "Smartphones",
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80"
+    },
+    {
+      "id": "wearables",
+      "name": "Wearables",
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80"
+    },
+    {
+      "id": "gaming",
+      "name": "Gaming",
+      "image": "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80"
+    },
+    {
+      "id": "cameras",
+      "name": "Cameras",
+      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80"
+    }
+  ],
+  "products": [
+    {
+      "id": "101",
+      "name": "Sony WH-1000XM5",
+      "price": 349.99,
+      "category": "audio",
+      "brand": "Sony",
+      "rating": 4.8,
+      "reviewsCount": 124,
+      "stock": 15,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Industry-leading noise cancellation...",
+      "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80"
+      ],
+      "oldPrice": 399.99
+    },
+    {
+      "id": "102",
+      "name": "Apple AirPods Max",
+      "price": 549.0,
+      "category": "audio",
+      "brand": "Apple",
+      "rating": 4.6,
+      "reviewsCount": 89,
+      "stock": 10,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "High-fidelity audio...",
+      "image": "https://images.unsplash.com/photo-1628202926206-c63a34b1618f?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1628202926206-c63a34b1618f?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "103",
+      "name": "JBL Flip 6",
+      "price": 129.95,
+      "category": "audio",
+      "brand": "JBL",
+      "rating": 4.7,
+      "reviewsCount": 340,
+      "stock": 45,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Bold JBL Original Pro Sound...",
+      "image": "https://images.unsplash.com/photo-1629281336496-c694a5c9f535?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1629281336496-c694a5c9f535?w=500&q=80"
+      ],
+      "oldPrice": 149.99
+    },
+    {
+      "id": "104",
+      "name": "Bose QuietComfort 45",
+      "price": 329.0,
+      "category": "audio",
+      "brand": "Bose",
+      "rating": 4.5,
+      "reviewsCount": 210,
+      "stock": 20,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Iconic quiet. Comfort. And sound...",
+      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80"
+      ],
+      "oldPrice": 349.0
+    },
+    {
+      "id": "105",
+      "name": "Sony WF-1000XM5",
+      "price": 299.99,
+      "category": "audio",
+      "brand": "Sony",
+      "rating": 4.4,
+      "reviewsCount": 95,
+      "stock": 30,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "The best noise cancelling earbuds...",
+      "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "106",
+      "name": "Beats Studio Pro",
+      "price": 349.99,
+      "category": "audio",
+      "brand": "Beats",
+      "rating": 4.3,
+      "reviewsCount": 150,
+      "stock": 25,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Completely custom acoustic platform...",
+      "image": "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "107",
+      "name": "Sennheiser Momentum 4",
+      "price": 379.95,
+      "category": "audio",
+      "brand": "Sennheiser",
+      "rating": 4.6,
+      "reviewsCount": 60,
+      "stock": 12,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Signature Sound and adaptive ANC...",
+      "image": "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "108",
+      "name": "JBL Charge 5",
+      "price": 179.95,
+      "category": "audio",
+      "brand": "JBL",
+      "rating": 4.8,
+      "reviewsCount": 500,
+      "stock": 40,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Play and charge endlessly...",
+      "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "109",
+      "name": "Marshall Stanmore III",
+      "price": 379.99,
+      "category": "audio",
+      "brand": "Marshall",
+      "rating": 4.7,
+      "reviewsCount": 80,
+      "stock": 8,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Legendary sound, re-engineered...",
+      "image": "https://images.unsplash.com/photo-1620121474663-128a1c9735d6?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1620121474663-128a1c9735d6?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "110",
+      "name": "Apple AirPods Pro 2",
+      "price": 249.0,
+      "category": "audio",
+      "brand": "Apple",
+      "rating": 4.9,
+      "reviewsCount": 1200,
+      "stock": 50,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Rebuilt from the sound up...",
+      "image": "https://images.unsplash.com/photo-1603351154351-5cfb3e19ef0f?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1603351154351-5cfb3e19ef0f?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+
+    {
+      "id": "201",
+      "name": "MacBook Air M2",
+      "price": 1199.0,
+      "category": "laptops",
+      "brand": "Apple",
+      "rating": 4.9,
+      "reviewsCount": 210,
+      "stock": 8,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Supercharged by M2 chip...",
+      "image": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80"
+      ],
+      "oldPrice": 1299.0
+    },
+    {
+      "id": "202",
+      "name": "Dell XPS 13 Plus",
+      "price": 1399.0,
+      "category": "laptops",
+      "brand": "Dell",
+      "rating": 4.5,
+      "reviewsCount": 56,
+      "stock": 5,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Twice as powerful as before...",
+      "image": "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "203",
+      "name": "ASUS ROG Zephyrus",
+      "price": 1649.99,
+      "category": "laptops",
+      "brand": "ASUS",
+      "rating": 4.8,
+      "reviewsCount": 112,
+      "stock": 12,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Gaming powerhouse...",
+      "image": "https://images.unsplash.com/photo-1636544520935-802c61176b6b?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1636544520935-802c61176b6b?w=500&q=80"
+      ],
+      "oldPrice": 1899.99
+    },
+    {
+      "id": "204",
+      "name": "Lenovo ThinkPad X1",
+      "price": 1899.0,
+      "category": "laptops",
+      "brand": "Lenovo",
+      "rating": 4.7,
+      "reviewsCount": 88,
+      "stock": 10,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Ultralight business laptop...",
+      "image": "https://images.unsplash.com/photo-1588872657578-883557e93b60?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1588872657578-883557e93b60?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "205",
+      "name": "HP Spectre x360",
+      "price": 1299.99,
+      "category": "laptops",
+      "brand": "HP",
+      "rating": 4.6,
+      "reviewsCount": 75,
+      "stock": 15,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "2-in-1 Laptop with touchscreen...",
+      "image": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "206",
+      "name": "MacBook Pro 16 M3 Max",
+      "price": 3499.0,
+      "category": "laptops",
+      "brand": "Apple",
+      "rating": 5.0,
+      "reviewsCount": 45,
+      "stock": 3,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Mind-blowing. Head-turning...",
+      "image": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "207",
+      "name": "Razer Blade 15",
+      "price": 2499.99,
+      "category": "laptops",
+      "brand": "Razer",
+      "rating": 4.4,
+      "reviewsCount": 65,
+      "stock": 7,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Portable Powerhouse...",
+      "image": "https://images.unsplash.com/photo-1531297461136-82af022f5b79?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1531297461136-82af022f5b79?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "208",
+      "name": "Microsoft Surface Laptop",
+      "price": 999.99,
+      "category": "laptops",
+      "brand": "Microsoft",
+      "rating": 4.5,
+      "reviewsCount": 90,
+      "stock": 20,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Sleek and super-light weight...",
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "209",
+      "name": "Acer Swift Go 14",
+      "price": 799.99,
+      "category": "laptops",
+      "brand": "Acer",
+      "rating": 4.3,
+      "reviewsCount": 120,
+      "stock": 30,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Ready to go OLED laptop...",
+      "image": "https://images.unsplash.com/photo-1544731612-de7f96afe55f?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1544731612-de7f96afe55f?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "210",
+      "name": "MSI Raider GE78",
+      "price": 3299.0,
+      "category": "laptops",
+      "brand": "MSI",
+      "rating": 4.7,
+      "reviewsCount": 30,
+      "stock": 4,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Light'em Up with RGB...",
+      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+
+    {
+      "id": "301",
+      "name": "Samsung Galaxy S24 Ultra",
+      "price": 1299.99,
+      "category": "smartphones",
+      "brand": "Samsung",
+      "rating": 4.7,
+      "reviewsCount": 450,
+      "stock": 20,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Galaxy AI is here...",
+      "image": "https://images.unsplash.com/photo-1610945265078-d86f3d297df2?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1610945265078-d86f3d297df2?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "302",
+      "name": "iPhone 15 Pro Max",
+      "price": 1199.0,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.9,
+      "reviewsCount": 1200,
+      "stock": 25,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Titanium design...",
+      "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "303",
+      "name": "Google Pixel 8 Pro",
+      "price": 999.0,
+      "category": "smartphones",
+      "brand": "Google",
+      "rating": 4.5,
+      "reviewsCount": 88,
+      "stock": 18,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "The all-pro phone...",
+      "image": "https://images.unsplash.com/photo-1598327105666-5b89351aff23?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1598327105666-5b89351aff23?w=500&q=80"
+      ],
+      "oldPrice": 1059.0
+    },
+    {
+      "id": "304",
+      "name": "OnePlus 12",
+      "price": 799.99,
+      "category": "smartphones",
+      "brand": "OnePlus",
+      "rating": 4.6,
+      "reviewsCount": 150,
+      "stock": 15,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Smooth Beyond Belief...",
+      "image": "https://images.unsplash.com/photo-1580910051074-3eb6948d3ad3?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1580910051074-3eb6948d3ad3?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "305",
+      "name": "Xiaomi 14 Ultra",
+      "price": 1099.0,
+      "category": "smartphones",
+      "brand": "Xiaomi",
+      "rating": 4.5,
+      "reviewsCount": 60,
+      "stock": 10,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Leica optics...",
+      "image": "https://images.unsplash.com/photo-1595941069915-4ebc5d27aa5e?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1595941069915-4ebc5d27aa5e?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "306",
+      "name": "Samsung Galaxy Z Flip 5",
+      "price": 999.99,
+      "category": "smartphones",
+      "brand": "Samsung",
+      "rating": 4.4,
+      "reviewsCount": 200,
+      "stock": 12,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Join the flip side...",
+      "image": "https://images.unsplash.com/photo-1603539276413-5975612c6a46?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1603539276413-5975612c6a46?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "307",
+      "name": "iPhone 15",
+      "price": 799.0,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviewsCount": 800,
+      "stock": 40,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Dynamic Island...",
+      "image": "https://images.unsplash.com/photo-1696446701796-da61225697cc?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1696446701796-da61225697cc?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "308",
+      "name": "Sony Xperia 1 V",
+      "price": 1399.0,
+      "category": "smartphones",
+      "brand": "Sony",
+      "rating": 4.3,
+      "reviewsCount": 40,
+      "stock": 5,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Next-gen sensor...",
+      "image": "https://images.unsplash.com/photo-1533228876829-65c94e7b5025?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1533228876829-65c94e7b5025?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "309",
+      "name": "Nothing Phone (2)",
+      "price": 599.0,
+      "category": "smartphones",
+      "brand": "Nothing",
+      "rating": 4.5,
+      "reviewsCount": 110,
+      "stock": 25,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Come to the bright side...",
+      "image": "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "310",
+      "name": "Google Pixel 8a",
+      "price": 499.0,
+      "category": "smartphones",
+      "brand": "Google",
+      "rating": 4.6,
+      "reviewsCount": 90,
+      "stock": 35,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Delightful. Powerful...",
+      "image": "https://images.unsplash.com/photo-1620241608701-94ef138c7ec9?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1620241608701-94ef138c7ec9?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+
+    {
+      "id": "401",
+      "name": "Apple Watch Series 9",
+      "price": 399.0,
+      "category": "wearables",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviewsCount": 300,
+      "stock": 40,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Smarter. Brighter...",
+      "image": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "402",
+      "name": "Samsung Galaxy Watch 6",
+      "price": 299.99,
+      "category": "wearables",
+      "brand": "Samsung",
+      "rating": 4.6,
+      "reviewsCount": 150,
+      "stock": 30,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Wellness journey...",
+      "image": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80"
+      ],
+      "oldPrice": 349.99
+    },
+    {
+      "id": "403",
+      "name": "Garmin Fenix 7 Pro",
+      "price": 799.99,
+      "category": "wearables",
+      "brand": "Garmin",
+      "rating": 4.9,
+      "reviewsCount": 80,
+      "stock": 10,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Be your best. All day...",
+      "image": "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "404",
+      "name": "Fitbit Charge 6",
+      "price": 159.95,
+      "category": "wearables",
+      "brand": "Fitbit",
+      "rating": 4.4,
+      "reviewsCount": 220,
+      "stock": 50,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Give your routine a boost...",
+      "image": "https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1576243345690-4e4b79b63288?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "405",
+      "name": "Apple Watch Ultra 2",
+      "price": 799.0,
+      "category": "wearables",
+      "brand": "Apple",
+      "rating": 5.0,
+      "reviewsCount": 110,
+      "stock": 15,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Next level adventure...",
+      "image": "https://images.unsplash.com/photo-1695232742959-1e16f3933c0d?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1695232742959-1e16f3933c0d?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "406",
+      "name": "Google Pixel Watch 2",
+      "price": 349.99,
+      "category": "wearables",
+      "brand": "Google",
+      "rating": 4.3,
+      "reviewsCount": 90,
+      "stock": 20,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Help by Google...",
+      "image": "https://images.unsplash.com/photo-1669046261595-5e6382103328?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1669046261595-5e6382103328?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "407",
+      "name": "Oura Ring Gen 3",
+      "price": 299.0,
+      "category": "wearables",
+      "brand": "Oura",
+      "rating": 4.5,
+      "reviewsCount": 180,
+      "stock": 25,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Smart ring for sleep...",
+      "image": "https://images.unsplash.com/photo-1605218427368-2c262a4ae3f9?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1605218427368-2c262a4ae3f9?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "408",
+      "name": "Amazfit GTR 4",
+      "price": 199.99,
+      "category": "wearables",
+      "brand": "Amazfit",
+      "rating": 4.4,
+      "reviewsCount": 130,
+      "stock": 35,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Smart fitness made easy...",
+      "image": "https://images.unsplash.com/photo-1557431177-36141475c676?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1557431177-36141475c676?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "409",
+      "name": "Whoop 4.0",
+      "price": 239.0,
+      "category": "wearables",
+      "brand": "Whoop",
+      "rating": 4.2,
+      "reviewsCount": 70,
+      "stock": 40,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Wearable health coach...",
+      "image": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "410",
+      "name": "Samsung Galaxy Watch 5",
+      "price": 449.99,
+      "category": "wearables",
+      "brand": "Samsung",
+      "rating": 4.7,
+      "reviewsCount": 160,
+      "stock": 10,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Built for adventure...",
+      "image": "https://images.unsplash.com/photo-1596558299946-4c407596048d?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1596558299946-4c407596048d?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+
+    {
+      "id": "501",
+      "name": "PlayStation 5 Slim",
+      "price": 499.99,
+      "category": "gaming",
+      "brand": "Sony",
+      "rating": 5.0,
+      "reviewsCount": 5000,
+      "stock": 10,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Play Like Never Before...",
+      "image": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "502",
+      "name": "Xbox Series X",
+      "price": 499.0,
+      "category": "gaming",
+      "brand": "Microsoft",
+      "rating": 4.8,
+      "reviewsCount": 2300,
+      "stock": 15,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Power your dreams...",
+      "image": "https://images.unsplash.com/photo-1621259182902-3815e095684e?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1621259182902-3815e095684e?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "503",
+      "name": "Nintendo Switch OLED",
+      "price": 349.99,
+      "category": "gaming",
+      "brand": "Nintendo",
+      "rating": 4.9,
+      "reviewsCount": 3500,
+      "stock": 25,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "7-inch OLED screen...",
+      "image": "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "504",
+      "name": "Logitech G Pro X",
+      "price": 159.99,
+      "category": "gaming",
+      "brand": "Logitech",
+      "rating": 4.9,
+      "reviewsCount": 900,
+      "stock": 50,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Less than 63g...",
+      "image": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "505",
+      "name": "DualSense Controller",
+      "price": 69.99,
+      "category": "gaming",
+      "brand": "Sony",
+      "rating": 4.8,
+      "reviewsCount": 4000,
+      "stock": 60,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Haptic feedback...",
+      "image": "https://images.unsplash.com/photo-1629424304724-6dcc69c0d30d?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1629424304724-6dcc69c0d30d?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "506",
+      "name": "Xbox Wireless Controller",
+      "price": 59.99,
+      "category": "gaming",
+      "brand": "Microsoft",
+      "rating": 4.7,
+      "reviewsCount": 2500,
+      "stock": 55,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Textured grip...",
+      "image": "https://images.unsplash.com/photo-1600080972464-8e5f35f63d88?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1600080972464-8e5f35f63d88?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "507",
+      "name": "Razer BlackWidow V4",
+      "price": 169.99,
+      "category": "gaming",
+      "brand": "Razer",
+      "rating": 4.6,
+      "reviewsCount": 300,
+      "stock": 20,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Mechanical gaming keyboard...",
+      "image": "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "508",
+      "name": "SteelSeries Arctis",
+      "price": 349.99,
+      "category": "gaming",
+      "brand": "SteelSeries",
+      "rating": 4.5,
+      "reviewsCount": 150,
+      "stock": 10,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Almighty Audio...",
+      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "509",
+      "name": "Meta Quest 3",
+      "price": 499.99,
+      "category": "gaming",
+      "brand": "Meta",
+      "rating": 4.8,
+      "reviewsCount": 200,
+      "stock": 15,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Mixed reality headset...",
+      "image": "https://images.unsplash.com/photo-1622979135225-d2ba269fb1ac?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1622979135225-d2ba269fb1ac?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "510",
+      "name": "Steam Deck OLED",
+      "price": 549.0,
+      "category": "gaming",
+      "brand": "Valve",
+      "rating": 4.9,
+      "reviewsCount": 600,
+      "stock": 8,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Portable PC gaming...",
+      "image": "https://images.unsplash.com/photo-1658428131343-41870a442750?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1658428131343-41870a442750?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+
+    {
+      "id": "601",
+      "name": "Sony Alpha a7 IV",
+      "price": 2498.0,
+      "category": "cameras",
+      "brand": "Sony",
+      "rating": 4.9,
+      "reviewsCount": 85,
+      "stock": 5,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Beyond basic...",
+      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "602",
+      "name": "Canon EOS R6",
+      "price": 2299.0,
+      "category": "cameras",
+      "brand": "Canon",
+      "rating": 4.8,
+      "reviewsCount": 60,
+      "stock": 8,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Master of stills...",
+      "image": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "603",
+      "name": "GoPro HERO12 Black",
+      "price": 349.99,
+      "category": "cameras",
+      "brand": "GoPro",
+      "rating": 4.7,
+      "reviewsCount": 300,
+      "stock": 25,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Incredible image quality...",
+      "image": "https://images.unsplash.com/photo-1564466199370-17673ca56bd8?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1564466199370-17673ca56bd8?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "604",
+      "name": "Nikon Z8",
+      "price": 3796.95,
+      "category": "cameras",
+      "brand": "Nikon",
+      "rating": 4.9,
+      "reviewsCount": 40,
+      "stock": 4,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Supreme agility...",
+      "image": "https://images.unsplash.com/photo-1516724562728-afc824a36e84?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1516724562728-afc824a36e84?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "605",
+      "name": "Fujifilm X100VI",
+      "price": 1599.0,
+      "category": "cameras",
+      "brand": "Fujifilm",
+      "rating": 4.8,
+      "reviewsCount": 120,
+      "stock": 2,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "The one and only...",
+      "image": "https://images.unsplash.com/photo-1533158388470-9a56699990c6?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1533158388470-9a56699990c6?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "606",
+      "name": "DJI Mini 4 Pro",
+      "price": 759.0,
+      "category": "cameras",
+      "brand": "DJI",
+      "rating": 4.7,
+      "reviewsCount": 150,
+      "stock": 18,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Mini to the max...",
+      "image": "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "607",
+      "name": "Panasonic Lumix S5II",
+      "price": 1997.99,
+      "category": "cameras",
+      "brand": "Panasonic",
+      "rating": 4.6,
+      "reviewsCount": 55,
+      "stock": 10,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Phase Hybrid AF...",
+      "image": "https://images.unsplash.com/photo-1626225492211-736e4f32e921?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1626225492211-736e4f32e921?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "608",
+      "name": "Sony ZV-E10",
+      "price": 698.0,
+      "category": "cameras",
+      "brand": "Sony",
+      "rating": 4.5,
+      "reviewsCount": 220,
+      "stock": 30,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Interchangeable-lens vlog camera...",
+      "image": "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "609",
+      "name": "Insta360 X3",
+      "price": 399.99,
+      "category": "cameras",
+      "brand": "Insta360",
+      "rating": 4.6,
+      "reviewsCount": 180,
+      "stock": 22,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Magic in action...",
+      "image": "https://images.unsplash.com/photo-1596707323145-98565a585721?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1596707323145-98565a585721?w=500&q=80"
+      ],
+      "oldPrice": null
+    },
+    {
+      "id": "610",
+      "name": "Polaroid Now+ Gen 2",
+      "price": 149.99,
+      "category": "cameras",
+      "brand": "Polaroid",
+      "rating": 4.4,
+      "reviewsCount": 95,
+      "stock": 40,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "App-connected instant camera...",
+      "image": "https://images.unsplash.com/photo-1563812850-25e2e8e7943c?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1563812850-25e2e8e7943c?w=500&q=80"
+      ],
+      "oldPrice": null
+    }
+  ],
+  "reviews": [
+    {
+      "id": "r1",
+      "productId": "101",
+      "userId": "mkth60qz-s7vce3",
+      "userName": "John Doe",
+      "rating": 5,
+      "comment": "Super məhsuldur!",
+      "date": "2025-10-24"
+    }
+  ],
+  "addresses": [
+    {
+      "id": "addr-1",
+      "userId": "mkth60qz-s7vce3",
+      "title": "Ev Ünvanı",
+      "city": "Bakı",
+      "street": "Nizami küçəsi 15",
+      "zip": "AZ1000"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ord-1",
+      "userId": "mkth60qz-s7vce3",
+      "totalAmount": 349.99,
+      "status": "Shipped",
+      "date": "2026-01-24",
+      "items": [{ "productId": "101", "quantity": 1, "price": 349.99 }]
+    }
+  ],
   "cart": [],
-  "wishlist": [],
-  "addresses": [],
-  "orders": []
+  "wishlist": []
 }

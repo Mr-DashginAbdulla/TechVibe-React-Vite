@@ -4,8 +4,4 @@ import App from "./App";
 import "./assets/styles/global.css";
 import "./locales/i18n";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

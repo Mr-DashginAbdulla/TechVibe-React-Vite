@@ -7,66 +7,6 @@ const FeaturedProducts = ({ products = [], onAddToCart, onToggleFavorite }) => {
   const { t } = useTranslation();
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  const demoProducts = [
-    {
-      id: 101,
-      name: "Dell XPS 15 OLED Laptop",
-      image:
-        "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&q=80",
-      price: 1799.99,
-      originalPrice: 1999.99,
-      rating: 5,
-      reviewCount: 156,
-      discount: 10,
-    },
-    {
-      id: 102,
-      name: "Samsung Galaxy S24 Ultra",
-      image:
-        "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&q=80",
-      price: 1099.99,
-      originalPrice: 1299.99,
-      rating: 5,
-      reviewCount: 203,
-      discount: 15,
-    },
-    {
-      id: 103,
-      name: "Sony WH-1000XM5 Headphones",
-      image:
-        "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&q=80",
-      price: 348.0,
-      originalPrice: 399.99,
-      rating: 5,
-      reviewCount: 428,
-      discount: 13,
-    },
-    {
-      id: 104,
-      name: 'iPad Pro 12.9" M2 Chip',
-      image:
-        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&q=80",
-      price: 1049.99,
-      originalPrice: 1199.99,
-      rating: 5,
-      reviewCount: 187,
-      discount: 12,
-    },
-    {
-      id: 105,
-      name: "GoPro HERO12 Black",
-      image:
-        "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&q=80",
-      price: 349.99,
-      originalPrice: 399.99,
-      rating: 4,
-      reviewCount: 94,
-      discount: 12,
-    },
-  ];
-
-  const displayProducts = products.length > 0 ? products : demoProducts;
-
   const scroll = (direction) => {
     const container = document.getElementById("featured-products-container");
     if (container) {
@@ -104,21 +44,27 @@ const FeaturedProducts = ({ products = [], onAddToCart, onToggleFavorite }) => {
           </div>
         </div>
 
-        <div
-          id="featured-products-container"
-          className="flex gap-[24px] overflow-x-auto scrollbar-hide pb-[16px]"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {displayProducts.map((product) => (
-            <div key={product.id} className="flex-shrink-0 w-[280px]">
-              <ProductCard
-                {...product}
-                onAddToCart={onAddToCart}
-                onToggleFavorite={onToggleFavorite}
-              />
-            </div>
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div
+            id="featured-products-container"
+            className="flex gap-[24px] overflow-x-auto scrollbar-hide pb-[16px]"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {products.map((product) => (
+              <div key={product.id} className="flex-shrink-0 w-[280px]">
+                <ProductCard
+                  {...product}
+                  onAddToCart={onAddToCart}
+                  onToggleFavorite={onToggleFavorite}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 py-10">
+            Öne çıxan məhsul tapılmadı.
+          </p>
+        )}
       </div>
     </section>
   );

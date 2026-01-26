@@ -17,6 +17,7 @@ import MyAddresses from "@/pages/profile/MyAddresses";
 import MyOrders from "@/pages/profile/MyOrders";
 import OrderDetails from "@/pages/profile/OrderDetails";
 import MyWishlist from "@/pages/profile/MyWishlist";
+import ProductDetails from "@/pages/public/Products/ProductDetails";
 
 const NotFound = () => (
   <div className="min-h-[60vh] flex items-center justify-center px-[16px]">
@@ -59,6 +60,8 @@ export default function AppRoutes() {
         <Route path="orders/:id" element={<OrderDetails />} />
         <Route path="wishlist" element={<MyWishlist />} />
       </Route>
+
+      <Route path="/product/:id" element={<ProductDetails />} />
 
       <Route path="/terms" element={<Navigate to="/" replace />} />
       <Route path="/privacy" element={<Navigate to="/" replace />} />

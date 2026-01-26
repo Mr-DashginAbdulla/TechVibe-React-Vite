@@ -1,73 +1,67 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { authService } from "@/services/authService";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // On mount, check sessionStorage and validate with backend
+  // 1. BAŞLANĞIC: Səhifə yenilənəndə (Refresh) işə düşür
   useEffect(() => {
-    const initializeAuth = async () => {
-      const storedUserId = sessionStorage.getItem("userId");
+    const initAuth = async () => {
+      // LocalStorage-dən yalnız ID-ni (Token kimi) oxuyuruq
+      const storedUserId = localStorage.getItem("auth_token");
 
       if (storedUserId) {
         try {
-          // Validate user exists in backend (db.json)
-          const freshUser = await authService.getUserById(storedUserId);
-          setUser(freshUser);
-          setIsLoggedIn(true);
+          // Tokenə əsasən serverdən useri tapırıq
+          const response = await fetch(
+            `http://localhost:3000/users/${storedUserId}`,
+          );
+
+          if (response.ok) {
+            const userData = await response.json();
+            setUser(userData); // Useri RAM-a yazırıq
+          } else {
+            // User serverdə tapılmadısa (silinibbsə), təmizləyirik
+            console.warn("User not found via token");
+            logout();
+          }
         } catch (error) {
-          // User not found in backend, clear session
-          console.error("User not found in backend:", error);
-          sessionStorage.removeItem("userId");
+          console.error("Session check failed:", error);
+          // Server xətası olsa belə (internet yoxdursa), useri atmırıq,
+          // amma burada təhlükəsizlik üçün logout edə bilərik.
         }
       }
+
+      // Yoxlama bitdi, loading-i dayandırırıq
       setIsLoading(false);
     };
 
-    initializeAuth();
+    initAuth();
   }, []);
 
-  // Login - validates against backend, stores only userId in session
+  // 2. LOGIN funksiyası
   const login = (userData) => {
-    setUser(userData);
-    setIsLoggedIn(true);
-    // Store only userId - actual data fetched from backend
-    sessionStorage.setItem("userId", userData.id);
+    setUser(userData); // Məlumatı RAM-a yazırıq
+    localStorage.setItem("auth_token", userData.id); // Yalnız ID-ni saxlayırıq
   };
 
-  // Logout - clears session
+  // 3. LOGOUT funksiyası
   const logout = () => {
     setUser(null);
-    setIsLoggedIn(false);
-    sessionStorage.removeItem("userId");
+    localStorage.removeItem("auth_token"); // Tokeni silirik
+    toast.info("Hesabdan çıxış edildi");
   };
 
-  // Update user data
+  // 4. UPDATE funksiyası (Profil yenilənəndə)
   const updateUser = (updatedUserData) => {
     setUser(updatedUserData);
+    // Token dəyişmir, çünki ID eynidir
   };
 
-  // Refresh user data from backend
-  const refreshUser = async () => {
-    if (user?.id) {
-      try {
-        const freshUser = await authService.getUserById(user.id);
-        setUser(freshUser);
-        return freshUser;
-      } catch (error) {
-        console.error("Failed to refresh user:", error);
-        logout();
-        return null;
-      }
-    }
-    return null;
-  };
-
-  // Get user initials (e.g., "JD" for John Doe)
+  // 5. Initials (Məsələn: "JD")
   const getInitials = () => {
     if (!user) return "";
     const first = user.firstName?.[0] || "";
@@ -77,12 +71,11 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     user,
-    isLoggedIn,
+    isLoggedIn: !!user, // User varsa true, yoxsa false
     isLoading,
     login,
     logout,
     updateUser,
-    refreshUser,
     getInitials,
   };
 
