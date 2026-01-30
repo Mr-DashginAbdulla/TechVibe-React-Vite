@@ -72,22 +72,18 @@ function Home() {
   return (
     <>
       <HeroSection />
-
       {/* Məlumatları ötürürük */}
       <NewArrivals
         products={newArrivals}
         onAddToCart={handleAddToCart}
         onToggleFavorite={handleToggleFavorite}
       />
-
       <ShopByCategory categories={categories} />
-
       <FeaturedProducts
         products={featuredProducts}
         onAddToCart={handleAddToCart}
         onToggleFavorite={handleToggleFavorite}
       />
-
       <Newsletter />
     </>
   );
