@@ -3,7 +3,6 @@ import MainLayout from "@/layouts/MainLayout";
 
 import Home from "@/pages/public/Home/Home";
 import ProductDetails from "@/pages/public/Products/ProductDetails";
-import Basket from "@/pages/public/Basket/Basket";
 import Checkout from "@/pages/public/Checkout/Checkout";
 
 import Login from "@/pages/auth/Login";
@@ -20,6 +19,7 @@ import MyAddresses from "@/pages/profile/MyAddresses";
 import MyOrders from "@/pages/profile/MyOrders";
 import OrderDetails from "@/pages/profile/OrderDetails";
 import MyWishlist from "@/pages/profile/MyWishlist";
+import ProfileCart from "@/pages/profile/ProfileCart";
 
 const NotFound = () => (
   <div className="min-h-[60vh] flex items-center justify-center px-[16px]">
@@ -42,7 +42,10 @@ export default function AppRoutes() {
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/basket" element={<Basket />} />
+        <Route
+          path="/basket"
+          element={<Navigate to="/profile/cart" replace />}
+        />
         <Route path="/checkout" element={<Checkout />} />
       </Route>
 
@@ -64,6 +67,7 @@ export default function AppRoutes() {
         <Route path="orders" element={<MyOrders />} />
         <Route path="orders/:id" element={<OrderDetails />} />
         <Route path="wishlist" element={<MyWishlist />} />
+        <Route path="cart" element={<ProfileCart />} />
       </Route>
 
       <Route path="/terms" element={<Navigate to="/" replace />} />

@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 import { useGetCartQuery } from "@/store/api/productsApi";
 import logoImg from "@/assets/images/TechVibeLogo-Light.png";
+import CartDrawer from "./CartDrawer";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -30,6 +31,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const profileRef = useRef(null);
   const langRef = useRef(null);
 
@@ -142,8 +144,8 @@ const Header = () => {
               <Heart className="w-[22px] h-[22px] text-[#374151]" />
             </Link>
 
-            <Link
-              to="/basket"
+            <button
+              onClick={() => setIsCartOpen(true)}
               className="relative p-[10px] rounded-[12px] hover:bg-[#F3F4F6] transition-colors"
             >
               <ShoppingCart className="w-[22px] h-[22px] text-[#374151]" />
@@ -152,7 +154,7 @@ const Header = () => {
                   {cartCount > 9 ? "9+" : cartCount}
                 </span>
               )}
-            </Link>
+            </button>
 
             {isLoggedIn ? (
               <div className="relative" ref={profileRef}>
@@ -262,6 +264,9 @@ const Header = () => {
           </div>
         )}
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };

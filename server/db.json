@@ -21,7 +21,7 @@
       "role": "user",
       "phone": "+994501234567",
       "isVerified": false,
-      "avatar": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCABwAMgDASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAABAUAAgMBBgf/xAAyEAACAQMDAwMCBQMFAQAAAAABAgMABBESITEFE0EiUWEycQYUgZGhI7HwFUJS0eHx/8QAGgEAAgMBAQAAAAAAAAAAAAAAAgMAAQQFBv/EACcRAAICAgIBBAICAwAAAAAAAAECABEDIRIxBBMiQVFhoQVxMtHw/9oADAMBAAIRAxEAPwD6BCuYsAgfFCP2Lb0SkSOoySBgZrG2knMiwsCo5LPRwjBcuu4OxyOfvXQqjPNg810ID+RM7ZKMp8ngftXLro6NCRrCgb40759//KOkl7SkIAQefihbmSadMxth1XbfarDNcW+PGAQRZgS2MaRGN0VuQGA3xUdIoLZjoXZTsRz8Ve2jaNSWkBB5A3AP3oC4vEeZlZX0jb0tjcZ/vTRZMyMVRbqpLC5kEwifUxbyzcbUzpVFPZ/mA3ZYZPLNkD5plHNHKMxuGq3G7qVgbVE3LDOBnmqzRiWIoTgHn7VeqSxiWJkP+4YoBHkanY0EcaoDkKMV0sq/UQM+5pa9zc2bhWcSrjYn/uh7i8kuQFcKAN8CjCEzO3kKoqtw+7vUSPTE4d28qc4+awt76RVOYy6rgsxJJqdNt/UJ2x5C78/5vR6qFUlowC2dWkZBqzQ1KXm/vuosu5hcRB1RVAbA9Xq/b9qEomS1Vwz2za0UZPuKGpq1WpjycibMlSpW0dpPLGHRMqfORV3UAAnqY0ZY28kwzr0oDv7mrW1nhO5JEXONkzjFG280Mm0eNSgAgDGKWzfU04sOwWg89oyAdkyMT85/+UVB09ni1SuQ3gDgVsK2jcj0+DSSxqbVwpdmDtahI2dEMmgZI4zjmuJCMR6/VqUEYHPB4/X+KJwukq7DScgg8frWkcIVF0jYbjPj5oeUb6QJ1KPaQKwyoxj1ZJ2+9Sjcl4tTDLL7VKDkY84l+B+oHgrIGLMyjPp5AqCRyCASB4wP4rmtQc85qrPnOnYe1FF3UHlnMc+ZGKoQBkeTv8UJc3jvEVWMhWP1ZoyeNZ49LceD7VwESRaJVzvp9Q+ojzTARMzhjYuLLaGV2LRHHhsH3rOezmjkZdBYAZ1AbU0t7KJGypZmJyN/+q2YfqDRc6OokePabnnBsaa2/ThDIJDKSRxgYrrdLgZiQzKPAB4rB57i1JhkZip+mTG9GW5aEUmP0jbiM65kDzQD9QzCVVgJAOc/+UPHNM7KzOWBycE4BI9/03oAhjznUGhuGXdiJ2MiNpfHGOayg6YGQNNqDeVzRcZcALoUEYyuePfH+e9ag5zsRg43quRAqX6SMeREWM8Vrc6QWXCgNo9/1oyO9ik9K6if9uR9X2rt1aLdBckqV8isIunxJcoPzAaT1OsfDELjJ+QNQz9x+tkqRuUqZQ1INTS4tTJGVhWNQ+7EjFZw9LRcNKxY+w4oyOe3uRI1szusMrQSFkKjuLjWB7gE4z7g+1dLAZ34GTQByRqNfAqv7xuZuIUCFo10rwSBharb3MMzusfIO/z4zV7h1SBmddS43HxQNpd2yEDt9tsY1c5+9EBYi2cK4Fwq7m7UDgE6sc44pfbwzRXS4jkODk42yKyluJJJjLqIOfTvxVxe3JYf1T/FMCkCZXyq7WfiOxVkwuwG3NLrfqOtwsqAajgEUyXfakkEdzoY3V9id+kEkAt4Fb2dzFdjCyZK4NYfUcD96EMosL0aIBjg+x+3zvQ1cMvwIPxGd5P+WTOxYnjOM1KV399AyAq5fUN8Z59t/FSjTHrYiM3kkN7TLzXSRTCOQ4Ync52x/wDc1rml/Ue2kqS6C2o8McVSO+lRzHKFA8YOMD+avhYsQfW4uQ0ZZoOOOaXUXmOdWSijYH2z5oM9SuN8Eb8bcVWG8khiMcSjLZyfOfiiCERTZ0YiNEuIRIIlky/tz/NWuLjthSQWLMAABzSeEP34wE9QOeNz5pozRyaVkfDAahkY/v5qmUAw8eUup+JhPDdzr3A2kDJCcEUPbyTzN2mDSqRjBOw+c023zztiugADAGB7Cq56qWcNm7it+lShjodSvjOxoSaJoJTGxGR7U/pZextcX6xpyFGc+KNHJO4rNgVRa9wKN3SQGMkNnbFFdZ6tfdKt7dbfpMvULmRNUixOf6YyAMqqsw4fnH0nGcUdBZQw6W0ZceSc715HrvX06bdXHS/wnZonUXuBb3E5UYieRjiJB5YNnAxhADjJJNZ/IyaFTpfxnjCzz3+PiNvwt+LofxHYXV3JarZJasFkZrlWVcgnLZAKjY4OCNjuMUDedTuLrrS9QgR1S3hZbeJs77hy0i/UqsVRjjcIoyMyLSiaGy/DFh/oIJuZJriRVi1BBcvHrRpmYlcASLoRM59DEeplYM0jl6h+IY+jgkQMySzqsIyAFBcsGALBS2wZUj1A5R3yDiORmFTvJ4+PGxcCO/wzZ/l+kidxJ3bly+p2J1JyGxjbUS77bHVkbEYNvFdV78WdajG3tn+aLPgAkhQFXUcnAGB/ArlbsY4ACcDyW9Z2b7i6a0uLmNZO6HzuF4GKHtIkkl0SQu2OdPj7/wA0w/MxQ61aQsVOcY4+BW6HUobABIztTeRAmH0lZrv+/mCTdMSSTUjaARwBSxopFZgUbK87cV6CsJruGBwjN6vI9qiuepMuBDu6nLaWBog6aQQADgbj4otsRKSx4+o80pJRp+9aSaZCPo0nNYSXcjKUwQnlSanCzIM4Qbjj83CXCI2ok429601q4KOnwQef85pCk+kerJOTnj/P1oqK+hIEbq6qMANq3FQ4/qWnkg9zVYxDdFpV7qEbMEyF34xUotNIX0HIJztUoSbjVSuoNewxzoxUapEXI0+aASwuHbT29Py3FM7OJ4rdUc5P9q2JCgknAG5NEHK6EUcK5Pc2oHB02NFPd9bEY+BXUgtYNDh9JLeliefijNjvS67W2a6AklZdsEAbA1ASTuWyKgBAEYYGoPgZAxmlfUZDJLpBGmP55NEXlysVsFjwdYwM7+nFBJeMqsDFG5bksvNWinuLz5FPsuMrKVprYM5BbOOKI80vh6moULImN8DSNgKOjkWVA6HKng0DAgx+J1YAA3LVkOwbg4090Df3xWtCX0EbR9x2KFeCOM/NQdwnJAuEyd3tt2c93B0Y/wCXivi/S5Zj+EpF6fmPqnSepLfNgAP29IUMM7nQ6jIxtrz719OF5cKukTNivNfi3pfTGs5evTrc299HIoFxafVI5PLDjIVXbOVJxuckEJ8jCa5fU2/xvmpz9KtmIuky3U/VbPrN5cG6tOz25bW3mCt2VG6kMdOnXyGOSSDj1qT77pFnJYObia2njuruXXqnVEzkHU4jiOkag3klh6hqIavBdH6aOi/iXpFvL1NzYdWiWdJlAR43IYITkkK6tjcEjcgkgkV7ix6fL0jr0Fjh1sL6w75tWU6La4GgyBAfpU6+Btk48CsuGg4JE6vm8mwkIaP/AFz0Syo3+4AgZKkjI+9QTwtnEqHG5wwoeSGORikUUWtCCfH77UtuYJIJcSHJO+r3rpBQZ5fJlZN1GNr25O4Si6FJAYgEn33qi9QYzAaV7RYKGJ3+5pZqOAMnA4FSmcB8zN65AAEc303Zh2bBJ4HJpYUeaNrh5BnUFOao00jkFnJIGBvVACxAAJJ4Aq1WhByZeZ/E0IeH1LJpY+FJG1bOn5oK0WlnCgMvBz5NC11Wdc6SRnnHmrqAGHR6nDkc1K67M7FnJJPJNcq4E1gmEeQzygeNDYqVlUqioMMZCBU9EBgADgcVWVNcTp/yUir6SW0itDHpB34/mstzscbEUqbpA0FtGP6ZwW2yfag5lnMzd4EP5zT1kxKJAAGJAYn2rskcUmDIgbSdgaYHr4mVvHLCr/1Fa9NDQErKrSeMcChpbSaFkUrkuNgu9PCcnNTzmoMhkbxkI1F9lZaW1zIdQwVB4FMMAcCqLJGTpVwTvtmr0LEk7jcaKooSVCARgjINcBznbFdoYyK7+0jhTvoVjiH1lmwBk4HPuSBiktzfdE67PbdEseq27W9wFlu2MunvqCCkIBwdTNgkbEBfc4r0tzLNbvYJHJtPeiKXKg6o+1K5X9SgH2q3Vr26g6N1C6jncS29rLOhJzhkQsOfkCgyMzAi9CaPGw4sbK9e5uvx8fU8/wDiHqVnBP0+46l1i1NxY3ySvG8uqSOJ8o+kDJ2DBtIxsv2y5WWPqTR3URt7tonZPzMM4cYOhmXY4ySqHffb5qr9bjs+kXvU4bm4vhahsd6EwOdKgqhBVTjLZzjYMcZoq2hu4yTedSluXKetOzEqF8jdcLqGwI3Zs7UCseV13H5UAx8eRFWP7+T8QKJZ7e6RpNTs+zHkY/72O1X6jJbyRgasyKdsePfNFyukUbFtZAOTjOff9qW3EDTzFoD3FGBkDH6VrU2bM4mQFFKjdwSpRv8Apc2B6043yTtW8PTYwhEy5YHkHY0wuszjBkJ6i6KGSZtMalvf4ppZ2f5c6nUF/wDl7VaO1igi39tyPt/NYWN28kgiYM2ThQANqBmLA1H48a42HLswqe2juQuvPp4Iq8USQpojXSKvU5GcY+KVZqpr4i7rcyulDWsoIyNJP7Unt7d7l9KbAck+KdyoZIWRcAsMb1WCHsQrHsceRRq3EROTD6jgnqBx9IDEBptz7LUppGAMHyWqUByNHL42Ktid6eVnT1t6yPG2fitZY2ikyw87b1rAjRnYAINgo2qXK93DLk4596Xe5pCUn5gpwzEnYZqrDGSP2ql1K0DR6B9RIOd8bVjcXkMaMvcy+Men3owCYhnUXc0jk7iatJU+QfFYXNyqv2VcB2HtnH+b0DHfTxlt9ZY59WaynaZZQ8ilHxkeDTQm5jbyLXUIFtH3VZrjBUgNpQ4B+9NBxzmvPF2bOpicnJ3oy3hvNQkjyFcg5ZuR81bL9mDiygGlWNalTxvUpM3RTeC7aO2UOI57e6E0TtD3VcCORCCodTxJnnxRc1rPedIns57mLVc2csDyJbMp1PkasFzsFONPORnPiu3tvLKoaJjkEHTn+1YWt1MX7La3k4JOPTUOMNuUnlPiIQjQ61O9bkF6Z7e4R2tJgyOhXBYNnOHzttxtz+1U6dNfOjxXN9bzN2isbm0ZJC+2GYiTSfkADPxTBJVZim4Ychhg1xVkEzMXBRuBjcVXBYYzZL7BB/E6YlYksAxIwdtj+ldRFjQKgwB4q1DXEkkc6nXpi07nGcHNEBeotiB7qm0gYDUm5XOFzsaHtDdtIWmGEYZA4xWdx1GMo6R6iTsGGwoO3kuA2iLLg8rjIpgU1uZnzLzFfqGXd4mpoQxGNiQM4PzWcRs1uQ4mkOTxjG/6UJLFJFIVdTq5rkeNYJG3tRhRWog5WLbE9Ex1ktkE+SKmmgYLWdGRg6gDBI5o/JGx4pBFdTpIxbZFSrJqQrkjIxtyKGikuI3WO5QacfVwTRunyP2rC7snnw2twv8AuU5/cVAR0ZHVu17mU9zq0rGNPqyTnfHipVILWQzyw52ixkn5qUWhEgO24+xmDIHqHtsazRjjfAAG9WEkMJ06lXHA1b1Vn0k43znas86ZMFu40kLqOG8gcChPycBQo0agjkij2VvoJUr7ihJpZXZo4YgQNiT4NMUnqZMirdkQGOwliuNSyBQODjJozQDpLAErwcV2JD2lJfLec+/mut6VLHOB8UZJMUiBRqLpumM0rMjqFJzg+K6lzJZ4gmQbD0MOP1rlx1LBAhAOwOT/AGrH873sJcIhXJOcHIpgDEbmQtjVvYaP6h6XaMh3y4G4TJz9qE/1KZ3ACqnGcn96EliaMK+co2ShqqyMnB5IP7UQQQGzv0dRvDcCQ5DMeTgj1D9BXTCry92P+m6nc6fqyPNK0u7hCCsh2GMH2phB1GGTAf0Oec8fvQFSOo5MqPppeWN3niZUGpTvJxtvtj/OaJrisGUMpyDwaqJU1iPIDf8AGl9zQABv7l6zngW4iKN9wR4NaVKkIgEUYNHDFLbmFlHpOlsDG/uKzg6eYXY95gDsNO1XlaaUMselNJyd8nz8VtGURQusZwCAdsDjiisiJCqSLHU0xQDdKXWSspUe2nNGySLEhZv0A5NLZ+oyNJiFgqjg45qJy+JMxxj/ADhkc8kLmB2XUANLY2H3AoqKSS7RgozKq+RsaTxX7HCT+tAPbc00trkRQKq+ACWB8HfcVGUiXhyBtXqbJHNFpkncac4Cp5+KJE2cqysQOVzuKEW77rYViGxkZohWjtiXV2mZRgKTtmlEfc1Iw+DqWkjVmEijQVyMDzUrSS4DQajGc+Sozn/ypVC4xioPc//Z",
+      "avatar": "",
       "createdAt": "2026-01-25T08:26:50.315Z"
     },
     {
@@ -41,7 +41,7 @@
     {
       "id": "audio",
       "name": "Audio",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80"
+      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80"
     },
     {
       "id": "laptops",
@@ -56,7 +56,7 @@
     {
       "id": "wearables",
       "name": "Wearables",
-      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80"
+      "image": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80"
     },
     {
       "id": "gaming",
@@ -84,7 +84,11 @@
       "description": "Industry-leading noise cancellation...",
       "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80"
+        "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80",
+        "https://images.unsplash.com/photo-1545127398-14699f92334b?w=500&q=80",
+        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&q=80",
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
+        "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500&q=80"
       ],
       "oldPrice": 399.99,
       "specs": {
@@ -107,9 +111,13 @@
       "isFeatured": true,
       "isNew": false,
       "description": "High-fidelity audio...",
-      "image": "https://images.unsplash.com/photo-1628202926206-c63a34b1618f?w=500&q=80",
+      "image": "https://images.unsplash.com/photo-1625081062068-b4b0b4c0f0e1?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1628202926206-c63a34b1618f?w=500&q=80"
+        "https://images.unsplash.com/photo-1625081062068-b4b0b4c0f0e1?w=500&q=80",
+        "https://images.unsplash.com/photo-1606220838315-056192d5e927?w=500&q=80",
+        "https://images.unsplash.com/photo-1600087626014-e652e18bbff2?w=500&q=80",
+        "https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=500&q=80",
+        "https://images.unsplash.com/photo-1590658165737-15a047b7a3ad?w=500&q=80"
       ],
       "oldPrice": null,
       "specs": {
@@ -132,9 +140,13 @@
       "isFeatured": false,
       "isNew": true,
       "description": "Bold JBL Original Pro Sound...",
-      "image": "https://images.unsplash.com/photo-1629281336496-c694a5c9f535?w=500&q=80",
+      "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1629281336496-c694a5c9f535?w=500&q=80"
+        "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80",
+        "https://images.unsplash.com/photo-1545127398-14699f92334b?w=500&q=80",
+        "https://images.unsplash.com/photo-1589256469067-ea99122bb5e8?w=500&q=80",
+        "https://images.unsplash.com/photo-1564424224827-cd24b8915874?w=500&q=80",
+        "https://images.unsplash.com/photo-1531104985437-603d6490e6d4?w=500&q=80"
       ],
       "oldPrice": 149.99,
       "specs": {
@@ -159,7 +171,11 @@
       "description": "Iconic quiet. Comfort. And sound...",
       "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80"
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
+        "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80",
+        "https://images.unsplash.com/photo-1606220838315-056192d5e927?w=500&q=80",
+        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&q=80",
+        "https://images.unsplash.com/photo-1577174881658-0f30ed549adc?w=500&q=80"
       ],
       "oldPrice": 349,
       "specs": {
@@ -182,9 +198,13 @@
       "isFeatured": true,
       "isNew": true,
       "description": "Supercharged by M2 chip...",
-      "image": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80",
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80"
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80",
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
+        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80",
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80"
       ],
       "oldPrice": 1299,
       "specs": {
@@ -209,7 +229,11 @@
       "description": "Twice as powerful as before...",
       "image": "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80"
+        "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80",
+        "https://images.unsplash.com/photo-1588872657578-883557e93b60?w=500&q=80",
+        "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
+        "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
+        "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=500&q=80"
       ],
       "oldPrice": null,
       "specs": {
@@ -232,9 +256,13 @@
       "isFeatured": true,
       "isNew": false,
       "description": "Gaming powerhouse...",
-      "image": "https://images.unsplash.com/photo-1636544520935-802c61176b6b?w=500&q=80",
+      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1636544520935-802c61176b6b?w=500&q=80"
+        "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
+        "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=500&q=80",
+        "https://images.unsplash.com/photo-1616588589676-60b30c3c53fc?w=500&q=80",
+        "https://images.unsplash.com/photo-1602524206684-76b0ac643810?w=500&q=80",
+        "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=500&q=80"
       ],
       "oldPrice": 1899.99,
       "specs": {
@@ -257,9 +285,13 @@
       "isFeatured": true,
       "isNew": true,
       "description": "Galaxy AI is here...",
-      "image": "https://images.unsplash.com/photo-1610945265078-d86f3d297df2?w=500&q=80",
+      "image": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1610945265078-d86f3d297df2?w=500&q=80"
+        "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80",
+        "https://images.unsplash.com/photo-1592286927505-b593d6426caa?w=500&q=80",
+        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&q=80",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80",
+        "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=500&q=80"
       ],
       "oldPrice": null,
       "specs": {
@@ -282,9 +314,13 @@
       "isFeatured": true,
       "isNew": false,
       "description": "Titanium design...",
-      "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80",
+      "image": "https://images.unsplash.com/photo-1592286927505-b593d6426caa?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80"
+        "https://images.unsplash.com/photo-1592286927505-b593d6426caa?w=500&q=80",
+        "https://images.unsplash.com/photo-1556656793-02715d8dd6f8?w=500&q=80",
+        "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=500&q=80",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80",
+        "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500&q=80"
       ],
       "oldPrice": null,
       "specs": {
@@ -309,7 +345,11 @@
       "description": "Smarter. Brighter...",
       "image": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80"
+        "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80",
+        "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80",
+        "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=500&q=80",
+        "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80",
+        "https://images.unsplash.com/photo-1523395243481-163f8f6155ab?w=500&q=80"
       ],
       "oldPrice": null,
       "specs": {
@@ -334,7 +374,11 @@
       "description": "Play Like Never Before...",
       "image": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80"
+        "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80",
+        "https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=500&q=80",
+        "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=500&q=80",
+        "https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?w=500&q=80",
+        "https://images.unsplash.com/photo-1486401899868-0e435ed85128?w=500&q=80"
       ],
       "oldPrice": null,
       "specs": {
@@ -359,7 +403,11 @@
       "description": "Beyond basic...",
       "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80"
+        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80",
+        "https://images.unsplash.com/photo-1606933248010-ef8ec5d04e4d?w=500&q=80",
+        "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=500&q=80",
+        "https://images.unsplash.com/photo-1606933248010-2e0e8f83c8c6?w=500&q=80",
+        "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&q=80"
       ],
       "oldPrice": null,
       "specs": {
@@ -617,5 +665,15 @@
   "addresses": [],
   "orders": [],
   "cart": [],
-  "wishlist": []
+  "wishlist": [
+    {
+      "userId": "ml25nlof-4yszgh",
+      "productId": "201",
+      "name": "MacBook Air M2",
+      "price": 1199,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+      "addedAt": "2026-01-31T22:01:07.650Z",
+      "id": 5
+    }
+  ]
 }

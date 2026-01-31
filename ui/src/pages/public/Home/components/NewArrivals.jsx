@@ -3,8 +3,18 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ProductCard from "@/components/product/ProductCard";
 
-const NewArrivals = ({ products = [], onAddToCart, onToggleFavorite }) => {
+const NewArrivals = ({
+  products = [],
+  onAddToCart,
+  onToggleFavorite,
+  wishlistItems = [],
+}) => {
   const { t } = useTranslation();
+
+  // Helper function to check if product is in wishlist
+  const isInWishlist = (productId) => {
+    return wishlistItems.some((item) => item.productId === productId);
+  };
 
   return (
     <section className="py-[60px] bg-white">
@@ -31,6 +41,7 @@ const NewArrivals = ({ products = [], onAddToCart, onToggleFavorite }) => {
               <ProductCard
                 key={product.id}
                 {...product}
+                isFavorite={isInWishlist(product.id)}
                 onAddToCart={onAddToCart}
                 onToggleFavorite={onToggleFavorite}
               />

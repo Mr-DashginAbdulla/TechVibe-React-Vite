@@ -3,9 +3,19 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ProductCard from "@/components/product/ProductCard";
 
-const FeaturedProducts = ({ products = [], onAddToCart, onToggleFavorite }) => {
+const FeaturedProducts = ({
+  products = [],
+  onAddToCart,
+  onToggleFavorite,
+  wishlistItems = [],
+}) => {
   const { t } = useTranslation();
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Helper function to check if product is in wishlist
+  const isInWishlist = (productId) => {
+    return wishlistItems.some((item) => item.productId === productId);
+  };
 
   const scroll = (direction) => {
     const container = document.getElementById("featured-products-container");
@@ -51,9 +61,10 @@ const FeaturedProducts = ({ products = [], onAddToCart, onToggleFavorite }) => {
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {products.map((product) => (
-              <div key={product.id} className="flex-shrink-0 w-[280px]">
+              <div key={product.id} className="shrink-0 w-[280px]">
                 <ProductCard
                   {...product}
+                  isFavorite={isInWishlist(product.id)}
                   onAddToCart={onAddToCart}
                   onToggleFavorite={onToggleFavorite}
                 />

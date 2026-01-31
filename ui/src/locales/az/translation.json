@@ -312,6 +312,10 @@
     "checkout": "Ödənişə keç",
     "continueShopping": "Alış-verişə davam et",
     "itemRemoved": "Məhsul səbətdən silindi",
-    "emptyCartError": "Səbətiniz boşdur"
+    "emptyCartError": "Səbətiniz boşdur",
+    "viewFullCart": "Tam səbəti gör",
+    "items": "məhsul",
+    "updateError": "Miqdarı yeniləmək alınmadı",
+    "removeError": "Məhsulu silmək alınmadı"
   }
 }

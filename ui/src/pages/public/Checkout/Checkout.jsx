@@ -21,7 +21,7 @@ const Checkout = () => {
           The checkout page is under construction. Please check back later!
         </p>
         <Link
-          to="/basket"
+          to="/profile/cart"
           className="flex items-center gap-2 text-blue-600 font-semibold hover:underline"
         >
           <ArrowLeft size={18} />

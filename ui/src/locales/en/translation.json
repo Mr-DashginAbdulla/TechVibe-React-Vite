@@ -312,6 +312,10 @@
     "checkout": "Proceed to Checkout",
     "continueShopping": "Continue Shopping",
     "itemRemoved": "Item removed from cart",
-    "emptyCartError": "Your cart is empty"
+    "emptyCartError": "Your cart is empty",
+    "viewFullCart": "View Full Cart",
+    "items": "items",
+    "updateError": "Failed to update quantity",
+    "removeError": "Failed to remove item"
   }
 }

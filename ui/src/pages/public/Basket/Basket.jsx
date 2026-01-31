@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -29,15 +29,6 @@ const Basket = () => {
 
   const [updateCartItem] = useUpdateCartItemMutation();
   const [removeFromCart] = useRemoveFromCartMutation();
-
-  // Set document title
-  useEffect(() => {
-    const title =
-      user && cartItems.length > 0
-        ? `${t("basket.title")} (${cartItems.length}) | TechVibe`
-        : `${t("basket.title")} | TechVibe`;
-    document.title = title;
-  }, [cartItems.length, t, user]);
 
   const handleQuantityChange = async (item, newQuantity) => {
     if (newQuantity < 1) return;
@@ -133,6 +124,13 @@ const Basket = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <Helmet>
+        <title>
+          {cartItems.length > 0
+            ? `${t("basket.title")} (${cartItems.length}) | TechVibe`
+            : `${t("basket.title")} | TechVibe`}
+        </title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
         {t("basket.title")}
       </h1>

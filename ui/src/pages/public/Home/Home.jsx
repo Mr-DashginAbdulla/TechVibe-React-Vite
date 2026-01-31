@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import HeroSection from "./HeroSection";
@@ -169,6 +170,10 @@ function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>TechVibe - {t("common.tagline")}</title>
+        <meta name="description" content={t("common.description")} />
+      </Helmet>
       <HeroSection />
       <NewArrivals
         products={newArrivals}

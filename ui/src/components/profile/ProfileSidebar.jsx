@@ -6,6 +6,7 @@ import {
   ShoppingBag,
   MapPin,
   Heart,
+  ShoppingCart,
   Settings,
   LogOut,
   ChevronRight,
@@ -30,6 +31,7 @@ const ProfileSidebar = () => {
       icon: MapPin,
     },
     { name: t("profile.myWishlist"), href: "/profile/wishlist", icon: Heart },
+    { name: t("nav.cart"), href: "/profile/cart", icon: ShoppingCart },
     {
       name: t("profile.accountSettings"),
       href: "/profile/settings",
@@ -52,7 +54,7 @@ const ProfileSidebar = () => {
             className="w-[56px] h-[56px] rounded-full object-cover"
           />
         ) : (
-          <div className="w-[56px] h-[56px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center">
+          <div className="w-[56px] h-[56px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center">
             <span className="text-[20px] font-bold text-white">
               {getInitials()}
             </span>
