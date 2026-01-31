@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 import { wishlistService } from "@/services/wishlistService";
@@ -53,7 +53,6 @@ const MyWishlist = () => {
       <Helmet>
         <title>{t("profile.myWishlist")} - TechVibe</title>
       </Helmet>
-
       <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
         <div className="flex items-center gap-[12px]">
           <div className="w-[48px] h-[48px] bg-pink-100 rounded-[12px] flex items-center justify-center">
@@ -133,11 +132,11 @@ const MyWishlist = () => {
                 </div>
                 <div className="flex items-center gap-[8px] mb-[16px]">
                   <span className="text-[18px] font-bold text-[#111827]">
-                    ${item.price.toFixed(2)}
+                    ${(item.price || 0).toFixed(2)}
                   </span>
                   {item.originalPrice && (
                     <span className="text-[14px] text-[#9CA3AF] line-through">
-                      ${item.originalPrice.toFixed(2)}
+                      ${(item.originalPrice || 0).toFixed(2)}
                     </span>
                   )}
                 </div>

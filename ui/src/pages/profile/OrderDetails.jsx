@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { orderService } from "@/services/orderService";
 import {
@@ -92,7 +92,6 @@ const OrderDetails = () => {
       <Helmet>
         <title>{t("profile.orderDetails")} - TechVibe</title>
       </Helmet>
-
       <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
         <Link
           to="/profile/orders"
@@ -137,7 +136,7 @@ const OrderDetails = () => {
                 key={index}
                 className="flex gap-[16px] p-[16px] bg-[#F9FAFB] rounded-[12px]"
               >
-                <div className="w-[80px] h-[80px] rounded-[10px] bg-white border border-[#E5E7EB] overflow-hidden flex-shrink-0">
+                <div className="w-[80px] h-[80px] rounded-[10px] bg-white border border-[#E5E7EB] overflow-hidden shrink-0">
                   {item.image ? (
                     <img
                       src={item.image}
@@ -162,7 +161,7 @@ const OrderDetails = () => {
                       {t("product.quantity")}: {item.quantity}
                     </p>
                     <p className="text-[16px] font-bold text-[#111827]">
-                      ${item.price.toFixed(2)}
+                      ${(item.price || 0).toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -174,18 +173,20 @@ const OrderDetails = () => {
             <div className="flex justify-between text-[14px]">
               <span className="text-[#6B7280]">{t("cart.subtotal")}</span>
               <span className="text-[#111827]">
-                ${order.subtotal.toFixed(2)}
+                ${(order.subtotal || 0).toFixed(2)}
               </span>
             </div>
             <div className="flex justify-between text-[14px]">
               <span className="text-[#6B7280]">{t("cart.shipping")}</span>
               <span className="text-[#111827]">
-                ${order.shipping.toFixed(2)}
+                ${(order.shipping || 0).toFixed(2)}
               </span>
             </div>
             <div className="flex justify-between text-[16px] font-bold pt-[12px] border-t border-[#E5E7EB]">
               <span className="text-[#111827]">{t("cart.total")}</span>
-              <span className="text-[#3B82F6]">${order.total.toFixed(2)}</span>
+              <span className="text-[#3B82F6]">
+                ${(order.total || 0).toFixed(2)}
+              </span>
             </div>
           </div>
         </div>

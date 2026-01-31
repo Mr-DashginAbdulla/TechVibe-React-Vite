@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 import { addressService } from "@/services/addressService";
@@ -122,10 +122,6 @@ const MyAddresses = () => {
 
   return (
     <div className="space-y-[24px]">
-      <Helmet>
-        <title>{t("profile.myAddresses")} - TechVibe</title>
-      </Helmet>
-
       <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px] flex items-center justify-between">
         <div>
           <h1 className="text-[24px] font-bold text-[#111827] mb-[4px]">

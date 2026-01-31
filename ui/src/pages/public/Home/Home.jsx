@@ -1,15 +1,44 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import HeroSection from "./HeroSection";
 import NewArrivals from "./components/NewArrivals";
 import ShopByCategory from "./components/ShopByCategory";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
-import { toast } from "react-toastify";
+
+import {
+  useGetCartQuery,
+  useAddToCartMutation,
+  useUpdateCartItemMutation,
+  useGetWishlistQuery,
+  useAddToWishlistMutation,
+  useRemoveFromWishlistMutation,
+} from "@/store/api/productsApi";
+import { useAuth } from "@/context/AuthContext";
 
 function Home() {
+  const { t } = useTranslation();
+  const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // RTK Query hooks for cart
+  const { data: cartItems = [] } = useGetCartQuery(user?.id, {
+    skip: !user?.id,
+  });
+
+  // RTK Query hooks for wishlist
+  const { data: wishlistItems = [] } = useGetWishlistQuery(user?.id, {
+    skip: !user?.id,
+  });
+
+  // Mutations
+  const [addToCart] = useAddToCartMutation();
+  const [updateCartItem] = useUpdateCartItemMutation();
+  const [addToWishlist] = useAddToWishlistMutation();
+  const [removeFromWishlist] = useRemoveFromWishlistMutation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,15 +54,12 @@ function Home() {
         const productsData = await productsRes.json();
         const categoriesData = await categoriesRes.json();
 
-        // MAPPING: Backend adlarını Frontend-ə dəqiq uyğunlaşdırırıq
         const formattedProducts = productsData.map((product) => ({
           id: product.id,
           name: product.name,
           price: product.price,
-          // Ən vacib hissə: 'image' sahəsini dəqiq götürürük
           image: product.image,
           rating: product.rating,
-          // ReviewsCount və OldPrice uyğunsuzluğunu həll edirik
           reviewCount: product.reviewsCount || 0,
           originalPrice: product.oldPrice,
           isNew: product.isNew,
@@ -57,9 +83,81 @@ function Home() {
   const newArrivals = products.filter((p) => p.isNew);
   const featuredProducts = products.filter((p) => p.isFeatured);
 
-  const handleAddToCart = (productId) => toast.success("Səbətə atıldı!");
-  const handleToggleFavorite = (productId) =>
-    toast.info("Sevimlilər siyahısı yeniləndi!");
+  const handleAddToCart = async (productId) => {
+    if (!user) {
+      toast.error(t("auth.signIn") + " to add items to cart");
+      return;
+    }
+
+    const product = products.find((p) => p.id === productId);
+    if (!product) return;
+
+    try {
+      // Check if product already exists in cart
+      const existingItem = cartItems.find(
+        (item) => item.productId === productId,
+      );
+
+      if (existingItem) {
+        // Update quantity
+        await updateCartItem({
+          id: existingItem.id,
+          quantity: (existingItem.quantity || 1) + 1,
+        }).unwrap();
+        toast.success(t("productDetails.cartUpdated"));
+      } else {
+        // Add new item
+        await addToCart({
+          userId: user.id,
+          productId: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+          selectedOptions: {},
+        }).unwrap();
+        toast.success(t("productDetails.addedToCart"));
+      }
+    } catch (error) {
+      toast.error("Failed to add to cart");
+    }
+  };
+
+  const handleToggleFavorite = async (productId) => {
+    if (!user) {
+      toast.error(t("auth.signIn") + " to use wishlist");
+      return;
+    }
+
+    const product = products.find((p) => p.id === productId);
+    if (!product) return;
+
+    try {
+      // Check if already in wishlist
+      const existingItem = wishlistItems.find(
+        (item) => item.productId === productId,
+      );
+
+      if (existingItem) {
+        // Remove from wishlist
+        await removeFromWishlist(existingItem.id).unwrap();
+        toast.success(t("productDetails.removedFromWishlist"));
+      } else {
+        // Add to wishlist
+        await addToWishlist({
+          userId: user.id,
+          productId: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          addedAt: new Date().toISOString(),
+        }).unwrap();
+        toast.success(t("productDetails.addedToWishlist"));
+      }
+    } catch (error) {
+      toast.error("Failed to update wishlist");
+    }
+  };
 
   if (loading) {
     return (
@@ -72,17 +170,18 @@ function Home() {
   return (
     <>
       <HeroSection />
-      {/* Məlumatları ötürürük */}
       <NewArrivals
         products={newArrivals}
         onAddToCart={handleAddToCart}
         onToggleFavorite={handleToggleFavorite}
+        wishlistItems={wishlistItems}
       />
       <ShopByCategory categories={categories} />
       <FeaturedProducts
         products={featuredProducts}
         onAddToCart={handleAddToCart}
         onToggleFavorite={handleToggleFavorite}
+        wishlistItems={wishlistItems}
       />
       <Newsletter />
     </>

@@ -2,6 +2,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
 
 import Home from "@/pages/public/Home/Home";
+import ProductDetails from "@/pages/public/Products/ProductDetails";
+import Basket from "@/pages/public/Basket/Basket";
+import Checkout from "@/pages/public/Checkout/Checkout";
 
 import Login from "@/pages/auth/Login";
 import Register from "@/pages/auth/Register";
@@ -17,7 +20,6 @@ import MyAddresses from "@/pages/profile/MyAddresses";
 import MyOrders from "@/pages/profile/MyOrders";
 import OrderDetails from "@/pages/profile/OrderDetails";
 import MyWishlist from "@/pages/profile/MyWishlist";
-import ProductDetails from "@/pages/public/Products/ProductDetails";
 
 const NotFound = () => (
   <div className="min-h-[60vh] flex items-center justify-center px-[16px]">
@@ -39,6 +41,9 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/basket" element={<Basket />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Route>
 
       <Route path="/auth">
@@ -60,8 +65,6 @@ export default function AppRoutes() {
         <Route path="orders/:id" element={<OrderDetails />} />
         <Route path="wishlist" element={<MyWishlist />} />
       </Route>
-
-      <Route path="/product/:id" element={<ProductDetails />} />
 
       <Route path="/terms" element={<Navigate to="/" replace />} />
       <Route path="/privacy" element={<Navigate to="/" replace />} />

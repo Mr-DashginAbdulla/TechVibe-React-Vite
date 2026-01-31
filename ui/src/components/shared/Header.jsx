@@ -13,12 +13,20 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
+import { useGetCartQuery } from "@/store/api/productsApi";
 import logoImg from "@/assets/images/TechVibeLogo-Light.png";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { isLoggedIn, user, logout, getInitials } = useAuth();
+
+  // Get cart items count
+  const { data: cartItems = [] } = useGetCartQuery(user?.id, {
+    skip: !user?.id,
+  });
+  const cartCount = cartItems.length;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -127,16 +135,24 @@ const Header = () => {
               )}
             </div>
 
-            <button className="relative p-[10px] rounded-[12px] hover:bg-[#F3F4F6] transition-colors">
+            <Link
+              to="/profile/wishlist"
+              className="relative p-[10px] rounded-[12px] hover:bg-[#F3F4F6] transition-colors"
+            >
               <Heart className="w-[22px] h-[22px] text-[#374151]" />
-            </button>
+            </Link>
 
-            <button className="relative p-[10px] rounded-[12px] hover:bg-[#F3F4F6] transition-colors">
+            <Link
+              to="/basket"
+              className="relative p-[10px] rounded-[12px] hover:bg-[#F3F4F6] transition-colors"
+            >
               <ShoppingCart className="w-[22px] h-[22px] text-[#374151]" />
-              <span className="absolute -top-[2px] -right-[2px] w-[18px] h-[18px] bg-[#3B82F6] rounded-full text-[11px] font-bold text-white flex items-center justify-center">
-                0
-              </span>
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute -top-[2px] -right-[2px] w-[18px] h-[18px] bg-[#3B82F6] rounded-full text-[11px] font-bold text-white flex items-center justify-center">
+                  {cartCount > 9 ? "9+" : cartCount}
+                </span>
+              )}
+            </Link>
 
             {isLoggedIn ? (
               <div className="relative" ref={profileRef}>
@@ -151,7 +167,7 @@ const Header = () => {
                       className="w-[36px] h-[36px] rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-[36px] h-[36px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white text-[14px] font-semibold">
+                    <div className="w-[36px] h-[36px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white text-[14px] font-semibold">
                       {getInitials()}
                     </div>
                   )}

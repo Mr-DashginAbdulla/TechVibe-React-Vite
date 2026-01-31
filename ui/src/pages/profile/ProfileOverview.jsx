@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 import { userService } from "@/services/userService";
@@ -106,7 +106,6 @@ const ProfileOverview = () => {
       <Helmet>
         <title>{t("profile.overview")} - TechVibe</title>
       </Helmet>
-
       <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
         <h1 className="text-[24px] font-bold text-[#111827] mb-[8px]">
           {t("messages.loginSuccess", { name: user?.firstName })} 👋
@@ -274,8 +273,8 @@ const ProfileOverview = () => {
                       {order.orderNumber}
                     </p>
                     <p className="text-[13px] text-[#6B7280]">
-                      {order.items.length} {t("order.items")} • $
-                      {order.total.toFixed(2)}
+                      {order.items?.length || 0} {t("order.items")} • $
+                      {(order.total || 0).toFixed(2)}
                     </p>
                   </div>
                 </div>

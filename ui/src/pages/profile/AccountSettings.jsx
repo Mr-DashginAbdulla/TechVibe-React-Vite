@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 import { userService } from "@/services/userService";
@@ -123,7 +123,6 @@ const AccountSettings = () => {
       <Helmet>
         <title>{t("profile.accountSettings")} - TechVibe</title>
       </Helmet>
-
       <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
         <div className="flex items-center gap-[20px]">
           <div className="relative">
@@ -134,7 +133,7 @@ const AccountSettings = () => {
                 className="w-[80px] h-[80px] rounded-full object-cover"
               />
             ) : (
-              <div className="w-[80px] h-[80px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center">
+              <div className="w-[80px] h-[80px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center">
                 <span className="text-[28px] font-bold text-white">
                   {user?.firstName?.[0]}
                   {user?.lastName?.[0]}
