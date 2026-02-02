@@ -87,12 +87,12 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
+    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
       <Helmet>
         <title>{t("auth.signIn")} - TechVibe</title>
       </Helmet>
       <div className="w-full max-w-[900px] bg-white rounded-[24px] shadow-xl overflow-hidden flex">
-        <div className="hidden lg:flex flex-col justify-center w-[380px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] p-[40px] text-white">
+        <div className="hidden lg:flex flex-col justify-center w-[380px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] p-[40px] text-white">
           <h2 className="text-[24px] font-bold mb-[24px]">
             {t("auth.welcomeBack")}
           </h2>

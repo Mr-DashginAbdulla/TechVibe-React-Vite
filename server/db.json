@@ -662,9 +662,207 @@
       "date": "2026-01-10"
     }
   ],
-  "addresses": [],
-  "orders": [],
-  "cart": [],
+  "addresses": [
+    {
+      "label": "Home",
+      "firstName": "John",
+      "lastName": "Doe",
+      "address": "Yasamal",
+      "city": "Baku",
+      "state": "Baku",
+      "zipCode": "1002",
+      "country": "Azerbaijan",
+      "phone": "+994998887766",
+      "isDefault": false,
+      "userId": "mkth60qz-s7vce3",
+      "id": 1
+    }
+  ],
+  "orders": [
+    {
+      "userId": "mkth60qz-s7vce3",
+      "items": [
+        {
+          "productId": "201",
+          "name": "MacBook Air M2",
+          "price": 1199,
+          "quantity": 1,
+          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80"
+        }
+      ],
+      "shippingAddress": {
+        "label": "Home",
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": "Yasamal",
+        "city": "Baku",
+        "state": "Baku",
+        "zipCode": "1002",
+        "country": "Azerbaijan",
+        "phone": "+994998887766"
+      },
+      "paymentMethod": "card",
+      "subtotal": 1199,
+      "shippingCost": 5,
+      "tax": 215.82,
+      "discount": 0,
+      "promoCode": null,
+      "total": 1419.82,
+      "status": "pending",
+      "createdAt": "2026-01-31T22:55:44.798Z",
+      "orderNumber": "ORD-2026-4798",
+      "timeline": [
+        {
+          "status": "ordered",
+          "date": "2026-01-31T22:55:44.798Z",
+          "description": "Order placed"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "userId": "mkth60qz-s7vce3",
+      "items": [
+        {
+          "productId": "103",
+          "name": "JBL Flip 6",
+          "price": 129.95,
+          "quantity": 1,
+          "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80"
+        }
+      ],
+      "shippingAddress": {
+        "label": "Home",
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": "Yasamal",
+        "city": "Baku",
+        "state": "Baku",
+        "zipCode": "1002",
+        "country": "Azerbaijan",
+        "phone": "+994998887766"
+      },
+      "paymentMethod": "cash",
+      "subtotal": 129.95,
+      "shippingCost": 5,
+      "tax": 23.391,
+      "discount": 0,
+      "promoCode": null,
+      "total": 158.34099999999998,
+      "status": "pending",
+      "createdAt": "2026-01-31T22:58:08.385Z",
+      "orderNumber": "ORD-2026-8385",
+      "timeline": [
+        {
+          "status": "ordered",
+          "date": "2026-01-31T22:58:08.385Z",
+          "description": "Order placed"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "userId": "mkth60qz-s7vce3",
+      "items": [
+        {
+          "productId": "101",
+          "name": "Sony WH-1000XM5",
+          "price": 349.99,
+          "quantity": 1,
+          "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80"
+        },
+        {
+          "productId": "103",
+          "name": "JBL Flip 6",
+          "price": 129.95,
+          "quantity": 1,
+          "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80"
+        }
+      ],
+      "shippingAddress": {
+        "label": "Home",
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": "Yasamal",
+        "city": "Baku",
+        "state": "Baku",
+        "zipCode": "1002",
+        "country": "Azerbaijan",
+        "phone": "+994998887766"
+      },
+      "paymentMethod": "cash",
+      "subtotal": 479.94,
+      "shippingCost": 5,
+      "tax": 86.3892,
+      "discount": 0,
+      "promoCode": null,
+      "total": 571.3292,
+      "status": "pending",
+      "createdAt": "2026-01-31T23:05:02.780Z",
+      "orderNumber": "ORD-2026-2780",
+      "timeline": [
+        {
+          "status": "ordered",
+          "date": "2026-01-31T23:05:02.780Z",
+          "description": "Order placed"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "userId": "mkth60qz-s7vce3",
+      "items": [
+        {
+          "productId": "201",
+          "name": "MacBook Air M2",
+          "price": 1199,
+          "quantity": 1,
+          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80"
+        }
+      ],
+      "shippingAddress": {
+        "label": "Home",
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": "Yasamal",
+        "city": "Baku",
+        "state": "Baku",
+        "zipCode": "1002",
+        "country": "Azerbaijan",
+        "phone": "+994998887766"
+      },
+      "paymentMethod": "gpay",
+      "subtotal": 1199,
+      "shippingCost": 5,
+      "tax": 215.82,
+      "discount": 0,
+      "promoCode": null,
+      "total": 1419.82,
+      "status": "pending",
+      "createdAt": "2026-02-01T23:06:35.301Z",
+      "orderNumber": "ORD-2026-5301",
+      "timeline": [
+        {
+          "status": "ordered",
+          "date": "2026-02-01T23:06:35.301Z",
+          "description": "Order placed"
+        }
+      ],
+      "id": 4
+    }
+  ],
+  "cart": [
+    {
+      "userId": "ml25nlof-4yszgh",
+      "productId": "201",
+      "name": "MacBook Air M2",
+      "price": 1199,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+      "quantity": 1,
+      "selectedOptions": {},
+      "id": 2
+    }
+  ],
   "wishlist": [
     {
       "userId": "ml25nlof-4yszgh",
@@ -674,6 +872,15 @@
       "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
       "addedAt": "2026-01-31T22:01:07.650Z",
       "id": 5
+    },
+    {
+      "userId": "mkth60qz-s7vce3",
+      "productId": "201",
+      "name": "MacBook Air M2",
+      "price": 1199,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+      "addedAt": "2026-01-31T22:53:46.542Z",
+      "id": 6
     }
   ]
 }

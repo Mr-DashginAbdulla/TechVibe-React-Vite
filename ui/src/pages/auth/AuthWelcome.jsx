@@ -1,8 +1,10 @@
 import { Link, Navigate } from "react-router-dom";
 import { ArrowRight, User, Zap, Shield, Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 
 const AuthWelcome = () => {
+  const { t } = useTranslation();
   const { isLoggedIn } = useAuth();
 
   // Redirect if already logged in
@@ -12,32 +14,30 @@ const AuthWelcome = () => {
   const benefits = [
     {
       icon: Zap,
-      title: "Fast Delivery",
-      description: "Quick shipping on all orders",
+      title: t("hero.freeShipping"),
+      description: t("hero.freeShippingDesc"),
     },
     {
       icon: Shield,
-      title: "100% Original",
-      description: "Authentic products guaranteed",
+      title: t("hero.securePayment"),
+      description: t("hero.securePaymentDesc"),
     },
     {
       icon: Award,
-      title: "Warranty Support",
-      description: "Full warranty on all items",
+      title: t("hero.easyReturns"),
+      description: t("hero.easyReturnsDesc"),
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
+    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
       <div className="w-full max-w-[420px] bg-white rounded-[24px] shadow-xl p-[40px]">
         {/* Header */}
         <div className="text-center mb-[32px]">
           <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
-            Welcome to TechVibe
+            {t("auth.welcomeBack")}
           </h1>
-          <p className="text-[15px] text-[#6B7280]">
-            Sign in to access your account and exclusive deals
-          </p>
+          <p className="text-[15px] text-[#6B7280]">{t("auth.welcomeDesc")}</p>
         </div>
 
         {/* Benefits */}
@@ -68,7 +68,7 @@ const AuthWelcome = () => {
             to="/auth/login"
             className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold py-[14px] rounded-[12px] transition-colors"
           >
-            Sign In
+            {t("auth.signIn")}
             <ArrowRight className="w-[18px] h-[18px]" />
           </Link>
           <Link
@@ -76,14 +76,16 @@ const AuthWelcome = () => {
             className="flex items-center justify-center gap-[8px] w-full bg-white hover:bg-[#F9FAFB] text-[#111827] font-semibold py-[14px] rounded-[12px] border border-[#E5E7EB] transition-colors"
           >
             <User className="w-[18px] h-[18px]" />
-            Create Account
+            {t("auth.createAccount")}
           </Link>
         </div>
 
         {/* Divider */}
         <div className="flex items-center gap-[16px] mb-[24px]">
           <div className="flex-1 h-[px] bg-[#E5E7EB]"></div>
-          <span className="text-[13px] text-[#9CA3AF]">Or continue with</span>
+          <span className="text-[13px] text-[#9CA3AF]">
+            {t("auth.orContinueWith")}
+          </span>
           <div className="flex-1 h-[px] bg-[#E5E7EB]"></div>
         </div>
 
@@ -133,7 +135,7 @@ const AuthWelcome = () => {
           to="/"
           className="flex items-center justify-center w-full text-[14px] text-[#6B7280] hover:text-[#3B82F6] font-medium transition-colors"
         >
-          Continue as Guest →
+          {t("common.continueAsGuest")} →
         </Link>
       </div>
     </div>

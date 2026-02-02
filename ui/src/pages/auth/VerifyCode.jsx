@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { CheckCircle, RefreshCcw, ArrowLeft } from "lucide-react";
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const VerifyCode = () => {
+  const { t } = useTranslation();
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
 
@@ -26,15 +28,15 @@ const VerifyCode = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
+    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
       <div className="w-full max-w-[440px] bg-white rounded-[24px] shadow-xl p-[40px]">
         {/* Header */}
         <div className="text-center mb-[32px]">
           <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
-            Reset Your Password
+            {t("auth.resetPassword")}
           </h1>
           <p className="text-[15px] text-[#6B7280]">
-            Enter the verification code sent to your email
+            {t("auth.enterVerificationCode")}
           </p>
         </div>
 
@@ -49,17 +51,17 @@ const VerifyCode = () => {
         <div className="bg-[#F0FDF4] border border-[#86EFAC] rounded-[12px] px-[16px] py-[12px] flex items-center gap-[10px] mb-[24px]">
           <CheckCircle className="w-[18px] h-[18px] text-[#22C55E] shrink-0" />
           <p className="text-[14px] text-[#15803D]">
-            Reset link sent to example@example.com
+            {t("auth.resetLinkSent")}
           </p>
         </div>
 
         {/* Verification Code */}
         <div className="mb-[24px]">
           <label className="block text-[15px] font-medium text-[#111827] mb-[8px]">
-            Verification Code
+            {t("auth.verificationCode")}
           </label>
           <p className="text-[13px] text-[#6B7280] mb-[16px]">
-            Enter the 6-digit code sent to example@example.com
+            {t("auth.enter6DigitCode")}
           </p>
 
           <div className="flex justify-center gap-[10px]">
@@ -84,7 +86,7 @@ const VerifyCode = () => {
           type="button"
           className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold py-[14px] rounded-[12px] transition-colors mb-[16px]"
         >
-          Verify Code
+          {t("auth.verifyCode")}
           <CheckCircle className="w-[18px] h-[18px]" />
         </button>
 
@@ -94,7 +96,7 @@ const VerifyCode = () => {
           className="flex items-center justify-center gap-[8px] w-full text-[#6B7280] hover:text-[#374151] font-medium py-[12px] transition-colors"
         >
           <RefreshCcw className="w-[16px] h-[16px]" />
-          Resend Code
+          {t("auth.resendCode")}
         </button>
 
         {/* Back to Login */}
@@ -103,7 +105,7 @@ const VerifyCode = () => {
           className="flex items-center justify-center gap-[8px] w-full mt-[16px] text-[#3B82F6] hover:text-[#2563EB] font-medium transition-colors"
         >
           <ArrowLeft className="w-[16px] h-[16px]" />
-          Back to Login
+          {t("auth.backToLogin")}
         </Link>
       </div>
     </div>

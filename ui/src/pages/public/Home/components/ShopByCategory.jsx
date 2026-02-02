@@ -49,10 +49,10 @@ const ShopByCategory = ({ categories = [] }) => {
               >
                 <img
                   src={category.image}
-                  alt={category.name}
+                  alt={t(`categories.${category.id}`)}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
 
                 {/* İkon */}
                 <div className="absolute top-[16px] left-[16px] w-[44px] h-[44px] bg-white/20 backdrop-blur-sm rounded-[12px] flex items-center justify-center">
@@ -62,7 +62,7 @@ const ShopByCategory = ({ categories = [] }) => {
                 {/* Ad və Ox */}
                 <div className="absolute bottom-[16px] left-[16px] right-[16px] flex items-end justify-between">
                   <h3 className="text-[20px] font-bold text-white">
-                    {category.name}
+                    {t(`categories.${category.id}`)}
                   </h3>
                   <div className="w-[36px] h-[36px] bg-white rounded-full flex items-center justify-center group-hover:bg-[#3B82F6] transition-colors">
                     <ArrowUpRight className="w-[18px] h-[18px] text-[#111827] group-hover:text-white transition-colors" />

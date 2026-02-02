@@ -21,7 +21,7 @@ const Breadcrumb = ({ productName, category }) => {
             to={`/products?category=${category}`}
             className="hover:text-blue-600 transition-colors capitalize"
           >
-            {category}
+            {t(`categories.${category}`)}
           </Link>
         </>
       )}

@@ -59,7 +59,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
+    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
       <Helmet>
         <title>{t("auth.forgotPasswordTitle")} - TechVibe</title>
       </Helmet>
@@ -91,7 +91,7 @@ const ForgotPassword = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t("auth.emailPlaceholder")}
-                  className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-[2px] focus:ring-[#3B82F6] focus:border-transparent transition-all"
+                  className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
                 />
               </div>
 
@@ -144,7 +144,7 @@ const ForgotPassword = () => {
             {steps.map((step) => (
               <div key={step.number} className="flex items-start gap-[12px]">
                 <div
-                  className={`w-[28px] h-[28px] rounded-full flex items-center justify-center flex-shrink-0 ${
+                  className={`w-[28px] h-[28px] rounded-full flex items-center justify-center shrink-0 ${
                     emailSent && step.number === 1
                       ? "bg-green-500"
                       : "bg-[#3B82F6]"

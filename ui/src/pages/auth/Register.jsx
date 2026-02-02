@@ -77,7 +77,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px] py-[40px]">
+    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px] py-[40px]">
       <Helmet>
         <title>{t("auth.createAccount")} - TechVibe</title>
       </Helmet>
@@ -108,7 +108,7 @@ const Register = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                placeholder="John"
+                placeholder={t("auth.firstNamePlaceholder")}
                 className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
               />
             </div>
@@ -121,7 +121,7 @@ const Register = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                placeholder="Doe"
+                placeholder={t("auth.lastNamePlaceholder")}
                 className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
               />
             </div>

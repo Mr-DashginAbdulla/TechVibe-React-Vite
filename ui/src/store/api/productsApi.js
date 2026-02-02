@@ -71,6 +71,23 @@ export const productsApi = createApi({
       invalidatesTags: ["Cart"],
     }),
 
+    clearCart: builder.mutation({
+      async queryFn(userId, _queryApi, _extraOptions, fetchWithBQ) {
+        // First get all cart items for this user
+        const cartResult = await fetchWithBQ(`/cart?userId=${userId}`);
+        if (cartResult.error) return { error: cartResult.error };
+
+        // Delete each cart item
+        const deletePromises = cartResult.data.map((item) =>
+          fetchWithBQ({ url: `/cart/${item.id}`, method: "DELETE" }),
+        );
+        await Promise.all(deletePromises);
+
+        return { data: { success: true } };
+      },
+      invalidatesTags: ["Cart"],
+    }),
+
     // Wishlist operations
     getWishlist: builder.query({
       query: (userId) => `/wishlist?userId=${userId}`,
@@ -113,6 +130,7 @@ export const {
   useAddToCartMutation,
   useUpdateCartItemMutation,
   useRemoveFromCartMutation,
+  useClearCartMutation,
   useGetWishlistQuery,
   useAddToWishlistMutation,
   useRemoveFromWishlistMutation,
