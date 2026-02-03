@@ -14,6 +14,8 @@ import {
   useAddToWishlistMutation,
   useRemoveFromWishlistMutation,
   useCheckWishlistItemQuery,
+  useAddReviewMutation,
+  useUpdateReviewMutation,
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
 
@@ -28,6 +30,7 @@ import ActionButtons from "./components/ActionButtons";
 import TrustBadges from "./components/TrustBadges";
 import SpecsTable from "./components/SpecsTable";
 import ReviewsSection from "./components/ReviewsSection";
+import WriteReviewModal from "./components/WriteReviewModal";
 import RecommendedProducts from "./components/RecommendedProducts";
 
 const ProductDetails = () => {
@@ -72,6 +75,11 @@ const ProductDetails = () => {
   const [updateCartItem] = useUpdateCartItemMutation();
   const [addToWishlist] = useAddToWishlistMutation();
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
+  const [addReview] = useAddReviewMutation();
+  const [updateReview] = useUpdateReviewMutation();
+
+  // Review modal state
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
 
   // Initialize options and price when product loads
   useEffect(() => {
@@ -207,6 +215,56 @@ const ProductDetails = () => {
       selectedOptions: {},
     });
     toast.success(t("productDetails.addedToCart"));
+  };
+
+  const handleSubmitReview = async ({ rating, comment }) => {
+    if (!user) {
+      toast.error(t("messages.loginRequired"));
+      return;
+    }
+
+    try {
+      await addReview({
+        productId: id,
+        userId: user.id,
+        userName: `${user.firstName} ${user.lastName?.charAt(0) || ""}.`,
+        rating,
+        comment,
+        date: new Date().toISOString().split("T")[0],
+        helpfulCount: 0,
+        helpfulBy: [],
+      }).unwrap();
+      toast.success(t("productDetails.reviewSubmitted"));
+    } catch (error) {
+      toast.error(t("messages.somethingWentWrong"));
+    }
+  };
+
+  const handleHelpful = async (review) => {
+    if (!user) {
+      toast.error(t("messages.loginRequired"));
+      return;
+    }
+
+    // Prevent voting on own review
+    if (review.userId === user.id) {
+      return;
+    }
+
+    // Check if already voted
+    if (review.helpfulBy?.includes(user.id)) {
+      return;
+    }
+
+    try {
+      await updateReview({
+        id: review.id,
+        helpfulCount: (review.helpfulCount || 0) + 1,
+        helpfulBy: [...(review.helpfulBy || []), user.id],
+      }).unwrap();
+    } catch (error) {
+      toast.error(t("messages.somethingWentWrong"));
+    }
   };
 
   // Loading state

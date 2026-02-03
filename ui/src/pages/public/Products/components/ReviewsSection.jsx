@@ -1,7 +1,14 @@
 import { Star, ThumbsUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const ReviewsSection = ({ reviews = [], rating, totalReviews }) => {
+const ReviewsSection = ({
+  reviews = [],
+  rating,
+  totalReviews,
+  onWriteReview,
+  onHelpful,
+  userId,
+}) => {
   const { t } = useTranslation();
 
   // Calculate rating distribution
@@ -64,7 +71,10 @@ const ReviewsSection = ({ reviews = [], rating, totalReviews }) => {
 
         {/* Write Review Button */}
         <div className="flex items-center">
-          <button className="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-xl transition-colors">
+          <button
+            onClick={onWriteReview}
+            className="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-xl transition-colors"
+          >
             {t("productDetails.writeReview")}
           </button>
         </div>
@@ -81,11 +91,13 @@ const ReviewsSection = ({ reviews = [], rating, totalReviews }) => {
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
-                    {review.user ? review.user.charAt(0).toUpperCase() : "U"}
+                    {review.userName
+                      ? review.userName.charAt(0).toUpperCase()
+                      : "U"}
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 text-sm">
-                      {review.user}
+                      {review.userName}
                     </h4>
                     <span className="text-xs text-gray-400">{review.date}</span>
                   </div>
@@ -104,10 +116,23 @@ const ReviewsSection = ({ reviews = [], rating, totalReviews }) => {
                 </div>
               </div>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                {review.content}
+                {review.comment}
               </p>
-              <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-blue-600 transition-colors">
-                <ThumbsUp size={14} />
+              <button
+                onClick={() => onHelpful && onHelpful(review)}
+                disabled={review.helpfulBy?.includes(userId)}
+                className={`flex items-center gap-2 text-sm transition-colors ${
+                  review.helpfulBy?.includes(userId)
+                    ? "text-blue-600 cursor-default"
+                    : "text-gray-500 hover:text-blue-600"
+                }`}
+              >
+                <ThumbsUp
+                  size={14}
+                  fill={
+                    review.helpfulBy?.includes(userId) ? "currentColor" : "none"
+                  }
+                />
                 {t("productDetails.helpful")} ({review.helpfulCount || 0})
               </button>
             </div>

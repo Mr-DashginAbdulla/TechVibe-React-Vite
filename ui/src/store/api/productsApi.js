@@ -117,6 +117,27 @@ export const productsApi = createApi({
         `/wishlist?userId=${userId}&productId=${productId}`,
       providesTags: ["Wishlist"],
     }),
+
+    // Review operations
+    addReview: builder.mutation({
+      query: (review) => ({
+        url: "/reviews",
+        method: "POST",
+        body: review,
+      }),
+      invalidatesTags: (result, error, { productId }) => [
+        { type: "Review", id: productId },
+      ],
+    }),
+
+    updateReview: builder.mutation({
+      query: ({ id, ...updates }) => ({
+        url: `/reviews/${id}`,
+        method: "PATCH",
+        body: updates,
+      }),
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
@@ -135,4 +156,6 @@ export const {
   useAddToWishlistMutation,
   useRemoveFromWishlistMutation,
   useCheckWishlistItemQuery,
+  useAddReviewMutation,
+  useUpdateReviewMutation,
 } = productsApi;
