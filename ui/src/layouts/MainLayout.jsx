@@ -3,12 +3,15 @@ import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
+import ScrollToTop from "@/components/shared/ScrollToTop";
+import BackToTopButton from "@/components/shared/BackToTopButton";
 
 const MainLayout = () => {
   const { t } = useTranslation();
 
   return (
     <div className="flex min-h-screen flex-col">
+      <ScrollToTop />
       <Helmet>
         <title>TechVibe - {t("home.heroTitle")}</title>
         <meta name="description" content={t("footer.description")} />
@@ -18,6 +21,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <BackToTopButton />
     </div>
   );
 };

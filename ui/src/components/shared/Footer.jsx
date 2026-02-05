@@ -8,10 +8,10 @@ const Footer = () => {
 
   const footerLinks = {
     [t("footer.shop")]: [
-      { name: t("footer.newArrivals"), href: "/products?filter=new" },
-      { name: t("footer.bestSellers"), href: "/products?filter=bestsellers" },
+      { name: t("footer.newArrivals"), href: "/shop?filter=new" },
+      { name: t("footer.bestSellers"), href: "/shop?filter=bestsellers" },
       { name: t("footer.deals"), href: "/deals" },
-      { name: t("footer.allProducts"), href: "/products" },
+      { name: t("footer.allProducts"), href: "/shop" },
     ],
     [t("footer.support")]: [
       { name: t("footer.contactUs"), href: "/contact" },

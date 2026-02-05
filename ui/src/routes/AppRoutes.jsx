@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
 
 import Home from "@/pages/public/Home/Home";
+import Shop from "@/pages/public/Shop/Shop";
+import Deals from "@/pages/public/Deals/Deals";
 import ProductDetails from "@/pages/public/Products/ProductDetails";
 import Checkout from "@/pages/public/Checkout/Checkout";
 import OrderSuccess from "@/pages/public/OrderSuccess/OrderSuccess";
@@ -49,6 +51,8 @@ export default function AppRoutes() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/deals" element={<Deals />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route
           path="/basket"

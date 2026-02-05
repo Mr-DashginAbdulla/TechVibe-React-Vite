@@ -39,34 +39,88 @@
   ],
   "categories": [
     {
-      "id": "audio",
-      "name": "Audio",
-      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80"
+      "id": "computers",
+      "name": "Computers & Accessories",
+      "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&q=80",
+      "parentId": null
     },
     {
       "id": "laptops",
       "name": "Laptops",
-      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80"
+      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80",
+      "parentId": "computers"
+    },
+    {
+      "id": "desktops",
+      "name": "Desktops",
+      "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&q=80",
+      "parentId": "computers"
+    },
+    {
+      "id": "monitors",
+      "name": "Monitors",
+      "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80",
+      "parentId": "computers"
+    },
+    {
+      "id": "peripherals",
+      "name": "Keyboards & Mice",
+      "image": "https://images.unsplash.com/photo-1587829741301-dc798b91add1?w=500&q=80",
+      "parentId": "computers"
+    },
+    {
+      "id": "phones",
+      "name": "Phones & Wearables",
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80",
+      "parentId": null
     },
     {
       "id": "smartphones",
       "name": "Smartphones",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80"
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80",
+      "parentId": "phones"
     },
     {
       "id": "wearables",
-      "name": "Wearables",
-      "image": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80"
+      "name": "Smartwatches",
+      "image": "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80",
+      "parentId": "phones"
     },
     {
       "id": "gaming",
       "name": "Gaming",
-      "image": "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80"
+      "image": "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80",
+      "parentId": null
+    },
+    {
+      "id": "consoles",
+      "name": "Consoles",
+      "image": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=500&q=80",
+      "parentId": "gaming"
+    },
+    {
+      "id": "games",
+      "name": "Video Games",
+      "image": "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80",
+      "parentId": "gaming"
+    },
+    {
+      "id": "audio",
+      "name": "Audio & Cameras",
+      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
+      "parentId": null
+    },
+    {
+      "id": "headphones",
+      "name": "Headphones",
+      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
+      "parentId": "audio"
     },
     {
       "id": "cameras",
       "name": "Cameras",
-      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80"
+      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80",
+      "parentId": "audio"
     }
   ],
   "products": [
@@ -81,22 +135,15 @@
       "stock": 15,
       "isFeatured": true,
       "isNew": false,
-      "description": "Industry-leading noise cancellation...",
+      "description": "Industry-leading noise cancellation headphones.",
       "image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80",
       "images": [
         "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80",
-        "https://images.unsplash.com/photo-1545127398-14699f92334b?w=500&q=80",
-        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&q=80",
-        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
-        "https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=500&q=80"
+        "https://images.unsplash.com/photo-1545127398-14699f92334b?w=500&q=80"
       ],
-      "oldPrice": 399.99,
       "specs": {
         "Battery Life": "Up to 30 hours",
-        "Noise Cancellation": "Active (QN1 Processor)",
-        "Connectivity": "Bluetooth 5.2",
-        "Weight": "250g",
-        "Microphone": "8 microphones"
+        "Connectivity": "Bluetooth 5.2"
       }
     },
     {
@@ -110,80 +157,15 @@
       "stock": 10,
       "isFeatured": true,
       "isNew": false,
-      "description": "High-fidelity audio...",
+      "description": "High-fidelity audio with Active Noise Cancellation.",
       "image": "https://images.unsplash.com/photo-1625081062068-b4b0b4c0f0e1?w=500&q=80",
       "images": [
         "https://images.unsplash.com/photo-1625081062068-b4b0b4c0f0e1?w=500&q=80",
-        "https://images.unsplash.com/photo-1606220838315-056192d5e927?w=500&q=80",
-        "https://images.unsplash.com/photo-1600087626014-e652e18bbff2?w=500&q=80",
-        "https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=500&q=80",
-        "https://images.unsplash.com/photo-1590658165737-15a047b7a3ad?w=500&q=80"
+        "https://images.unsplash.com/photo-1606220838315-056192d5e927?w=500&q=80"
       ],
-      "oldPrice": null,
       "specs": {
-        "Battery Life": "Up to 20 hours",
-        "Noise Cancellation": "Active Noise Cancellation",
-        "Chip": "Apple H1 headphone chip",
-        "Connectivity": "Bluetooth 5.0",
-        "Weight": "384.8g"
-      }
-    },
-    {
-      "id": "103",
-      "name": "JBL Flip 6",
-      "price": 129.95,
-      "category": "audio",
-      "brand": "JBL",
-      "rating": 4.7,
-      "reviewsCount": 340,
-      "stock": 45,
-      "isFeatured": false,
-      "isNew": true,
-      "description": "Bold JBL Original Pro Sound...",
-      "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80",
-      "images": [
-        "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80",
-        "https://images.unsplash.com/photo-1545127398-14699f92334b?w=500&q=80",
-        "https://images.unsplash.com/photo-1589256469067-ea99122bb5e8?w=500&q=80",
-        "https://images.unsplash.com/photo-1564424224827-cd24b8915874?w=500&q=80",
-        "https://images.unsplash.com/photo-1531104985437-603d6490e6d4?w=500&q=80"
-      ],
-      "oldPrice": 149.99,
-      "specs": {
-        "Battery Life": "Up to 12 hours",
-        "Water Resistance": "IP67 waterproof",
-        "Output Power": "30W",
-        "Connectivity": "Bluetooth 5.1",
-        "Dimensions": "17.8 x 6.8 x 7.2 cm"
-      }
-    },
-    {
-      "id": "104",
-      "name": "Bose QuietComfort 45",
-      "price": 329,
-      "category": "audio",
-      "brand": "Bose",
-      "rating": 4.5,
-      "reviewsCount": 210,
-      "stock": 20,
-      "isFeatured": false,
-      "isNew": false,
-      "description": "Iconic quiet. Comfort. And sound...",
-      "image": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
-      "images": [
-        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&q=80",
-        "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80",
-        "https://images.unsplash.com/photo-1606220838315-056192d5e927?w=500&q=80",
-        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&q=80",
-        "https://images.unsplash.com/photo-1577174881658-0f30ed549adc?w=500&q=80"
-      ],
-      "oldPrice": 349,
-      "specs": {
-        "Battery Life": "Up to 24 hours",
-        "Noise Cancellation": "Acoustic Noise Cancelling",
-        "Connectivity": "Bluetooth 5.1",
-        "Charging Interface": "USB-C",
-        "App Support": "Bose Music app"
+        "Battery Life": "20 hours",
+        "Chip": "H1"
       }
     },
     {
@@ -197,22 +179,16 @@
       "stock": 8,
       "isFeatured": true,
       "isNew": true,
-      "description": "Supercharged by M2 chip...",
+      "description": "Supercharged by M2 chip, redesigned for portability.",
       "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
       "images": [
         "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
-        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&q=80",
-        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&q=80",
-        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80",
-        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80"
+        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80"
       ],
-      "oldPrice": 1299,
       "specs": {
-        "Processor": "Apple M2 (8-core CPU, 8-core GPU)",
-        "Memory": "8GB Unified Memory",
-        "Storage": "256GB SSD",
-        "Display": "13.6-inch Liquid Retina",
-        "Battery Life": "Up to 18 hours"
+        "Processor": "M2",
+        "RAM": "8GB",
+        "Storage": "256GB SSD"
       }
     },
     {
@@ -226,51 +202,15 @@
       "stock": 5,
       "isFeatured": false,
       "isNew": true,
-      "description": "Twice as powerful as before...",
+      "description": "Twice as powerful as before in the same size.",
       "image": "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80",
       "images": [
         "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80",
-        "https://images.unsplash.com/photo-1588872657578-883557e93b60?w=500&q=80",
-        "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
-        "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=500&q=80",
-        "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=500&q=80"
+        "https://images.unsplash.com/photo-1588872657578-883557e93b60?w=500&q=80"
       ],
-      "oldPrice": null,
       "specs": {
-        "Processor": "12th Gen Intel Core i7-1260P",
-        "Memory": "16GB LPDDR5",
-        "Storage": "512GB PCIe SSD",
-        "Display": "13.4 OLED Touch",
-        "Ports": "2x Thunderbolt 4"
-      }
-    },
-    {
-      "id": "203",
-      "name": "ASUS ROG Zephyrus",
-      "price": 1649.99,
-      "category": "laptops",
-      "brand": "ASUS",
-      "rating": 4.8,
-      "reviewsCount": 112,
-      "stock": 12,
-      "isFeatured": true,
-      "isNew": false,
-      "description": "Gaming powerhouse...",
-      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
-      "images": [
-        "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
-        "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=500&q=80",
-        "https://images.unsplash.com/photo-1616588589676-60b30c3c53fc?w=500&q=80",
-        "https://images.unsplash.com/photo-1602524206684-76b0ac643810?w=500&q=80",
-        "https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=500&q=80"
-      ],
-      "oldPrice": 1899.99,
-      "specs": {
-        "Processor": "AMD Ryzen 9 6900HS",
-        "Graphics": "NVIDIA GeForce RTX 3070 Ti",
-        "Memory": "16GB DDR5",
-        "Display": "14-inch 120Hz IPS",
-        "Storage": "1TB NVMe SSD"
+        "Processor": "i7-1260P",
+        "Screen": "OLED Touch"
       }
     },
     {
@@ -284,22 +224,28 @@
       "stock": 20,
       "isFeatured": true,
       "isNew": true,
-      "description": "Galaxy AI is here...",
+      "description": "Galaxy AI is here with Titanium exterior.",
       "image": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80",
       "images": [
         "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80",
-        "https://images.unsplash.com/photo-1592286927505-b593d6426caa?w=500&q=80",
-        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=500&q=80",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80",
-        "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=500&q=80"
+        "https://images.unsplash.com/photo-1706606990497-40f42b4d9904?w=500&q=80",
+        "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?w=500&q=80"
       ],
-      "oldPrice": null,
+      "colorOptions": [
+        {
+          "colorName": "Titanium Black",
+          "hexCode": "#2C2C2C",
+          "imageIndex": 0
+        },
+        {
+          "colorName": "Titanium Violet",
+          "hexCode": "#7F7396",
+          "imageIndex": 1
+        }
+      ],
       "specs": {
         "Processor": "Snapdragon 8 Gen 3",
-        "Display": "6.8-inch QHD+ AMOLED",
-        "Camera": "200MP Main + 50MP Zoom",
-        "Battery": "5000mAh",
-        "Storage": "256GB"
+        "Main Camera": "200MP"
       }
     },
     {
@@ -313,22 +259,62 @@
       "stock": 25,
       "isFeatured": true,
       "isNew": false,
-      "description": "Titanium design...",
-      "image": "https://images.unsplash.com/photo-1592286927505-b593d6426caa?w=500&q=80",
+      "description": "Titanium design, A17 Pro chip.",
+      "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1592286927505-b593d6426caa?w=500&q=80",
-        "https://images.unsplash.com/photo-1556656793-02715d8dd6f8?w=500&q=80",
-        "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=500&q=80",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80",
-        "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=500&q=80"
+        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&q=80",
+        "https://images.unsplash.com/photo-1696446701796-da61225697cc?w=500&q=80",
+        "https://images.unsplash.com/photo-1592286927505-b593d6426caa?w=500&q=80"
       ],
-      "oldPrice": null,
+      "colorOptions": [
+        {
+          "colorName": "Natural Titanium",
+          "hexCode": "#B3B0A6",
+          "imageIndex": 0
+        },
+        {
+          "colorName": "Blue Titanium",
+          "hexCode": "#2F3C48",
+          "imageIndex": 1
+        }
+      ],
       "specs": {
-        "Processor": "A17 Pro chip",
-        "Display": "6.7-inch Super Retina XDR",
-        "Camera": "48MP Main + 5x Telephoto",
-        "Material": "Titanium",
-        "Storage": "256GB"
+        "Processor": "A17 Pro",
+        "Body": "Titanium"
+      }
+    },
+    {
+      "id": "303",
+      "name": "Google Pixel 8 Pro",
+      "price": 999,
+      "category": "smartphones",
+      "brand": "Google",
+      "rating": 4.6,
+      "reviewsCount": 320,
+      "stock": 18,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "The most advanced Pixel camera and Google AI.",
+      "image": "https://images.unsplash.com/photo-1698739959325-a8c6a0c0e763?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1698739959325-a8c6a0c0e763?w=500&q=80",
+        "https://images.unsplash.com/photo-1696426578059-d64df4526d7c?w=500&q=80"
+      ],
+      "colorOptions": [
+        {
+          "colorName": "Obsidian",
+          "hexCode": "#181818",
+          "imageIndex": 0
+        },
+        {
+          "colorName": "Porcelain",
+          "hexCode": "#F2F2F2",
+          "imageIndex": 1
+        }
+      ],
+      "specs": {
+        "Processor": "Tensor G3",
+        "Camera": "50MP"
       }
     },
     {
@@ -342,22 +328,15 @@
       "stock": 40,
       "isFeatured": true,
       "isNew": true,
-      "description": "Smarter. Brighter...",
+      "description": "Smarter. Brighter. Mightier.",
       "image": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80",
       "images": [
         "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80",
-        "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80",
-        "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=500&q=80",
-        "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80",
-        "https://images.unsplash.com/photo-1523395243481-163f8f6155ab?w=500&q=80"
+        "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80"
       ],
-      "oldPrice": null,
       "specs": {
-        "Processor": "S9 SiP",
-        "Display": "Always-On Retina (2000 nits)",
-        "Sensors": "Blood Oxygen, ECG",
-        "Water Resistance": "WR50",
-        "Battery": "Up to 18 hours"
+        "Chip": "S9 SiP",
+        "Display": "2000 nits"
       }
     },
     {
@@ -371,51 +350,355 @@
       "stock": 10,
       "isFeatured": true,
       "isNew": false,
-      "description": "Play Like Never Before...",
+      "description": "Play Like Never Before, now smaller.",
       "image": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80",
       "images": [
         "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=500&q=80",
-        "https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=500&q=80",
-        "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=500&q=80",
-        "https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?w=500&q=80",
-        "https://images.unsplash.com/photo-1486401899868-0e435ed85128?w=500&q=80"
+        "https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=500&q=80"
       ],
-      "oldPrice": null,
       "specs": {
         "Storage": "1TB SSD",
-        "Resolution": "Up to 4K 120Hz",
-        "Processor": "Custom Zen 2 CPU",
-        "Graphics": "10.3 TFLOPS RDNA 2",
-        "Drive": "Ultra HD Blu-ray"
+        "Resolution": "4K 120Hz"
       }
     },
     {
-      "id": "601",
-      "name": "Sony Alpha a7 IV",
-      "price": 2498,
-      "category": "cameras",
-      "brand": "Sony",
+      "id": "701",
+      "name": "Alienware Aurora R16",
+      "price": 1899.99,
+      "category": "desktops",
+      "brand": "Dell",
+      "rating": 4.7,
+      "reviewsCount": 42,
+      "stock": 7,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Optimized airflow and high-performance gaming desktop.",
+      "image": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=500&q=80",
+        "https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?w=500&q=80",
+        "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=500&q=80"
+      ],
+      "specs": {
+        "Processor": "Intel Core i9-14900KF",
+        "Graphics": "RTX 4080",
+        "RAM": "32GB DDR5"
+      }
+    },
+    {
+      "id": "702",
+      "name": "Apple Mac Studio",
+      "price": 1999,
+      "category": "desktops",
+      "brand": "Apple",
       "rating": 4.9,
       "reviewsCount": 85,
+      "stock": 12,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Compact powerhouse for creative professionals.",
+      "image": "https://images.unsplash.com/photo-1647423853123-57a972eb452b?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1647423853123-57a972eb452b?w=500&q=80",
+        "https://images.unsplash.com/photo-1542393545-facac7050887?w=500&q=80"
+      ],
+      "specs": {
+        "Chip": "M2 Max",
+        "Memory": "32GB Unified",
+        "Ports": "Thunderbolt 4"
+      }
+    },
+    {
+      "id": "703",
+      "name": "HP OMEN 45L",
+      "price": 2199.99,
+      "category": "desktops",
+      "brand": "HP",
+      "rating": 4.6,
+      "reviewsCount": 28,
+      "stock": 4,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "Extreme cooling with the Cryo Chamber.",
+      "image": "https://images.unsplash.com/photo-1555617981-d57c7423c523?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1555617981-d57c7423c523?w=500&q=80",
+        "https://images.unsplash.com/photo-1624705002806-5d72df19c3ad?w=500&q=80"
+      ],
+      "specs": {
+        "Processor": "AMD Ryzen 9",
+        "Graphics": "RTX 4090",
+        "Storage": "2TB NVMe"
+      }
+    },
+    {
+      "id": "801",
+      "name": "LG UltraGear 27GN950",
+      "price": 799.99,
+      "category": "monitors",
+      "brand": "LG",
+      "rating": 4.8,
+      "reviewsCount": 150,
+      "stock": 20,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "World's first 4K Nano IPS 1ms gaming monitor.",
+      "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80",
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&q=80"
+      ],
+      "specs": {
+        "Resolution": "3840 x 2160 (4K)",
+        "Refresh Rate": "144Hz",
+        "Panel": "Nano IPS"
+      }
+    },
+    {
+      "id": "802",
+      "name": "Samsung Odyssey G9",
+      "price": 1199.99,
+      "category": "monitors",
+      "brand": "Samsung",
+      "rating": 4.7,
+      "reviewsCount": 98,
       "stock": 5,
       "isFeatured": true,
       "isNew": true,
-      "description": "Beyond basic...",
-      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80",
+      "description": "49-inch curved gaming monitor for immersive play.",
+      "image": "https://images.unsplash.com/photo-1616763355548-1b606f439f86?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80",
-        "https://images.unsplash.com/photo-1606933248010-ef8ec5d04e4d?w=500&q=80",
-        "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=500&q=80",
-        "https://images.unsplash.com/photo-1606933248010-2e0e8f83c8c6?w=500&q=80",
-        "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500&q=80"
+        "https://images.unsplash.com/photo-1616763355548-1b606f439f86?w=500&q=80",
+        "https://images.unsplash.com/photo-1551817958-c1b0c0f6c2e3?w=500&q=80"
       ],
-      "oldPrice": null,
       "specs": {
-        "Sensor": "33MP Full-Frame Exmor R",
-        "Video": "4K 60p 10-bit",
-        "ISO Range": "100-51200",
-        "Focus": "Real-time Eye AF",
-        "Connectivity": "Wi-Fi 5GHz / USB-C"
+        "Size": "49 Inch",
+        "Curvature": "1000R",
+        "Refresh Rate": "240Hz"
+      }
+    },
+    {
+      "id": "803",
+      "name": "Dell UltraSharp U2723QE",
+      "price": 629.99,
+      "category": "monitors",
+      "brand": "Dell",
+      "rating": 4.9,
+      "reviewsCount": 65,
+      "stock": 15,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Experience pure black and vivid color on this 4K Hub monitor.",
+      "image": "https://images.unsplash.com/photo-1544207796-99ac08e90d70?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1544207796-99ac08e90d70?w=500&q=80",
+        "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=500&q=80"
+      ],
+      "specs": {
+        "Resolution": "4K UHD",
+        "Panel": "IPS Black",
+        "Connectivity": "USB-C Hub"
+      }
+    },
+    {
+      "id": "901",
+      "name": "Keychron K2 Pro",
+      "price": 99,
+      "category": "keyboards",
+      "brand": "Keychron",
+      "rating": 4.8,
+      "reviewsCount": 210,
+      "stock": 50,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Wireless mechanical keyboard with QMK/VIA support.",
+      "image": "https://images.unsplash.com/photo-1587829741301-dc798b91add1?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1587829741301-dc798b91add1?w=500&q=80",
+        "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&q=80"
+      ],
+      "specs": {
+        "Switch": "Red/Blue/Brown",
+        "Backlight": "RGB",
+        "Connectivity": "Bluetooth & Wired"
+      }
+    },
+    {
+      "id": "902",
+      "name": "Logitech G915 Lightspeed",
+      "price": 229.99,
+      "category": "keyboards",
+      "brand": "Logitech",
+      "rating": 4.7,
+      "reviewsCount": 180,
+      "stock": 22,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Premium wireless gaming keyboard with low-profile switches.",
+      "image": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=500&q=80",
+        "https://images.unsplash.com/photo-1566819616010-0a2569fa1236?w=500&q=80"
+      ],
+      "specs": {
+        "Battery": "30 hours (100% brightness)",
+        "Material": "Aluminum Alloy"
+      }
+    },
+    {
+      "id": "903",
+      "name": "Razer BlackWidow V4",
+      "price": 169.99,
+      "category": "keyboards",
+      "brand": "Razer",
+      "rating": 4.6,
+      "reviewsCount": 95,
+      "stock": 14,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Mechanical gaming keyboard with Razer Chroma RGB.",
+      "image": "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&q=80",
+        "https://images.unsplash.com/photo-1626019503460-64b1f4865184?w=500&q=80"
+      ],
+      "specs": {
+        "Switches": "Razer Green",
+        "Features": "Dedicated Macro Keys"
+      }
+    },
+    {
+      "id": "1001",
+      "name": "Logitech MX Master 3S",
+      "price": 99.99,
+      "category": "mice",
+      "brand": "Logitech",
+      "rating": 4.9,
+      "reviewsCount": 450,
+      "stock": 60,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Performance wireless mouse with 8K DPI tracking.",
+      "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&q=80",
+        "https://images.unsplash.com/photo-1615663245857-acda5b2b1518?w=500&q=80"
+      ],
+      "specs": {
+        "Sensor": "Darkfield",
+        "Clicks": "Quiet Clicks",
+        "Wheel": "MagSpeed"
+      }
+    },
+    {
+      "id": "1002",
+      "name": "Razer DeathAdder V3 Pro",
+      "price": 149.99,
+      "category": "mice",
+      "brand": "Razer",
+      "rating": 4.8,
+      "reviewsCount": 120,
+      "stock": 25,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "Ultra-lightweight wireless ergonomic esports mouse.",
+      "image": "https://images.unsplash.com/photo-1613141411244-0e42a9f7724d?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1613141411244-0e42a9f7724d?w=500&q=80",
+        "https://images.unsplash.com/photo-1629429408209-1f912961dbd8?w=500&q=80"
+      ],
+      "specs": {
+        "Weight": "63g",
+        "DPI": "30,000",
+        "Polling Rate": "4000Hz"
+      }
+    },
+    {
+      "id": "1003",
+      "name": "Apple Magic Mouse",
+      "price": 79,
+      "category": "mice",
+      "brand": "Apple",
+      "rating": 4.2,
+      "reviewsCount": 300,
+      "stock": 40,
+      "isFeatured": false,
+      "isNew": false,
+      "description": "Wireless, rechargeable, with Multi-Touch surface.",
+      "image": "https://images.unsplash.com/photo-1615663245857-acda5b2b1518?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1615663245857-acda5b2b1518?w=500&q=80",
+        "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&q=80"
+      ],
+      "specs": {
+        "Connectivity": "Bluetooth",
+        "Gestures": "Multi-Touch"
+      }
+    },
+    {
+      "id": "1101",
+      "name": "Marvel's Spider-Man 2",
+      "price": 69.99,
+      "category": "games",
+      "brand": "PlayStation Studios",
+      "rating": 4.9,
+      "reviewsCount": 540,
+      "stock": 100,
+      "isFeatured": true,
+      "isNew": true,
+      "description": "The next game in the Marvel's Spider-Man franchise (PS5 Disc).",
+      "image": "https://images.unsplash.com/photo-1627856014759-085296e22dc7?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1627856014759-085296e22dc7?w=500&q=80",
+        "https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=500&q=80"
+      ],
+      "specs": {
+        "Platform": "PlayStation 5",
+        "Genre": "Action-Adventure"
+      }
+    },
+    {
+      "id": "1102",
+      "name": "EA SPORTS FC 24",
+      "price": 59.99,
+      "category": "games",
+      "brand": "EA Sports",
+      "rating": 4.5,
+      "reviewsCount": 320,
+      "stock": 85,
+      "isFeatured": false,
+      "isNew": true,
+      "description": "A new era for The World's Game (PS5 Disc).",
+      "image": "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80",
+        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500&q=80"
+      ],
+      "specs": {
+        "Platform": "PS5 / Xbox",
+        "Genre": "Sports"
+      }
+    },
+    {
+      "id": "1103",
+      "name": "Elden Ring",
+      "price": 49.99,
+      "category": "games",
+      "brand": "FromSoftware",
+      "rating": 5,
+      "reviewsCount": 900,
+      "stock": 30,
+      "isFeatured": true,
+      "isNew": false,
+      "description": "Winner of Game of the Year. An epic fantasy action-RPG.",
+      "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&q=80",
+        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&q=80"
+      ],
+      "specs": {
+        "Platform": "PS5 / Xbox",
+        "Genre": "RPG"
       }
     }
   ],
@@ -438,110 +721,6 @@
       "date": "2025-11-01"
     },
     {
-      "id": "r101_3",
-      "productId": "101",
-      "userName": "Tural K.",
-      "rating": 4,
-      "comment": "Səs keyfiyyəti yaxşıdır, amma qutusu biraz böyükdür.",
-      "date": "2025-11-05"
-    },
-    {
-      "id": "r102_1",
-      "productId": "102",
-      "userName": "Leyla H.",
-      "rating": 5,
-      "comment": "Apple ekosistemi üçün ən yaxşı seçim. Transparanlıq rejimi inanılası deyil.",
-      "date": "2025-12-10"
-    },
-    {
-      "id": "r102_2",
-      "productId": "102",
-      "userName": "Murad V.",
-      "rating": 4,
-      "comment": "Biraz ağırdır, amma material keyfiyyəti hiss olunur.",
-      "date": "2026-01-05"
-    },
-    {
-      "id": "r102_3",
-      "productId": "102",
-      "userName": "Səbinə R.",
-      "rating": 5,
-      "comment": "Dizaynı çox bəyənirəm, səs isə studiya keyfiyyətindədir.",
-      "date": "2026-01-15"
-    },
-    {
-      "id": "r103_1",
-      "productId": "103",
-      "userName": "Rəşad Q.",
-      "rating": 5,
-      "comment": "Balaca olmasına baxmayaraq səsi çox güclüdür. Çimərlik üçün idealdır.",
-      "date": "2025-09-20"
-    },
-    {
-      "id": "r103_2",
-      "productId": "103",
-      "userName": "Nigar S.",
-      "rating": 4,
-      "comment": "Batareyası vəd edildiyi kimi 12 saat dözür.",
-      "date": "2025-10-12"
-    },
-    {
-      "id": "r103_3",
-      "productId": "103",
-      "userName": "Elvin M.",
-      "rating": 5,
-      "comment": "JBL keyfiyyəti. Basslar yerindədir.",
-      "date": "2025-11-28"
-    },
-    {
-      "id": "r201_1",
-      "productId": "201",
-      "userName": "Fərid Ə.",
-      "rating": 5,
-      "comment": "M2 çipi həqiqətən çox sürətlidir. Video montaj üçün əladır.",
-      "date": "2025-11-15"
-    },
-    {
-      "id": "r201_2",
-      "productId": "201",
-      "userName": "Günel T.",
-      "rating": 5,
-      "comment": "Dizaynı çox incədir və yüngüldür. Çantada hiss olunmur.",
-      "date": "2025-12-02"
-    },
-    {
-      "id": "r201_3",
-      "productId": "201",
-      "userName": "Kamran B.",
-      "rating": 4,
-      "comment": "Ekran parlaqlığı əladır, amma port sayı azdır.",
-      "date": "2026-01-10"
-    },
-    {
-      "id": "r202_1",
-      "productId": "202",
-      "userName": "Samir Z.",
-      "rating": 4,
-      "comment": "Dizayn futuristikdir, klaviatura biraz vərdiş tələb edir.",
-      "date": "2025-10-30"
-    },
-    {
-      "id": "r202_2",
-      "productId": "202",
-      "userName": "Aynur P.",
-      "rating": 5,
-      "comment": "Ekran keyfiyyəti Dell-də həmişəki kimi möhtəşəmdir.",
-      "date": "2025-11-22"
-    },
-    {
-      "id": "r202_3",
-      "productId": "202",
-      "userName": "Vüsal K.",
-      "rating": 5,
-      "comment": "İş üçün ən yaxşı Windows noutbukudur.",
-      "date": "2026-01-08"
-    },
-    {
       "id": "r301_1",
       "productId": "301",
       "userName": "Orxan C.",
@@ -550,134 +729,55 @@
       "date": "2026-01-26"
     },
     {
-      "id": "r301_2",
-      "productId": "301",
-      "userName": "Nərmin L.",
+      "id": "r701_1",
+      "productId": "701",
+      "userName": "Kamran V.",
+      "rating": 5,
+      "comment": "Oyun performansı üçün söz ola bilməz. Soyutma sistemi çox səssiz işləyir.",
+      "date": "2026-02-01"
+    },
+    {
+      "id": "r702_1",
+      "productId": "702",
+      "userName": "Nərgiz H.",
+      "rating": 5,
+      "comment": "Dizaynerlər üçün əvəzolunmazdır. Render sürəti heyranedicidir.",
+      "date": "2026-01-30"
+    },
+    {
+      "id": "r801_1",
+      "productId": "801",
+      "userName": "Fərid K.",
+      "rating": 5,
+      "comment": "4K keyfiyyəti və 144Hz bir arada. Rənglər çox canlıdır.",
+      "date": "2026-02-02"
+    },
+    {
+      "id": "r901_1",
+      "productId": "901",
+      "userName": "Leyla S.",
       "rating": 4,
-      "comment": "Biraz böyükdür, bir əllə işlətmək çətindir, amma güclüdür.",
+      "comment": "Yazı yazmaq üçün çox rahatdır, amma biraz hündürdür, qoltuqaltı lazımdır.",
+      "date": "2026-01-25"
+    },
+    {
+      "id": "r1001_1",
+      "productId": "1001",
+      "userName": "Rəşad Ə.",
+      "rating": 5,
+      "comment": "Bu mouse ilə işləmək tamam başqa zövqdür. Sonsuz scroll funksiyası əladır.",
       "date": "2026-01-28"
     },
     {
-      "id": "r301_3",
-      "productId": "301",
-      "userName": "Elnur H.",
+      "id": "r1101_1",
+      "productId": "1101",
+      "userName": "Tural M.",
       "rating": 5,
-      "comment": "S-Pen çox faydalıdır, qeydlər aparmaq üçün əvəzolunmazdır.",
-      "date": "2026-01-29"
-    },
-    {
-      "id": "r302_1",
-      "productId": "302",
-      "userName": "Zaur M.",
-      "rating": 5,
-      "comment": "Titanium korpus hissiyyatı tam başqadır. Çox yüngülləşib.",
-      "date": "2025-12-25"
-    },
-    {
-      "id": "r302_2",
-      "productId": "302",
-      "userName": "Fidan Q.",
-      "rating": 5,
-      "comment": "Kameranın gecə rejimi xeyli təkmilləşib.",
-      "date": "2026-01-12"
-    },
-    {
-      "id": "r302_3",
-      "productId": "302",
-      "userName": "Rüstəm Ə.",
-      "rating": 4,
-      "comment": "Bahadır, amma keyfiyyətinə söz ola bilməz.",
+      "comment": "Hekayə və qrafika möhtəşəmdir. Hər kəsə tövsiyə edirəm.",
       "date": "2026-01-20"
-    },
-    {
-      "id": "r401_1",
-      "productId": "401",
-      "userName": "Lalə S.",
-      "rating": 5,
-      "comment": "Double tap jesti işimi çox asanlaşdırır.",
-      "date": "2025-11-10"
-    },
-    {
-      "id": "r401_2",
-      "productId": "401",
-      "userName": "Cavid N.",
-      "rating": 5,
-      "comment": "Ekran parlaqlığı günəş altında belə əla görünür.",
-      "date": "2025-12-05"
-    },
-    {
-      "id": "r401_3",
-      "productId": "401",
-      "userName": "Sevinc K.",
-      "rating": 4,
-      "comment": "Batareyası hər gün şarj tələb edir, bu biraz yorucudur.",
-      "date": "2026-01-18"
-    },
-    {
-      "id": "r501_1",
-      "productId": "501",
-      "userName": "Rauf İ.",
-      "rating": 5,
-      "comment": "Yüklənmə sürəti (SSD) sadəcə uçur. Oyunlar anında açılır.",
-      "date": "2025-12-20"
-    },
-    {
-      "id": "r501_2",
-      "productId": "501",
-      "userName": "Teymur Ə.",
-      "rating": 5,
-      "comment": "DualSense pultunun hissiyyatı oyunu tamamilə dəyişir.",
-      "date": "2026-01-02"
-    },
-    {
-      "id": "r501_3",
-      "productId": "501",
-      "userName": "Arif M.",
-      "rating": 5,
-      "comment": "Slim versiyası daha yığcamdır, yer tutmur.",
-      "date": "2026-01-15"
-    },
-    {
-      "id": "r601_1",
-      "productId": "601",
-      "userName": "Fotoqraf Əli",
-      "rating": 5,
-      "comment": "Avtofokus sistemi inanılmaz dərəcədə sürətli və dəqiqdir.",
-      "date": "2025-11-30"
-    },
-    {
-      "id": "r601_2",
-      "productId": "601",
-      "userName": "Nuranə F.",
-      "rating": 5,
-      "comment": "Həm foto, həm video üçün mükəmməl hibrid kameradır.",
-      "date": "2025-12-15"
-    },
-    {
-      "id": "r601_3",
-      "productId": "601",
-      "userName": "Kənan R.",
-      "rating": 4,
-      "comment": "Menyusu biraz qarışıqdır, amma öyrəşmək olur.",
-      "date": "2026-01-10"
     }
   ],
-  "addresses": [
-    {
-      "label": "Home",
-      "firstName": "John",
-      "lastName": "Doe",
-      "address": "Yasamal",
-      "city": "Baku",
-      "state": "Baku",
-      "zipCode": "1002",
-      "country": "Azerbaijan",
-      "phone": "+994998887766",
-      "isDefault": false,
-      "userId": "mkth60qz-s7vce3",
-      "id": 1
-    }
-  ],
+  "addresses": [],
   "orders": [],
   "cart": [],
   "wishlist": []

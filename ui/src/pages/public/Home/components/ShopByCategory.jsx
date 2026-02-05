@@ -2,7 +2,7 @@ import {
   ArrowUpRight,
   Laptop,
   Smartphone,
-  Watch,
+  Monitor,
   Headphones,
   Camera,
   Gamepad2,
@@ -16,13 +16,17 @@ const ShopByCategory = ({ categories = [] }) => {
 
   // Serverdən gələn ID-lərə uyğun ikonlar (Mapping)
   const iconMap = {
+    computers: Monitor,
     laptops: Laptop,
+    phones: Smartphone,
     smartphones: Smartphone,
-    wearables: Watch,
+    gaming: Gamepad2,
     audio: Headphones,
     cameras: Camera,
-    gaming: Gamepad2,
   };
+
+  // Yalnız parent kateqoriyaları göstər (parentId === null)
+  const parentCategories = categories.filter((cat) => cat.parentId === null);
 
   return (
     <section className="py-[60px] bg-[#F9FAFB]">
@@ -36,15 +40,15 @@ const ShopByCategory = ({ categories = [] }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-          {categories.map((category) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
+          {parentCategories.map((category) => {
             // İkonu tapırıq, yoxdursa default 'Package' ikonu qoyuruq
             const IconComponent = iconMap[category.id] || Package;
 
             return (
               <Link
                 key={category.id}
-                to={`/products?category=${category.id}`}
+                to={`/shop?category=${category.id}`}
                 className="group relative h-[220px] rounded-[20px] overflow-hidden"
               >
                 <img

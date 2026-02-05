@@ -19,7 +19,7 @@ const RecommendedProducts = ({
           {t("productDetails.recommendedProducts")}
         </h2>
         <Link
-          to="/products"
+          to="/shop"
           className="text-blue-600 font-semibold text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all"
         >
           {t("productDetails.viewAllProducts")}

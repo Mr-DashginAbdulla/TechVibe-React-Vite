@@ -27,7 +27,7 @@ const NewArrivals = ({
             </h2>
           </div>
           <Link
-            to="/products?filter=new"
+            to="/shop"
             className="flex items-center gap-[8px] text-[#3B82F6] hover:text-[#2563EB] font-medium transition-colors"
           >
             {t("home.viewAll")}
@@ -49,7 +49,7 @@ const NewArrivals = ({
           </div>
         ) : (
           <p className="text-center text-gray-500 py-10">
-            Yeni məhsul tapılmadı.
+            {t("common.noProductsFound")}
           </p>
         )}
       </div>

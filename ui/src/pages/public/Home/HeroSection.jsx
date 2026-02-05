@@ -24,7 +24,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="w-full bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] py-[60px]">
+    <section className="w-full bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] py-[60px]">
       <div className="container mx-auto px-[16px]">
         <div className="flex flex-col lg:flex-row items-center gap-[40px] lg:gap-[60px]">
           <div className="flex-1 text-center lg:text-left">
@@ -40,7 +40,7 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row items-center gap-[16px] justify-center lg:justify-start">
               <Link
-                to="/products"
+                to="/shop"
                 className="flex items-center gap-[8px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold px-[28px] py-[14px] rounded-[12px] transition-colors"
               >
                 {t("hero.discoverNova")}

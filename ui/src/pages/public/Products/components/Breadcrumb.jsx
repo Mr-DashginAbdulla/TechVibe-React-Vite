@@ -11,14 +11,14 @@ const Breadcrumb = ({ productName, category }) => {
         {t("productDetails.home")}
       </Link>
       <ChevronRight size={14} className="text-gray-400" />
-      <Link to="/products" className="hover:text-blue-600 transition-colors">
+      <Link to="/shop" className="hover:text-blue-600 transition-colors">
         {t("productDetails.products")}
       </Link>
       {category && (
         <>
           <ChevronRight size={14} className="text-gray-400" />
           <Link
-            to={`/products?category=${category}`}
+            to={`/shop?category=${category}`}
             className="hover:text-blue-600 transition-colors capitalize"
           >
             {t(`categories.${category}`)}

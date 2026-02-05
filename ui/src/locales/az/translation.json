@@ -27,7 +27,8 @@
     "close": "Bağla",
     "refresh": "Yenilə",
     "selectAll": "Hamısını seç",
-    "clearAll": "Hamısını təmizlə"
+    "clearAll": "Hamısını təmizlə",
+    "noProductsFound": "Məhsul tapılmadı."
   },
   "nav": {
     "home": "Ana səhifə",
@@ -148,13 +149,19 @@
     "thankYou": "Abunə olduğunuz üçün təşəkkürlər!"
   },
   "categories": {
-    "smartphones": "Smartfonlar",
+    "computers": "Kompüterlər və Aksesuarlar",
     "laptops": "Noutbuklar",
-    "audio": "Səs",
-    "wearables": "Geyilə bilən",
+    "desktops": "Masaüstü Kompüterlər",
+    "monitors": "Monitorlar",
+    "peripherals": "Klaviatura və Siçanlar",
+    "phones": "Telefonlar və Geyilə Bilənlər",
+    "smartphones": "Smartfonlar",
+    "wearables": "Ağıllı Saatlar",
     "gaming": "Oyunlar",
-    "accessories": "Aksesuarlar",
-    "tablets": "Planşetlər",
+    "consoles": "Konsollar",
+    "games": "Video Oyunlar",
+    "audio": "Səs və Kameralar",
+    "headphones": "Qulaqlıqlar",
     "cameras": "Kameralar"
   },
   "product": {
@@ -405,5 +412,44 @@
       "shipped": "Göndərildi",
       "delivered": "Çatdırıldı"
     }
+  },
+  "shop": {
+    "title": "Bütün Məhsullar",
+    "results": "{{count}} məhsul tapıldı",
+    "noResults": "Filterinizə uyğun məhsul tapılmadı",
+    "clearFilters": "Bütün filterləri təmizlə",
+    "filters": "Filterlər",
+    "showFilters": "Filterləri göstər",
+    "hideFilters": "Filterləri gizlə",
+    "priceRange": "Qiymət aralığı",
+    "minPrice": "Min",
+    "maxPrice": "Max",
+    "brands": "Brendlər",
+    "rating": "Reytinq",
+    "ratingAbove": "{{stars}}+ ulduz",
+    "applyFilters": "Filterləri tətbiq et",
+    "sortBy": "Sırala",
+    "sortNewest": "Ən yenilər",
+    "sortPriceAsc": "Qiymət: Aşağıdan yuxarıya",
+    "sortPriceDesc": "Qiymət: Yuxarıdan aşağıya",
+    "sortRating": "Ən yaxşı reytinq",
+    "searchResults": "\"{{query}}\" üçün axtarış nəticələri",
+    "andAbove": "və yuxarı",
+    "searchSuggestions": "Təklif olunan Məhsullar",
+    "noSearchResults": "Məhsul tapılmadı",
+    "viewAllResults": "Bütün nəticələrə bax"
+  },
+  "categoriesPage": {
+    "title": "Kateqoriyalara Baxın",
+    "subtitle": "Axtardığınızı dəqiq tapın",
+    "products": "{{count}} məhsul",
+    "viewAll": "Bütün kateqoriyalara bax"
+  },
+  "deals": {
+    "title": "Xüsusi Endirimlər",
+    "subtitle": "Məhdud müddətli təkliflər - qaçırmayın!",
+    "saveUp": "{{percent}}%-ə qədər qənaət",
+    "endsSoon": "Tezliklə bitir",
+    "noDeals": "Hazırda aktiv endirim yoxdur"
   }
 }

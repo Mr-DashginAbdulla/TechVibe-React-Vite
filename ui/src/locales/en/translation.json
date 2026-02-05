@@ -27,7 +27,8 @@
     "close": "Close",
     "refresh": "Refresh",
     "selectAll": "Select All",
-    "clearAll": "Clear All"
+    "clearAll": "Clear All",
+    "noProductsFound": "No products found."
   },
   "nav": {
     "home": "Home",
@@ -148,13 +149,19 @@
     "thankYou": "Thank you for subscribing!"
   },
   "categories": {
-    "smartphones": "Smartphones",
+    "computers": "Computers & Accessories",
     "laptops": "Laptops",
-    "audio": "Audio",
-    "wearables": "Wearables",
+    "desktops": "Desktops",
+    "monitors": "Monitors",
+    "peripherals": "Keyboards & Mice",
+    "phones": "Phones & Wearables",
+    "smartphones": "Smartphones",
+    "wearables": "Smartwatches",
     "gaming": "Gaming",
-    "accessories": "Accessories",
-    "tablets": "Tablets",
+    "consoles": "Consoles",
+    "games": "Video Games",
+    "audio": "Audio & Cameras",
+    "headphones": "Headphones",
     "cameras": "Cameras"
   },
   "product": {
@@ -405,5 +412,44 @@
       "shipped": "Shipped",
       "delivered": "Delivered"
     }
+  },
+  "shop": {
+    "title": "All Products",
+    "results": "{{count}} products found",
+    "noResults": "No products match your filters",
+    "clearFilters": "Clear All Filters",
+    "filters": "Filters",
+    "showFilters": "Show Filters",
+    "hideFilters": "Hide Filters",
+    "priceRange": "Price Range",
+    "minPrice": "Min",
+    "maxPrice": "Max",
+    "brands": "Brands",
+    "rating": "Rating",
+    "ratingAbove": "{{stars}}+ Stars",
+    "applyFilters": "Apply Filters",
+    "sortBy": "Sort By",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "sortRating": "Best Rating",
+    "searchResults": "Search results for \"{{query}}\"",
+    "andAbove": "& above",
+    "searchSuggestions": "Suggested Products",
+    "noSearchResults": "No products found",
+    "viewAllResults": "View all results"
+  },
+  "categoriesPage": {
+    "title": "Browse Categories",
+    "subtitle": "Find exactly what you're looking for",
+    "products": "{{count}} products",
+    "viewAll": "View All Categories"
+  },
+  "deals": {
+    "title": "Special Deals",
+    "subtitle": "Limited time offers - don't miss out!",
+    "saveUp": "Save up to {{percent}}%",
+    "endsSoon": "Ends Soon",
+    "noDeals": "No active deals at the moment"
   }
 }
