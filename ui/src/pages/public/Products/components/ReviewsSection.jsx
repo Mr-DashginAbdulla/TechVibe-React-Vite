@@ -32,21 +32,29 @@ const ReviewsSection = ({
       <div className="flex flex-col md:flex-row gap-6 mb-8 p-6 bg-gray-50 rounded-xl">
         {/* Rating Score */}
         <div className="flex flex-col items-center justify-center min-w-[120px]">
-          <div className="text-5xl font-bold text-gray-900 mb-2">{rating}</div>
+          <div className="text-5xl font-bold text-gray-900 mb-2">
+            {rating !== null ? rating : "-"}
+          </div>
           <div className="flex mb-2">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
                 size={18}
-                fill={i < Math.floor(rating) ? "#F59E0B" : "none"}
+                fill={
+                  rating !== null && i < Math.floor(rating) ? "#F59E0B" : "none"
+                }
                 className={
-                  i < Math.floor(rating) ? "text-amber-400" : "text-gray-300"
+                  rating !== null && i < Math.floor(rating)
+                    ? "text-amber-400"
+                    : "text-gray-300"
                 }
               />
             ))}
           </div>
           <div className="text-sm text-gray-500">
-            {totalReviews} {t("productDetails.reviews")}
+            {totalReviews > 0
+              ? `${totalReviews} ${t("productDetails.reviews")}`
+              : t("productDetails.noReviews")}
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -35,6 +35,7 @@ import RecommendedProducts from "./components/RecommendedProducts";
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { user } = useAuth();
 
@@ -42,6 +43,9 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [calculatedPrice, setCalculatedPrice] = useState(0);
+  const [transformedProductOptions, setTransformedProductOptions] = useState(
+    [],
+  );
 
   // RTK Query hooks
   const {
@@ -86,16 +90,50 @@ const ProductDetails = () => {
     if (product) {
       setCalculatedPrice(product.price);
 
-      // Set default options
-      if (product.options) {
-        const defaults = {};
-        product.options.forEach((opt) => {
-          if (opt.values && opt.values.length > 0) {
-            defaults[opt.id] = opt.values[0];
-          }
+      // Transform colorOptions and memoryOptions to options format
+      const transformedOptions = [];
+
+      if (product.colorOptions?.length > 0) {
+        transformedOptions.push({
+          id: "color",
+          title: "Color",
+          type: "color",
+          values: product.colorOptions.map((c) => ({
+            label: c.name,
+            value: c.hex,
+            priceModifier: 0,
+          })),
         });
-        setSelectedOptions(defaults);
       }
+
+      if (product.memoryOptions?.length > 0) {
+        transformedOptions.push({
+          id: "memory",
+          title: "Storage",
+          type: "select",
+          values: product.memoryOptions.map((m) => ({
+            label: m.size,
+            priceModifier: m.adj || 0,
+          })),
+        });
+      }
+
+      // Also support legacy options format
+      if (product.options) {
+        transformedOptions.push(...product.options);
+      }
+
+      // Set default options
+      const defaults = {};
+      transformedOptions.forEach((opt) => {
+        if (opt.values && opt.values.length > 0) {
+          defaults[opt.id] = opt.values[0];
+        }
+      });
+      setSelectedOptions(defaults);
+
+      // Store transformed options for rendering
+      setTransformedProductOptions(transformedOptions);
     }
   }, [product]);
 
@@ -140,14 +178,18 @@ const ProductDetails = () => {
       );
 
       if (existingItem) {
-        // Update quantity of existing item
+        // Update quantity of existing item (but not exceed stock)
+        const newQuantity = Math.min(
+          (existingItem.quantity || 1) + quantity,
+          product.stock,
+        );
         await updateCartItem({
           id: existingItem.id,
-          quantity: (existingItem.quantity || 1) + quantity,
+          quantity: newQuantity,
         }).unwrap();
         toast.success(t("productDetails.cartUpdated"));
       } else {
-        // Add new item to cart
+        // Add new item to cart with stock info
         await addToCart({
           userId: user.id,
           productId: product.id,
@@ -155,6 +197,7 @@ const ProductDetails = () => {
           price: calculatedPrice,
           image: product.image,
           quantity,
+          stock: product.stock,
           selectedOptions,
         }).unwrap();
         toast.success(t("productDetails.addedToCart"));
@@ -170,8 +213,19 @@ const ProductDetails = () => {
       return;
     }
 
-    // Navigate directly to checkout - user can add items from product page
-    window.location.href = "/checkout";
+    // Create buy now item with current product details
+    const buyNowItem = {
+      productId: product.id,
+      name: product.name,
+      price: calculatedPrice,
+      image: product.image,
+      quantity,
+      stock: product.stock,
+      selectedOptions,
+    };
+
+    // Navigate to checkout with product data - bypassing cart
+    navigate("/checkout", { state: { buyNowItem } });
   };
 
   const handleToggleWishlist = async () => {
@@ -323,8 +377,15 @@ const ProductDetails = () => {
               <ProductInfo
                 brand={product.brand}
                 name={product.name}
-                rating={product.rating}
-                reviewsCount={product.reviewsCount || reviews.length}
+                rating={
+                  reviews.length > 0
+                    ? (
+                        reviews.reduce((sum, r) => sum + r.rating, 0) /
+                        reviews.length
+                      ).toFixed(1)
+                    : null
+                }
+                reviewsCount={reviews.length}
                 isNew={product.isNew}
               />
 
@@ -335,7 +396,7 @@ const ProductDetails = () => {
               />
 
               <VariantSelector
-                options={product.options}
+                options={transformedProductOptions}
                 selectedOptions={selectedOptions}
                 onOptionSelect={handleOptionSelect}
               />
@@ -364,8 +425,15 @@ const ProductDetails = () => {
           {/* Customer Reviews */}
           <ReviewsSection
             reviews={reviews}
-            rating={product.rating}
-            totalReviews={product.reviewsCount || reviews.length}
+            rating={
+              reviews.length > 0
+                ? (
+                    reviews.reduce((sum, r) => sum + r.rating, 0) /
+                    reviews.length
+                  ).toFixed(1)
+                : null
+            }
+            totalReviews={reviews.length}
           />
 
           {/* Recommended Products */}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -15,7 +15,11 @@ import {
   Truck,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { useGetCartQuery, useClearCartMutation } from "@/store/api/productsApi";
+import {
+  useGetCartQuery,
+  useClearCartMutation,
+  useGetAllProductsQuery,
+} from "@/store/api/productsApi";
 import { addressService } from "@/services/addressService";
 import { orderService } from "@/services/orderService";
 import ShippingStep from "./ShippingStep";
@@ -29,12 +33,21 @@ const STEPS = [
   { id: 3, key: "review", icon: ClipboardCheck },
 ];
 
-const SHIPPING_COST = 5.0; // Sabit çatdırılma qiyməti
+const SHIPPING_COST = 5.0; // Çatdırılma qiyməti
+const FREE_SHIPPING_THRESHOLD = 50; // Pulsuz çatdırılma həddi
 
 const Checkout = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
+
+  // Check if this is a "Buy Now" direct purchase
+  const buyNowItem = location.state?.buyNowItem;
+
+  // Check if this is editing an existing order
+  const editOrderId = location.state?.editOrderId;
+  const editOrderItems = location.state?.editOrderItems;
 
   const [currentStep, setCurrentStep] = useState(1);
   const [addresses, setAddresses] = useState([]);
@@ -52,11 +65,64 @@ const Checkout = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
-    skip: !user?.id,
+    skip: !user?.id || !!buyNowItem, // Skip cart query if this is a buy-now purchase
   });
   const [clearCart] = useClearCartMutation();
 
-  // Redirect if not logged in or cart is empty
+  // Local state for managing items (allows quantity changes)
+  const [localItems, setLocalItems] = useState([]);
+
+  // Fetch all products to get stock info
+  const { data: allProducts = [] } = useGetAllProductsQuery();
+
+  // Initialize local items when cart or special items are loaded
+  useEffect(() => {
+    let items = [];
+    if (buyNowItem) {
+      items = [buyNowItem];
+    } else if (editOrderItems) {
+      items = editOrderItems;
+    } else if (cartItems.length > 0) {
+      items = cartItems;
+    }
+
+    // Merge stock info from products
+    if (items.length > 0 && allProducts.length > 0) {
+      const itemsWithStock = items.map((item) => {
+        const product = allProducts.find(
+          (p) => p.id === item.productId || p.id === String(item.productId),
+        );
+        return {
+          ...item,
+          stock: product?.stock || item.stock || 99,
+        };
+      });
+      setLocalItems(itemsWithStock);
+    } else if (items.length > 0) {
+      setLocalItems(items);
+    }
+  }, [buyNowItem, editOrderItems, cartItems, allProducts]);
+
+  // Use localItems for checkout
+  const checkoutItems = localItems;
+
+  // Handle quantity update
+  const handleUpdateQuantity = (item, newQuantity) => {
+    if (newQuantity < 1) return;
+    // Limit quantity to stock if available
+    const maxQuantity = item.stock || 99;
+    if (newQuantity > maxQuantity) return;
+
+    setLocalItems((prevItems) =>
+      prevItems.map((i) =>
+        i.id === item.id || i.productId === item.productId
+          ? { ...i, quantity: newQuantity }
+          : i,
+      ),
+    );
+  };
+
+  // Redirect if not logged in or no items
   useEffect(() => {
     if (!user) {
       toast.error(t("basket.loginRequired"));
@@ -66,11 +132,16 @@ const Checkout = () => {
   }, [user, navigate, t]);
 
   useEffect(() => {
-    if (cartItems.length === 0 && !isLoading) {
+    if (
+      checkoutItems.length === 0 &&
+      !isLoading &&
+      !buyNowItem &&
+      !editOrderItems
+    ) {
       toast.error(t("basket.emptyCartError"));
       navigate("/");
     }
-  }, [cartItems, isLoading, navigate, t]);
+  }, [checkoutItems, isLoading, buyNowItem, editOrderItems, navigate, t]);
 
   // Fetch addresses
   useEffect(() => {
@@ -96,12 +167,14 @@ const Checkout = () => {
   }, [user?.id]);
 
   // Calculations
-  const subtotal = cartItems.reduce(
+  const subtotal = checkoutItems.reduce(
     (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
     0,
   );
+  // Free shipping for orders over $50
+  const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
   const tax = subtotal * 0.18; // 18% ƏDV
-  const total = subtotal + SHIPPING_COST + tax - discount;
+  const total = subtotal + shippingCost + tax - discount;
 
   const selectedAddress = addresses.find((a) => a.id === selectedAddressId);
 
@@ -165,18 +238,19 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
-    if (!selectedAddress || cartItems.length === 0) return;
+    if (!selectedAddress || checkoutItems.length === 0) return;
 
     setIsSubmitting(true);
     try {
       const orderData = {
         userId: user.id,
-        items: cartItems.map((item) => ({
+        items: checkoutItems.map((item) => ({
           productId: item.productId,
           name: item.name,
           price: item.price,
           quantity: item.quantity,
           image: item.image,
+          selectedOptions: item.selectedOptions || {},
         })),
         shippingAddress: {
           label: selectedAddress.label,
@@ -191,7 +265,7 @@ const Checkout = () => {
         },
         paymentMethod: paymentMethod,
         subtotal: subtotal,
-        shippingCost: SHIPPING_COST,
+        shippingCost: shippingCost,
         tax: tax,
         discount: discount,
         promoCode: promoCode || null,
@@ -200,12 +274,25 @@ const Checkout = () => {
         createdAt: new Date().toISOString(),
       };
 
-      const order = await orderService.create(orderData);
+      let order;
+      if (editOrderId) {
+        // Update existing order
+        order = await orderService.updateOrderItems(
+          editOrderId,
+          orderData.items,
+        );
+        toast.success(t("checkout.orderUpdated"));
+      } else {
+        // Create new order
+        order = await orderService.create(orderData);
+        toast.success(t("checkout.orderPlaced"));
+      }
 
-      // Clear cart
-      await clearCart(user.id);
+      // Clear cart only if this was not a buy-now or edit-order purchase
+      if (!buyNowItem && !editOrderId) {
+        await clearCart(user.id);
+      }
 
-      toast.success(t("checkout.orderPlaced"));
       navigate(`/order-success/${order.id}`);
     } catch (error) {
       console.error("Error placing order:", error);
@@ -304,7 +391,7 @@ const Checkout = () => {
               )}
               {currentStep === 3 && (
                 <ReviewStep
-                  cartItems={cartItems}
+                  cartItems={checkoutItems}
                   selectedAddress={selectedAddress}
                   paymentMethod={paymentMethod}
                   onChangeStep={setCurrentStep}
@@ -380,14 +467,16 @@ const Checkout = () => {
           {/* Right - Order Summary */}
           <div className="lg:col-span-1">
             <CheckoutSummary
-              cartItems={cartItems}
+              cartItems={checkoutItems}
               subtotal={subtotal}
-              shippingCost={SHIPPING_COST}
+              shippingCost={shippingCost}
+              freeShippingThreshold={FREE_SHIPPING_THRESHOLD}
               tax={tax}
               discount={discount}
               total={total}
               promoCode={promoCode}
               onApplyPromo={handleApplyPromo}
+              onUpdateQuantity={handleUpdateQuantity}
               currentStep={currentStep}
             />
           </div>

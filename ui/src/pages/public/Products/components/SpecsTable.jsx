@@ -7,6 +7,13 @@ const SpecsTable = ({ specs = {} }) => {
 
   if (specEntries.length === 0) return null;
 
+  // Translate spec key - fallback to original key if translation not found
+  const translateSpecKey = (key) => {
+    const translationKey = `specs.${key.replace(/\s+/g, "")}`;
+    const translation = t(translationKey, { defaultValue: "" });
+    return translation || key;
+  };
+
   return (
     <div className="mb-12">
       <h2 className="text-2xl font-bold text-gray-900 mb-1">
@@ -35,7 +42,7 @@ const SpecsTable = ({ specs = {} }) => {
               }`}
             >
               <div className="px-6 py-4 text-sm font-medium text-gray-700">
-                {key}
+                {translateSpecKey(key)}
               </div>
               <div className="px-6 py-4 text-sm text-gray-600">{value}</div>
             </div>

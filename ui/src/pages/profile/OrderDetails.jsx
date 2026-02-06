@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { orderService } from "@/services/orderService";
+import { useAuth } from "@/context/AuthContext";
+import {
+  useAddToCartMutation,
+  useClearCartMutation,
+} from "@/store/api/productsApi";
 import {
   ArrowLeft,
   Package,
@@ -11,13 +17,25 @@ import {
   Clock,
   MapPin,
   Loader2,
+  XCircle,
+  AlertTriangle,
+  Edit3,
+  RefreshCw,
 } from "lucide-react";
 
 const OrderDetails = () => {
   const { t, i18n } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [order, setOrder] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCancelling, setIsCancelling] = useState(false);
+  const [isReordering, setIsReordering] = useState(false);
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+
+  const [addToCart] = useAddToCartMutation();
+  const [clearCart] = useClearCartMutation();
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -39,8 +57,82 @@ const OrderDetails = () => {
       processing: Package,
       shipped: Truck,
       delivered: CheckCircle,
+      cancelled: XCircle,
     };
     return icons[status] || Clock;
+  };
+
+  // Check if order can be cancelled (pending or processing)
+  const canCancelOrder =
+    order && ["pending", "processing"].includes(order.status);
+
+  // Check if order can be edited (only pending)
+  const canEditOrder = order && order.status === "pending";
+
+  // Handle reorder - add all items to cart and go to checkout
+  const handleReorder = async () => {
+    if (!user || !order) return;
+
+    setIsReordering(true);
+    try {
+      // Clear existing cart first
+      await clearCart(user.id);
+
+      // Add all order items to cart
+      for (const item of order.items) {
+        await addToCart({
+          userId: user.id,
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          quantity: item.quantity,
+          selectedOptions: item.selectedOptions || {},
+        });
+      }
+
+      toast.success(t("order.itemsAddedToCart"));
+      navigate("/checkout");
+    } catch (error) {
+      toast.error(t("order.reorderError"));
+    } finally {
+      setIsReordering(false);
+    }
+  };
+
+  // Handle edit order - navigate to a special edit page or checkout with edit mode
+  const handleEditOrder = () => {
+    if (!canEditOrder) return;
+    // Navigate to checkout with order items and edit mode
+    navigate("/checkout", {
+      state: {
+        editOrderId: order.id,
+        editOrderItems: order.items.map((item) => ({
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          quantity: item.quantity,
+          selectedOptions: item.selectedOptions || {},
+        })),
+      },
+    });
+  };
+
+  const handleCancelOrder = async () => {
+    setIsCancelling(true);
+    try {
+      await orderService.cancelOrder(id);
+      toast.success(t("order.orderCancelled"));
+      // Refresh order data
+      const updatedOrder = await orderService.getById(id);
+      setOrder(updatedOrder);
+      setShowCancelConfirm(false);
+    } catch (error) {
+      toast.error(error.message || t("order.cancelError"));
+    } finally {
+      setIsCancelling(false);
+    }
   };
 
   const getStatusText = (status) => {
@@ -109,19 +201,50 @@ const OrderDetails = () => {
               {t("order.orderDate")}: {formatDate(order.createdAt)}
             </p>
           </div>
-          <span
-            className={`px-[16px] py-[8px] rounded-full text-[14px] font-medium ${
-              order.status === "delivered"
-                ? "bg-green-100 text-green-700"
-                : order.status === "shipped"
-                  ? "bg-purple-100 text-purple-700"
-                  : order.status === "processing"
-                    ? "bg-blue-100 text-blue-700"
-                    : "bg-yellow-100 text-yellow-700"
-            }`}
-          >
-            {getStatusText(order.status)}
-          </span>
+          <div className="flex items-center gap-[12px]">
+            <span
+              className={`px-[16px] py-[8px] rounded-full text-[14px] font-medium ${
+                order.status === "delivered"
+                  ? "bg-green-100 text-green-700"
+                  : order.status === "shipped"
+                    ? "bg-purple-100 text-purple-700"
+                    : order.status === "processing"
+                      ? "bg-blue-100 text-blue-700"
+                      : order.status === "cancelled"
+                        ? "bg-red-100 text-red-700"
+                        : "bg-yellow-100 text-yellow-700"
+              }`}
+            >
+              {getStatusText(order.status)}
+            </span>
+            {canCancelOrder && (
+              <button
+                onClick={() => setShowCancelConfirm(true)}
+                className="px-[12px] py-[8px] text-[13px] font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              >
+                {t("order.cancelOrder")}
+              </button>
+            )}
+            {canEditOrder && (
+              <button
+                onClick={handleEditOrder}
+                className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              >
+                <Edit3 className="w-[14px] h-[14px]" />
+                {t("order.editOrder")}
+              </button>
+            )}
+            <button
+              onClick={handleReorder}
+              disabled={isReordering}
+              className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors disabled:opacity-50"
+            >
+              <RefreshCw
+                className={`w-[14px] h-[14px] ${isReordering ? "animate-spin" : ""}`}
+              />
+              {isReordering ? t("common.loading") : t("order.reorder")}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -153,8 +276,35 @@ const OrderDetails = () => {
                   <p className="text-[15px] font-semibold text-[#111827]">
                     {item.name}
                   </p>
-                  <p className="text-[13px] text-[#6B7280]">
-                    {item.brand} • {item.color}
+                  {/* Display selected options (color, memory, etc.) */}
+                  {item.selectedOptions &&
+                    Object.keys(item.selectedOptions).length > 0 && (
+                      <div className="flex flex-wrap gap-[6px] mt-[4px]">
+                        {Object.entries(item.selectedOptions).map(
+                          ([key, value]) => {
+                            if (!value) return null;
+                            const displayValue =
+                              value.label || value.value || value;
+                            return (
+                              <span
+                                key={key}
+                                className="inline-flex items-center gap-[4px] px-[6px] py-[2px] bg-[#E5E7EB] rounded-[4px] text-[11px] text-[#6B7280]"
+                              >
+                                {key === "color" && value.value && (
+                                  <span
+                                    className="w-[10px] h-[10px] rounded-full border border-gray-300"
+                                    style={{ backgroundColor: value.value }}
+                                  />
+                                )}
+                                {displayValue}
+                              </span>
+                            );
+                          },
+                        )}
+                      </div>
+                    )}
+                  <p className="text-[13px] text-[#6B7280] mt-[2px]">
+                    {item.brand || ""} {item.color ? `• ${item.color}` : ""}
                   </p>
                   <div className="flex items-center justify-between mt-[8px]">
                     <p className="text-[13px] text-[#6B7280]">
@@ -249,6 +399,43 @@ const OrderDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Cancel Confirmation Modal */}
+      {showCancelConfirm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
+          <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[400px] shadow-xl">
+            <div className="flex items-center gap-[12px] mb-[16px]">
+              <div className="w-[48px] h-[48px] bg-red-100 rounded-full flex items-center justify-center">
+                <AlertTriangle className="w-[24px] h-[24px] text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-[18px] font-semibold text-[#111827]">
+                  {t("order.cancelConfirmTitle")}
+                </h3>
+              </div>
+            </div>
+            <p className="text-[14px] text-[#6B7280] mb-[24px]">
+              {t("order.cancelConfirmMessage")}
+            </p>
+            <div className="flex gap-[12px]">
+              <button
+                onClick={() => setShowCancelConfirm(false)}
+                disabled={isCancelling}
+                className="flex-1 px-[16px] py-[12px] bg-[#F3F4F6] text-[#374151] font-semibold rounded-[12px] hover:bg-[#E5E7EB] transition-colors"
+              >
+                {t("common.no")}
+              </button>
+              <button
+                onClick={handleCancelOrder}
+                disabled={isCancelling}
+                className="flex-1 px-[16px] py-[12px] bg-red-600 text-white font-semibold rounded-[12px] hover:bg-red-700 transition-colors disabled:opacity-50"
+              >
+                {isCancelling ? t("common.loading") : t("order.confirmCancel")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

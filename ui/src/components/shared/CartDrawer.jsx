@@ -15,6 +15,7 @@ import {
   useGetCartQuery,
   useUpdateCartItemMutation,
   useRemoveFromCartMutation,
+  useGetAllProductsQuery,
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
 
@@ -26,6 +27,17 @@ const CartDrawer = ({ isOpen, onClose }) => {
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
   });
+
+  // Fetch products to get stock info
+  const { data: allProducts = [] } = useGetAllProductsQuery();
+
+  // Helper to get product stock
+  const getProductStock = (productId) => {
+    const product = allProducts.find(
+      (p) => p.id === productId || p.id === String(productId),
+    );
+    return product?.stock || 99;
+  };
 
   const [updateCartItem] = useUpdateCartItemMutation();
   const [removeFromCart] = useRemoveFromCartMutation();
@@ -47,6 +59,12 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
   const handleQuantityChange = async (item, newQuantity) => {
     if (newQuantity < 1) return;
+    // Limit quantity to stock from products API
+    const maxQuantity = getProductStock(item.productId);
+    if (newQuantity > maxQuantity) {
+      toast.error(t("basket.stockLimitReached"));
+      return;
+    }
     try {
       await updateCartItem({ id: item.id, quantity: newQuantity }).unwrap();
     } catch (error) {
@@ -222,7 +240,10 @@ const CartDrawer = ({ isOpen, onClose }) => {
                                 (item.quantity || 1) + 1,
                               )
                             }
-                            className="p-[6px] hover:bg-[#F3F4F6] transition-colors rounded-r-[8px]"
+                            disabled={
+                              item.quantity >= getProductStock(item.productId)
+                            }
+                            className="p-[6px] hover:bg-[#F3F4F6] disabled:opacity-40 disabled:cursor-not-allowed transition-colors rounded-r-[8px]"
                           >
                             <Plus className="w-[14px] h-[14px]" />
                           </button>
