@@ -138,6 +138,14 @@ export const productsApi = createApi({
       }),
       invalidatesTags: ["Review"],
     }),
+
+    deleteReview: builder.mutation({
+      query: (id) => ({
+        url: `/reviews/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
@@ -158,4 +166,5 @@ export const {
   useCheckWishlistItemQuery,
   useAddReviewMutation,
   useUpdateReviewMutation,
+  useDeleteReviewMutation,
 } = productsApi;

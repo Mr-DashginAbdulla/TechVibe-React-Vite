@@ -1,20 +1,98 @@
-import { useState } from "react";
-import { Star, X } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Star, X, ImagePlus, Trash2, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const WriteReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
+const WriteReviewModal = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  productName,
+  editData = null,
+}) => {
   const { t } = useTranslation();
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [images, setImages] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const MAX_IMAGES = 3;
+  const isEditMode = !!editData;
+
+  // Pre-populate form when editing
+  useEffect(() => {
+    if (editData) {
+      setRating(editData.rating || 0);
+      setComment(editData.comment || "");
+      setImages(editData.images || []);
+    } else {
+      setRating(0);
+      setComment("");
+      setImages([]);
+    }
+  }, [editData, isOpen]);
+
+  const handleImageUpload = async (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    // Check max images limit
+    const remainingSlots = MAX_IMAGES - images.length;
+    const filesToProcess = files.slice(0, remainingSlots);
+
+    if (filesToProcess.length === 0) return;
+
+    setIsUploading(true);
+
+    try {
+      const newImages = await Promise.all(
+        filesToProcess.map((file) => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+        }),
+      );
+
+      setImages((prev) => [...prev, ...newImages]);
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    } finally {
+      setIsUploading(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (rating === 0) return;
 
-    onSubmit({ rating, comment });
+    onSubmit({
+      rating,
+      comment,
+      images,
+      ...(isEditMode && { id: editData.id }),
+    });
     setRating(0);
     setComment("");
+    setImages([]);
+    onClose();
+  };
+
+  const handleClose = () => {
+    setRating(0);
+    setComment("");
+    setImages([]);
     onClose();
   };
 
@@ -25,14 +103,14 @@ const WriteReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
+        onClick={handleClose}
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6 max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 transition-colors"
         >
           <X size={20} />
@@ -40,7 +118,9 @@ const WriteReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
 
         {/* Header */}
         <h2 className="text-xl font-bold text-gray-900 mb-2">
-          {t("productDetails.writeReview")}
+          {isEditMode
+            ? t("productDetails.editReview")
+            : t("productDetails.writeReview")}
         </h2>
         <p className="text-sm text-gray-500 mb-6">{productName}</p>
 
@@ -88,13 +168,83 @@ const WriteReviewModal = ({ isOpen, onClose, onSubmit, productName }) => {
             />
           </div>
 
+          {/* Image Upload */}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              {t("productDetails.uploadPhotos")} ({images.length}/{MAX_IMAGES})
+            </label>
+
+            {/* Image Preview Grid */}
+            {images.length > 0 && (
+              <div className="grid grid-cols-3 gap-3 mb-3">
+                {images.map((img, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-square rounded-lg overflow-hidden border border-gray-200"
+                  >
+                    <img
+                      src={img}
+                      alt={`Preview ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition-colors"
+                    >
+                      <Trash2 size={12} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Upload Button */}
+            {images.length < MAX_IMAGES && (
+              <div className="relative">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleImageUpload}
+                  className="hidden"
+                  id="review-images"
+                />
+                <label
+                  htmlFor="review-images"
+                  className={`flex items-center justify-center gap-2 w-full py-3 px-4 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-500 transition-colors cursor-pointer ${
+                    isUploading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
+                  {isUploading ? (
+                    <>
+                      <Loader2 size={20} className="animate-spin" />
+                      {t("common.loading")}
+                    </>
+                  ) : (
+                    <>
+                      <ImagePlus size={20} />
+                      {t("productDetails.addPhotos")}
+                    </>
+                  )}
+                </label>
+              </div>
+            )}
+            <p className="text-xs text-gray-400 mt-2">
+              {t("productDetails.maxPhotosHint", { max: MAX_IMAGES })}
+            </p>
+          </div>
+
           {/* Submit Button */}
           <button
             type="submit"
             disabled={rating === 0}
             className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-colors"
           >
-            {t("productDetails.submitReview")}
+            {isEditMode
+              ? t("productDetails.updateReview")
+              : t("productDetails.submitReview")}
           </button>
         </form>
       </div>

@@ -16,6 +16,7 @@ import {
   useCheckWishlistItemQuery,
   useAddReviewMutation,
   useUpdateReviewMutation,
+  useDeleteReviewMutation,
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
 
@@ -82,9 +83,11 @@ const ProductDetails = () => {
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
   const [addReview] = useAddReviewMutation();
   const [updateReview] = useUpdateReviewMutation();
+  const [deleteReview] = useDeleteReviewMutation();
 
   // Review modal state
   const [reviewModalOpen, setReviewModalOpen] = useState(false);
+  const [editReviewData, setEditReviewData] = useState(null);
 
   // Initialize options and price when product loads
   useEffect(() => {
@@ -272,29 +275,57 @@ const ProductDetails = () => {
     toast.success(t("productDetails.addedToCart"));
   };
 
-  const handleSubmitReview = async ({ rating, comment }) => {
+  const handleSubmitReview = async ({
+    rating,
+    comment,
+    images = [],
+    id: reviewId,
+  }) => {
     if (!user) {
       toast.error(t("messages.loginRequired"));
       return;
     }
 
     try {
-      await addReview({
-        productId: id,
-        userId: user.id,
-        userName: `${user.firstName} ${user.lastName?.charAt(0) || ""}.`,
-        rating,
-        comment,
-        date: new Date().toISOString().split("T")[0],
-        helpfulCount: 0,
-        helpfulBy: [],
-      }).unwrap();
-      toast.success(t("productDetails.reviewSubmitted"));
+      if (reviewId) {
+        // Edit existing review
+        await updateReview({
+          id: reviewId,
+          rating,
+          comment,
+          images,
+        }).unwrap();
+        toast.success(t("productDetails.reviewUpdated"));
+        setEditReviewData(null);
+      } else {
+        // Create new review
+        await addReview({
+          productId: id,
+          userId: user.id,
+          userName: `${user.firstName} ${user.lastName?.charAt(0) || ""}.`,
+          rating,
+          comment,
+          images,
+          date: new Date().toISOString().split("T")[0],
+          helpfulCount: 0,
+          helpfulBy: [],
+          unhelpfulCount: 0,
+          unhelpfulBy: [],
+        }).unwrap();
+        toast.success(t("productDetails.reviewSubmitted"));
+      }
     } catch (error) {
       toast.error(t("messages.somethingWentWrong"));
     }
   };
 
+  // Open edit modal with review data
+  const handleEditReview = (review) => {
+    setEditReviewData(review);
+    setReviewModalOpen(true);
+  };
+
+  // Toggle helpful vote - can add or remove vote
   const handleHelpful = async (review) => {
     if (!user) {
       toast.error(t("messages.loginRequired"));
@@ -303,20 +334,97 @@ const ProductDetails = () => {
 
     // Prevent voting on own review
     if (review.userId === user.id) {
+      toast.info(t("productDetails.cannotVoteOwnReview"));
       return;
     }
 
-    // Check if already voted
-    if (review.helpfulBy?.includes(user.id)) {
-      return;
-    }
+    const hasVotedHelpful = review.helpfulBy?.includes(user.id);
+    const hasVotedUnhelpful = review.unhelpfulBy?.includes(user.id);
 
     try {
-      await updateReview({
-        id: review.id,
-        helpfulCount: (review.helpfulCount || 0) + 1,
-        helpfulBy: [...(review.helpfulBy || []), user.id],
-      }).unwrap();
+      if (hasVotedHelpful) {
+        // Remove helpful vote
+        await updateReview({
+          id: review.id,
+          helpfulCount: Math.max((review.helpfulCount || 0) - 1, 0),
+          helpfulBy: (review.helpfulBy || []).filter((id) => id !== user.id),
+        }).unwrap();
+      } else {
+        // Add helpful vote (and remove unhelpful if exists)
+        const updates = {
+          id: review.id,
+          helpfulCount: (review.helpfulCount || 0) + 1,
+          helpfulBy: [...(review.helpfulBy || []), user.id],
+        };
+        if (hasVotedUnhelpful) {
+          updates.unhelpfulCount = Math.max(
+            (review.unhelpfulCount || 0) - 1,
+            0,
+          );
+          updates.unhelpfulBy = (review.unhelpfulBy || []).filter(
+            (id) => id !== user.id,
+          );
+        }
+        await updateReview(updates).unwrap();
+      }
+    } catch (error) {
+      toast.error(t("messages.somethingWentWrong"));
+    }
+  };
+
+  // Toggle unhelpful vote - can add or remove vote
+  const handleUnhelpful = async (review) => {
+    if (!user) {
+      toast.error(t("messages.loginRequired"));
+      return;
+    }
+
+    // Prevent voting on own review
+    if (review.userId === user.id) {
+      toast.info(t("productDetails.cannotVoteOwnReview"));
+      return;
+    }
+
+    const hasVotedHelpful = review.helpfulBy?.includes(user.id);
+    const hasVotedUnhelpful = review.unhelpfulBy?.includes(user.id);
+
+    try {
+      if (hasVotedUnhelpful) {
+        // Remove unhelpful vote
+        await updateReview({
+          id: review.id,
+          unhelpfulCount: Math.max((review.unhelpfulCount || 0) - 1, 0),
+          unhelpfulBy: (review.unhelpfulBy || []).filter(
+            (id) => id !== user.id,
+          ),
+        }).unwrap();
+      } else {
+        // Add unhelpful vote (and remove helpful if exists)
+        const updates = {
+          id: review.id,
+          unhelpfulCount: (review.unhelpfulCount || 0) + 1,
+          unhelpfulBy: [...(review.unhelpfulBy || []), user.id],
+        };
+        if (hasVotedHelpful) {
+          updates.helpfulCount = Math.max((review.helpfulCount || 0) - 1, 0);
+          updates.helpfulBy = (review.helpfulBy || []).filter(
+            (id) => id !== user.id,
+          );
+        }
+        await updateReview(updates).unwrap();
+      }
+    } catch (error) {
+      toast.error(t("messages.somethingWentWrong"));
+    }
+  };
+
+  // Delete own review
+  const handleDeleteReview = async (reviewId) => {
+    if (!user) return;
+
+    try {
+      await deleteReview(reviewId).unwrap();
+      toast.success(t("productDetails.reviewDeleted"));
     } catch (error) {
       toast.error(t("messages.somethingWentWrong"));
     }
@@ -434,6 +542,15 @@ const ProductDetails = () => {
                 : null
             }
             totalReviews={reviews.length}
+            onWriteReview={() => {
+              setEditReviewData(null);
+              setReviewModalOpen(true);
+            }}
+            onHelpful={handleHelpful}
+            onUnhelpful={handleUnhelpful}
+            onEdit={handleEditReview}
+            onDelete={handleDeleteReview}
+            userId={user?.id}
           />
 
           {/* Recommended Products */}
@@ -446,6 +563,18 @@ const ProductDetails = () => {
           />
         </div>
       </div>
+
+      {/* Write Review Modal */}
+      <WriteReviewModal
+        isOpen={reviewModalOpen}
+        onClose={() => {
+          setReviewModalOpen(false);
+          setEditReviewData(null);
+        }}
+        onSubmit={handleSubmitReview}
+        productName={product?.name}
+        editData={editReviewData}
+      />
     </>
   );
 };
