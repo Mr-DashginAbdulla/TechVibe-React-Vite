@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { ArrowRight, ArrowLeft, Mail, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,6 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [emailSent, setEmailSent] = useState(false);
 
   const steps = [
     {
@@ -21,8 +20,13 @@ const ForgotPassword = () => {
     },
     {
       number: 2,
-      title: t("messages.resetLinkSent").split("!")[0],
-      description: t("auth.sendResetLink"),
+      title: t("auth.verificationCode"),
+      description: t("auth.enter6DigitCode"),
+    },
+    {
+      number: 3,
+      title: t("auth.resetPassword"),
+      description: t("profile.newPassword"),
     },
   ];
 
@@ -46,8 +50,24 @@ const ForgotPassword = () => {
       const userExists = await authService.checkEmailExists(email);
 
       if (userExists) {
-        setEmailSent(true);
-        toast.success(t("messages.resetLinkSent"));
+        // Generate 6-digit verification code
+        const verificationCode = Math.floor(
+          100000 + Math.random() * 900000,
+        ).toString();
+
+        // Show code in toast for demo purposes (in production this would be sent via email)
+        toast.info(`🔐 Demo: Your verification code is ${verificationCode}`, {
+          autoClose: 15000,
+          position: "top-center",
+        });
+
+        // Navigate to verify code page with email and code
+        navigate("/auth/verify-code", {
+          state: {
+            email,
+            verificationCode,
+          },
+        });
       } else {
         toast.error(t("messages.userNotFound"));
       }
@@ -71,61 +91,45 @@ const ForgotPassword = () => {
 
           <div className="text-center mb-[32px]">
             <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
-              {emailSent
-                ? t("messages.resetLinkSent").split("!")[0] + "!"
-                : t("auth.forgotPasswordTitle")}
+              {t("auth.forgotPasswordTitle")}
             </h1>
             <p className="text-[15px] text-[#6B7280]">
-              {emailSent ? `${email}` : t("auth.forgotPasswordDesc")}
+              {t("auth.forgotPasswordDesc")}
             </p>
           </div>
 
-          {!emailSent ? (
-            <form className="space-y-[20px]" onSubmit={handleSubmit}>
-              <div>
-                <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                  {t("auth.email")}
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t("auth.emailPlaceholder")}
-                  className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-[#93C5FD] text-white font-semibold py-[14px] rounded-[12px] transition-colors"
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="w-[18px] h-[18px] animate-spin" />
-                    {t("auth.sending")}
-                  </>
-                ) : (
-                  <>
-                    {t("auth.sendResetLink")}
-                    <ArrowRight className="w-[18px] h-[18px]" />
-                  </>
-                )}
-              </button>
-            </form>
-          ) : (
-            <div className="space-y-[20px]">
-              <button
-                onClick={() => {
-                  setEmailSent(false);
-                  setEmail("");
-                }}
-                className="flex items-center justify-center gap-[8px] w-full bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#374151] font-semibold py-[14px] rounded-[12px] transition-colors"
-              >
-                {t("messages.tryAnotherEmail")}
-              </button>
+          <form className="space-y-[20px]" onSubmit={handleSubmit}>
+            <div>
+              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                {t("auth.email")}
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t("auth.emailPlaceholder")}
+                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+              />
             </div>
-          )}
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-[#93C5FD] text-white font-semibold py-[14px] rounded-[12px] transition-colors"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-[18px] h-[18px] animate-spin" />
+                  {t("auth.sending")}
+                </>
+              ) : (
+                <>
+                  {t("auth.sendResetLink")}
+                  <ArrowRight className="w-[18px] h-[18px]" />
+                </>
+              )}
+            </button>
+          </form>
 
           <Link
             to="/auth/login"
@@ -143,15 +147,9 @@ const ForgotPassword = () => {
           <div className="space-y-[12px]">
             {steps.map((step) => (
               <div key={step.number} className="flex items-start gap-[12px]">
-                <div
-                  className={`w-[28px] h-[28px] rounded-full flex items-center justify-center shrink-0 ${
-                    emailSent && step.number === 1
-                      ? "bg-green-500"
-                      : "bg-[#3B82F6]"
-                  }`}
-                >
+                <div className="w-[28px] h-[28px] rounded-full flex items-center justify-center shrink-0 bg-[#3B82F6]">
                   <span className="text-[13px] font-bold text-white">
-                    {emailSent && step.number === 1 ? "✓" : step.number}
+                    {step.number}
                   </span>
                 </div>
                 <div>

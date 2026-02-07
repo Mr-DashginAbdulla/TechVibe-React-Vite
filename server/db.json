@@ -1,6 +1,18 @@
 {
   "users": [
     {
+      "id": "super-admin-001",
+      "firstName": "Super",
+      "lastName": "Admin",
+      "email": "superadmin@techvibe.com",
+      "password": "superadmin123",
+      "role": "super-admin",
+      "phone": "+994501234567",
+      "isVerified": true,
+      "avatar": "",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
       "id": "admin-001",
       "firstName": "Admin",
       "lastName": "User",
@@ -21,20 +33,8 @@
       "role": "user",
       "phone": "+994501234567",
       "isVerified": false,
-      "avatar": "",
+      "avatar": "data:image/jpeg;base64,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",
       "createdAt": "2026-01-25T08:26:50.315Z"
-    },
-    {
-      "id": "ml25nlof-4yszgh",
-      "firstName": "Test",
-      "lastName": "User",
-      "email": "test@example.com",
-      "password": "Password123!",
-      "phone": "",
-      "isVerified": false,
-      "avatar": "",
-      "createdAt": "2026-01-31T10:14:30.783Z",
-      "memberSince": "2026-01-31T10:14:30.783Z"
     }
   ],
   "categories": [
@@ -65,7 +65,7 @@
     {
       "id": "peripherals",
       "name": "Keyboards & Mice",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b91add1?w=500&q=80",
+      "image": "https://m.media-amazon.com/images/I/71frUjQMwyL._AC_SL1500_.jpg",
       "parentId": "computers"
     },
     {
@@ -101,7 +101,7 @@
     {
       "id": "games",
       "name": "Video Games",
-      "image": "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80",
+      "image": "https://www.debu.ca/wp-content/uploads/2024/03/65e0b59b5a75b.jpg",
       "parentId": "gaming"
     },
     {
@@ -136,7 +136,8 @@
       "description": "M2 chip, 13.6-inch Liquid Retina display",
       "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
       "images": [
-        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80"
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+        "https://techcrunch.com/wp-content/uploads/2022/07/CMC_1580.jpg?resize=1536,1024"
       ],
       "specs": {
         "Processor": "Apple M2 chip (8-core CPU, 10-core GPU)",
@@ -236,9 +237,9 @@
       "isFeatured": true,
       "isNew": true,
       "description": "12th Gen Intel, OLED Touch display",
-      "image": "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80",
+      "image": "https://notebooks.az/image/cache/catalog/Dell%20Xps%2013%20Plus/snimok-500x500-500x500.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1593642632823-8f78536788c6?w=500&q=80"
+        "https://notebooks.az/image/cache/catalog/Dell%20Xps%2013%20Plus/snimok-500x500-500x500.jpg"
       ],
       "specs": {
         "Processor": "12th Gen Intel Core i7-1260P",
@@ -253,7 +254,9 @@
         "OS": "Windows 11 Pro"
       },
       "rating": 4.4,
-      "reviewsCount": 5
+      "reviewsCount": 5,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "4",
@@ -265,9 +268,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "15.6-inch 3.5K OLED, Intel Core i7",
-      "image": "https://images.unsplash.com/photo-1588872657578-883557e93b60?w=500&q=80",
+      "image": "https://www.colbybrownphotography.com/wp-content/uploads/2016/03/Dell-XPS-15-Front-and-Top-View.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1588872657578-883557e93b60?w=500&q=80"
+        "https://www.colbybrownphotography.com/wp-content/uploads/2016/03/Dell-XPS-15-Front-and-Top-View.jpg"
       ],
       "specs": {
         "Processor": "13th Gen Intel Core i7-13700H",
@@ -283,7 +286,9 @@
         "OS": "Windows 11 Pro"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "5",
@@ -414,9 +419,9 @@
       "isFeatured": false,
       "isNew": true,
       "description": "13.5-inch PixelSense, Intel Evo",
-      "image": "https://images.unsplash.com/photo-1617317121520-0a6bfe1c6de3?w=500&q=80",
+      "image": "https://i5.walmartimages.com/seo/Microsoft-Surface-Laptop-5-13-5-Touchscreen-Intel-Core-i5-1235U-8GB-RAM-512GB-SSD-Windows-11-Home-Intel-Evo-Platform-R1S-00001-Platinum_adc70fb0-290d-43c6-a7b0-132118a43d2f.f5df5e8941d5fe187691bbd221ff9f0a.jpeg",
       "images": [
-        "https://images.unsplash.com/photo-1617317121520-0a6bfe1c6de3?w=500&q=80"
+        "https://i5.walmartimages.com/seo/Microsoft-Surface-Laptop-5-13-5-Touchscreen-Intel-Core-i5-1235U-8GB-RAM-512GB-SSD-Windows-11-Home-Intel-Evo-Platform-R1S-00001-Platinum_adc70fb0-290d-43c6-a7b0-132118a43d2f.f5df5e8941d5fe187691bbd221ff9f0a.jpeg"
       ],
       "specs": {
         "Processor": "12th Gen Intel Core i7-1255U",
@@ -431,7 +436,9 @@
         "Touch": "10-point multi-touch"
       },
       "rating": 4.4,
-      "reviewsCount": 5
+      "reviewsCount": 5,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "10",
@@ -888,9 +895,9 @@
       "isFeatured": true,
       "isNew": false,
       "description": "High-fidelity audio, H1 chip",
-      "image": "https://images.unsplash.com/photo-1625081062068-b4b0b4c0f0e1?w=500&q=80",
+      "image": "https://kontakt.az/media/catalog/product/cache/f8158826193ba5faa8b862a9bd1eb9e9/t/m/tm-dg-acs-1109-hb-0001_991.png",
       "images": [
-        "https://images.unsplash.com/photo-1625081062068-b4b0b4c0f0e1?w=500&q=80"
+        "https://kontakt.az/media/catalog/product/cache/f8158826193ba5faa8b862a9bd1eb9e9/t/m/tm-dg-acs-1109-hb-0001_991.png"
       ],
       "specs": {
         "Type": "Over-ear, closed-back",
@@ -918,7 +925,8 @@
         }
       ],
       "rating": 4.5,
-      "reviewsCount": 4
+      "reviewsCount": 4,
+      "memoryOptions": []
     },
     {
       "id": "23",
@@ -1150,9 +1158,9 @@
       "isFeatured": true,
       "isNew": true,
       "description": "M2 Max chip, pro performance",
-      "image": "https://images.unsplash.com/photo-1647423853123-57a972eb452b?w=500&q=80",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mac_Studio_%282022%29_front.jpg/2560px-Mac_Studio_%282022%29_front.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1647423853123-57a972eb452b?w=500&q=80"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mac_Studio_%282022%29_front.jpg/2560px-Mac_Studio_%282022%29_front.jpg"
       ],
       "specs": {
         "Processor": "Apple M2 Max (12-core CPU, 38-core GPU)",
@@ -1166,7 +1174,9 @@
         "Weight": "2.7 kg"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "32",
@@ -1500,9 +1510,9 @@
       "isFeatured": true,
       "isNew": true,
       "description": "4K IPS Black, USB-C Hub",
-      "image": "https://images.unsplash.com/photo-1544207796-99ac08e90d70?w=500&q=80",
+      "image": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2723qe/media-gallery/monitor-u2723qe-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&wid=3764&hei=2248&qlt=100,1&resMode=sharp2&size=3764,2248&chrss=full&imwidth=5000",
       "images": [
-        "https://images.unsplash.com/photo-1544207796-99ac08e90d70?w=500&q=80"
+        "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/peripherals/monitors/u-series/u2723qe/media-gallery/monitor-u2723qe-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&wid=3764&hei=2248&qlt=100,1&resMode=sharp2&size=3764,2248&chrss=full&imwidth=5000"
       ],
       "specs": {
         "Screen Size": "27 inches",
@@ -1516,7 +1526,9 @@
         "Ports": "USB-C, HDMI 2.0, DisplayPort 1.4, RJ45, USB Hub"
       },
       "rating": 4.4,
-      "reviewsCount": 5
+      "reviewsCount": 5,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "44",
@@ -1556,9 +1568,9 @@
       "isFeatured": false,
       "isNew": true,
       "description": "27-inch 5K, Thunderbolt 3",
-      "image": "https://images.unsplash.com/photo-1527443060795-0402a18906c5?w=500&q=80",
+      "image": "https://www.lgcorp.com/media/release/images/33597",
       "images": [
-        "https://images.unsplash.com/photo-1527443060795-0402a18906c5?w=500&q=80"
+        "https://www.lgcorp.com/media/release/images/33597"
       ],
       "specs": {
         "Screen Size": "27 inches",
@@ -1571,7 +1583,9 @@
         "Audio": "Built-in Speakers"
       },
       "rating": 4.5,
-      "reviewsCount": 4
+      "reviewsCount": 4,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "46",
@@ -2267,9 +2281,9 @@
       "isFeatured": true,
       "isNew": true,
       "description": "Open-world action RPG masterpiece",
-      "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&q=80",
+      "image": "https://m.media-amazon.com/images/M/MV5BMWNlMDBiYzYtMWMyMC00Zjc5LTlhMjItMjRlMzBmYmVkOGM0XkEyXkFqcGc@._V1_FMjpg_UX1170_.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&q=80"
+        "https://m.media-amazon.com/images/M/MV5BMWNlMDBiYzYtMWMyMC00Zjc5LTlhMjItMjRlMzBmYmVkOGM0XkEyXkFqcGc@._V1_FMjpg_UX1170_.jpg"
       ],
       "specs": {
         "Platforms": "PS5, PS4, Xbox Series X/S, Xbox One, PC",
@@ -2281,7 +2295,9 @@
         "Rating": "PEGI 16 / M (Mature)"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "72",
@@ -2293,9 +2309,9 @@
       "isFeatured": true,
       "isNew": false,
       "description": "Epic Norse mythology adventure",
-      "image": "https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=500&q=80",
+      "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRYqvGZy040Fx-IvUBKs3HA4mez8oLVyvug5IIyi67KdQJW9f2L",
       "images": [
-        "https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=500&q=80"
+        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRYqvGZy040Fx-IvUBKs3HA4mez8oLVyvug5IIyi67KdQJW9f2L"
       ],
       "specs": {
         "Platforms": "PS5, PS4, PC",
@@ -2307,11 +2323,13 @@
         "Rating": "PEGI 18 / M (Mature)"
       },
       "rating": 4.5,
-      "reviewsCount": 4
+      "reviewsCount": 4,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "73",
-      "name": "EA Sports FC 24",
+      "name": "EA Sports FC 26",
       "price": 69.99,
       "category": "games",
       "brand": "EA Sports",
@@ -2319,9 +2337,9 @@
       "isFeatured": true,
       "isNew": true,
       "description": "HyperMotionV, PlayStyles",
-      "image": "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80",
+      "image": "https://m.media-amazon.com/images/I/81aMKJCm9BL._SL1500_.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1493711662062-fa541f7f897a?w=500&q=80"
+        "https://m.media-amazon.com/images/I/81aMKJCm9BL._SL1500_.jpg"
       ],
       "specs": {
         "Platforms": "PS5, PS4, Xbox Series X/S, Xbox One, PC, Switch",
@@ -2333,7 +2351,9 @@
         "Rating": "PEGI 3 / E (Everyone)"
       },
       "rating": 4.4,
-      "reviewsCount": 5
+      "reviewsCount": 5,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "74",
@@ -2345,9 +2365,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "Open-world wizarding world RPG",
-      "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&q=80",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS17HP2A9mcJDWilpg-TH8rX28vFw-kQRmR1fzrW3bHlopXNQoD",
       "images": [
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&q=80"
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS17HP2A9mcJDWilpg-TH8rX28vFw-kQRmR1fzrW3bHlopXNQoD"
       ],
       "specs": {
         "Platforms": "PS5, Xbox Series X/S, PC",
@@ -2359,7 +2379,9 @@
         "Rating": "PEGI 12 / T (Teen)"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "75",
@@ -2371,9 +2393,9 @@
       "isFeatured": false,
       "isNew": true,
       "description": "Peter and Miles, bigger NYC",
-      "image": "https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=500&q=80",
+      "image": "https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-hero-banner-desktop-01-en-31may23?$4000px$",
       "images": [
-        "https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=500&q=80"
+        "https://gmedia.playstation.com/is/image/SIEPDC/spider-man-2-hero-banner-desktop-01-en-31may23?$4000px$"
       ],
       "specs": {
         "Platforms": "PS5 Exclusive",
@@ -2385,7 +2407,9 @@
         "Rating": "PEGI 16 / T (Teen)"
       },
       "rating": 4.5,
-      "reviewsCount": 4
+      "reviewsCount": 4,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "76",
@@ -2397,9 +2421,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "Sequel to Breath of the Wild",
-      "image": "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=500&q=80",
+      "image": "https://upload.wikimedia.org/wikipedia/en/f/fb/The_Legend_of_Zelda_Tears_of_the_Kingdom_cover.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=500&q=80"
+        "https://upload.wikimedia.org/wikipedia/en/f/fb/The_Legend_of_Zelda_Tears_of_the_Kingdom_cover.jpg"
       ],
       "specs": {
         "Platforms": "Nintendo Switch Exclusive",
@@ -2411,7 +2435,9 @@
         "Rating": "PEGI 12 / E10+"
       },
       "rating": 4.4,
-      "reviewsCount": 5
+      "reviewsCount": 5,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "77",
@@ -2423,9 +2449,9 @@
       "isFeatured": false,
       "isNew": true,
       "description": "GOTY 2023, epic D&D RPG",
-      "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&q=80",
+      "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTfHf00n-K29UJL0yUMLv6-MIsfGv1F7YuGprMdjVequP_n3St8",
       "images": [
-        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&q=80"
+        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTfHf00n-K29UJL0yUMLv6-MIsfGv1F7YuGprMdjVequP_n3St8"
       ],
       "specs": {
         "Platforms": "PS5, Xbox Series X/S, PC",
@@ -2437,7 +2463,9 @@
         "Rating": "PEGI 18 / M (Mature)"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "78",
@@ -2449,9 +2477,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "Modern Warfare returns",
-      "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&q=80",
+      "image": "https://gaming-cdn.com/images/products/15290/616x353/call-of-duty-modern-warfare-iii-playstation-5-game-playstation-store-europe-cover.jpg?v=1748419563",
       "images": [
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&q=80"
+        "https://gaming-cdn.com/images/products/15290/616x353/call-of-duty-modern-warfare-iii-playstation-5-game-playstation-store-europe-cover.jpg?v=1748419563"
       ],
       "specs": {
         "Platforms": "PS5, PS4, Xbox Series X/S, Xbox One, PC",
@@ -2463,7 +2491,9 @@
         "Rating": "PEGI 18 / M (Mature)"
       },
       "rating": 4.5,
-      "reviewsCount": 4
+      "reviewsCount": 4,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "79",
@@ -2475,9 +2505,9 @@
       "isFeatured": false,
       "isNew": true,
       "description": "Space exploration RPG",
-      "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&q=80",
+      "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSqvnP5kTC1a2_1IC_B74fi7NMQHAGA_qbAMRwWt9hMjO0TKvXC",
       "images": [
-        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&q=80"
+        "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSqvnP5kTC1a2_1IC_B74fi7NMQHAGA_qbAMRwWt9hMjO0TKvXC"
       ],
       "specs": {
         "Platforms": "Xbox Series X/S, PC",
@@ -2489,7 +2519,9 @@
         "Rating": "PEGI 18 / M (Mature)"
       },
       "rating": 4.4,
-      "reviewsCount": 5
+      "reviewsCount": 5,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "80",
@@ -2501,9 +2533,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "Survival horror sequel",
-      "image": "https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=500&q=80",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSvXoNTBYMtV_d_kL-KECFIzBEhETK2Gt4QdJz8yIlIoB2t3HK",
       "images": [
-        "https://images.unsplash.com/photo-1552820728-8b83bb6b2b0d?w=500&q=80"
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSvXoNTBYMtV_d_kL-KECFIzBEhETK2Gt4QdJz8yIlIoB2t3HK"
       ],
       "specs": {
         "Platforms": "PS5, Xbox Series X/S, PC",
@@ -2515,7 +2547,9 @@
         "Rating": "PEGI 18 / M (Mature)"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "81",
@@ -7155,11 +7189,22 @@
       "userId": "mkth60qz-s7vce3",
       "items": [
         {
-          "productId": "2",
-          "name": "MacBook Pro 14",
-          "price": 2199,
-          "quantity": 2,
-          "image": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80"
+          "productId": "1",
+          "name": "MacBook Air M2",
+          "price": 1199,
+          "quantity": 5,
+          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+          "selectedOptions": {
+            "color": {
+              "label": "Midnight",
+              "value": "#1E1E2E",
+              "priceModifier": 0
+            },
+            "memory": {
+              "label": "256GB",
+              "priceModifier": 0
+            }
+          }
         }
       ],
       "shippingAddress": {
@@ -7174,28 +7219,115 @@
         "phone": "+994 12 345 67 89"
       },
       "paymentMethod": "cash",
-      "subtotal": 4398,
-      "shippingCost": 5,
-      "tax": 791.64,
+      "subtotal": 5995,
+      "shippingCost": 0,
+      "tax": 1079.1,
       "discount": 0,
       "promoCode": null,
-      "total": 5194.64,
-      "status": "cancelled",
-      "createdAt": "2026-02-05T19:59:45.936Z",
-      "orderNumber": "ORD-2026-5936",
+      "total": 7074.1,
+      "status": "pending",
+      "createdAt": "2026-02-07T07:14:22.381Z",
+      "orderNumber": "ORD-2026-2381",
       "timeline": [
         {
           "status": "ordered",
-          "date": "2026-02-05T19:59:45.936Z",
+          "date": "2026-02-07T07:14:22.381Z",
           "description": "Order placed"
-        },
-        {
-          "status": "cancelled",
-          "date": "2026-02-05T20:07:56.036Z",
-          "description": "Order cancelled by customer"
         }
       ],
       "id": 1
+    },
+    {
+      "userId": "mkth60qz-s7vce3",
+      "items": [
+        {
+          "productId": "1",
+          "name": "MacBook Air M2",
+          "price": 1199,
+          "quantity": 1,
+          "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
+          "selectedOptions": {
+            "color": {
+              "label": "Midnight",
+              "value": "#1E1E2E",
+              "priceModifier": 0
+            },
+            "memory": {
+              "label": "256GB",
+              "priceModifier": 0
+            }
+          }
+        }
+      ],
+      "shippingAddress": {
+        "label": "Home",
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": "Yasamal",
+        "city": "Bakı",
+        "state": "Bakı",
+        "zipCode": "1001",
+        "country": "Azerbaijan",
+        "phone": "+994 12 345 67 89"
+      },
+      "paymentMethod": "cash",
+      "subtotal": 1199,
+      "shippingCost": 0,
+      "tax": 215.82,
+      "discount": 0,
+      "promoCode": null,
+      "total": 1414.82,
+      "status": "cancelled",
+      "createdAt": "2026-02-07T07:14:31.778Z",
+      "orderNumber": "ORD-2026-1778",
+      "timeline": [
+        {
+          "status": "ordered",
+          "date": "2026-02-07T07:14:31.778Z",
+          "description": "Order placed"
+        },
+        {
+          "status": "processing",
+          "date": "2026-02-07T07:15:39.072Z",
+          "description": "İşlənməyə başlandı"
+        },
+        {
+          "status": "shipped",
+          "date": "2026-02-07T07:15:48.489Z",
+          "description": "Göndərildi"
+        },
+        {
+          "status": "delivered",
+          "date": "2026-02-07T07:15:54.934Z",
+          "description": "Çatdırıldı"
+        },
+        {
+          "status": "shipped",
+          "date": "2026-02-07T07:16:04.932Z",
+          "description": "Göndərildi"
+        },
+        {
+          "status": "processing",
+          "date": "2026-02-07T07:16:12.946Z",
+          "description": "İşlənməyə başlandı"
+        },
+        {
+          "status": "cancelled",
+          "date": "2026-02-07T07:16:49.936Z",
+          "description": "Order cancelled by customer"
+        },
+        {
+          "status": "pending",
+          "date": "2026-02-07T07:16:54.956Z",
+          "description": "Gözləyir"
+        },
+        {
+          "status": "cancelled",
+          "date": "2026-02-07T07:17:08.693Z",
+          "description": "Ləğv edildi"
+        }
+      ],
+      "id": 2
     }
   ],
   "cart": [],

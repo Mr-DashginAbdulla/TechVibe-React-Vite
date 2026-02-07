@@ -1,6 +1,7 @@
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom"; // Link əlavə olundu
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ProductCard = ({
   id,
@@ -19,7 +20,11 @@ const ProductCard = ({
   const { t } = useTranslation();
 
   return (
-    <div className="group relative bg-white rounded-[16px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100">
+    <motion.div
+      whileHover={{ y: -6, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="group relative bg-white rounded-[16px] overflow-hidden shadow-sm hover:shadow-lg border border-gray-100"
+    >
       {/* Etiketlər */}
       <div className="absolute top-[12px] left-[12px] z-10 flex flex-col gap-[6px]">
         {discount && (
@@ -50,7 +55,7 @@ const ProductCard = ({
       {/* Şəkil - Link ilə əhatələndi */}
       <Link
         to={`/product/${id}`}
-        className="block relative w-full h-[220px] bg-[#F9FAFB] flex items-center justify-center overflow-hidden"
+        className="relative w-full h-[220px] bg-[#F9FAFB] flex items-center justify-center overflow-hidden"
       >
         <img
           src={image}
@@ -106,7 +111,7 @@ const ProductCard = ({
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

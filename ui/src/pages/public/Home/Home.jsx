@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import HeroSection from "./HeroSection";
 import NewArrivals from "./components/NewArrivals";
 import ShopByCategory from "./components/ShopByCategory";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
+import { ProductCardSkeleton } from "@/components/ui";
 
 import {
   useGetCartQuery,
@@ -162,8 +164,16 @@ function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      <div className="container mx-auto px-4 py-12">
+        {/* Hero skeleton */}
+        <div className="h-[400px] bg-gray-100 rounded-2xl mb-12 animate-pulse" />
+
+        {/* Products skeleton */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+            <ProductCardSkeleton key={i} />
+          ))}
+        </div>
       </div>
     );
   }
@@ -174,21 +184,65 @@ function Home() {
         <title>TechVibe - {t("common.tagline")}</title>
         <meta name="description" content={t("common.description")} />
       </Helmet>
-      <HeroSection />
-      <NewArrivals
-        products={newArrivals}
-        onAddToCart={handleAddToCart}
-        onToggleFavorite={handleToggleFavorite}
-        wishlistItems={wishlistItems}
-      />
-      <ShopByCategory categories={categories} />
-      <FeaturedProducts
-        products={featuredProducts}
-        onAddToCart={handleAddToCart}
-        onToggleFavorite={handleToggleFavorite}
-        wishlistItems={wishlistItems}
-      />
-      <Newsletter />
+
+      {/* Hero Section with fade in */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <HeroSection />
+      </motion.div>
+
+      {/* New Arrivals with slide up */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <NewArrivals
+          products={newArrivals}
+          onAddToCart={handleAddToCart}
+          onToggleFavorite={handleToggleFavorite}
+          wishlistItems={wishlistItems}
+        />
+      </motion.div>
+
+      {/* Shop By Category with slide up */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <ShopByCategory categories={categories} />
+      </motion.div>
+
+      {/* Featured Products with slide up */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <FeaturedProducts
+          products={featuredProducts}
+          onAddToCart={handleAddToCart}
+          onToggleFavorite={handleToggleFavorite}
+          wishlistItems={wishlistItems}
+        />
+      </motion.div>
+
+      {/* Newsletter with fade in */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <Newsletter />
+      </motion.div>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
@@ -32,6 +32,7 @@ import SpecsTable from "./components/SpecsTable";
 import ReviewsSection from "./components/ReviewsSection";
 import WriteReviewModal from "./components/WriteReviewModal";
 import RecommendedProducts from "./components/RecommendedProducts";
+import { ProductDetailsSkeleton } from "@/components/ui";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -323,14 +324,7 @@ const ProductDetails = () => {
 
   // Loading state
   if (productLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-gray-500">{t("productDetails.loading")}</span>
-        </div>
-      </div>
-    );
+    return <ProductDetailsSkeleton />;
   }
 
   // Error state
@@ -356,6 +350,12 @@ const ProductDetails = () => {
       <Helmet>
         <title>{product.name} | TechVibe</title>
         <meta name="description" content={product.description} />
+        <meta property="og:title" content={`${product.name} | TechVibe`} />
+        <meta property="og:description" content={product.description} />
+        <meta property="og:image" content={product.image} />
+        <meta property="og:type" content="product" />
+        <meta property="product:price:amount" content={product.price} />
+        <meta property="product:price:currency" content="USD" />
       </Helmet>
 
       <div className="min-h-screen bg-white">

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
