@@ -6,12 +6,14 @@ import { AuthProvider } from "@/context/AuthContext";
 import { LenisProvider } from "@/context/LenisProvider";
 import AppRoutes from "@/routes/AppRoutes";
 import store from "@/store/store";
+import ScrollToTop from "@/components/shared/ScrollToTop";
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <LenisProvider>
+          <ScrollToTop />
           <AuthProvider>
             <AppRoutes />
             <ToastContainer
