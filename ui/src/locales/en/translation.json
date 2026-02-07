@@ -114,7 +114,20 @@
     "resetLinkSent": "Password reset link sent to your email!",
     "tryAnotherEmail": "Try another email",
     "changesSaved": "Changes saved successfully",
-    "errorOccurred": "An error occurred"
+    "errorOccurred": "An error occurred",
+    "somethingWentWrong": "Something went wrong",
+    "loginRequired": "Please login to continue",
+    "loginToAddToCart": "Please login to add items to cart",
+    "loginToUseWishlist": "Please login to use wishlist",
+    "failedToAddToCart": "Failed to add to cart",
+    "failedToUpdateCart": "Failed to update cart",
+    "failedToUpdateQuantity": "Failed to update quantity",
+    "failedToRemoveItem": "Failed to remove item",
+    "failedToUpdateWishlist": "Failed to update wishlist",
+    "invalidAccess": "Invalid access. Please start from the beginning.",
+    "invalidVerificationCode": "Invalid verification code. Please try again.",
+    "dataLoadError": "Error loading data",
+    "logoutSuccess": "Successfully logged out"
   },
   "hero": {
     "title1": "Future.",
@@ -185,7 +198,8 @@
     "lowToHigh": "Price: Low to High",
     "highToLow": "Price: High to Low",
     "newest": "Newest First",
-    "bestRating": "Best Rating"
+    "bestRating": "Best Rating",
+    "highestDiscount": "Highest Discount"
   },
   "cart": {
     "shoppingCart": "Shopping Cart",

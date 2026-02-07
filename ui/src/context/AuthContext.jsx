@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import i18n from "@/locales/i18n";
 
 const AuthContext = createContext(null);
 
@@ -52,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("auth_token"); // Tokeni silirik
-    toast.info("Hesabdan çıxış edildi");
+    toast.info(i18n.t("messages.logoutSuccess"));
   };
 
   // 4. UPDATE funksiyası (Profil yenilənəndə)

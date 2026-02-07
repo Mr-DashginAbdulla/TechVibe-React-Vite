@@ -114,7 +114,20 @@
     "resetLinkSent": "Şifrə sıfırlama linki emailinizə göndərildi!",
     "tryAnotherEmail": "Başqa email ilə cəhd et",
     "changesSaved": "Dəyişikliklər uğurla saxlanıldı",
-    "errorOccurred": "Xəta baş verdi"
+    "errorOccurred": "Xəta baş verdi",
+    "somethingWentWrong": "Xəta baş verdi",
+    "loginRequired": "Davam etmək üçün daxil olun",
+    "loginToAddToCart": "Səbətə əlavə etmək üçün daxil olun",
+    "loginToUseWishlist": "İstək siyahısını istifadə etmək üçün daxil olun",
+    "failedToAddToCart": "Səbətə əlavə olunmadı",
+    "failedToUpdateCart": "Səbət yenilənmədi",
+    "failedToUpdateQuantity": "Miqdar yenilənmədi",
+    "failedToRemoveItem": "Məhsul silinmədi",
+    "failedToUpdateWishlist": "İstək siyahısı yenilənmədi",
+    "invalidAccess": "Yanlış giriş. Başdan başlayın.",
+    "invalidVerificationCode": "Yanlış doğrulama kodu. Yenidən cəhd edin.",
+    "dataLoadError": "Məlumatlar yüklənərkən xəta baş verdi",
+    "logoutSuccess": "Hesabdan çıxış edildi"
   },
   "hero": {
     "title1": "Gələcək.",
@@ -185,7 +198,8 @@
     "lowToHigh": "Qiymət: Aşağıdan yuxarıya",
     "highToLow": "Qiymət: Yuxarıdan aşağıya",
     "newest": "Ən yenilər",
-    "bestRating": "Ən yaxşı reytinq"
+    "bestRating": "Ən yaxşı reytinq",
+    "highestDiscount": "Ən çox endirim"
   },
   "cart": {
     "shoppingCart": "Alış-veriş səbəti",

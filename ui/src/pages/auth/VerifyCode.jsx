@@ -34,7 +34,7 @@ const VerifyCode = () => {
   // Redirect if no state data
   useEffect(() => {
     if (!email || !correctCode) {
-      toast.error("Invalid access. Please start from forgot password page.");
+      toast.error(t("messages.invalidAccess"));
       navigate("/auth/forgot-password");
     }
   }, [email, correctCode, navigate]);
@@ -84,7 +84,7 @@ const VerifyCode = () => {
       setIsVerified(true);
       toast.success(t("auth.verificationSuccessful"));
     } else {
-      toast.error("Invalid verification code. Please try again.");
+      toast.error(t("messages.invalidVerificationCode"));
       setCode(["", "", "", "", "", ""]);
       inputRefs.current[0]?.focus();
     }

@@ -98,7 +98,8 @@ const Header = () => {
     setLangDropdownOpen(false);
   };
 
-  const currentLang = i18n.language === "az" ? "AZ" : "EN";
+  const currentLang =
+    i18n.language === "az" ? "AZ" : i18n.language === "ru" ? "RU" : "EN";
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-[#E5E7EB]">
@@ -309,6 +310,12 @@ const Header = () => {
                     className={`w-full px-[16px] py-[8px] text-left text-[14px] hover:bg-[#F3F4F6] ${i18n.language === "az" ? "text-[#3B82F6] font-medium" : "text-[#374151]"}`}
                   >
                     Azərbaycan
+                  </button>
+                  <button
+                    onClick={() => changeLanguage("ru")}
+                    className={`w-full px-[16px] py-[8px] text-left text-[14px] hover:bg-[#F3F4F6] ${i18n.language === "ru" ? "text-[#3B82F6] font-medium" : "text-[#374151]"}`}
+                  >
+                    Русский
                   </button>
                 </div>
               )}

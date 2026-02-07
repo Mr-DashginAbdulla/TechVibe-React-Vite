@@ -35,7 +35,7 @@ const Basket = () => {
     try {
       await updateCartItem({ id: item.id, quantity: newQuantity }).unwrap();
     } catch (error) {
-      toast.error("Failed to update quantity");
+      toast.error(t("messages.failedToUpdateQuantity"));
     }
   };
 
@@ -44,7 +44,7 @@ const Basket = () => {
       await removeFromCart(itemId).unwrap();
       toast.success(t("basket.itemRemoved"));
     } catch (error) {
-      toast.error("Failed to remove item");
+      toast.error(t("messages.failedToRemoveItem"));
     }
   };
 

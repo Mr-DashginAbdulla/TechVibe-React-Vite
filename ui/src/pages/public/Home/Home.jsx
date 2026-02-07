@@ -73,7 +73,7 @@ function Home() {
         setCategories(categoriesData);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Məlumatlar yüklənərkən xəta baş verdi.");
+        toast.error(t("messages.dataLoadError"));
       } finally {
         setLoading(false);
       }
@@ -88,7 +88,7 @@ function Home() {
 
   const handleAddToCart = async (productId) => {
     if (!user) {
-      toast.error(t("auth.signIn") + " to add items to cart");
+      toast.error(t("messages.loginToAddToCart"));
       return;
     }
 
@@ -122,13 +122,13 @@ function Home() {
         toast.success(t("productDetails.addedToCart"));
       }
     } catch (error) {
-      toast.error("Failed to add to cart");
+      toast.error(t("messages.failedToAddToCart"));
     }
   };
 
   const handleToggleFavorite = async (productId) => {
     if (!user) {
-      toast.error(t("auth.signIn") + " to use wishlist");
+      toast.error(t("messages.loginToUseWishlist"));
       return;
     }
 
@@ -158,7 +158,7 @@ function Home() {
         toast.success(t("productDetails.addedToWishlist"));
       }
     } catch (error) {
-      toast.error("Failed to update wishlist");
+      toast.error(t("messages.failedToUpdateWishlist"));
     }
   };
 

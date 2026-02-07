@@ -89,7 +89,7 @@ function Deals() {
   // Cart/Wishlist handlers
   const handleAddToCart = async (productId) => {
     if (!user) {
-      toast.error(t("auth.signIn") + " to add items to cart");
+      toast.error(t("messages.loginToAddToCart"));
       return;
     }
 
@@ -120,13 +120,13 @@ function Deals() {
         toast.success(t("productDetails.addedToCart"));
       }
     } catch (error) {
-      toast.error("Failed to add to cart");
+      toast.error(t("messages.failedToAddToCart"));
     }
   };
 
   const handleToggleFavorite = async (productId) => {
     if (!user) {
-      toast.error(t("auth.signIn") + " to use wishlist");
+      toast.error(t("messages.loginToUseWishlist"));
       return;
     }
 
@@ -153,7 +153,7 @@ function Deals() {
         toast.success(t("productDetails.addedToWishlist"));
       }
     } catch (error) {
-      toast.error("Failed to update wishlist");
+      toast.error(t("messages.failedToUpdateWishlist"));
     }
   };
 
@@ -246,7 +246,7 @@ function Deals() {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="px-[12px] py-[8px] border border-[#E5E7EB] rounded-[8px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
               >
-                <option value="discount">Ən çox endirim</option>
+                <option value="discount">{t("product.highestDiscount")}</option>
                 <option value="price_asc">{t("shop.sortPriceAsc")}</option>
                 <option value="price_desc">{t("shop.sortPriceDesc")}</option>
               </select>

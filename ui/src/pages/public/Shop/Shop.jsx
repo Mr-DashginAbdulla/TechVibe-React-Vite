@@ -600,7 +600,7 @@ function Shop() {
         toast.success(t("productDetails.addedToCart"));
       }
     } catch (error) {
-      toast.error("Failed to add to cart");
+      toast.error(t("messages.failedToAddToCart"));
     }
   };
 
@@ -633,7 +633,7 @@ function Shop() {
         toast.success(t("productDetails.addedToWishlist"));
       }
     } catch (error) {
-      toast.error("Failed to update wishlist");
+      toast.error(t("messages.failedToUpdateWishlist"));
     }
   };
 

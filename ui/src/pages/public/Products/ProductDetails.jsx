@@ -171,7 +171,7 @@ const ProductDetails = () => {
 
   const handleAddToCart = async () => {
     if (!user) {
-      toast.error("Please login to add items to cart");
+      toast.error(t("messages.loginToAddToCart"));
       return;
     }
 
@@ -207,13 +207,13 @@ const ProductDetails = () => {
         toast.success(t("productDetails.addedToCart"));
       }
     } catch (error) {
-      toast.error("Failed to add to cart");
+      toast.error(t("messages.failedToAddToCart"));
     }
   };
 
   const handleBuyNow = () => {
     if (!user) {
-      toast.error("Please login to continue");
+      toast.error(t("messages.loginRequired"));
       return;
     }
 
@@ -234,7 +234,7 @@ const ProductDetails = () => {
 
   const handleToggleWishlist = async () => {
     if (!user) {
-      toast.error("Please login to use wishlist");
+      toast.error(t("messages.loginToUseWishlist"));
       return;
     }
 
@@ -254,13 +254,13 @@ const ProductDetails = () => {
         toast.success(t("productDetails.addedToWishlist"));
       }
     } catch (error) {
-      toast.error("Failed to update wishlist");
+      toast.error(t("messages.failedToUpdateWishlist"));
     }
   };
 
   const handleRelatedAddToCart = (prod) => {
     if (!user) {
-      toast.error("Please login to add items to cart");
+      toast.error(t("messages.loginToAddToCart"));
       return;
     }
     addToCart({
