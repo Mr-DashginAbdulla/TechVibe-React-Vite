@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Plus,
   Search,
@@ -18,6 +19,7 @@ import { productService, categoryService } from "@/services/api";
 const ITEMS_PER_PAGE = 10;
 
 const Products = () => {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -47,7 +49,7 @@ const Products = () => {
       setProducts(productsData);
       setCategories(categoriesData);
     } catch (error) {
-      toast.error("Məlumatları yükləmək mümkün olmadı");
+      toast.error(t("messages.error"));
     } finally {
       setLoading(false);
     }
@@ -58,11 +60,11 @@ const Products = () => {
     try {
       await productService.delete(productToDelete.id);
       setProducts(products.filter((p) => p.id !== productToDelete.id));
-      toast.success("Məhsul silindi");
+      toast.success(t("products.deleteSuccess"));
       setShowDeleteModal(false);
       setProductToDelete(null);
     } catch (error) {
-      toast.error("Məhsulu silmək mümkün olmadı");
+      toast.error(t("products.deleteError"));
     }
   };
 
@@ -115,10 +117,10 @@ const Products = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[12px]">
         <div>
           <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
-            Məhsullar
+            {t("products.title")}
           </h1>
           <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-[2px]">
-            {filteredProducts.length} məhsul tapıldı
+            {filteredProducts.length} {t("products.totalProducts")}
           </p>
         </div>
         <Link
@@ -126,7 +128,7 @@ const Products = () => {
           className="inline-flex items-center justify-center gap-[8px] px-[16px] sm:px-[20px] py-[10px] sm:py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white text-[14px] font-semibold rounded-[12px] transition-colors"
         >
           <Plus className="w-[18px] h-[18px]" />
-          <span className="hidden xs:inline">Yeni </span>Məhsul
+          {t("products.addProduct")}
         </Link>
       </div>
 
@@ -136,7 +138,7 @@ const Products = () => {
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
           <input
             type="text"
-            placeholder="Axtar..."
+            placeholder={t("products.searchProducts")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-[40px] pr-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
@@ -147,7 +149,7 @@ const Products = () => {
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="px-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px] text-[#374151] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
         >
-          <option value="">Hamısı</option>
+          <option value="">{t("common.all")}</option>
           {categories.map((cat) => (
             <option key={cat.id} value={cat.id}>
               {cat.name}
@@ -164,22 +166,22 @@ const Products = () => {
             <thead>
               <tr className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Məhsul
+                  {t("products.productName")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Kateqoriya
+                  {t("products.category")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Qiymət
+                  {t("products.price")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Stok
+                  {t("products.stock")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Reytinq
+                  {t("products.rating")}
                 </th>
                 <th className="text-right px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Əməliyyat
+                  {t("common.actions")}
                 </th>
               </tr>
             </thead>
@@ -276,7 +278,7 @@ const Products = () => {
                       <span
                         className={`text-[12px] ${product.stock > 10 ? "text-green-600" : product.stock > 0 ? "text-yellow-600" : "text-red-600"}`}
                       >
-                        Stok: {product.stock}
+                        {t("products.stock")}: {product.stock}
                       </span>
                       <div className="flex items-center gap-[2px]">
                         <Star className="w-[12px] h-[12px] text-[#F59E0B] fill-[#F59E0B]" />
@@ -309,7 +311,9 @@ const Products = () => {
           ) : (
             <div className="p-[40px] text-center">
               <Package className="w-[40px] h-[40px] text-[#D1D5DB] mx-auto mb-[10px]" />
-              <p className="text-[14px] text-[#6B7280]">Məhsul tapılmadı</p>
+              <p className="text-[14px] text-[#6B7280]">
+                {t("products.noProducts")}
+              </p>
             </div>
           )}
         </div>
@@ -318,7 +322,9 @@ const Products = () => {
         {currentProducts.length === 0 && (
           <div className="hidden md:block p-[50px] text-center">
             <Package className="w-[44px] h-[44px] text-[#D1D5DB] mx-auto mb-[10px]" />
-            <p className="text-[15px] text-[#6B7280]">Məhsul tapılmadı</p>
+            <p className="text-[15px] text-[#6B7280]">
+              {t("products.noProducts")}
+            </p>
           </div>
         )}
 
@@ -379,23 +385,23 @@ const Products = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[360px]">
             <h3 className="text-[17px] font-bold text-[#111827] mb-[10px]">
-              Məhsulu Sil
+              {t("products.deleteProduct")}
             </h3>
             <p className="text-[14px] text-[#6B7280] mb-[20px]">
-              "{productToDelete?.name}" məhsulunu silmək istədiyinizə əminsiniz?
+              {t("products.deleteConfirm")}
             </p>
             <div className="flex gap-[10px]">
               <button
                 onClick={() => setShowDeleteModal(false)}
                 className="flex-1 px-[16px] py-[10px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[10px] hover:bg-[#F3F4F6]"
               >
-                Ləğv et
+                {t("common.cancel")}
               </button>
               <button
                 onClick={handleDelete}
                 className="flex-1 px-[16px] py-[10px] bg-[#EF4444] hover:bg-[#DC2626] text-white font-medium rounded-[10px]"
               >
-                Sil
+                {t("common.delete")}
               </button>
             </div>
           </div>

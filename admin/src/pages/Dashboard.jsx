@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   DollarSign,
   ShoppingCart,
@@ -12,6 +13,7 @@ import {
 import { orderService, productService, userService } from "@/services/api";
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const [stats, setStats] = useState({
     totalRevenue: 0,
     totalOrders: 0,
@@ -68,7 +70,7 @@ const Dashboard = () => {
 
   const statCards = [
     {
-      title: "Ümumi Gəlir",
+      title: t("dashboard.totalRevenue"),
       value: `$${stats.totalRevenue.toLocaleString("en-US", { minimumFractionDigits: 2 })}`,
       icon: DollarSign,
       color: "from-[#10B981] to-[#059669]",
@@ -76,7 +78,7 @@ const Dashboard = () => {
       positive: true,
     },
     {
-      title: "Sifarişlər",
+      title: t("dashboard.orders"),
       value: stats.totalOrders,
       icon: ShoppingCart,
       color: "from-[#3B82F6] to-[#2563EB]",
@@ -84,7 +86,7 @@ const Dashboard = () => {
       positive: true,
     },
     {
-      title: "İstifadəçilər",
+      title: t("dashboard.users"),
       value: stats.totalUsers,
       icon: Users,
       color: "from-[#8B5CF6] to-[#7C3AED]",
@@ -92,7 +94,7 @@ const Dashboard = () => {
       positive: true,
     },
     {
-      title: "Məhsullar",
+      title: t("dashboard.products"),
       value: stats.totalProducts,
       icon: Package,
       color: "from-[#F59E0B] to-[#D97706]",
@@ -110,11 +112,11 @@ const Dashboard = () => {
       cancelled: "bg-red-100 text-red-700",
     };
     const labels = {
-      pending: "Gözləyir",
-      processing: "İşlənir",
-      shipped: "Göndərildi",
-      delivered: "Çatdırıldı",
-      cancelled: "Ləğv edildi",
+      pending: t("orders.pending"),
+      processing: t("orders.processing"),
+      shipped: t("orders.shipped"),
+      delivered: t("orders.delivered"),
+      cancelled: t("orders.cancelled"),
     };
     return (
       <span
@@ -137,9 +139,11 @@ const Dashboard = () => {
     <div className="space-y-[24px]">
       {/* Page Header */}
       <div>
-        <h1 className="text-[24px] font-bold text-[#111827]">Dashboard</h1>
+        <h1 className="text-[24px] font-bold text-[#111827]">
+          {t("dashboard.title")}
+        </h1>
         <p className="text-[14px] text-[#6B7280] mt-[4px]">
-          Mağazanızın ümumi görünüşü
+          {t("dashboard.subtitle")}
         </p>
       </div>
 
@@ -179,13 +183,13 @@ const Dashboard = () => {
         <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
           <div className="flex items-center justify-between p-[20px] border-b border-[#E5E7EB]">
             <h2 className="text-[16px] font-semibold text-[#111827]">
-              Son Sifarişlər
+              {t("dashboard.recentOrders")}
             </h2>
             <Link
               to="/orders"
               className="text-[14px] font-medium text-[#3B82F6] hover:text-[#2563EB]"
             >
-              Hamısına bax
+              {t("common.viewAll")}
             </Link>
           </div>
           <div className="divide-y divide-[#E5E7EB]">
@@ -200,7 +204,7 @@ const Dashboard = () => {
                       #{order.orderNumber || order.id}
                     </p>
                     <p className="text-[13px] text-[#6B7280]">
-                      {new Date(order.createdAt).toLocaleDateString("az-AZ")}
+                      {new Date(order.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="text-right">
@@ -213,7 +217,7 @@ const Dashboard = () => {
               ))
             ) : (
               <div className="p-[40px] text-center text-[#6B7280]">
-                Sifariş tapılmadı
+                {t("dashboard.noOrdersFound")}
               </div>
             )}
           </div>
@@ -223,13 +227,13 @@ const Dashboard = () => {
         <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
           <div className="flex items-center justify-between p-[20px] border-b border-[#E5E7EB]">
             <h2 className="text-[16px] font-semibold text-[#111827]">
-              Top Məhsullar
+              {t("dashboard.topProducts")}
             </h2>
             <Link
               to="/products"
               className="text-[14px] font-medium text-[#3B82F6] hover:text-[#2563EB]"
             >
-              Hamısına bax
+              {t("common.viewAll")}
             </Link>
           </div>
           <div className="divide-y divide-[#E5E7EB]">

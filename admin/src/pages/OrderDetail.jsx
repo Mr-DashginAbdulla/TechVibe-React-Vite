@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   ArrowLeft,
   Package,
@@ -15,6 +16,7 @@ import { toast } from "react-toastify";
 import { orderService } from "@/services/api";
 
 const OrderDetail = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const [order, setOrder] = useState(null);
@@ -30,38 +32,41 @@ const OrderDetail = () => {
       const data = await orderService.getById(id);
       setOrder(data);
     } catch (error) {
-      toast.error("Sifariş tapılmadı");
+      toast.error(t("orders.notFound"));
       navigate("/orders");
     } finally {
       setLoading(false);
     }
   };
 
+  const getStatusLabel = (status) => {
+    const labels = {
+      pending: t("orders.pending"),
+      processing: t("orders.processing"),
+      shipped: t("orders.shipped"),
+      delivered: t("orders.delivered"),
+      cancelled: t("orders.cancelled"),
+    };
+    return labels[status] || status;
+  };
+
   const updateStatus = async (newStatus) => {
     setUpdating(true);
     try {
-      const statusLabels = {
-        pending: "Gözləyir",
-        processing: "İşlənməyə başlandı",
-        shipped: "Göndərildi",
-        delivered: "Çatdırıldı",
-        cancelled: "Ləğv edildi",
-      };
-
       const newTimeline = [
         ...(order.timeline || []),
         {
           status: newStatus,
           date: new Date().toISOString(),
-          description: statusLabels[newStatus],
+          description: getStatusLabel(newStatus),
         },
       ];
 
       await orderService.updateStatus(id, newStatus, newTimeline);
       setOrder({ ...order, status: newStatus, timeline: newTimeline });
-      toast.success("Status yeniləndi");
+      toast.success(t("orders.statusUpdated"));
     } catch (error) {
-      toast.error("Status yeniləmək mümkün olmadı");
+      toast.error(t("messages.error"));
     } finally {
       setUpdating(false);
     }
@@ -104,11 +109,11 @@ const OrderDetail = () => {
           </button>
           <div>
             <h1 className="text-[24px] font-bold text-[#111827]">
-              Sifariş #{order.orderNumber || order.id}
+              {t("orders.orderNumber")} #{order.orderNumber || order.id}
             </h1>
             <p className="text-[14px] text-[#6B7280]">
-              {new Date(order.createdAt).toLocaleDateString("az-AZ")} tarixində
-              yaradılıb
+              {t("orders.createdAt")}{" "}
+              {new Date(order.createdAt).toLocaleDateString()}
             </p>
           </div>
         </div>
@@ -121,11 +126,7 @@ const OrderDetail = () => {
           <span
             className={`text-[14px] font-semibold ${statusConfig[order.status]?.color}`}
           >
-            {order.status === "pending" && "Gözləyir"}
-            {order.status === "processing" && "İşlənir"}
-            {order.status === "shipped" && "Göndərildi"}
-            {order.status === "delivered" && "Çatdırıldı"}
-            {order.status === "cancelled" && "Ləğv edildi"}
+            {getStatusLabel(order.status)}
           </span>
         </div>
       </div>
@@ -137,7 +138,7 @@ const OrderDetail = () => {
           <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
             <div className="p-[20px] border-b border-[#E5E7EB]">
               <h2 className="text-[16px] font-semibold text-[#111827]">
-                Sifariş Məhsulları
+                {t("orders.orderItems")}
               </h2>
             </div>
             <div className="divide-y divide-[#E5E7EB]">
@@ -156,7 +157,7 @@ const OrderDetail = () => {
                       {item.name}
                     </p>
                     <p className="text-[13px] text-[#6B7280]">
-                      Say: {item.quantity}
+                      {t("orders.quantity")}: {item.quantity}
                     </p>
                   </div>
                   <p className="text-[16px] font-semibold text-[#111827]">
@@ -170,7 +171,7 @@ const OrderDetail = () => {
           {/* Timeline */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
             <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
-              Sifariş Tarixçəsi
+              {t("orders.orderHistory")}
             </h2>
             <div className="space-y-[16px]">
               {order.timeline?.map((event, idx) => {
@@ -189,7 +190,7 @@ const OrderDetail = () => {
                         {event.description}
                       </p>
                       <p className="text-[13px] text-[#6B7280]">
-                        {new Date(event.date).toLocaleString("az-AZ")}
+                        {new Date(event.date).toLocaleString()}
                       </p>
                     </div>
                   </div>
@@ -204,7 +205,7 @@ const OrderDetail = () => {
           {/* Status Update */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
             <h2 className="text-[16px] font-semibold text-[#111827] mb-[16px]">
-              Statusu Yenilə
+              {t("orders.updateStatus")}
             </h2>
             <div className="grid grid-cols-2 gap-[8px]">
               {[
@@ -224,11 +225,7 @@ const OrderDetail = () => {
                       : "border border-[#E5E7EB] text-[#374151] hover:bg-[#F3F4F6]"
                   } disabled:opacity-50`}
                 >
-                  {status === "pending" && "Gözləyir"}
-                  {status === "processing" && "İşlənir"}
-                  {status === "shipped" && "Göndərildi"}
-                  {status === "delivered" && "Çatdırıldı"}
-                  {status === "cancelled" && "Ləğv et"}
+                  {getStatusLabel(status)}
                 </button>
               ))}
             </div>
@@ -239,7 +236,7 @@ const OrderDetail = () => {
             <div className="flex items-center gap-[12px] mb-[16px]">
               <User className="w-[20px] h-[20px] text-[#6B7280]" />
               <h2 className="text-[16px] font-semibold text-[#111827]">
-                Müştəri
+                {t("orders.customer")}
               </h2>
             </div>
             <p className="text-[14px] text-[#111827] font-medium">
@@ -256,7 +253,7 @@ const OrderDetail = () => {
             <div className="flex items-center gap-[12px] mb-[16px]">
               <MapPin className="w-[20px] h-[20px] text-[#6B7280]" />
               <h2 className="text-[16px] font-semibold text-[#111827]">
-                Çatdırılma Ünvanı
+                {t("orders.shippingAddress")}
               </h2>
             </div>
             <p className="text-[14px] text-[#374151]">
@@ -276,29 +273,29 @@ const OrderDetail = () => {
             <div className="flex items-center gap-[12px] mb-[16px]">
               <CreditCard className="w-[20px] h-[20px] text-[#6B7280]" />
               <h2 className="text-[16px] font-semibold text-[#111827]">
-                Sifariş Xülasəsi
+                {t("orders.orderSummary")}
               </h2>
             </div>
             <div className="space-y-[12px]">
               <div className="flex justify-between text-[14px]">
-                <span className="text-[#6B7280]">Alt cəm</span>
+                <span className="text-[#6B7280]">{t("orders.subtotal")}</span>
                 <span className="text-[#111827]">
                   ${order.subtotal?.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between text-[14px]">
-                <span className="text-[#6B7280]">Çatdırılma</span>
+                <span className="text-[#6B7280]">{t("orders.shipping")}</span>
                 <span className="text-[#111827]">
                   ${order.shippingCost?.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between text-[14px]">
-                <span className="text-[#6B7280]">Vergi</span>
+                <span className="text-[#6B7280]">{t("orders.tax")}</span>
                 <span className="text-[#111827]">${order.tax?.toFixed(2)}</span>
               </div>
               {order.discount > 0 && (
                 <div className="flex justify-between text-[14px]">
-                  <span className="text-[#6B7280]">Endirim</span>
+                  <span className="text-[#6B7280]">{t("orders.discount")}</span>
                   <span className="text-green-600">
                     -${order.discount?.toFixed(2)}
                   </span>
@@ -306,7 +303,7 @@ const OrderDetail = () => {
               )}
               <div className="pt-[12px] border-t border-[#E5E7EB] flex justify-between">
                 <span className="text-[16px] font-semibold text-[#111827]">
-                  Cəm
+                  {t("orders.total")}
                 </span>
                 <span className="text-[18px] font-bold text-[#3B82F6]">
                   ${order.total?.toFixed(2)}

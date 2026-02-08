@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Search,
   Plus,
@@ -17,6 +18,7 @@ import { useAuth } from "@/context/AuthContext";
 const ITEMS_PER_PAGE = 10;
 
 const Users = () => {
+  const { t } = useTranslation();
   const { isSuperAdmin, user: currentUser } = useAuth();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,7 +50,7 @@ const Users = () => {
       const data = await userService.getAll();
       setUsers(data);
     } catch (error) {
-      toast.error("İstifadəçiləri yükləmək mümkün olmadı");
+      toast.error(t("messages.error"));
     } finally {
       setLoading(false);
     }
@@ -61,7 +63,7 @@ const Users = () => {
         const updateData = { ...formData };
         if (!updateData.password) delete updateData.password;
         await userService.update(editingUser.id, updateData);
-        toast.success("İstifadəçi yeniləndi");
+        toast.success(t("users.saveSuccess"));
       } else {
         await userService.create({
           ...formData,
@@ -70,12 +72,12 @@ const Users = () => {
           avatar: "",
           createdAt: new Date().toISOString(),
         });
-        toast.success("İstifadəçi yaradıldı");
+        toast.success(t("messages.created"));
       }
       fetchUsers();
       closeModal();
     } catch (error) {
-      toast.error("Xəta baş verdi");
+      toast.error(t("messages.error"));
     }
   };
 
@@ -83,10 +85,10 @@ const Users = () => {
     try {
       await userService.delete(userToDelete.id);
       setUsers(users.filter((u) => u.id !== userToDelete.id));
-      toast.success("İstifadəçi silindi");
+      toast.success(t("users.deleteSuccess"));
       setShowDeleteModal(false);
     } catch (error) {
-      toast.error("Silmək mümkün olmadı");
+      toast.error(t("messages.error"));
     }
   };
 
@@ -116,15 +118,15 @@ const Users = () => {
     });
   };
 
-  const canEditUser = (t) => {
-    if (t.role === "super-admin") return false;
-    if (currentUser.id === t.id) return true;
+  const canEditUser = (u) => {
+    if (u.role === "super-admin") return false;
+    if (currentUser.id === u.id) return true;
     if (isSuperAdmin) return true;
-    return t.role === "user";
+    return u.role === "user";
   };
-  const canDeleteUser = (t) => {
-    if (t.role === "super-admin") return false;
-    if (t.id === currentUser.id) return false;
+  const canDeleteUser = (u) => {
+    if (u.role === "super-admin") return false;
+    if (u.id === currentUser.id) return false;
     return isSuperAdmin;
   };
 
@@ -135,9 +137,9 @@ const Users = () => {
       user: "bg-gray-100 text-gray-700",
     };
     const labels = {
-      "super-admin": "Super Admin",
-      admin: "Admin",
-      user: "İstifadəçi",
+      "super-admin": t("users.superAdmin"),
+      admin: t("users.admin"),
+      user: t("users.customer"),
     };
     return (
       <span
@@ -187,10 +189,10 @@ const Users = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[12px]">
         <div>
           <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
-            İstifadəçilər
+            {t("users.title")}
           </h1>
           <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-[2px]">
-            {filteredUsers.length} istifadəçi
+            {filteredUsers.length} {t("users.totalUsers")}
           </p>
         </div>
         {isSuperAdmin && (
@@ -199,7 +201,7 @@ const Users = () => {
             className="inline-flex items-center justify-center gap-[8px] px-[16px] py-[10px] bg-[#3B82F6] hover:bg-[#2563EB] text-white text-[14px] font-semibold rounded-[12px]"
           >
             <Plus className="w-[18px] h-[18px]" />
-            Yeni
+            {t("users.addUser")}
           </button>
         )}
       </div>
@@ -210,7 +212,7 @@ const Users = () => {
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
           <input
             type="text"
-            placeholder="Axtar..."
+            placeholder={t("users.searchUsers")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-[40px] pr-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
@@ -221,10 +223,10 @@ const Users = () => {
           onChange={(e) => setRoleFilter(e.target.value)}
           className="px-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
         >
-          <option value="">Hamısı</option>
-          <option value="super-admin">Super Admin</option>
-          <option value="admin">Admin</option>
-          <option value="user">İstifadəçi</option>
+          <option value="">{t("users.allRoles")}</option>
+          <option value="super-admin">{t("users.superAdmin")}</option>
+          <option value="admin">{t("users.admin")}</option>
+          <option value="user">{t("users.customer")}</option>
         </select>
       </div>
 
@@ -236,19 +238,19 @@ const Users = () => {
             <thead>
               <tr className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  İstifadəçi
+                  {t("users.userName")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Email
+                  {t("users.email")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Rol
+                  {t("users.role")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Qeydiyyat
+                  {t("users.joinDate")}
                 </th>
                 <th className="text-right px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Əməliyyat
+                  {t("common.actions")}
                 </th>
               </tr>
             </thead>
@@ -286,7 +288,7 @@ const Users = () => {
                     {getRoleBadge(u.role)}
                   </td>
                   <td className="px-[16px] py-[14px] text-[13px] text-[#6B7280]">
-                    {new Date(u.createdAt).toLocaleDateString("az-AZ")}
+                    {new Date(u.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-[16px] py-[14px]">
                     <div className="flex items-center justify-end gap-[6px]">
@@ -346,7 +348,7 @@ const Users = () => {
                       {u.email}
                     </p>
                     <p className="text-[12px] text-[#9CA3AF] mt-[2px]">
-                      {new Date(u.createdAt).toLocaleDateString("az-AZ")}
+                      {new Date(u.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex flex-col gap-[4px]">
@@ -376,7 +378,7 @@ const Users = () => {
           ) : (
             <div className="p-[40px] text-center">
               <UsersIcon className="w-[40px] h-[40px] text-[#D1D5DB] mx-auto mb-[10px]" />
-              <p className="text-[14px] text-[#6B7280]">İstifadəçi tapılmadı</p>
+              <p className="text-[14px] text-[#6B7280]">{t("users.noUsers")}</p>
             </div>
           )}
         </div>
@@ -384,7 +386,7 @@ const Users = () => {
         {currentUsers.length === 0 && (
           <div className="hidden md:block p-[50px] text-center">
             <UsersIcon className="w-[44px] h-[44px] text-[#D1D5DB] mx-auto mb-[10px]" />
-            <p className="text-[15px] text-[#6B7280]">İstifadəçi tapılmadı</p>
+            <p className="text-[15px] text-[#6B7280]">{t("users.noUsers")}</p>
           </div>
         )}
 
@@ -445,13 +447,13 @@ const Users = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[400px] max-h-[90vh] overflow-y-auto">
             <h3 className="text-[17px] font-bold text-[#111827] mb-[16px]">
-              {editingUser ? "Redaktə Et" : "Yeni İstifadəçi"}
+              {editingUser ? t("users.editUser") : t("users.addUser")}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-[12px]">
               <div className="grid grid-cols-2 gap-[10px]">
                 <div>
                   <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
-                    Ad *
+                    {t("users.firstName")} *
                   </label>
                   <input
                     type="text"
@@ -465,7 +467,7 @@ const Users = () => {
                 </div>
                 <div>
                   <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
-                    Soyad *
+                    {t("users.lastName")} *
                   </label>
                   <input
                     type="text"
@@ -480,7 +482,7 @@ const Users = () => {
               </div>
               <div>
                 <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
-                  Email *
+                  {t("users.email")} *
                 </label>
                 <input
                   type="email"
@@ -494,7 +496,7 @@ const Users = () => {
               </div>
               <div>
                 <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
-                  Şifrə {editingUser && "(boş = dəyişdirmə)"}
+                  {t("users.password")}
                 </label>
                 <input
                   type="password"
@@ -508,7 +510,7 @@ const Users = () => {
               </div>
               <div>
                 <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
-                  Telefon
+                  {t("users.phone")}
                 </label>
                 <input
                   type="tel"
@@ -522,7 +524,7 @@ const Users = () => {
               {isSuperAdmin && (
                 <div>
                   <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
-                    Rol
+                    {t("users.role")}
                   </label>
                   <select
                     value={formData.role}
@@ -531,8 +533,8 @@ const Users = () => {
                     }
                     className="w-full px-[12px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
                   >
-                    <option value="user">İstifadəçi</option>
-                    <option value="admin">Admin</option>
+                    <option value="user">{t("users.customer")}</option>
+                    <option value="admin">{t("users.admin")}</option>
                   </select>
                 </div>
               )}
@@ -542,13 +544,13 @@ const Users = () => {
                   onClick={closeModal}
                   className="flex-1 px-[14px] py-[10px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[10px]"
                 >
-                  Ləğv
+                  {t("common.cancel")}
                 </button>
                 <button
                   type="submit"
                   className="flex-1 px-[14px] py-[10px] bg-[#3B82F6] text-white font-medium rounded-[10px]"
                 >
-                  {editingUser ? "Yenilə" : "Yarat"}
+                  {t("common.save")}
                 </button>
               </div>
             </form>
@@ -561,23 +563,23 @@ const Users = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[360px]">
             <h3 className="text-[17px] font-bold text-[#111827] mb-[10px]">
-              Sil
+              {t("users.deleteUser")}
             </h3>
             <p className="text-[14px] text-[#6B7280] mb-[20px]">
-              "{userToDelete?.firstName} {userToDelete?.lastName}" silsinmi?
+              {t("users.deleteConfirm")}
             </p>
             <div className="flex gap-[10px]">
               <button
                 onClick={() => setShowDeleteModal(false)}
                 className="flex-1 px-[14px] py-[10px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[10px]"
               >
-                Ləğv
+                {t("common.cancel")}
               </button>
               <button
                 onClick={handleDelete}
                 className="flex-1 px-[14px] py-[10px] bg-[#EF4444] text-white font-medium rounded-[10px]"
               >
-                Sil
+                {t("common.delete")}
               </button>
             </div>
           </div>

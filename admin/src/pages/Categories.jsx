@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Plus, Edit, Trash2, FolderTree, ChevronRight } from "lucide-react";
 import { toast } from "react-toastify";
 import { categoryService } from "@/services/api";
 
 const Categories = () => {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +28,7 @@ const Categories = () => {
       const data = await categoryService.getAll();
       setCategories(data);
     } catch (error) {
-      toast.error("Kateqoriyaları yükləmək mümkün olmadı");
+      toast.error(t("messages.error"));
     } finally {
       setLoading(false);
     }
@@ -37,15 +39,15 @@ const Categories = () => {
     try {
       if (editingCategory) {
         await categoryService.update(editingCategory.id, formData);
-        toast.success("Kateqoriya yeniləndi");
+        toast.success(t("categories.saveSuccess"));
       } else {
         await categoryService.create(formData);
-        toast.success("Kateqoriya yaradıldı");
+        toast.success(t("messages.created"));
       }
       fetchCategories();
       closeModal();
     } catch (error) {
-      toast.error("Xəta baş verdi");
+      toast.error(t("messages.error"));
     }
   };
 
@@ -53,11 +55,11 @@ const Categories = () => {
     try {
       await categoryService.delete(categoryToDelete.id);
       setCategories(categories.filter((c) => c.id !== categoryToDelete.id));
-      toast.success("Kateqoriya silindi");
+      toast.success(t("categories.deleteSuccess"));
       setShowDeleteModal(false);
       setCategoryToDelete(null);
     } catch (error) {
-      toast.error("Kateqoriyanı silmək mümkün olmadı");
+      toast.error(t("messages.error"));
     }
   };
 
@@ -99,10 +101,10 @@ const Categories = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[16px]">
         <div>
           <h1 className="text-[24px] font-bold text-[#111827]">
-            Kateqoriyalar
+            {t("categories.title")}
           </h1>
           <p className="text-[14px] text-[#6B7280] mt-[4px]">
-            {categories.length} kateqoriya mövcuddur
+            {categories.length} {t("categories.totalCategories")}
           </p>
         </div>
         <button
@@ -110,7 +112,7 @@ const Categories = () => {
           className="inline-flex items-center gap-[8px] px-[20px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-[12px] transition-colors"
         >
           <Plus className="w-[20px] h-[20px]" />
-          Yeni Kateqoriya
+          {t("categories.addCategory")}
         </button>
       </div>
 
@@ -133,7 +135,7 @@ const Categories = () => {
                           {parent.name}
                         </p>
                         <p className="text-[13px] text-[#6B7280]">
-                          {children.length} alt kateqoriya
+                          {children.length} {t("categories.subcategories")}
                         </p>
                       </div>
                     </div>
@@ -206,7 +208,7 @@ const Categories = () => {
           <div className="p-[60px] text-center">
             <FolderTree className="w-[48px] h-[48px] text-[#D1D5DB] mx-auto mb-[12px]" />
             <p className="text-[16px] font-medium text-[#6B7280]">
-              Kateqoriya tapılmadı
+              {t("categories.noCategories")}
             </p>
           </div>
         )}
@@ -217,12 +219,14 @@ const Categories = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[450px]">
             <h3 className="text-[18px] font-bold text-[#111827] mb-[20px]">
-              {editingCategory ? "Kateqoriyanı Redaktə Et" : "Yeni Kateqoriya"}
+              {editingCategory
+                ? t("categories.editCategory")
+                : t("categories.addCategory")}
             </h3>
             <form onSubmit={handleSubmit} className="space-y-[16px]">
               <div>
                 <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                  ID (unikal) *
+                  {t("categories.categoryId")} *
                 </label>
                 <input
                   type="text"
@@ -240,7 +244,7 @@ const Categories = () => {
               </div>
               <div>
                 <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                  Ad *
+                  {t("categories.categoryName")} *
                 </label>
                 <input
                   type="text"
@@ -254,7 +258,7 @@ const Categories = () => {
               </div>
               <div>
                 <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                  Şəkil URL
+                  {t("categories.imageUrl")}
                 </label>
                 <input
                   type="url"
@@ -267,7 +271,7 @@ const Categories = () => {
               </div>
               <div>
                 <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                  Ana Kateqoriya
+                  {t("categories.parentCategory")}
                 </label>
                 <select
                   value={formData.parentId || ""}
@@ -279,7 +283,7 @@ const Categories = () => {
                   }
                   className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px]"
                 >
-                  <option value="">Yoxdur (Ana kateqoriya)</option>
+                  <option value="">{t("categories.noParent")}</option>
                   {parentCategories
                     .filter((p) => p.id !== editingCategory?.id)
                     .map((cat) => (
@@ -295,13 +299,13 @@ const Categories = () => {
                   onClick={closeModal}
                   className="flex-1 px-[20px] py-[12px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[12px] hover:bg-[#F3F4F6]"
                 >
-                  Ləğv et
+                  {t("common.cancel")}
                 </button>
                 <button
                   type="submit"
                   className="flex-1 px-[20px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium rounded-[12px]"
                 >
-                  {editingCategory ? "Yenilə" : "Yarat"}
+                  {t("common.save")}
                 </button>
               </div>
             </form>
@@ -314,24 +318,23 @@ const Categories = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[400px]">
             <h3 className="text-[18px] font-bold text-[#111827] mb-[12px]">
-              Kateqoriyanı Sil
+              {t("categories.deleteCategory")}
             </h3>
             <p className="text-[14px] text-[#6B7280] mb-[24px]">
-              "{categoryToDelete?.name}" kateqoriyasını silmək istədiyinizə
-              əminsiniz?
+              {t("categories.deleteConfirm")}
             </p>
             <div className="flex gap-[12px]">
               <button
                 onClick={() => setShowDeleteModal(false)}
                 className="flex-1 px-[20px] py-[12px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[12px] hover:bg-[#F3F4F6]"
               >
-                Ləğv et
+                {t("common.cancel")}
               </button>
               <button
                 onClick={handleDelete}
                 className="flex-1 px-[20px] py-[12px] bg-[#EF4444] hover:bg-[#DC2626] text-white font-medium rounded-[12px]"
               >
-                Sil
+                {t("common.delete")}
               </button>
             </div>
           </div>

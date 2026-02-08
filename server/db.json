@@ -1862,9 +1862,9 @@
       "isFeatured": false,
       "isNew": true,
       "description": "Multi-sport GPS, solar",
-      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500&q=80",
+      "image": "https://m.media-amazon.com/images/I/61B+WKMAqwL._AC_SL1500_.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500&q=80"
+        "https://m.media-amazon.com/images/I/61B+WKMAqwL._AC_SL1500_.jpg"
       ],
       "specs": {
         "Display": "1.4-inch MIP, Solar charging",
@@ -1877,7 +1877,9 @@
         "Features": "Topo maps, Music storage, Garmin Pay, Built-in LED flashlight"
       },
       "rating": 4.5,
-      "reviewsCount": 4
+      "reviewsCount": 4,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "56",

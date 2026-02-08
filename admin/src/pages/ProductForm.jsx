@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Upload, X, Plus, Trash2, Image, Link } from "lucide-react";
 import { toast } from "react-toastify";
 import { productService, categoryService } from "@/services/api";
 
 const ProductForm = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
   const isEditing = !!id;
@@ -13,7 +15,7 @@ const ProductForm = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [imageMode, setImageMode] = useState("url"); // "url" or "upload"
+  const [imageMode, setImageMode] = useState("url");
   const [newImageUrl, setNewImageUrl] = useState("");
 
   const [formData, setFormData] = useState({
@@ -48,7 +50,7 @@ const ProductForm = () => {
       const data = await categoryService.getAll();
       setCategories(data);
     } catch (error) {
-      toast.error("Kateqoriyaları yükləmək mümkün olmadı");
+      toast.error(t("messages.error"));
     }
   };
 
@@ -72,7 +74,7 @@ const ProductForm = () => {
         memoryOptions: data.memoryOptions || [],
       });
     } catch (error) {
-      toast.error("Məhsul tapılmadı");
+      toast.error(t("products.notFound"));
       navigate("/products");
     } finally {
       setLoading(false);
@@ -99,14 +101,14 @@ const ProductForm = () => {
 
       if (isEditing) {
         await productService.update(id, productData);
-        toast.success("Məhsul yeniləndi");
+        toast.success(t("products.saveSuccess"));
       } else {
         await productService.create(productData);
-        toast.success("Məhsul yaradıldı");
+        toast.success(t("messages.created"));
       }
       navigate("/products");
     } catch (error) {
-      toast.error("Xəta baş verdi");
+      toast.error(t("messages.error"));
     } finally {
       setSaving(false);
     }
@@ -229,12 +231,10 @@ const ProductForm = () => {
         </button>
         <div>
           <h1 className="text-[24px] font-bold text-[#111827]">
-            {isEditing ? "Məhsulu Redaktə Et" : "Yeni Məhsul"}
+            {isEditing ? t("products.editProduct") : t("products.addProduct")}
           </h1>
           <p className="text-[14px] text-[#6B7280] mt-[4px]">
-            {isEditing
-              ? "Məhsul məlumatlarını yeniləyin"
-              : "Yeni məhsul əlavə edin"}
+            {isEditing ? t("products.editSubtitle") : t("products.addSubtitle")}
           </p>
         </div>
       </div>
@@ -243,12 +243,12 @@ const ProductForm = () => {
         {/* Basic Info */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
-            Əsas Məlumatlar
+            {t("products.basicInfo")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Məhsul Adı *
+                {t("products.productName")} *
               </label>
               <input
                 type="text"
@@ -262,7 +262,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Brend *
+                {t("products.brand")} *
               </label>
               <input
                 type="text"
@@ -276,7 +276,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Qiymət ($) *
+                {t("products.price")} ($) *
               </label>
               <input
                 type="number"
@@ -291,7 +291,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Stok *
+                {t("products.stock")} *
               </label>
               <input
                 type="number"
@@ -305,7 +305,7 @@ const ProductForm = () => {
             </div>
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Kateqoriya *
+                {t("products.category")} *
               </label>
               <select
                 value={formData.category}
@@ -315,7 +315,7 @@ const ProductForm = () => {
                 required
                 className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent"
               >
-                <option value="">Seçin...</option>
+                <option value="">{t("common.select")}...</option>
                 {categories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.name}
@@ -334,7 +334,7 @@ const ProductForm = () => {
                   className="w-[18px] h-[18px] rounded border-[#D1D5DB] text-[#3B82F6] focus:ring-[#3B82F6]"
                 />
                 <span className="text-[14px] text-[#374151]">
-                  Seçilmiş məhsul
+                  {t("products.featured")}
                 </span>
               </label>
               <label className="flex items-center gap-[10px] cursor-pointer">
@@ -346,12 +346,14 @@ const ProductForm = () => {
                   }
                   className="w-[18px] h-[18px] rounded border-[#D1D5DB] text-[#3B82F6] focus:ring-[#3B82F6]"
                 />
-                <span className="text-[14px] text-[#374151]">Yeni məhsul</span>
+                <span className="text-[14px] text-[#374151]">
+                  {t("products.newProduct")}
+                </span>
               </label>
             </div>
             <div className="md:col-span-2">
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Təsvir
+                {t("products.description")}
               </label>
               <textarea
                 value={formData.description}
@@ -369,7 +371,7 @@ const ProductForm = () => {
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <div className="flex items-center justify-between mb-[20px]">
             <h2 className="text-[16px] font-semibold text-[#111827]">
-              Məhsul Şəkilləri
+              {t("products.productImages")}
             </h2>
             <div className="flex gap-[8px]">
               <button
@@ -394,7 +396,7 @@ const ProductForm = () => {
                 }`}
               >
                 <Upload className="w-[16px] h-[16px]" />
-                Yüklə
+                {t("products.upload")}
               </button>
             </div>
           </div>
@@ -414,7 +416,7 @@ const ProductForm = () => {
                   />
                   {idx === 0 && (
                     <span className="absolute top-[6px] left-[6px] px-[8px] py-[3px] bg-[#3B82F6] text-white text-[11px] font-medium rounded-[6px]">
-                      Əsas
+                      {t("products.mainImage")}
                     </span>
                   )}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-[8px]">
@@ -423,7 +425,7 @@ const ProductForm = () => {
                         type="button"
                         onClick={() => setMainImage(idx)}
                         className="p-[8px] bg-white rounded-[8px] text-[#3B82F6] hover:bg-[#F3F4F6]"
-                        title="Əsas şəkil et"
+                        title={t("products.setMainImage")}
                       >
                         <Image className="w-[16px] h-[16px]" />
                       </button>
@@ -432,7 +434,7 @@ const ProductForm = () => {
                       type="button"
                       onClick={() => removeImage(idx)}
                       className="p-[8px] bg-white rounded-[8px] text-[#EF4444] hover:bg-red-50"
-                      title="Sil"
+                      title={t("common.delete")}
                     >
                       <Trash2 className="w-[16px] h-[16px]" />
                     </button>
@@ -458,7 +460,7 @@ const ProductForm = () => {
                 className="px-[20px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium rounded-[12px] transition-colors flex items-center gap-[8px]"
               >
                 <Plus className="w-[18px] h-[18px]" />
-                Əlavə et
+                {t("common.add")}
               </button>
             </div>
           ) : (
@@ -476,8 +478,10 @@ const ProductForm = () => {
               />
               <Upload className="w-[40px] h-[40px] text-[#9CA3AF] mx-auto mb-[12px]" />
               <p className="text-[14px] text-[#6B7280]">
-                Şəkil yükləmək üçün{" "}
-                <span className="text-[#3B82F6] font-medium">klikləyin</span>
+                {t("products.clickToUpload")}{" "}
+                <span className="text-[#3B82F6] font-medium">
+                  {t("products.click")}
+                </span>
               </p>
               <p className="text-[12px] text-[#9CA3AF] mt-[4px]">
                 PNG, JPG, WEBP (max 5MB)
@@ -487,7 +491,7 @@ const ProductForm = () => {
 
           {formData.images.length === 0 && (
             <p className="text-[13px] text-[#9CA3AF] mt-[12px]">
-              Heç bir şəkil əlavə edilməyib
+              {t("products.noImages")}
             </p>
           )}
         </div>
@@ -495,7 +499,7 @@ const ProductForm = () => {
         {/* Specifications */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
-            Xüsusiyyətlər
+            {t("products.specifications")}
           </h2>
           <div className="space-y-[12px]">
             {Object.entries(formData.specs).map(([key, value]) => (
@@ -521,7 +525,7 @@ const ProductForm = () => {
             <div className="flex gap-[12px]">
               <input
                 type="text"
-                placeholder="Xüsusiyyət adı"
+                placeholder={t("products.specName")}
                 value={newSpec.key}
                 onChange={(e) =>
                   setNewSpec({ ...newSpec, key: e.target.value })
@@ -530,7 +534,7 @@ const ProductForm = () => {
               />
               <input
                 type="text"
-                placeholder="Dəyəri"
+                placeholder={t("products.specValue")}
                 value={newSpec.value}
                 onChange={(e) =>
                   setNewSpec({ ...newSpec, value: e.target.value })
@@ -551,7 +555,7 @@ const ProductForm = () => {
         {/* Color Options */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
-            Rəng Seçimləri
+            {t("products.colorOptions")}
           </h2>
           <div className="flex flex-wrap gap-[12px] mb-[16px]">
             {formData.colorOptions.map((color, idx) => (
@@ -577,7 +581,7 @@ const ProductForm = () => {
           <div className="flex gap-[12px]">
             <input
               type="text"
-              placeholder="Rəng adı"
+              placeholder={t("products.colorName")}
               value={newColor.name}
               onChange={(e) =>
                 setNewColor({ ...newColor, name: e.target.value })
@@ -605,7 +609,7 @@ const ProductForm = () => {
         {/* Memory Options */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
-            Yaddaş Seçimləri
+            {t("products.memoryOptions")}
           </h2>
           <div className="flex flex-wrap gap-[12px] mb-[16px]">
             {formData.memoryOptions.map((mem, idx) => (
@@ -628,7 +632,7 @@ const ProductForm = () => {
           <div className="flex gap-[12px]">
             <input
               type="text"
-              placeholder="Ölçü (ör: 256GB)"
+              placeholder={t("products.memorySize")}
               value={newMemory.size}
               onChange={(e) =>
                 setNewMemory({ ...newMemory, size: e.target.value })
@@ -637,7 +641,7 @@ const ProductForm = () => {
             />
             <input
               type="number"
-              placeholder="Qiymət fərqi"
+              placeholder={t("products.priceDiff")}
               value={newMemory.adj}
               onChange={(e) =>
                 setNewMemory({ ...newMemory, adj: e.target.value })
@@ -661,14 +665,14 @@ const ProductForm = () => {
             onClick={() => navigate("/products")}
             className="px-[24px] py-[12px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[12px] hover:bg-[#F3F4F6]"
           >
-            Ləğv et
+            {t("common.cancel")}
           </button>
           <button
             type="submit"
             disabled={saving}
             className="px-[24px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-[12px] disabled:opacity-50"
           >
-            {saving ? "Saxlanılır..." : isEditing ? "Yenilə" : "Yarat"}
+            {saving ? t("common.saving") : t("common.save")}
           </button>
         </div>
       </form>

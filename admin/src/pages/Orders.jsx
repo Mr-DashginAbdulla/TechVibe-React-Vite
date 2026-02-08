@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Search,
   Eye,
@@ -15,6 +16,7 @@ import { orderService } from "@/services/api";
 const ITEMS_PER_PAGE = 10;
 
 const Orders = () => {
+  const { t } = useTranslation();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,19 +37,19 @@ const Orders = () => {
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
       );
     } catch (error) {
-      toast.error("Sifarişləri yükləmək mümkün olmadı");
+      toast.error(t("messages.error"));
     } finally {
       setLoading(false);
     }
   };
 
   const statuses = [
-    { value: "", label: "Hamısı" },
-    { value: "pending", label: "Gözləyir" },
-    { value: "processing", label: "İşlənir" },
-    { value: "shipped", label: "Göndərildi" },
-    { value: "delivered", label: "Çatdırıldı" },
-    { value: "cancelled", label: "Ləğv" },
+    { value: "", label: t("orders.allStatuses") },
+    { value: "pending", label: t("orders.pending") },
+    { value: "processing", label: t("orders.processing") },
+    { value: "shipped", label: t("orders.shipped") },
+    { value: "delivered", label: t("orders.delivered") },
+    { value: "cancelled", label: t("orders.cancelled") },
   ];
 
   const getStatusBadge = (status) => {
@@ -59,11 +61,11 @@ const Orders = () => {
       cancelled: "bg-red-100 text-red-700",
     };
     const labels = {
-      pending: "Gözləyir",
-      processing: "İşlənir",
-      shipped: "Göndərildi",
-      delivered: "Çatdırıldı",
-      cancelled: "Ləğv",
+      pending: t("orders.pending"),
+      processing: t("orders.processing"),
+      shipped: t("orders.shipped"),
+      delivered: t("orders.delivered"),
+      cancelled: t("orders.cancelled"),
     };
     return (
       <span
@@ -114,10 +116,10 @@ const Orders = () => {
       {/* Header */}
       <div>
         <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
-          Sifarişlər
+          {t("orders.title")}
         </h1>
         <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-[2px]">
-          {filteredOrders.length} sifariş tapıldı
+          {filteredOrders.length} {t("orders.totalOrders")}
         </p>
       </div>
 
@@ -127,7 +129,7 @@ const Orders = () => {
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
           <input
             type="text"
-            placeholder="Sifariş nömrəsi ilə axtar..."
+            placeholder={t("orders.searchOrders")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-[40px] pr-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
@@ -154,25 +156,25 @@ const Orders = () => {
             <thead>
               <tr className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Sifariş
+                  {t("orders.orderNumber")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Tarix
+                  {t("orders.date")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Müştəri
+                  {t("orders.customer")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Məhsullar
+                  {t("orders.items")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Cəm
+                  {t("orders.total")}
                 </th>
                 <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Status
+                  {t("orders.status")}
                 </th>
                 <th className="text-right px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
-                  Əməliyyat
+                  {t("common.actions")}
                 </th>
               </tr>
             </thead>
@@ -184,10 +186,10 @@ const Orders = () => {
                   </td>
                   <td className="px-[16px] py-[14px]">
                     <p className="text-[14px] text-[#374151]">
-                      {new Date(order.createdAt).toLocaleDateString("az-AZ")}
+                      {new Date(order.createdAt).toLocaleDateString()}
                     </p>
                     <p className="text-[12px] text-[#6B7280]">
-                      {new Date(order.createdAt).toLocaleTimeString("az-AZ", {
+                      {new Date(order.createdAt).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
@@ -233,7 +235,7 @@ const Orders = () => {
                       className="inline-flex items-center gap-[5px] px-[12px] py-[7px] bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#374151] text-[12px] font-medium rounded-[7px]"
                     >
                       <Eye className="w-[14px] h-[14px]" />
-                      Bax
+                      {t("orders.viewDetails")}
                     </Link>
                   </td>
                 </tr>
@@ -253,7 +255,7 @@ const Orders = () => {
                       #{order.orderNumber || order.id}
                     </p>
                     <p className="text-[12px] text-[#6B7280]">
-                      {new Date(order.createdAt).toLocaleDateString("az-AZ")}
+                      {new Date(order.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   {getStatusBadge(order.status)}
@@ -273,7 +275,7 @@ const Orders = () => {
                     className="flex items-center gap-[5px] px-[14px] py-[8px] bg-[#3B82F6] text-white text-[13px] font-medium rounded-[8px]"
                   >
                     <Eye className="w-[15px] h-[15px]" />
-                    Bax
+                    {t("orders.viewDetails")}
                   </Link>
                 </div>
               </div>
@@ -281,7 +283,9 @@ const Orders = () => {
           ) : (
             <div className="p-[40px] text-center">
               <ShoppingCart className="w-[40px] h-[40px] text-[#D1D5DB] mx-auto mb-[10px]" />
-              <p className="text-[14px] text-[#6B7280]">Sifariş tapılmadı</p>
+              <p className="text-[14px] text-[#6B7280]">
+                {t("orders.noOrders")}
+              </p>
             </div>
           )}
         </div>
@@ -290,7 +294,7 @@ const Orders = () => {
         {currentOrders.length === 0 && (
           <div className="hidden md:block p-[50px] text-center">
             <ShoppingCart className="w-[44px] h-[44px] text-[#D1D5DB] mx-auto mb-[10px]" />
-            <p className="text-[15px] text-[#6B7280]">Sifariş tapılmadı</p>
+            <p className="text-[15px] text-[#6B7280]">{t("orders.noOrders")}</p>
           </div>
         )}
 

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Search,
   Bell,
@@ -7,21 +8,36 @@ import {
   ChevronDown,
   LogOut,
   Settings,
-  User,
+  Globe,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const Header = ({ onMenuClick }) => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { user, logout, isSuperAdmin } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const dropdownRef = useRef(null);
+  const langDropdownRef = useRef(null);
+
+  const currentLang = i18n.language?.startsWith("az")
+    ? "AZ"
+    : i18n.language?.startsWith("ru")
+      ? "RU"
+      : "EN";
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
+      }
+      if (
+        langDropdownRef.current &&
+        !langDropdownRef.current.contains(event.target)
+      ) {
+        setLangDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -37,6 +53,11 @@ const Header = ({ onMenuClick }) => {
     if (e.key === "Enter" && searchQuery.trim()) {
       navigate(`/products?search=${encodeURIComponent(searchQuery)}`);
     }
+  };
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    setLangDropdownOpen(false);
   };
 
   return (
@@ -56,7 +77,7 @@ const Header = ({ onMenuClick }) => {
             <Search className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
             <input
               type="text"
-              placeholder="Axtar..."
+              placeholder={t("header.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearch}
@@ -67,6 +88,53 @@ const Header = ({ onMenuClick }) => {
 
         {/* Right side */}
         <div className="flex items-center gap-[12px]">
+          {/* Language Switcher */}
+          <div className="relative" ref={langDropdownRef}>
+            <button
+              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+              className="flex items-center gap-[6px] px-[12px] py-[8px] rounded-[10px] hover:bg-[#F3F4F6] transition-colors text-[14px] font-medium text-[#374151]"
+            >
+              <Globe className="w-[18px] h-[18px]" />
+              <span>{currentLang}</span>
+              <ChevronDown className="w-[14px] h-[14px]" />
+            </button>
+
+            {langDropdownOpen && (
+              <div className="absolute right-0 mt-[8px] w-[140px] bg-white rounded-[12px] shadow-lg border border-[#E5E7EB] py-[8px]">
+                <button
+                  onClick={() => changeLanguage("en")}
+                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-[#F3F4F6] ${
+                    currentLang === "EN"
+                      ? "text-[#3B82F6] font-medium"
+                      : "text-[#374151]"
+                  }`}
+                >
+                  🇺🇸 English
+                </button>
+                <button
+                  onClick={() => changeLanguage("az")}
+                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-[#F3F4F6] ${
+                    currentLang === "AZ"
+                      ? "text-[#3B82F6] font-medium"
+                      : "text-[#374151]"
+                  }`}
+                >
+                  🇦🇿 Azərbaycan
+                </button>
+                <button
+                  onClick={() => changeLanguage("ru")}
+                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-[#F3F4F6] ${
+                    currentLang === "RU"
+                      ? "text-[#3B82F6] font-medium"
+                      : "text-[#374151]"
+                  }`}
+                >
+                  🇷🇺 Русский
+                </button>
+              </div>
+            )}
+          </div>
+
           {/* Notifications */}
           <button className="relative p-[10px] rounded-[10px] hover:bg-[#F3F4F6] transition-colors">
             <Bell className="w-[22px] h-[22px] text-[#374151]" />
@@ -96,7 +164,7 @@ const Header = ({ onMenuClick }) => {
                   {user?.firstName} {user?.lastName}
                 </p>
                 <p className="text-[12px] text-[#6B7280]">
-                  {isSuperAdmin ? "Super Admin" : "Admin"}
+                  {isSuperAdmin ? t("users.superAdmin") : t("users.admin")}
                 </p>
               </div>
               <ChevronDown className="w-[16px] h-[16px] text-[#6B7280]" />
@@ -118,14 +186,14 @@ const Header = ({ onMenuClick }) => {
                   className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-[#374151] hover:bg-[#F3F4F6]"
                 >
                   <Settings className="w-[16px] h-[16px]" />
-                  Tənzimləmələr
+                  {t("header.settings")}
                 </button>
                 <button
                   onClick={handleLogout}
                   className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-[#EF4444] hover:bg-red-50"
                 >
                   <LogOut className="w-[16px] h-[16px]" />
-                  Çıxış
+                  {t("header.logout")}
                 </button>
               </div>
             )}

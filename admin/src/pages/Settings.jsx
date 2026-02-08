@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Save, Store, User, Bell, Shield } from "lucide-react";
 import { toast } from "react-toastify";
 import { useAuth } from "@/context/AuthContext";
 import { userService } from "@/services/api";
 
 const Settings = () => {
+  const { t } = useTranslation();
   const { user, isSuperAdmin } = useAuth();
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
@@ -27,9 +29,9 @@ const Settings = () => {
     setSaving(true);
     try {
       await userService.update(user.id, profileData);
-      toast.success("Profil məlumatları yeniləndi");
+      toast.success(t("settings.profileUpdated"));
     } catch (error) {
-      toast.error("Xəta baş verdi");
+      toast.error(t("messages.error"));
     } finally {
       setSaving(false);
     }
@@ -38,37 +40,39 @@ const Settings = () => {
   const handlePasswordSave = async (e) => {
     e.preventDefault();
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      toast.error("Şifrələr uyğun gəlmir");
+      toast.error(t("settings.passwordMismatch"));
       return;
     }
     setSaving(true);
     try {
       await userService.update(user.id, { password: passwordData.newPassword });
-      toast.success("Şifrə yeniləndi");
+      toast.success(t("settings.passwordUpdated"));
       setPasswordData({
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
       });
     } catch (error) {
-      toast.error("Xəta baş verdi");
+      toast.error(t("messages.error"));
     } finally {
       setSaving(false);
     }
   };
 
   const tabs = [
-    { id: "profile", label: "Profil", icon: User },
-    { id: "security", label: "Təhlükəsizlik", icon: Shield },
+    { id: "profile", label: t("settings.profile"), icon: User },
+    { id: "security", label: t("settings.security"), icon: Shield },
   ];
 
   return (
     <div className="space-y-[24px]">
       {/* Header */}
       <div>
-        <h1 className="text-[24px] font-bold text-[#111827]">Tənzimləmələr</h1>
+        <h1 className="text-[24px] font-bold text-[#111827]">
+          {t("settings.title")}
+        </h1>
         <p className="text-[14px] text-[#6B7280] mt-[4px]">
-          Hesab və sistem tənzimləmələri
+          {t("settings.subtitle")}
         </p>
       </div>
 
@@ -112,7 +116,7 @@ const Settings = () => {
                   {user?.firstName} {user?.lastName}
                 </p>
                 <p className="text-[13px] text-white/80">
-                  {isSuperAdmin ? "Super Admin" : "Admin"}
+                  {isSuperAdmin ? t("users.superAdmin") : t("users.admin")}
                 </p>
               </div>
             </div>
@@ -125,13 +129,13 @@ const Settings = () => {
           {activeTab === "profile" && (
             <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
               <h2 className="text-[18px] font-semibold text-[#111827] mb-[24px]">
-                Profil Məlumatları
+                {t("settings.profileInfo")}
               </h2>
               <form onSubmit={handleProfileSave} className="space-y-[20px]">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
                   <div>
                     <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                      Ad
+                      {t("users.firstName")}
                     </label>
                     <input
                       type="text"
@@ -147,7 +151,7 @@ const Settings = () => {
                   </div>
                   <div>
                     <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                      Soyad
+                      {t("users.lastName")}
                     </label>
                     <input
                       type="text"
@@ -164,7 +168,7 @@ const Settings = () => {
                 </div>
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                    Email
+                    {t("users.email")}
                   </label>
                   <input
                     type="email"
@@ -177,7 +181,7 @@ const Settings = () => {
                 </div>
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                    Telefon
+                    {t("users.phone")}
                   </label>
                   <input
                     type="tel"
@@ -195,7 +199,7 @@ const Settings = () => {
                     className="inline-flex items-center gap-[8px] px-[24px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-[12px] disabled:opacity-50"
                   >
                     <Save className="w-[18px] h-[18px]" />
-                    {saving ? "Saxlanılır..." : "Saxla"}
+                    {saving ? t("common.saving") : t("common.save")}
                   </button>
                 </div>
               </form>
@@ -206,7 +210,7 @@ const Settings = () => {
           {activeTab === "security" && (
             <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
               <h2 className="text-[18px] font-semibold text-[#111827] mb-[24px]">
-                Şifrəni Dəyiş
+                {t("settings.changePassword")}
               </h2>
               <form
                 onSubmit={handlePasswordSave}
@@ -214,7 +218,7 @@ const Settings = () => {
               >
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                    Cari Şifrə
+                    {t("settings.currentPassword")}
                   </label>
                   <input
                     type="password"
@@ -231,7 +235,7 @@ const Settings = () => {
                 </div>
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                    Yeni Şifrə
+                    {t("settings.newPassword")}
                   </label>
                   <input
                     type="password"
@@ -248,7 +252,7 @@ const Settings = () => {
                 </div>
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                    Yeni Şifrəni Təsdiqlə
+                    {t("settings.confirmPassword")}
                   </label>
                   <input
                     type="password"
@@ -270,7 +274,7 @@ const Settings = () => {
                     className="inline-flex items-center gap-[8px] px-[24px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-[12px] disabled:opacity-50"
                   >
                     <Shield className="w-[18px] h-[18px]" />
-                    {saving ? "Dəyişdirilir..." : "Şifrəni Dəyiş"}
+                    {saving ? t("common.saving") : t("settings.changePassword")}
                   </button>
                 </div>
               </form>

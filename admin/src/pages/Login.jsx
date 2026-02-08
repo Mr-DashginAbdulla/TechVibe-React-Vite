@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Mail, Lock, AlertCircle } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const Login = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { login, isLoggedIn } = useAuth();
   const [email, setEmail] = useState("");
@@ -41,9 +43,11 @@ const Login = () => {
               T
             </span>
           </div>
-          <h1 className="text-[28px] font-bold text-white">TechVibe Admin</h1>
+          <h1 className="text-[28px] font-bold text-white">
+            {t("login.title")}
+          </h1>
           <p className="text-[14px] text-white/80 mt-[4px]">
-            Panelə daxil olmaq üçün məlumatlarınızı daxil edin
+            {t("login.subtitle")}
           </p>
         </div>
 
@@ -62,7 +66,7 @@ const Login = () => {
           <div className="space-y-[20px]">
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Email
+                {t("login.email")}
               </label>
               <div className="relative">
                 <Mail className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
@@ -70,7 +74,7 @@ const Login = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@techvibe.com"
+                  placeholder={t("login.emailPlaceholder")}
                   required
                   className="w-full pl-[44px] pr-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
                 />
@@ -79,7 +83,7 @@ const Login = () => {
 
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
-                Şifrə
+                {t("login.password")}
               </label>
               <div className="relative">
                 <Lock className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
@@ -87,7 +91,7 @@ const Login = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder={t("login.passwordPlaceholder")}
                   required
                   className="w-full pl-[44px] pr-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
                 />
@@ -118,15 +122,15 @@ const Login = () => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
-                Gözləyin...
+                {t("login.signingIn")}
               </span>
             ) : (
-              "Daxil ol"
+              t("login.signIn")
             )}
           </button>
 
           <p className="text-center text-[13px] text-[#6B7280] mt-[20px]">
-            Yalnız admin istifadəçilər daxil ola bilər
+            {t("login.accessDenied")}
           </p>
         </form>
       </div>

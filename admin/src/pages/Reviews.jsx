@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Search,
   Star,
@@ -16,6 +17,7 @@ import { reviewService, productService } from "@/services/api";
 const ITEMS_PER_PAGE = 10;
 
 const Reviews = () => {
+  const { t } = useTranslation();
   const [reviews, setReviews] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,7 +43,7 @@ const Reviews = () => {
       setReviews(reviewsData);
       setProducts(productsData);
     } catch (error) {
-      toast.error("Rəyləri yükləmək mümkün olmadı");
+      toast.error(t("messages.error"));
     } finally {
       setLoading(false);
     }
@@ -51,15 +53,15 @@ const Reviews = () => {
     try {
       await reviewService.delete(reviewToDelete.id);
       setReviews(reviews.filter((r) => r.id !== reviewToDelete.id));
-      toast.success("Rəy silindi");
+      toast.success(t("reviews.deleteSuccess"));
       setShowDeleteModal(false);
     } catch (error) {
-      toast.error("Silmək mümkün olmadı");
+      toast.error(t("messages.error"));
     }
   };
 
   const getProductName = (id) =>
-    products.find((p) => p.id === id)?.name || "Naməlum";
+    products.find((p) => p.id === id)?.name || t("common.unknown");
   const getProductImage = (id) => products.find((p) => p.id === id)?.image;
 
   const filteredReviews = reviews.filter((r) => {
@@ -102,10 +104,10 @@ const Reviews = () => {
       {/* Header */}
       <div>
         <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
-          Rəylər
+          {t("reviews.title")}
         </h1>
         <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-[2px]">
-          {filteredReviews.length} rəy tapıldı
+          {filteredReviews.length} {t("reviews.totalReviews")}
         </p>
       </div>
 
@@ -115,7 +117,7 @@ const Reviews = () => {
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
           <input
             type="text"
-            placeholder="Axtar..."
+            placeholder={t("reviews.searchReviews")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-[40px] pr-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
@@ -126,7 +128,7 @@ const Reviews = () => {
           onChange={(e) => setRatingFilter(e.target.value)}
           className="px-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
         >
-          <option value="">Hamısı</option>
+          <option value="">{t("reviews.allRatings")}</option>
           {[5, 4, 3, 2, 1].map((r) => (
             <option key={r} value={r}>
               {r} ★
@@ -183,9 +185,7 @@ const Reviews = () => {
                     {review.comment}
                   </p>
                   <div className="flex items-center gap-[12px] mt-[8px] text-[11px] sm:text-[12px] text-[#6B7280]">
-                    <span>
-                      {new Date(review.date).toLocaleDateString("az-AZ")}
-                    </span>
+                    <span>{new Date(review.date).toLocaleDateString()}</span>
                     {review.helpful > 0 && (
                       <div className="flex items-center gap-[3px]">
                         <ThumbsUp className="w-[12px] h-[12px]" />
@@ -200,7 +200,9 @@ const Reviews = () => {
         ) : (
           <div className="bg-white rounded-[14px] border border-[#E5E7EB] p-[50px] text-center">
             <MessageSquare className="w-[40px] h-[40px] text-[#D1D5DB] mx-auto mb-[10px]" />
-            <p className="text-[14px] text-[#6B7280]">Rəy tapılmadı</p>
+            <p className="text-[14px] text-[#6B7280]">
+              {t("reviews.noReviews")}
+            </p>
           </div>
         )}
       </div>
@@ -261,23 +263,23 @@ const Reviews = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[360px]">
             <h3 className="text-[17px] font-bold text-[#111827] mb-[10px]">
-              Rəyi Sil
+              {t("reviews.deleteReview")}
             </h3>
             <p className="text-[14px] text-[#6B7280] mb-[20px]">
-              Bu rəyi silmək istədiyinizə əminsiniz?
+              {t("reviews.deleteConfirm")}
             </p>
             <div className="flex gap-[10px]">
               <button
                 onClick={() => setShowDeleteModal(false)}
                 className="flex-1 px-[14px] py-[10px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[10px]"
               >
-                Ləğv
+                {t("common.cancel")}
               </button>
               <button
                 onClick={handleDelete}
                 className="flex-1 px-[14px] py-[10px] bg-[#EF4444] text-white font-medium rounded-[10px]"
               >
-                Sil
+                {t("common.delete")}
               </button>
             </div>
           </div>

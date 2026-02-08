@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
   Package,
@@ -14,17 +15,18 @@ import {
 import { useAuth } from "@/context/AuthContext";
 
 const Sidebar = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const { user, logout, isSuperAdmin } = useAuth();
 
   const menuItems = [
-    { path: "/", icon: LayoutDashboard, label: "Dashboard" },
-    { path: "/products", icon: Package, label: "Məhsullar" },
-    { path: "/categories", icon: FolderTree, label: "Kateqoriyalar" },
-    { path: "/orders", icon: ShoppingCart, label: "Sifarişlər" },
-    { path: "/users", icon: Users, label: "İstifadəçilər" },
-    { path: "/reviews", icon: Star, label: "Rəylər" },
-    { path: "/settings", icon: Settings, label: "Tənzimləmələr" },
+    { path: "/", icon: LayoutDashboard, label: t("sidebar.dashboard") },
+    { path: "/products", icon: Package, label: t("sidebar.products") },
+    { path: "/categories", icon: FolderTree, label: t("sidebar.categories") },
+    { path: "/orders", icon: ShoppingCart, label: t("sidebar.orders") },
+    { path: "/users", icon: Users, label: t("sidebar.users") },
+    { path: "/reviews", icon: Star, label: t("sidebar.reviews") },
+    { path: "/settings", icon: Settings, label: t("sidebar.settings") },
   ];
 
   const isActive = (path) => {
@@ -91,7 +93,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                   className={`w-[12px] h-[12px] ${isSuperAdmin ? "text-amber-500" : "text-[#3B82F6]"}`}
                 />
                 <span className="text-[12px] text-[#6B7280]">
-                  {isSuperAdmin ? "Super Admin" : "Admin"}
+                  {isSuperAdmin ? t("users.superAdmin") : t("users.admin")}
                 </span>
               </div>
             </div>
@@ -124,7 +126,9 @@ const Sidebar = ({ isOpen, onClose }) => {
             className="flex items-center gap-[12px] w-full px-[16px] py-[12px] text-[#EF4444] hover:bg-red-50 rounded-[10px] transition-colors"
           >
             <LogOut className="w-[20px] h-[20px]" />
-            <span className="text-[14px] font-medium">Çıxış</span>
+            <span className="text-[14px] font-medium">
+              {t("sidebar.logout")}
+            </span>
           </button>
         </div>
       </aside>
