@@ -20,7 +20,6 @@ import {
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
 
-// Components
 import Breadcrumb from "./components/Breadcrumb";
 import ImageGallery from "./components/ImageGallery";
 import ProductInfo from "./components/ProductInfo";
@@ -41,7 +40,6 @@ const ProductDetails = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  // UI States
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [calculatedPrice, setCalculatedPrice] = useState(0);
@@ -49,7 +47,6 @@ const ProductDetails = () => {
     [],
   );
 
-  // RTK Query hooks
   const {
     data: product,
     isLoading: productLoading,
@@ -63,7 +60,6 @@ const ProductDetails = () => {
     { skip: !product?.category },
   );
 
-  // Wishlist check
   const { data: wishlistItems = [] } = useCheckWishlistItemQuery(
     { userId: user?.id, productId: id },
     { skip: !user?.id },
@@ -71,12 +67,10 @@ const ProductDetails = () => {
 
   const isInWishlist = wishlistItems.length > 0;
 
-  // Get user's cart to check for duplicates
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
   });
 
-  // Mutations
   const [addToCart] = useAddToCartMutation();
   const [updateCartItem] = useUpdateCartItemMutation();
   const [addToWishlist] = useAddToWishlistMutation();
@@ -85,16 +79,13 @@ const ProductDetails = () => {
   const [updateReview] = useUpdateReviewMutation();
   const [deleteReview] = useDeleteReviewMutation();
 
-  // Review modal state
   const [reviewModalOpen, setReviewModalOpen] = useState(false);
   const [editReviewData, setEditReviewData] = useState(null);
 
-  // Initialize options and price when product loads
   useEffect(() => {
     if (product) {
       setCalculatedPrice(product.price);
 
-      // Transform colorOptions and memoryOptions to options format
       const transformedOptions = [];
 
       if (product.colorOptions?.length > 0) {
@@ -122,12 +113,10 @@ const ProductDetails = () => {
         });
       }
 
-      // Also support legacy options format
       if (product.options) {
         transformedOptions.push(...product.options);
       }
 
-      // Set default options
       const defaults = {};
       transformedOptions.forEach((opt) => {
         if (opt.values && opt.values.length > 0) {
@@ -136,12 +125,10 @@ const ProductDetails = () => {
       });
       setSelectedOptions(defaults);
 
-      // Store transformed options for rendering
       setTransformedProductOptions(transformedOptions);
     }
   }, [product]);
 
-  // Recalculate price when options change
   useEffect(() => {
     if (!product) return;
 
@@ -157,7 +144,6 @@ const ProductDetails = () => {
     setCalculatedPrice(basePrice + modifiers);
   }, [selectedOptions, product]);
 
-  // Scroll to top on product change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
@@ -176,13 +162,11 @@ const ProductDetails = () => {
     }
 
     try {
-      // Check if product already exists in cart
       const existingItem = cartItems.find(
         (item) => item.productId === product.id,
       );
 
       if (existingItem) {
-        // Update quantity of existing item (but not exceed stock)
         const newQuantity = Math.min(
           (existingItem.quantity || 1) + quantity,
           product.stock,
@@ -193,7 +177,6 @@ const ProductDetails = () => {
         }).unwrap();
         toast.success(t("productDetails.cartUpdated"));
       } else {
-        // Add new item to cart with stock info
         await addToCart({
           userId: user.id,
           productId: product.id,
@@ -217,7 +200,6 @@ const ProductDetails = () => {
       return;
     }
 
-    // Create buy now item with current product details
     const buyNowItem = {
       productId: product.id,
       name: product.name,
@@ -228,7 +210,6 @@ const ProductDetails = () => {
       selectedOptions,
     };
 
-    // Navigate to checkout with product data - bypassing cart
     navigate("/checkout", { state: { buyNowItem } });
   };
 
@@ -288,7 +269,6 @@ const ProductDetails = () => {
 
     try {
       if (reviewId) {
-        // Edit existing review
         await updateReview({
           id: reviewId,
           rating,
@@ -298,7 +278,6 @@ const ProductDetails = () => {
         toast.success(t("productDetails.reviewUpdated"));
         setEditReviewData(null);
       } else {
-        // Create new review
         await addReview({
           productId: id,
           userId: user.id,
@@ -319,20 +298,17 @@ const ProductDetails = () => {
     }
   };
 
-  // Open edit modal with review data
   const handleEditReview = (review) => {
     setEditReviewData(review);
     setReviewModalOpen(true);
   };
 
-  // Toggle helpful vote - can add or remove vote
   const handleHelpful = async (review) => {
     if (!user) {
       toast.error(t("messages.loginRequired"));
       return;
     }
 
-    // Prevent voting on own review
     if (review.userId === user.id) {
       toast.info(t("productDetails.cannotVoteOwnReview"));
       return;
@@ -343,14 +319,12 @@ const ProductDetails = () => {
 
     try {
       if (hasVotedHelpful) {
-        // Remove helpful vote
         await updateReview({
           id: review.id,
           helpfulCount: Math.max((review.helpfulCount || 0) - 1, 0),
           helpfulBy: (review.helpfulBy || []).filter((id) => id !== user.id),
         }).unwrap();
       } else {
-        // Add helpful vote (and remove unhelpful if exists)
         const updates = {
           id: review.id,
           helpfulCount: (review.helpfulCount || 0) + 1,
@@ -372,14 +346,12 @@ const ProductDetails = () => {
     }
   };
 
-  // Toggle unhelpful vote - can add or remove vote
   const handleUnhelpful = async (review) => {
     if (!user) {
       toast.error(t("messages.loginRequired"));
       return;
     }
 
-    // Prevent voting on own review
     if (review.userId === user.id) {
       toast.info(t("productDetails.cannotVoteOwnReview"));
       return;
@@ -390,7 +362,6 @@ const ProductDetails = () => {
 
     try {
       if (hasVotedUnhelpful) {
-        // Remove unhelpful vote
         await updateReview({
           id: review.id,
           unhelpfulCount: Math.max((review.unhelpfulCount || 0) - 1, 0),
@@ -399,7 +370,6 @@ const ProductDetails = () => {
           ),
         }).unwrap();
       } else {
-        // Add unhelpful vote (and remove helpful if exists)
         const updates = {
           id: review.id,
           unhelpfulCount: (review.unhelpfulCount || 0) + 1,
@@ -418,7 +388,6 @@ const ProductDetails = () => {
     }
   };
 
-  // Delete own review
   const handleDeleteReview = async (reviewId) => {
     if (!user) return;
 
@@ -430,12 +399,10 @@ const ProductDetails = () => {
     }
   };
 
-  // Loading state
   if (productLoading) {
     return <ProductDetailsSkeleton />;
   }
 
-  // Error state
   if (productError || !product) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -468,19 +435,15 @@ const ProductDetails = () => {
 
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-6 max-w-7xl">
-          {/* Breadcrumb */}
           <Breadcrumb productName={product.name} category={product.category} />
 
-          {/* Main Product Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-            {/* Left - Image Gallery */}
             <ImageGallery
               images={images}
               productName={product.name}
               isNew={product.isNew}
             />
 
-            {/* Right - Product Info */}
             <div className="flex flex-col">
               <ProductInfo
                 brand={product.brand}
@@ -527,10 +490,8 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          {/* Technical Specifications */}
           {product.specs && <SpecsTable specs={product.specs} />}
 
-          {/* Customer Reviews */}
           <ReviewsSection
             reviews={reviews}
             rating={
@@ -553,7 +514,6 @@ const ProductDetails = () => {
             userId={user?.id}
           />
 
-          {/* Recommended Products */}
           <RecommendedProducts
             products={relatedProducts}
             onAddToCart={handleRelatedAddToCart}
@@ -564,7 +524,6 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      {/* Write Review Modal */}
       <WriteReviewModal
         isOpen={reviewModalOpen}
         onClose={() => {

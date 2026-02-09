@@ -101,7 +101,6 @@ const Reviews = () => {
 
   return (
     <div className="space-y-[20px]">
-      {/* Header */}
       <div>
         <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
           {t("reviews.title")}
@@ -111,7 +110,6 @@ const Reviews = () => {
         </p>
       </div>
 
-      {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-[10px]">
         <div className="relative flex-1">
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
@@ -137,7 +135,6 @@ const Reviews = () => {
         </select>
       </div>
 
-      {/* Reviews List */}
       <div className="space-y-[12px]">
         {currentReviews.length > 0 ? (
           currentReviews.map((review) => (
@@ -149,7 +146,7 @@ const Reviews = () => {
                 <img
                   src={getProductImage(review.productId)}
                   alt=""
-                  className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[10px] object-cover flex-shrink-0 hidden xs:block"
+                  className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[10px] object-cover shrink-0 hidden xs:block"
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-[10px]">
@@ -161,8 +158,8 @@ const Reviews = () => {
                         {getProductName(review.productId)}
                       </p>
                     </div>
-                    <div className="flex items-center gap-[6px] flex-shrink-0">
-                      <div className="flex gap-[1px]">
+                    <div className="flex items-center gap-[6px] shrink-0">
+                      <div className="flex gap-px">
                         {[1, 2, 3, 4, 5].map((s) => (
                           <Star
                             key={s}
@@ -207,7 +204,6 @@ const Reviews = () => {
         )}
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-[12px] bg-white rounded-[14px] border border-[#E5E7EB] px-[14px] py-[12px]">
           <p className="text-[12px] text-[#6B7280]">
@@ -258,7 +254,6 @@ const Reviews = () => {
         </div>
       )}
 
-      {/* Delete Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[360px]">

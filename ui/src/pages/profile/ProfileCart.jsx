@@ -68,7 +68,6 @@ const ProfileCart = () => {
       </Helmet>
 
       <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB]">
-        {/* Header */}
         <div className="flex items-center gap-[16px] p-[24px] border-b border-[#E5E7EB]">
           <div className="w-[48px] h-[48px] bg-blue-100 rounded-[12px] flex items-center justify-center">
             <ShoppingCart className="w-[24px] h-[24px] text-[#3B82F6]" />
@@ -83,7 +82,6 @@ const ProfileCart = () => {
           </div>
         </div>
 
-        {/* Content */}
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-[60px] px-[24px]">
             <div className="relative mb-[20px]">
@@ -107,7 +105,6 @@ const ProfileCart = () => {
           </div>
         ) : (
           <>
-            {/* Cart Items */}
             <div className="divide-y divide-[#E5E7EB]">
               {cartItems.map((item) => (
                 <div
@@ -174,7 +171,6 @@ const ProfileCart = () => {
               ))}
             </div>
 
-            {/* Summary */}
             <div className="p-[20px] bg-[#F9FAFB] border-t border-[#E5E7EB]">
               <div className="flex items-center justify-between mb-[12px]">
                 <span className="text-[15px] text-[#6B7280]">

@@ -5,7 +5,7 @@ const Newsletter = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-[60px] bg-gradient-to-r from-[#3B82F6] to-[#6366F1]">
+    <section className="py-[60px] bg-linear-to-br from-[#3B82F6] to-[#6366F1]">
       <div className="container mx-auto px-[16px]">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-[32px]">
           <div className="text-center lg:text-left">
@@ -23,7 +23,7 @@ const Newsletter = () => {
               <input
                 type="email"
                 placeholder={t("home.enterEmail")}
-                className="w-full pl-[48px] pr-[16px] py-[14px] rounded-[12px] bg-white text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-[2px] focus:ring-white/50"
+                className="w-full pl-[48px] pr-[16px] py-[14px] rounded-[12px] bg-white text-[#111827] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50"
               />
             </div>
             <button

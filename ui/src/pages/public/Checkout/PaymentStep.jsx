@@ -45,7 +45,6 @@ const PaymentStep = ({
         </p>
       </div>
 
-      {/* Payment Method Selection */}
       <div className="space-y-[12px] mb-[32px]">
         {PAYMENT_METHODS.map((method) => {
           const Icon = method.icon;
@@ -96,14 +95,12 @@ const PaymentStep = ({
         })}
       </div>
 
-      {/* Card Details Form */}
       {paymentMethod === "card" && (
         <div className="bg-[#F9FAFB] rounded-[20px] p-[24px] space-y-[20px]">
           <h3 className="text-[18px] font-semibold text-[#111827]">
             {t("checkout.cardDetails")}
           </h3>
 
-          {/* Card Preview */}
           <div className="bg-linear-to-br from-[#1E3A8A] to-[#3B82F6] rounded-[16px] p-[24px] text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-white/10 rounded-full -mr-[100px] -mt-[100px]" />
             <div className="absolute bottom-0 left-0 w-[150px] h-[150px] bg-white/5 rounded-full -ml-[75px] -mb-[75px]" />
@@ -137,7 +134,6 @@ const PaymentStep = ({
             </div>
           </div>
 
-          {/* Card Form */}
           <div className="space-y-[16px]">
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
@@ -222,7 +218,6 @@ const PaymentStep = ({
         </div>
       )}
 
-      {/* Cash on Delivery info */}
       {paymentMethod === "cash" && (
         <div className="bg-emerald-50 rounded-[20px] p-[24px] border border-emerald-200">
           <div className="flex items-start gap-[16px]">
@@ -241,7 +236,6 @@ const PaymentStep = ({
         </div>
       )}
 
-      {/* Google Pay info */}
       {paymentMethod === "gpay" && (
         <div className="bg-purple-50 rounded-[20px] p-[24px] border border-purple-200">
           <div className="flex items-start gap-[16px]">

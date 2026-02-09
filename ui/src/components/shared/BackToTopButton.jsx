@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
 
-/**
- * Floating Back to Top button that appears when scrolled down
- */
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      // Show button when scrolled 400px down
       if (window.scrollY > 400) {
         setIsVisible(true);
       } else {

@@ -1,9 +1,5 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
-/**
- * Custom Skeleton component with shimmer effect
- * Provides consistent loading placeholders across the app
- */
 const Skeleton = ({
   width = "100%",
   height = "20px",

@@ -38,7 +38,6 @@ function Categories() {
     fetchData();
   }, [t]);
 
-  // Count products per category
   const getCategoryProductCount = (categoryId) => {
     return products.filter((p) => p.category === categoryId).length;
   };
@@ -58,7 +57,6 @@ function Categories() {
       </Helmet>
 
       <div className="min-h-screen bg-[#F9FAFB]">
-        {/* Hero Section */}
         <div className="bg-linear-to-br from-[#3B82F6] to-[#6366F1] text-white">
           <div className="max-w-[1280px] mx-auto px-[16px] py-[48px] text-center">
             <h1 className="text-[36px] md:text-[48px] font-bold mb-[16px]">
@@ -70,7 +68,6 @@ function Categories() {
           </div>
         </div>
 
-        {/* Categories Grid */}
         <div className="max-w-[1280px] mx-auto px-[16px] py-[48px]">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px]">
             {categories.map((category) => (
@@ -79,17 +76,14 @@ function Categories() {
                 to={`/shop?category=${category.id}`}
                 className="group relative bg-white rounded-[20px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-[#E5E7EB]"
               >
-                {/* Image Container */}
                 <div className="relative h-[200px] bg-linear-to-br from-[#F9FAFB] to-[#F3F4F6] overflow-hidden">
                   <img
                     src={category.image}
                     alt={category.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
-                  {/* Product Count Badge */}
                   <div className="absolute top-[16px] right-[16px] px-[12px] py-[6px] bg-white/90 backdrop-blur-sm rounded-full">
                     <span className="text-[13px] font-semibold text-[#111827]">
                       {getCategoryProductCount(category.id)}{" "}
@@ -98,7 +92,6 @@ function Categories() {
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="p-[20px]">
                   <div className="flex items-center justify-between">
                     <h3 className="text-[20px] font-semibold text-[#111827] group-hover:text-[#3B82F6] transition-colors">

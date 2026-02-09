@@ -22,7 +22,6 @@ import {
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
 
-// Filter Sidebar Component
 const FilterSidebar = ({
   categories,
   brands,
@@ -70,7 +69,6 @@ const FilterSidebar = ({
 
   return (
     <div className={`${isMobile ? "p-[20px]" : ""}`}>
-      {/* Mobile Header */}
       {isMobile && (
         <div className="flex items-center justify-between mb-[24px] pb-[16px] border-b border-[#E5E7EB]">
           <h3 className="text-[18px] font-semibold text-[#111827]">
@@ -85,7 +83,6 @@ const FilterSidebar = ({
         </div>
       )}
 
-      {/* Clear Filters */}
       {hasActiveFilters && (
         <button
           onClick={onClearFilters}
@@ -95,13 +92,11 @@ const FilterSidebar = ({
         </button>
       )}
 
-      {/* Categories */}
       <div className="mb-[24px]">
         <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
           {t("nav.categories")}
         </h4>
         <div className="space-y-[8px]">
-          {/* Show parent categories first, then children indented */}
           {categories
             .filter((cat) => cat.parentId === null)
             .map((parent) => {
@@ -110,7 +105,6 @@ const FilterSidebar = ({
               );
               return (
                 <div key={parent.id}>
-                  {/* Parent Category */}
                   <label className="flex items-center gap-[10px] cursor-pointer group">
                     <input
                       type="checkbox"
@@ -124,7 +118,6 @@ const FilterSidebar = ({
                       {t(`categories.${parent.id}`)}
                     </span>
                   </label>
-                  {/* Child Categories */}
                   {children.map((child) => (
                     <label
                       key={child.id}
@@ -150,7 +143,6 @@ const FilterSidebar = ({
         </div>
       </div>
 
-      {/* Price Range */}
       <div className="mb-[24px]">
         <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
           {t("shop.priceRange")}
@@ -174,7 +166,6 @@ const FilterSidebar = ({
         </div>
       </div>
 
-      {/* Brands */}
       <div className="mb-[24px]">
         <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
           {t("shop.brands")}
@@ -199,7 +190,6 @@ const FilterSidebar = ({
         </div>
       </div>
 
-      {/* Rating */}
       <div className="mb-[24px]">
         <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
           {t("shop.rating")}
@@ -256,7 +246,6 @@ const FilterSidebar = ({
   );
 };
 
-// Sort Dropdown Component
 const SortDropdown = ({ value, onChange }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -314,7 +303,6 @@ const SortDropdown = ({ value, onChange }) => {
   );
 };
 
-// Active Filters Tags
 const ActiveFilters = ({ filters, categories, onRemove }) => {
   const { t } = useTranslation();
   const tags = [];
@@ -382,20 +370,17 @@ const ActiveFilters = ({ filters, categories, onRemove }) => {
   );
 };
 
-// Main Shop Component
 function Shop() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // State
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
 
-  // Parse URL params into filters
   const filters = {
     search: searchParams.get("search") || "",
     categories: searchParams.getAll("category"),
@@ -408,7 +393,6 @@ function Shop() {
     sort: searchParams.get("sort") || "newest",
   };
 
-  // RTK Query hooks
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
   });
@@ -420,7 +404,6 @@ function Shop() {
   const [addToWishlist] = useAddToWishlistMutation();
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
 
-  // Fetch data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -448,16 +431,12 @@ function Shop() {
     fetchData();
   }, [t]);
 
-  // Get unique brands
   const brands = useMemo(() => {
     return [...new Set(products.map((p) => p.brand).filter(Boolean))].sort();
   }, [products]);
-
-  // Filter and sort products
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
-    // Search filter
     if (filters.search) {
       const query = filters.search.toLowerCase();
       result = result.filter(
@@ -468,9 +447,7 @@ function Shop() {
       );
     }
 
-    // Category filter - include children when parent is selected
     if (filters.categories.length > 0) {
-      // Get all category IDs to filter (including children of selected parents)
       const expandedCategories = filters.categories.flatMap((catId) => {
         const children = categories
           .filter((c) => c.parentId === catId)
@@ -480,12 +457,9 @@ function Shop() {
       result = result.filter((p) => expandedCategories.includes(p.category));
     }
 
-    // Brand filter
     if (filters.brands.length > 0) {
       result = result.filter((p) => filters.brands.includes(p.brand));
     }
-
-    // Price filter
     if (filters.minPrice) {
       result = result.filter((p) => p.price >= parseFloat(filters.minPrice));
     }
@@ -493,12 +467,9 @@ function Shop() {
       result = result.filter((p) => p.price <= parseFloat(filters.maxPrice));
     }
 
-    // Rating filter
     if (filters.minRating) {
       result = result.filter((p) => p.rating >= filters.minRating);
     }
-
-    // Sort
     switch (filters.sort) {
       case "price_asc":
         result.sort((a, b) => a.price - b.price);
@@ -517,7 +488,6 @@ function Shop() {
     return result;
   }, [products, filters]);
 
-  // Update URL params
   const updateFilters = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
 
@@ -566,7 +536,6 @@ function Shop() {
     }
   };
 
-  // Cart/Wishlist handlers (same as Home.jsx)
   const handleAddToCart = async (productId) => {
     if (!user) {
       toast.error(t("auth.signIn") + " to add items to cart");
@@ -661,7 +630,6 @@ function Shop() {
       </Helmet>
 
       <div className="min-h-screen bg-[#F9FAFB]">
-        {/* Header */}
         <div className="bg-white border-b border-[#E5E7EB]">
           <div className="max-w-[1280px] mx-auto px-[16px] py-[24px]">
             <nav className="flex items-center gap-[8px] text-[14px] text-[#6B7280] mb-[16px]">
@@ -717,7 +685,6 @@ function Shop() {
         </div>
 
         <div className="max-w-[1280px] mx-auto px-[16px] py-[32px]">
-          {/* Mobile Filter Button */}
           <div className="md:hidden flex items-center justify-between mb-[20px]">
             <button
               onClick={() => setMobileFilterOpen(true)}
@@ -732,7 +699,6 @@ function Shop() {
             />
           </div>
 
-          {/* Active Filters */}
           <ActiveFilters
             filters={filters}
             categories={categories}
@@ -740,7 +706,6 @@ function Shop() {
           />
 
           <div className="flex gap-[32px]">
-            {/* Desktop Sidebar */}
             <aside className="hidden md:block w-[280px] shrink-0">
               <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px] sticky top-[100px]">
                 <FilterSidebar
@@ -759,7 +724,6 @@ function Shop() {
               </div>
             </aside>
 
-            {/* Products Grid */}
             <main className="flex-1">
               {filteredProducts.length > 0 ? (
                 <div
@@ -803,7 +767,6 @@ function Shop() {
           </div>
         </div>
 
-        {/* Mobile Filter Drawer */}
         {mobileFilterOpen && (
           <>
             <div

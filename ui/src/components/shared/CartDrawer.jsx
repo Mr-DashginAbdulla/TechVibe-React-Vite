@@ -29,10 +29,8 @@ const CartDrawer = ({ isOpen, onClose }) => {
     skip: !user?.id,
   });
 
-  // Fetch products to get stock info
   const { data: allProducts = [] } = useGetAllProductsQuery();
 
-  // Helper to get product stock
   const getProductStock = (productId) => {
     const product = allProducts.find(
       (p) => p.id === productId || p.id === String(productId),
@@ -43,7 +41,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
   const [updateCartItem] = useUpdateCartItemMutation();
   const [removeFromCart] = useRemoveFromCartMutation();
 
-  // Close on ESC key
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
@@ -60,7 +57,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
   const handleQuantityChange = async (item, newQuantity) => {
     if (newQuantity < 1) return;
-    // Limit quantity to stock from products API
+
     const maxQuantity = getProductStock(item.productId);
     if (newQuantity > maxQuantity) {
       toast.error(t("basket.stockLimitReached"));
@@ -101,7 +98,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -111,7 +107,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
             onClick={onClose}
           />
 
-          {/* Drawer */}
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -119,7 +114,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed top-0 right-0 h-full w-full max-w-[420px] bg-white z-70 shadow-2xl"
           >
-            {/* Header */}
+
             <div className="flex items-center justify-between p-[20px] border-b border-[#E5E7EB]">
               <div className="flex items-center gap-[12px]">
                 <div className="w-[40px] h-[40px] bg-blue-100 rounded-[10px] flex items-center justify-center">
@@ -142,10 +137,8 @@ const CartDrawer = ({ isOpen, onClose }) => {
               </button>
             </div>
 
-            {/* Content */}
             <div className="flex flex-col h-[calc(100%-80px)]">
               {!user ? (
-                // Not logged in
                 <div className="flex-1 flex flex-col items-center justify-center p-[24px]">
                   <div className="w-[80px] h-[80px] bg-blue-50 rounded-full flex items-center justify-center mb-[16px]">
                     <ShoppingBag className="w-[36px] h-[36px] text-[#3B82F6]" />
@@ -165,7 +158,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   </Link>
                 </div>
               ) : cartItems.length === 0 ? (
-                // Empty cart
                 <div className="flex-1 flex flex-col items-center justify-center p-[24px]">
                   <div className="relative mb-[20px]">
                     <div className="w-[100px] h-[100px] bg-linear-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
@@ -193,7 +185,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   </button>
                 </div>
               ) : (
-                // Cart items
                 <>
                   <div className="flex-1 overflow-y-auto p-[16px] space-y-[12px]">
                     {cartItems.map((item) => (
@@ -268,7 +259,6 @@ const CartDrawer = ({ isOpen, onClose }) => {
                     ))}
                   </div>
 
-                  {/* Footer */}
                   <div className="p-[16px] border-t border-[#E5E7EB] bg-[#F9FAFB]">
                     <div className="space-y-[8px] mb-[16px]">
                       <div className="flex justify-between text-[14px]">

@@ -98,7 +98,6 @@ const OrderDetail = () => {
 
   return (
     <div className="space-y-[24px]">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-[16px]">
           <button
@@ -132,9 +131,7 @@ const OrderDetail = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[24px]">
-        {/* Left Column - Order Items & Timeline */}
         <div className="lg:col-span-2 space-y-[24px]">
-          {/* Order Items */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
             <div className="p-[20px] border-b border-[#E5E7EB]">
               <h2 className="text-[16px] font-semibold text-[#111827]">
@@ -168,7 +165,6 @@ const OrderDetail = () => {
             </div>
           </div>
 
-          {/* Timeline */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
             <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
               {t("orders.orderHistory")}
@@ -200,9 +196,7 @@ const OrderDetail = () => {
           </div>
         </div>
 
-        {/* Right Column - Details & Actions */}
         <div className="space-y-[24px]">
-          {/* Status Update */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
             <h2 className="text-[16px] font-semibold text-[#111827] mb-[16px]">
               {t("orders.updateStatus")}
@@ -231,7 +225,6 @@ const OrderDetail = () => {
             </div>
           </div>
 
-          {/* Customer Info */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
             <div className="flex items-center gap-[12px] mb-[16px]">
               <User className="w-[20px] h-[20px] text-[#6B7280]" />
@@ -248,7 +241,6 @@ const OrderDetail = () => {
             </p>
           </div>
 
-          {/* Shipping Address */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
             <div className="flex items-center gap-[12px] mb-[16px]">
               <MapPin className="w-[20px] h-[20px] text-[#6B7280]" />
@@ -268,7 +260,6 @@ const OrderDetail = () => {
             </p>
           </div>
 
-          {/* Order Summary */}
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
             <div className="flex items-center gap-[12px] mb-[16px]">
               <CreditCard className="w-[20px] h-[20px] text-[#6B7280]" />

@@ -33,8 +33,8 @@ const STEPS = [
   { id: 3, key: "review", icon: ClipboardCheck },
 ];
 
-const SHIPPING_COST = 5.0; // Çatdırılma qiyməti
-const FREE_SHIPPING_THRESHOLD = 50; // Pulsuz çatdırılma həddi
+const SHIPPING_COST = 5.0;
+const FREE_SHIPPING_THRESHOLD = 50;
 
 const Checkout = () => {
   const { t } = useTranslation();
@@ -42,10 +42,8 @@ const Checkout = () => {
   const location = useLocation();
   const { user } = useAuth();
 
-  // Check if this is a "Buy Now" direct purchase
   const buyNowItem = location.state?.buyNowItem;
 
-  // Check if this is editing an existing order
   const editOrderId = location.state?.editOrderId;
   const editOrderItems = location.state?.editOrderItems;
 
@@ -65,17 +63,14 @@ const Checkout = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
-    skip: !user?.id || !!buyNowItem, // Skip cart query if this is a buy-now purchase
+    skip: !user?.id || !!buyNowItem,
   });
   const [clearCart] = useClearCartMutation();
 
-  // Local state for managing items (allows quantity changes)
   const [localItems, setLocalItems] = useState([]);
 
-  // Fetch all products to get stock info
   const { data: allProducts = [] } = useGetAllProductsQuery();
 
-  // Initialize local items when cart or special items are loaded
   useEffect(() => {
     let items = [];
     if (buyNowItem) {
@@ -86,7 +81,6 @@ const Checkout = () => {
       items = cartItems;
     }
 
-    // Merge stock info from products
     if (items.length > 0 && allProducts.length > 0) {
       const itemsWithStock = items.map((item) => {
         const product = allProducts.find(
@@ -103,13 +97,11 @@ const Checkout = () => {
     }
   }, [buyNowItem, editOrderItems, cartItems, allProducts]);
 
-  // Use localItems for checkout
   const checkoutItems = localItems;
 
-  // Handle quantity update
   const handleUpdateQuantity = (item, newQuantity) => {
     if (newQuantity < 1) return;
-    // Limit quantity to stock if available
+
     const maxQuantity = item.stock || 99;
     if (newQuantity > maxQuantity) return;
 
@@ -122,7 +114,6 @@ const Checkout = () => {
     );
   };
 
-  // Redirect if not logged in or no items
   useEffect(() => {
     if (!user) {
       toast.error(t("basket.loginRequired"));
@@ -143,14 +134,13 @@ const Checkout = () => {
     }
   }, [checkoutItems, isLoading, buyNowItem, editOrderItems, navigate, t]);
 
-  // Fetch addresses
   useEffect(() => {
     const fetchAddresses = async () => {
       if (!user?.id) return;
       try {
         const data = await addressService.getByUserId(user.id);
         setAddresses(data);
-        // Auto-select default address
+
         const defaultAddr = data.find((a) => a.isDefault);
         if (defaultAddr) {
           setSelectedAddressId(defaultAddr.id);
@@ -166,19 +156,17 @@ const Checkout = () => {
     fetchAddresses();
   }, [user?.id]);
 
-  // Calculations
   const subtotal = checkoutItems.reduce(
     (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
     0,
   );
-  // Free shipping for orders over $50
+
   const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
-  const tax = subtotal * 0.18; // 18% ƏDV
+  const tax = subtotal * 0.18;
   const total = subtotal + shippingCost + tax - discount;
 
   const selectedAddress = addresses.find((a) => a.id === selectedAddressId);
 
-  // Step validation
   const canProceed = () => {
     if (currentStep === 1) {
       return selectedAddressId !== null;
@@ -210,7 +198,6 @@ const Checkout = () => {
   };
 
   const handleApplyPromo = async (code) => {
-    // Simulate promo code validation
     const promoCodes = {
       STUDENT10: { discount: 10, type: "percentage", minOrder: 50 },
       SAVE20: { discount: 20, type: "fixed", minOrder: 100 },
@@ -276,19 +263,16 @@ const Checkout = () => {
 
       let order;
       if (editOrderId) {
-        // Update existing order
         order = await orderService.updateOrderItems(
           editOrderId,
           orderData.items,
         );
         toast.success(t("checkout.orderUpdated"));
       } else {
-        // Create new order
         order = await orderService.create(orderData);
         toast.success(t("checkout.orderPlaced"));
       }
 
-      // Clear cart only if this was not a buy-now or edit-order purchase
       if (!buyNowItem && !editOrderId) {
         await clearCart(user.id);
       }
@@ -311,7 +295,6 @@ const Checkout = () => {
       </Helmet>
 
       <div className="max-w-[1280px] mx-auto px-[16px] py-[32px]">
-        {/* Stepper */}
         <div className="mb-[40px]">
           <div className="flex items-center justify-center">
             {STEPS.map((step, index) => {
@@ -364,9 +347,7 @@ const Checkout = () => {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-[32px]">
-          {/* Left - Step Content */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[32px]">
               {currentStep === 1 && (
@@ -398,7 +379,6 @@ const Checkout = () => {
                 />
               )}
 
-              {/* Navigation Buttons */}
               <div className="flex justify-between mt-[32px] pt-[24px] border-t border-[#E5E7EB]">
                 <button
                   onClick={handleBack}
@@ -447,7 +427,6 @@ const Checkout = () => {
               </div>
             </div>
 
-            {/* Trust Badges */}
             <div className="flex items-center justify-center gap-[32px] mt-[24px]">
               <div className="flex items-center gap-[8px] text-[13px] text-[#6B7280]">
                 <ShieldCheck className="w-[18px] h-[18px] text-emerald-500" />
@@ -464,7 +443,6 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Right - Order Summary */}
           <div className="lg:col-span-1">
             <CheckoutSummary
               cartItems={checkoutItems}

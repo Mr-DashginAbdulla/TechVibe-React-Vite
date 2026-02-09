@@ -114,7 +114,6 @@ const ProductForm = () => {
     }
   };
 
-  // Image functions
   const addImageUrl = () => {
     if (newImageUrl.trim()) {
       setFormData({
@@ -156,7 +155,6 @@ const ProductForm = () => {
     setFormData({ ...formData, images: newImages });
   };
 
-  // Spec functions
   const addSpec = () => {
     if (newSpec.key && newSpec.value) {
       setFormData({
@@ -172,7 +170,6 @@ const ProductForm = () => {
     setFormData({ ...formData, specs: rest });
   };
 
-  // Color functions
   const addColor = () => {
     if (newColor.name) {
       setFormData({
@@ -190,7 +187,6 @@ const ProductForm = () => {
     });
   };
 
-  // Memory functions
   const addMemory = () => {
     if (newMemory.size) {
       setFormData({
@@ -221,7 +217,6 @@ const ProductForm = () => {
 
   return (
     <div className="space-y-[24px]">
-      {/* Header */}
       <div className="flex items-center gap-[16px]">
         <button
           onClick={() => navigate("/products")}
@@ -240,7 +235,6 @@ const ProductForm = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-[24px]">
-        {/* Basic Info */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
             {t("products.basicInfo")}
@@ -367,7 +361,6 @@ const ProductForm = () => {
           </div>
         </div>
 
-        {/* Product Images */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <div className="flex items-center justify-between mb-[20px]">
             <h2 className="text-[16px] font-semibold text-[#111827]">
@@ -401,7 +394,6 @@ const ProductForm = () => {
             </div>
           </div>
 
-          {/* Image Grid */}
           {formData.images.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-[12px] mb-[20px]">
               {formData.images.map((img, idx) => (
@@ -444,7 +436,6 @@ const ProductForm = () => {
             </div>
           )}
 
-          {/* Add Image */}
           {imageMode === "url" ? (
             <div className="flex gap-[12px]">
               <input
@@ -496,7 +487,6 @@ const ProductForm = () => {
           )}
         </div>
 
-        {/* Specifications */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
             {t("products.specifications")}
@@ -552,7 +542,6 @@ const ProductForm = () => {
           </div>
         </div>
 
-        {/* Color Options */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
             {t("products.colorOptions")}
@@ -606,7 +595,6 @@ const ProductForm = () => {
           </div>
         </div>
 
-        {/* Memory Options */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
           <h2 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
             {t("products.memoryOptions")}
@@ -658,7 +646,6 @@ const ProductForm = () => {
           </div>
         </div>
 
-        {/* Actions */}
         <div className="flex gap-[12px] justify-end">
           <button
             type="button"

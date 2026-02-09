@@ -50,18 +50,15 @@ const ForgotPassword = () => {
       const userExists = await authService.checkEmailExists(email);
 
       if (userExists) {
-        // Generate 6-digit verification code
         const verificationCode = Math.floor(
           100000 + Math.random() * 900000,
         ).toString();
 
-        // Show code in toast for demo purposes (in production this would be sent via email)
         toast.info(`🔐 Demo: Your verification code is ${verificationCode}`, {
           autoClose: 15000,
           position: "top-center",
         });
 
-        // Navigate to verify code page with email and code
         navigate("/auth/verify-code", {
           state: {
             email,

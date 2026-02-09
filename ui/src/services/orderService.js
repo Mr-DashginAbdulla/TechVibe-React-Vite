@@ -1,7 +1,6 @@
 const API_URL = "http://localhost:3000";
 
 export const orderService = {
-  // Get all orders for user
   async getByUserId(userId) {
     const response = await fetch(
       `${API_URL}/orders?userId=${userId}&_sort=createdAt&_order=desc`,
@@ -10,7 +9,6 @@ export const orderService = {
     return response.json();
   },
 
-  // Get orders by status
   async getByStatus(userId, status) {
     if (status === "all") {
       return this.getByUserId(userId);
@@ -22,14 +20,12 @@ export const orderService = {
     return response.json();
   },
 
-  // Get single order
   async getById(id) {
     const response = await fetch(`${API_URL}/orders/${id}`);
     if (!response.ok) throw new Error("Sifariş tapılmadı");
     return response.json();
   },
 
-  // Create order
   async create(orderData) {
     const orderNumber = `ORD-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`;
     const response = await fetch(`${API_URL}/orders`, {
@@ -53,7 +49,6 @@ export const orderService = {
     return response.json();
   },
 
-  // Update order status
   async updateStatus(id, status, description) {
     const order = await this.getById(id);
     const timeline = [
@@ -69,11 +64,9 @@ export const orderService = {
     return response.json();
   },
 
-  // Cancel order (only for pending/processing status)
   async cancelOrder(id) {
     const order = await this.getById(id);
 
-    // Only allow cancellation for pending or processing orders
     if (!["pending", "processing"].includes(order.status)) {
       throw new Error("Bu sifariş artıq ləğv edilə bilməz");
     }
@@ -96,16 +89,13 @@ export const orderService = {
     return response.json();
   },
 
-  // Update order items (only for pending status)
   async updateOrderItems(id, items) {
     const order = await this.getById(id);
 
-    // Only allow modification for pending orders
     if (order.status !== "pending") {
       throw new Error("Bu sifariş artıq dəyişdirilə bilməz");
     }
 
-    // Recalculate totals
     const subtotal = items.reduce(
       (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
       0,

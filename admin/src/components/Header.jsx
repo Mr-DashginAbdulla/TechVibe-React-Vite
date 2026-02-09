@@ -63,7 +63,6 @@ const Header = ({ onMenuClick }) => {
   return (
     <header className="sticky top-0 z-30 h-[72px] bg-white border-b border-[#E5E7EB] px-[24px]">
       <div className="flex items-center justify-between h-full">
-        {/* Left side */}
         <div className="flex items-center gap-[16px]">
           <button
             onClick={onMenuClick}
@@ -72,7 +71,6 @@ const Header = ({ onMenuClick }) => {
             <Menu className="w-[22px] h-[22px] text-[#374151]" />
           </button>
 
-          {/* Search */}
           <div className="hidden md:block relative">
             <Search className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
             <input
@@ -86,9 +84,7 @@ const Header = ({ onMenuClick }) => {
           </div>
         </div>
 
-        {/* Right side */}
         <div className="flex items-center gap-[12px]">
-          {/* Language Switcher */}
           <div className="relative" ref={langDropdownRef}>
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
@@ -135,13 +131,11 @@ const Header = ({ onMenuClick }) => {
             )}
           </div>
 
-          {/* Notifications */}
           <button className="relative p-[10px] rounded-[10px] hover:bg-[#F3F4F6] transition-colors">
             <Bell className="w-[22px] h-[22px] text-[#374151]" />
             <span className="absolute top-[6px] right-[6px] w-[8px] h-[8px] bg-[#EF4444] rounded-full"></span>
           </button>
 
-          {/* Profile Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -154,7 +148,7 @@ const Header = ({ onMenuClick }) => {
                   className="w-[36px] h-[36px] rounded-full object-cover"
                 />
               ) : (
-                <div className="w-[36px] h-[36px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white text-[14px] font-semibold">
+                <div className="w-[36px] h-[36px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white text-[14px] font-semibold">
                   {user?.firstName?.charAt(0)}
                   {user?.lastName?.charAt(0)}
                 </div>

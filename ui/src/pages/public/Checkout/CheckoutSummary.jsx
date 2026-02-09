@@ -43,7 +43,6 @@ const CheckoutSummary = ({
         {t("basket.orderSummary")}
       </h3>
 
-      {/* Cart Items Preview */}
       <div className="space-y-[12px] mb-[20px] max-h-[240px] overflow-y-auto">
         {cartItems.map((item, index) => (
           <div key={item.id || index} className="flex items-start gap-[12px]">
@@ -58,7 +57,7 @@ const CheckoutSummary = ({
               <p className="text-[13px] font-medium text-[#111827] line-clamp-1">
                 {item.name}
               </p>
-              {/* Display selected options (color, memory, etc.) */}
+
               {item.selectedOptions &&
                 Object.keys(item.selectedOptions).length > 0 && (
                   <div className="flex flex-wrap gap-[6px] mt-[4px]">
@@ -85,7 +84,7 @@ const CheckoutSummary = ({
                     )}
                   </div>
                 )}
-              {/* Quantity controls */}
+
               <div className="flex items-center gap-[8px] mt-[4px]">
                 {onUpdateQuantity ? (
                   <div className="flex items-center gap-[4px]">
@@ -128,7 +127,6 @@ const CheckoutSummary = ({
 
       <div className="h-px bg-[#E5E7EB] my-[16px]" />
 
-      {/* Promo Code */}
       {currentStep >= 3 && (
         <div className="mb-[16px]">
           <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
@@ -167,7 +165,6 @@ const CheckoutSummary = ({
         </div>
       )}
 
-      {/* Price Breakdown */}
       <div className="space-y-[12px]">
         <div className="flex justify-between text-[14px]">
           <span className="text-[#6B7280]">
@@ -213,7 +210,6 @@ const CheckoutSummary = ({
         </div>
       </div>
 
-      {/* Trust Badges */}
       <div className="mt-[24px] pt-[20px] border-t border-[#E5E7EB] space-y-[12px]">
         <div className="flex items-center gap-[10px] text-[13px] text-[#6B7280]">
           <ShieldCheck className="w-[18px] h-[18px] text-emerald-500" />

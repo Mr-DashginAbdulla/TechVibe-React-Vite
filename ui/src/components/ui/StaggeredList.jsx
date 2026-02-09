@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
 
-/**
- * Container variants for staggered children animations
- */
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -14,9 +11,6 @@ const containerVariants = {
   },
 };
 
-/**
- * Child item variants
- */
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -29,10 +23,6 @@ const itemVariants = {
   },
 };
 
-/**
- * StaggeredList - Animates children with staggered delay
- * Perfect for product grids, card lists, etc.
- */
 const StaggeredList = ({
   children,
   className = "",
@@ -66,9 +56,6 @@ const StaggeredList = ({
   );
 };
 
-/**
- * StaggeredItem - Individual item to be used inside StaggeredList
- */
 export const StaggeredItem = ({
   children,
   className = "",

@@ -1,12 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 
-/**
- * Generic auth guard.
- * - If `isLoading` => show a simple spinner.
- * - If not logged in => redirect to /auth/login and preserve intended location.
- * - Otherwise => render nested routes via <Outlet/>.
- */
 export default function ProtectedRoute() {
   const { isLoggedIn, isLoading } = useAuth();
   const location = useLocation();

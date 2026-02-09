@@ -66,7 +66,6 @@ const Settings = () => {
 
   return (
     <div className="space-y-[24px]">
-      {/* Header */}
       <div>
         <h1 className="text-[24px] font-bold text-[#111827]">
           {t("settings.title")}
@@ -77,7 +76,6 @@ const Settings = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-[24px]">
-        {/* Sidebar Tabs */}
         <div className="lg:w-[240px]">
           <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[8px]">
             {tabs.map((tab) => (
@@ -96,8 +94,7 @@ const Settings = () => {
             ))}
           </div>
 
-          {/* Admin Info Card */}
-          <div className="bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-[16px] p-[20px] mt-[16px]">
+          <div className="bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-[16px] p-[20px] mt-[16px]">
             <div className="flex items-center gap-[12px]">
               {user?.avatar ? (
                 <img
@@ -123,9 +120,7 @@ const Settings = () => {
           </div>
         </div>
 
-        {/* Content */}
         <div className="flex-1">
-          {/* Profile Tab */}
           {activeTab === "profile" && (
             <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
               <h2 className="text-[18px] font-semibold text-[#111827] mb-[24px]">
@@ -206,7 +201,6 @@ const Settings = () => {
             </div>
           )}
 
-          {/* Security Tab */}
           {activeTab === "security" && (
             <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
               <h2 className="text-[18px] font-semibold text-[#111827] mb-[24px]">

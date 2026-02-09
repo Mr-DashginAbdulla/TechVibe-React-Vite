@@ -27,17 +27,14 @@ function Home() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // RTK Query hooks for cart
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
   });
 
-  // RTK Query hooks for wishlist
   const { data: wishlistItems = [] } = useGetWishlistQuery(user?.id, {
     skip: !user?.id,
   });
 
-  // Mutations
   const [addToCart] = useAddToCartMutation();
   const [updateCartItem] = useUpdateCartItemMutation();
   const [addToWishlist] = useAddToWishlistMutation();
@@ -82,7 +79,6 @@ function Home() {
     fetchData();
   }, []);
 
-  // Filtrləmə
   const newArrivals = products.filter((p) => p.isNew);
   const featuredProducts = products.filter((p) => p.isFeatured);
 
@@ -96,20 +92,17 @@ function Home() {
     if (!product) return;
 
     try {
-      // Check if product already exists in cart
       const existingItem = cartItems.find(
         (item) => item.productId === productId,
       );
 
       if (existingItem) {
-        // Update quantity
         await updateCartItem({
           id: existingItem.id,
           quantity: (existingItem.quantity || 1) + 1,
         }).unwrap();
         toast.success(t("productDetails.cartUpdated"));
       } else {
-        // Add new item
         await addToCart({
           userId: user.id,
           productId: product.id,
@@ -136,17 +129,14 @@ function Home() {
     if (!product) return;
 
     try {
-      // Check if already in wishlist
       const existingItem = wishlistItems.find(
         (item) => item.productId === productId,
       );
 
       if (existingItem) {
-        // Remove from wishlist
         await removeFromWishlist(existingItem.id).unwrap();
         toast.success(t("productDetails.removedFromWishlist"));
       } else {
-        // Add to wishlist
         await addToWishlist({
           userId: user.id,
           productId: product.id,
@@ -165,10 +155,8 @@ function Home() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12">
-        {/* Hero skeleton */}
         <div className="h-[400px] bg-gray-100 rounded-2xl mb-12 animate-pulse" />
 
-        {/* Products skeleton */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <ProductCardSkeleton key={i} />
@@ -185,7 +173,6 @@ function Home() {
         <meta name="description" content={t("common.description")} />
       </Helmet>
 
-      {/* Hero Section with fade in */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -194,7 +181,6 @@ function Home() {
         <HeroSection />
       </motion.div>
 
-      {/* New Arrivals with slide up */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -209,7 +195,6 @@ function Home() {
         />
       </motion.div>
 
-      {/* Shop By Category with slide up */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -219,7 +204,6 @@ function Home() {
         <ShopByCategory categories={categories} />
       </motion.div>
 
-      {/* Featured Products with slide up */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -234,7 +218,6 @@ function Home() {
         />
       </motion.div>
 
-      {/* Newsletter with fade in */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

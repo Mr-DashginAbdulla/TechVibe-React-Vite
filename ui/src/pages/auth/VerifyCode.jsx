@@ -19,7 +19,6 @@ const VerifyCode = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get email and verification code from navigation state
   const { email, verificationCode: correctCode } = location.state || {};
 
   const [code, setCode] = useState(["", "", "", "", "", ""]);
@@ -31,7 +30,6 @@ const VerifyCode = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const inputRefs = useRef([]);
 
-  // Redirect if no state data
   useEffect(() => {
     if (!email || !correctCode) {
       toast.error(t("messages.invalidAccess"));
@@ -46,7 +44,6 @@ const VerifyCode = () => {
     newCode[index] = value;
     setCode(newCode);
 
-    // Auto-focus next input
     if (value && index < 5) {
       inputRefs.current[index + 1]?.focus();
     }
@@ -91,12 +88,10 @@ const VerifyCode = () => {
   };
 
   const handleResendCode = () => {
-    // Generate new code and show in toast
     const newVerificationCode = Math.floor(
       100000 + Math.random() * 900000,
     ).toString();
 
-    // Update the state with new code (in production, this would send new email)
     location.state.verificationCode = newVerificationCode;
 
     toast.info(`🔐 Demo: Your new code is ${newVerificationCode}`, {
@@ -146,7 +141,6 @@ const VerifyCode = () => {
         <title>{t("auth.resetPassword")} - TechVibe</title>
       </Helmet>
       <div className="w-full max-w-[440px] bg-white rounded-[24px] shadow-xl p-[40px]">
-        {/* Header */}
         <div className="text-center mb-[32px]">
           <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
             {isVerified ? t("profile.newPassword") : t("auth.resetPassword")}
@@ -160,14 +154,12 @@ const VerifyCode = () => {
 
         {!isVerified ? (
           <>
-            {/* Success Icon */}
             <div className="flex justify-center mb-[24px]">
               <div className="w-[72px] h-[72px] bg-[#EEF2FF] rounded-full flex items-center justify-center">
                 <CheckCircle className="w-[36px] h-[36px] text-[#3B82F6]" />
               </div>
             </div>
 
-            {/* Info Message */}
             <div className="bg-[#F0FDF4] border border-[#86EFAC] rounded-[12px] px-[16px] py-[12px] flex items-center gap-[10px] mb-[24px]">
               <CheckCircle className="w-[18px] h-[18px] text-[#22C55E] shrink-0" />
               <p className="text-[14px] text-[#15803D]">
@@ -175,7 +167,6 @@ const VerifyCode = () => {
               </p>
             </div>
 
-            {/* Verification Code */}
             <div className="mb-[24px]">
               <label className="block text-[15px] font-medium text-[#111827] mb-[8px]">
                 {t("auth.verificationCode")}
@@ -202,7 +193,6 @@ const VerifyCode = () => {
               </div>
             </div>
 
-            {/* Verify Button */}
             <button
               type="button"
               onClick={handleVerifyCode}
@@ -212,7 +202,6 @@ const VerifyCode = () => {
               <CheckCircle className="w-[18px] h-[18px]" />
             </button>
 
-            {/* Resend Code */}
             <button
               type="button"
               onClick={handleResendCode}
@@ -223,16 +212,13 @@ const VerifyCode = () => {
             </button>
           </>
         ) : (
-          /* Password Reset Form */
           <form onSubmit={handleResetPassword} className="space-y-[20px]">
-            {/* Success Icon */}
             <div className="flex justify-center mb-[8px]">
               <div className="w-[72px] h-[72px] bg-[#DCFCE7] rounded-full flex items-center justify-center">
                 <Lock className="w-[36px] h-[36px] text-[#22C55E]" />
               </div>
             </div>
 
-            {/* New Password */}
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
                 {t("profile.newPassword")}
@@ -259,7 +245,6 @@ const VerifyCode = () => {
               </div>
             </div>
 
-            {/* Confirm Password */}
             <div>
               <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
                 {t("profile.confirmNewPassword")}
@@ -286,7 +271,6 @@ const VerifyCode = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
@@ -307,7 +291,6 @@ const VerifyCode = () => {
           </form>
         )}
 
-        {/* Back to Login */}
         <Link
           to="/auth/login"
           className="flex items-center justify-center gap-[8px] w-full mt-[16px] text-[#3B82F6] hover:text-[#2563EB] font-medium transition-colors"

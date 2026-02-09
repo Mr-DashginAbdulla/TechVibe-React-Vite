@@ -33,17 +33,14 @@ const Dashboard = () => {
           productService.getAll(),
         ]);
 
-        // Calculate total revenue from completed orders
         const totalRevenue = orders
           .filter((o) => o.status !== "cancelled")
           .reduce((sum, o) => sum + (o.total || 0), 0);
 
-        // Get recent orders
         const recentOrders = [...orders]
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .slice(0, 5);
 
-        // Get top products by rating
         const topProducts = [...products]
           .sort((a, b) => (b.rating || 0) - (a.rating || 0))
           .slice(0, 5);
@@ -137,7 +134,6 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-[24px]">
-      {/* Page Header */}
       <div>
         <h1 className="text-[24px] font-bold text-[#111827]">
           {t("dashboard.title")}
@@ -147,7 +143,6 @@ const Dashboard = () => {
         </p>
       </div>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
         {statCards.map((stat, index) => (
           <div
@@ -156,7 +151,7 @@ const Dashboard = () => {
           >
             <div className="flex items-center justify-between mb-[16px]">
               <div
-                className={`w-[48px] h-[48px] rounded-[12px] bg-gradient-to-br ${stat.color} flex items-center justify-center`}
+                className={`w-[48px] h-[48px] rounded-[12px] bg-linear-to-br ${stat.color} flex items-center justify-center`}
               >
                 <stat.icon className="w-[24px] h-[24px] text-white" />
               </div>
@@ -177,9 +172,7 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px]">
-        {/* Recent Orders */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
           <div className="flex items-center justify-between p-[20px] border-b border-[#E5E7EB]">
             <h2 className="text-[16px] font-semibold text-[#111827]">
@@ -223,7 +216,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Top Products */}
         <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
           <div className="flex items-center justify-between p-[20px] border-b border-[#E5E7EB]">
             <h2 className="text-[16px] font-semibold text-[#111827]">

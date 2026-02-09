@@ -1,10 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
-/**
- * PageTransition - Wrapper for smooth page transitions
- * Use this to wrap your page content for animated route changes
- */
 const PageTransition = ({ children, className = "" }) => {
   const location = useLocation();
 

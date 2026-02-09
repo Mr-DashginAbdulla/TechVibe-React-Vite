@@ -16,7 +16,6 @@ const MyWishlist = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  // RTK Query hooks for real-time sync
   const {
     data: wishlist = [],
     isLoading,
@@ -50,20 +49,17 @@ const MyWishlist = () => {
     }
 
     try {
-      // Check if already in cart
       const existingCartItem = cartItems.find(
         (cartItem) => cartItem.productId === item.productId,
       );
 
       if (existingCartItem) {
-        // Update quantity
         await updateCartItem({
           id: existingCartItem.id,
           quantity: (existingCartItem.quantity || 1) + 1,
         }).unwrap();
         toast.success(t("productDetails.cartUpdated"));
       } else {
-        // Add new item
         await addToCart({
           userId: user.id,
           productId: item.productId,
@@ -133,7 +129,6 @@ const MyWishlist = () => {
               key={item.id}
               className="group relative bg-white rounded-[16px] overflow-hidden shadow-sm hover:shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Remove Button (replaces heart in ProductCard) */}
               <button
                 onClick={() => handleRemove(item.id)}
                 className="absolute top-[12px] right-[12px] z-10 w-[36px] h-[36px] bg-white rounded-full flex items-center justify-center shadow-md hover:scale-110 hover:bg-red-50 transition-all text-red-500"
@@ -142,7 +137,6 @@ const MyWishlist = () => {
                 <Trash2 className="w-[18px] h-[18px]" />
               </button>
 
-              {/* Image */}
               <Link
                 to={`/product/${item.productId}`}
                 className="relative w-full h-[220px] bg-[#F9FAFB] flex items-center justify-center overflow-hidden"
@@ -155,7 +149,6 @@ const MyWishlist = () => {
               </Link>
 
               <div className="p-[16px]">
-                {/* Rating (placeholder since wishlist items may not have rating) */}
                 <div className="flex items-center gap-[4px] mb-[8px]">
                   {[...Array(5)].map((_, index) => (
                     <Star
@@ -165,14 +158,12 @@ const MyWishlist = () => {
                   ))}
                 </div>
 
-                {/* Name */}
                 <Link to={`/product/${item.productId}`}>
                   <h3 className="text-[15px] font-medium text-[#111827] mb-[8px] line-clamp-2 min-h-[40px] hover:text-[#3B82F6] transition-colors">
                     {item.name}
                   </h3>
                 </Link>
 
-                {/* Price and Cart Button */}
                 <div className="flex items-center justify-between">
                   <span className="text-[18px] font-bold text-[#111827]">
                     ${Number(item.price || 0).toFixed(2)}

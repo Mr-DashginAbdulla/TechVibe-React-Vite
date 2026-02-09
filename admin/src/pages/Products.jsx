@@ -82,7 +82,6 @@ const Products = () => {
     return matchesSearch && matchesCategory;
   });
 
-  // Pagination
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -113,7 +112,6 @@ const Products = () => {
 
   return (
     <div className="space-y-[20px]">
-      {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[12px]">
         <div>
           <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
@@ -132,7 +130,6 @@ const Products = () => {
         </Link>
       </div>
 
-      {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-[10px]">
         <div className="relative flex-1">
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
@@ -158,9 +155,7 @@ const Products = () => {
         </select>
       </div>
 
-      {/* Products - Mobile Cards / Desktop Table */}
       <div className="bg-white rounded-[16px] border border-[#E5E7EB] overflow-hidden">
-        {/* Desktop Table */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -253,7 +248,6 @@ const Products = () => {
           </table>
         </div>
 
-        {/* Mobile Cards */}
         <div className="md:hidden divide-y divide-[#E5E7EB]">
           {currentProducts.length > 0 ? (
             currentProducts.map((product) => (
@@ -262,7 +256,7 @@ const Products = () => {
                   <img
                     src={product.image}
                     alt=""
-                    className="w-[60px] h-[60px] rounded-[10px] object-cover flex-shrink-0"
+                    className="w-[60px] h-[60px] rounded-[10px] object-cover shrink-0"
                   />
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-medium text-[#111827] line-clamp-1">
@@ -318,7 +312,6 @@ const Products = () => {
           )}
         </div>
 
-        {/* Empty state for desktop */}
         {currentProducts.length === 0 && (
           <div className="hidden md:block p-[50px] text-center">
             <Package className="w-[44px] h-[44px] text-[#D1D5DB] mx-auto mb-[10px]" />
@@ -328,7 +321,6 @@ const Products = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row items-center justify-between gap-[12px] px-[14px] sm:px-[16px] py-[12px] border-t border-[#E5E7EB] bg-[#FAFAFA]">
             <p className="text-[12px] text-[#6B7280]">
@@ -380,7 +372,6 @@ const Products = () => {
         )}
       </div>
 
-      {/* Delete Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[360px]">

@@ -12,7 +12,6 @@ const FeaturedProducts = ({
   const { t } = useTranslation();
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  // Helper function to check if product is in wishlist
   const isInWishlist = (productId) => {
     return wishlistItems.some((item) => item.productId === productId);
   };

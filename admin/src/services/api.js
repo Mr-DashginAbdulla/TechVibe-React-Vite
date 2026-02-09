@@ -1,6 +1,5 @@
 const API_URL = "http://localhost:3000";
 
-// Generic fetch wrapper with error handling
 const fetchApi = async (endpoint, options = {}) => {
   const response = await fetch(`${API_URL}${endpoint}`, {
     headers: {
@@ -17,7 +16,6 @@ const fetchApi = async (endpoint, options = {}) => {
   return response.json();
 };
 
-// Products API
 export const productService = {
   getAll: () => fetchApi("/products"),
   getById: (id) => fetchApi(`/products/${id}`),
@@ -37,7 +35,6 @@ export const productService = {
     }),
 };
 
-// Categories API
 export const categoryService = {
   getAll: () => fetchApi("/categories"),
   getById: (id) => fetchApi(`/categories/${id}`),
@@ -57,7 +54,6 @@ export const categoryService = {
     }),
 };
 
-// Orders API
 export const orderService = {
   getAll: () => fetchApi("/orders"),
   getById: (id) => fetchApi(`/orders/${id}`),
@@ -72,7 +68,6 @@ export const orderService = {
     }),
 };
 
-// Users API
 export const userService = {
   getAll: () => fetchApi("/users"),
   getById: (id) => fetchApi(`/users/${id}`),
@@ -92,7 +87,6 @@ export const userService = {
     }),
 };
 
-// Reviews API
 export const reviewService = {
   getAll: () => fetchApi("/reviews"),
   getByProductId: (productId) => fetchApi(`/reviews?productId=${productId}`),
@@ -102,7 +96,6 @@ export const reviewService = {
     }),
 };
 
-// Auth API
 export const authService = {
   login: async (email, password) => {
     const users = await fetchApi(`/users?email=${email}`);

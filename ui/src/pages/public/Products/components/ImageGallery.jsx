@@ -15,7 +15,6 @@ const ImageGallery = ({ images = [], productName, isNew = false }) => {
 
   return (
     <div className="relative bg-gray-50 rounded-3xl overflow-hidden">
-      {/* Main Image */}
       <div className="aspect-4/3 flex items-center justify-center p-8 relative group">
         <img
           src={images[activeIndex] || "https://via.placeholder.com/500"}
@@ -23,7 +22,6 @@ const ImageGallery = ({ images = [], productName, isNew = false }) => {
           className="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
         />
 
-        {/* Navigation Arrows */}
         {totalImages > 1 && (
           <>
             <button
@@ -41,13 +39,11 @@ const ImageGallery = ({ images = [], productName, isNew = false }) => {
           </>
         )}
 
-        {/* Image Counter */}
         <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white text-sm font-medium px-3 py-1.5 rounded-full">
           {activeIndex + 1} / {totalImages}
         </div>
       </div>
 
-      {/* Thumbnail Strip - Only show if more than 1 image */}
       {totalImages > 1 && (
         <div className="flex gap-2 p-4 bg-white border-t border-gray-100">
           {images.map((img, idx) => (

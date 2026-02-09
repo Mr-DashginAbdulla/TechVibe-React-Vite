@@ -36,7 +36,6 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -44,16 +43,14 @@ const Sidebar = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full w-[260px] bg-white border-r border-[#E5E7EB] z-50 transform transition-transform duration-300 lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Logo */}
         <div className="h-[72px] flex items-center justify-between px-[24px] border-b border-[#E5E7EB]">
           <Link to="/" className="flex items-center gap-[10px]">
-            <div className="w-[40px] h-[40px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-[10px] flex items-center justify-center">
+            <div className="w-[40px] h-[40px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-[10px] flex items-center justify-center">
               <span className="text-white font-bold text-[18px]">T</span>
             </div>
             <div>
@@ -69,7 +66,6 @@ const Sidebar = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Admin Info */}
         <div className="p-[16px] border-b border-[#E5E7EB]">
           <div className="flex items-center gap-[12px] p-[12px] bg-[#F9FAFB] rounded-[12px]">
             {user?.avatar ? (
@@ -79,7 +75,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 className="w-[40px] h-[40px] rounded-full object-cover"
               />
             ) : (
-              <div className="w-[40px] h-[40px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white font-semibold">
+              <div className="w-[40px] h-[40px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white font-semibold">
                 {user?.firstName?.charAt(0)}
                 {user?.lastName?.charAt(0)}
               </div>
@@ -100,7 +96,6 @@ const Sidebar = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Navigation */}
         <nav className="p-[16px] flex flex-col gap-[4px]">
           {menuItems.map((item) => (
             <Link
@@ -119,7 +114,6 @@ const Sidebar = ({ isOpen, onClose }) => {
           ))}
         </nav>
 
-        {/* Logout */}
         <div className="absolute bottom-0 left-0 right-0 p-[16px] border-t border-[#E5E7EB]">
           <button
             onClick={logout}

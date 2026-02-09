@@ -7,7 +7,6 @@ const AuthWelcome = () => {
   const { t } = useTranslation();
   const { isLoggedIn } = useAuth();
 
-  // Redirect if already logged in
   if (isLoggedIn) {
     return <Navigate to="/" replace />;
   }
@@ -32,7 +31,6 @@ const AuthWelcome = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
       <div className="w-full max-w-[420px] bg-white rounded-[24px] shadow-xl p-[40px]">
-        {/* Header */}
         <div className="text-center mb-[32px]">
           <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
             {t("auth.welcomeBack")}
@@ -40,7 +38,6 @@ const AuthWelcome = () => {
           <p className="text-[15px] text-[#6B7280]">{t("auth.welcomeDesc")}</p>
         </div>
 
-        {/* Benefits */}
         <div className="space-y-[16px] mb-[32px]">
           {benefits.map((benefit, index) => (
             <div
@@ -62,7 +59,6 @@ const AuthWelcome = () => {
           ))}
         </div>
 
-        {/* Action Buttons */}
         <div className="space-y-[12px] mb-[24px]">
           <Link
             to="/auth/login"
@@ -80,7 +76,6 @@ const AuthWelcome = () => {
           </Link>
         </div>
 
-        {/* Divider */}
         <div className="flex items-center gap-[16px] mb-[24px]">
           <div className="flex-1 h-[px] bg-[#E5E7EB]"></div>
           <span className="text-[13px] text-[#9CA3AF]">
@@ -89,7 +84,6 @@ const AuthWelcome = () => {
           <div className="flex-1 h-[px] bg-[#E5E7EB]"></div>
         </div>
 
-        {/* Social Login */}
         <div className="flex items-center justify-center gap-[12px] mb-[24px]">
           <button className="w-[56px] h-[56px] bg-white border border-[#E5E7EB] rounded-[12px] flex items-center justify-center hover:bg-[#F9FAFB] transition-colors">
             <svg className="w-[24px] h-[24px]" viewBox="0 0 24 24">
@@ -130,7 +124,6 @@ const AuthWelcome = () => {
           </button>
         </div>
 
-        {/* Continue as Guest */}
         <Link
           to="/"
           className="flex items-center justify-center w-full text-[14px] text-[#6B7280] hover:text-[#3B82F6] font-medium transition-colors"

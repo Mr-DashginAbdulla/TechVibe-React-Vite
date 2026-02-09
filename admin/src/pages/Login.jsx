@@ -13,7 +13,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // If already logged in, redirect to dashboard
   if (isLoggedIn) {
     return <Navigate to="/" replace />;
   }
@@ -34,12 +33,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#3B82F6] to-[#6366F1] flex items-center justify-center p-[24px]">
+    <div className="min-h-screen bg-linear-to-br from-[#3B82F6] to-[#6366F1] flex items-center justify-center p-[24px]">
       <div className="w-full max-w-[420px]">
-        {/* Logo */}
         <div className="text-center mb-[32px]">
           <div className="inline-flex items-center justify-center w-[64px] h-[64px] bg-white rounded-[16px] shadow-lg mb-[16px]">
-            <span className="text-[32px] font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#3B82F6] to-[#6366F1]">
+            <span className="text-[32px] font-bold text-transparent bg-clip-text bg-linear-to-br from-[#3B82F6] to-[#6366F1]">
               T
             </span>
           </div>
@@ -51,14 +49,13 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Login Form */}
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-[20px] p-[32px] shadow-xl"
         >
           {error && (
             <div className="flex items-center gap-[10px] p-[14px] bg-red-50 border border-red-200 rounded-[12px] mb-[24px]">
-              <AlertCircle className="w-[20px] h-[20px] text-red-500 flex-shrink-0" />
+              <AlertCircle className="w-[20px] h-[20px] text-red-500 shrink-0" />
               <p className="text-[14px] text-red-600">{error}</p>
             </div>
           )}
@@ -102,7 +99,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-[28px] py-[14px] bg-gradient-to-r from-[#3B82F6] to-[#6366F1] hover:from-[#2563EB] hover:to-[#4F46E5] text-white font-semibold rounded-[12px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full mt-[28px] py-[14px] bg-linear-to-r from-[#3B82F6] to-[#6366F1] hover:from-[#2563EB] hover:to-[#4F46E5] text-white font-semibold rounded-[12px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-[8px]">

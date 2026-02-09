@@ -7,26 +7,22 @@ export const productsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   tagTypes: ["Product", "Review", "Cart", "Wishlist"],
   endpoints: (builder) => ({
-    // Get single product by ID
     getProductById: builder.query({
       query: (id) => `/products/${id}`,
       providesTags: (result, error, id) => [{ type: "Product", id }],
     }),
 
-    // Get all products
     getAllProducts: builder.query({
       query: () => "/products",
       providesTags: ["Product"],
     }),
 
-    // Get products by category (for related products)
     getRelatedProducts: builder.query({
       query: ({ category, excludeId, limit = 4 }) =>
         `/products?category=${category}&id_ne=${excludeId}&_limit=${limit}`,
       providesTags: ["Product"],
     }),
 
-    // Get reviews for a product
     getProductReviews: builder.query({
       query: (productId) => `/reviews?productId=${productId}`,
       providesTags: (result, error, productId) => [
@@ -34,12 +30,10 @@ export const productsApi = createApi({
       ],
     }),
 
-    // Get all categories
     getCategories: builder.query({
       query: () => "/categories",
     }),
 
-    // Cart operations
     getCart: builder.query({
       query: (userId) => `/cart?userId=${userId}`,
       providesTags: ["Cart"],
@@ -73,11 +67,9 @@ export const productsApi = createApi({
 
     clearCart: builder.mutation({
       async queryFn(userId, _queryApi, _extraOptions, fetchWithBQ) {
-        // First get all cart items for this user
         const cartResult = await fetchWithBQ(`/cart?userId=${userId}`);
         if (cartResult.error) return { error: cartResult.error };
 
-        // Delete each cart item
         const deletePromises = cartResult.data.map((item) =>
           fetchWithBQ({ url: `/cart/${item.id}`, method: "DELETE" }),
         );
@@ -88,7 +80,6 @@ export const productsApi = createApi({
       invalidatesTags: ["Cart"],
     }),
 
-    // Wishlist operations
     getWishlist: builder.query({
       query: (userId) => `/wishlist?userId=${userId}`,
       providesTags: ["Wishlist"],
@@ -111,14 +102,12 @@ export const productsApi = createApi({
       invalidatesTags: ["Wishlist"],
     }),
 
-    // Check if product is in wishlist
     checkWishlistItem: builder.query({
       query: ({ userId, productId }) =>
         `/wishlist?userId=${userId}&productId=${productId}`,
       providesTags: ["Wishlist"],
     }),
 
-    // Review operations
     addReview: builder.mutation({
       query: (review) => ({
         url: "/reviews",

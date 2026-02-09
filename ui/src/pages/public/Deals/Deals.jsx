@@ -21,9 +21,8 @@ function Deals() {
   const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("discount"); // discount, price_asc, price_desc
+  const [sortBy, setSortBy] = useState("discount"); 
 
-  // RTK Query hooks
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
   });
@@ -53,7 +52,6 @@ function Deals() {
     fetchData();
   }, [t]);
 
-  // Filter products with discounts and calculate discount percentage
   const dealsProducts = useMemo(() => {
     let deals = products
       .filter((p) => p.oldPrice && p.oldPrice > p.price)
@@ -64,7 +62,6 @@ function Deals() {
         ),
       }));
 
-    // Sort
     switch (sortBy) {
       case "discount":
         deals.sort((a, b) => b.discountPercent - a.discountPercent);
@@ -80,13 +77,11 @@ function Deals() {
     return deals;
   }, [products, sortBy]);
 
-  // Calculate max discount for hero
   const maxDiscount = useMemo(() => {
     if (dealsProducts.length === 0) return 0;
     return Math.max(...dealsProducts.map((p) => p.discountPercent));
   }, [dealsProducts]);
 
-  // Cart/Wishlist handlers
   const handleAddToCart = async (productId) => {
     if (!user) {
       toast.error(t("messages.loginToAddToCart"));
@@ -176,9 +171,7 @@ function Deals() {
       </Helmet>
 
       <div className="min-h-screen bg-[#F9FAFB]">
-        {/* Hero Section */}
         <div className="bg-linear-to-br from-[#DC2626] to-[#991B1B] text-white relative overflow-hidden">
-          {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
 
@@ -199,7 +192,6 @@ function Deals() {
                 </p>
               </div>
 
-              {/* Stats */}
               <div className="flex items-center gap-[24px]">
                 <div className="text-center px-[24px] py-[16px] bg-white/10 rounded-[16px] backdrop-blur-sm">
                   <div className="flex items-center justify-center gap-[8px] mb-[4px]">
@@ -229,9 +221,7 @@ function Deals() {
           </div>
         </div>
 
-        {/* Content */}
         <div className="max-w-[1280px] mx-auto px-[16px] py-[48px]">
-          {/* Sort Options */}
           <div className="flex items-center justify-between mb-[32px]">
             <p className="text-[16px] text-[#6B7280]">
               {dealsProducts.length}{" "}
@@ -253,12 +243,10 @@ function Deals() {
             </div>
           </div>
 
-          {/* Products Grid */}
           {dealsProducts.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[24px]">
               {dealsProducts.map((product) => (
                 <div key={product.id} className="relative">
-                  {/* Discount Badge */}
                   <div className="absolute top-[12px] left-[12px] z-10 px-[10px] py-[4px] bg-[#DC2626] text-white text-[12px] font-bold rounded-[6px]">
                     -{product.discountPercent}%
                   </div>

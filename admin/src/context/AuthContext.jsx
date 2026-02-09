@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for stored admin session
     const storedUser = localStorage.getItem("adminUser");
     if (storedUser) {
       setUser(JSON.parse(storedUser));

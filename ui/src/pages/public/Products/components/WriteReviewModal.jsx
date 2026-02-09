@@ -20,7 +20,6 @@ const WriteReviewModal = ({
   const MAX_IMAGES = 3;
   const isEditMode = !!editData;
 
-  // Pre-populate form when editing
   useEffect(() => {
     if (editData) {
       setRating(editData.rating || 0);
@@ -37,7 +36,6 @@ const WriteReviewModal = ({
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
 
-    // Check max images limit
     const remainingSlots = MAX_IMAGES - images.length;
     const filesToProcess = files.slice(0, remainingSlots);
 
@@ -62,7 +60,6 @@ const WriteReviewModal = ({
       console.error("Error uploading images:", error);
     } finally {
       setIsUploading(false);
-      // Reset file input
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
@@ -100,15 +97,12 @@ const WriteReviewModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={handleClose}
       />
 
-      {/* Modal */}
       <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6 max-h-[90vh] overflow-y-auto">
-        {/* Close Button */}
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 transition-colors"
@@ -116,7 +110,6 @@ const WriteReviewModal = ({
           <X size={20} />
         </button>
 
-        {/* Header */}
         <h2 className="text-xl font-bold text-gray-900 mb-2">
           {isEditMode
             ? t("productDetails.editReview")
@@ -125,7 +118,6 @@ const WriteReviewModal = ({
         <p className="text-sm text-gray-500 mb-6">{productName}</p>
 
         <form onSubmit={handleSubmit}>
-          {/* Star Rating */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-3">
               {t("productDetails.yourRating")}
@@ -154,7 +146,6 @@ const WriteReviewModal = ({
             </div>
           </div>
 
-          {/* Comment */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               {t("productDetails.yourReviewText")}
@@ -168,13 +159,11 @@ const WriteReviewModal = ({
             />
           </div>
 
-          {/* Image Upload */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               {t("productDetails.uploadPhotos")} ({images.length}/{MAX_IMAGES})
             </label>
 
-            {/* Image Preview Grid */}
             {images.length > 0 && (
               <div className="grid grid-cols-3 gap-3 mb-3">
                 {images.map((img, index) => (
@@ -199,7 +188,6 @@ const WriteReviewModal = ({
               </div>
             )}
 
-            {/* Upload Button */}
             {images.length < MAX_IMAGES && (
               <div className="relative">
                 <input
@@ -236,7 +224,6 @@ const WriteReviewModal = ({
             </p>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={rating === 0}

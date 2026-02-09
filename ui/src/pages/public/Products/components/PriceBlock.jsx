@@ -9,7 +9,6 @@ const PriceBlock = ({ price, oldPrice, stock }) => {
 
   return (
     <div className="mb-6">
-      {/* Price Row */}
       <div className="flex items-end gap-3 mb-2">
         <span className="text-3xl font-bold text-gray-900">
           ${price.toFixed(2)}
@@ -26,7 +25,6 @@ const PriceBlock = ({ price, oldPrice, stock }) => {
         )}
       </div>
 
-      {/* Discount Info */}
       {discount > 0 && (
         <p className="text-emerald-600 text-sm font-medium flex items-center gap-1.5 mb-4">
           <Zap size={14} className="fill-current" />
@@ -35,7 +33,6 @@ const PriceBlock = ({ price, oldPrice, stock }) => {
         </p>
       )}
 
-      {/* Stock Status */}
       <div className="flex items-center gap-2">
         {stock > 0 ? (
           <>

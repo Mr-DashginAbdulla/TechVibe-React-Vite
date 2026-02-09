@@ -9,7 +9,6 @@ const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
     <div className="space-y-5 mb-6">
       {options.map((option) => (
         <div key={option.id}>
-          {/* Option Title */}
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-gray-900">
               {option.title}
@@ -21,7 +20,6 @@ const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
             )}
           </div>
 
-          {/* Color Selector */}
           {option.type === "color" && (
             <div className="flex flex-wrap gap-3">
               {option.values.map((val) => (
@@ -44,7 +42,6 @@ const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
             </div>
           )}
 
-          {/* Storage/Select Selector */}
           {option.type === "select" && (
             <div className="grid grid-cols-2 gap-3">
               {option.values.map((val) => (

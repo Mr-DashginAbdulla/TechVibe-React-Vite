@@ -65,7 +65,7 @@ const MyAddresses = () => {
         city: "",
         state: "",
         zipCode: "",
-        country: "Azerbaijan",
+        country: "",
         phone: user?.phone || "",
         isDefault: addresses.length === 0,
       });

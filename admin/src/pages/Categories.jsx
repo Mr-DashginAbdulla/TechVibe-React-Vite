@@ -80,10 +80,8 @@ const Categories = () => {
     setFormData({ id: "", name: "", image: "", parentId: null });
   };
 
-  // Get parent categories
   const parentCategories = categories.filter((c) => c.parentId === null);
 
-  // Get children for a parent
   const getChildren = (parentId) =>
     categories.filter((c) => c.parentId === parentId);
 
@@ -97,7 +95,6 @@ const Categories = () => {
 
   return (
     <div className="space-y-[24px]">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[16px]">
         <div>
           <h1 className="text-[24px] font-bold text-[#111827]">
@@ -116,7 +113,6 @@ const Categories = () => {
         </button>
       </div>
 
-      {/* Category Tree */}
       <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
         {parentCategories.length > 0 ? (
           <div className="divide-y divide-[#E5E7EB]">
@@ -124,10 +120,9 @@ const Categories = () => {
               const children = getChildren(parent.id);
               return (
                 <div key={parent.id}>
-                  {/* Parent Category */}
                   <div className="flex items-center justify-between p-[20px] hover:bg-[#F9FAFB]">
                     <div className="flex items-center gap-[16px]">
-                      <div className="w-[48px] h-[48px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-[12px] flex items-center justify-center">
+                      <div className="w-[48px] h-[48px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-[12px] flex items-center justify-center">
                         <FolderTree className="w-[24px] h-[24px] text-white" />
                       </div>
                       <div>
@@ -158,7 +153,6 @@ const Categories = () => {
                     </div>
                   </div>
 
-                  {/* Child Categories */}
                   {children.length > 0 && (
                     <div className="bg-[#F9FAFB] border-t border-[#E5E7EB]">
                       {children.map((child) => (
@@ -214,7 +208,6 @@ const Categories = () => {
         )}
       </div>
 
-      {/* Add/Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[450px]">
@@ -313,7 +306,6 @@ const Categories = () => {
         </div>
       )}
 
-      {/* Delete Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[400px]">

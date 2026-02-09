@@ -1,7 +1,6 @@
 const API_URL = "http://localhost:3000";
 
 export const wishlistService = {
-  // Get all wishlist items for user
   async getByUserId(userId) {
     const response = await fetch(
       `${API_URL}/wishlist?userId=${userId}&_sort=addedAt&_order=desc`,
@@ -10,7 +9,6 @@ export const wishlistService = {
     return response.json();
   },
 
-  // Check if product is in wishlist
   async isInWishlist(userId, productId) {
     const response = await fetch(
       `${API_URL}/wishlist?userId=${userId}&productId=${productId}`,
@@ -19,9 +17,7 @@ export const wishlistService = {
     return items.length > 0 ? items[0] : null;
   },
 
-  // Add to wishlist
   async add(wishlistData) {
-    // Check if already exists
     const existing = await this.isInWishlist(
       wishlistData.userId,
       wishlistData.productId,
@@ -42,7 +38,6 @@ export const wishlistService = {
     return response.json();
   },
 
-  // Remove from wishlist
   async remove(id) {
     const response = await fetch(`${API_URL}/wishlist/${id}`, {
       method: "DELETE",
@@ -51,7 +46,6 @@ export const wishlistService = {
     return true;
   },
 
-  // Remove by productId
   async removeByProductId(userId, productId) {
     const item = await this.isInWishlist(userId, productId);
     if (item) {
@@ -60,7 +54,6 @@ export const wishlistService = {
     return false;
   },
 
-  // Get count
   async getCount(userId) {
     const items = await this.getByUserId(userId);
     return items.length;

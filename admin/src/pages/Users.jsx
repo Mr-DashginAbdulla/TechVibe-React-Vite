@@ -185,7 +185,6 @@ const Users = () => {
 
   return (
     <div className="space-y-[20px]">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[12px]">
         <div>
           <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
@@ -206,7 +205,6 @@ const Users = () => {
         )}
       </div>
 
-      {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-[10px]">
         <div className="relative flex-1">
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
@@ -230,9 +228,7 @@ const Users = () => {
         </select>
       </div>
 
-      {/* Users */}
       <div className="bg-white rounded-[16px] border border-[#E5E7EB] overflow-hidden">
-        {/* Desktop */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -266,7 +262,7 @@ const Users = () => {
                           className="w-[36px] h-[36px] rounded-full object-cover"
                         />
                       ) : (
-                        <div className="w-[36px] h-[36px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white text-[13px] font-semibold">
+                        <div className="w-[36px] h-[36px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white text-[13px] font-semibold">
                           {u.firstName?.charAt(0)}
                           {u.lastName?.charAt(0)}
                         </div>
@@ -319,7 +315,6 @@ const Users = () => {
           </table>
         </div>
 
-        {/* Mobile */}
         <div className="md:hidden divide-y divide-[#E5E7EB]">
           {currentUsers.length > 0 ? (
             currentUsers.map((u) => (
@@ -332,7 +327,7 @@ const Users = () => {
                       className="w-[44px] h-[44px] rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-[44px] h-[44px] bg-gradient-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white font-semibold">
+                    <div className="w-[44px] h-[44px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white font-semibold">
                       {u.firstName?.charAt(0)}
                       {u.lastName?.charAt(0)}
                     </div>
@@ -390,7 +385,6 @@ const Users = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row items-center justify-between gap-[12px] px-[14px] py-[12px] border-t border-[#E5E7EB] bg-[#FAFAFA]">
             <p className="text-[12px] text-[#6B7280]">
@@ -442,7 +436,6 @@ const Users = () => {
         )}
       </div>
 
-      {/* Add/Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[400px] max-h-[90vh] overflow-y-auto">
@@ -558,7 +551,6 @@ const Users = () => {
         </div>
       )}
 
-      {/* Delete Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[360px]">

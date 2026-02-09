@@ -61,7 +61,6 @@ const Basket = () => {
     navigate("/checkout");
   };
 
-  // Not logged in state
   if (!user) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
@@ -84,7 +83,6 @@ const Basket = () => {
     );
   }
 
-  // Loading state
   if (isLoading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -93,7 +91,6 @@ const Basket = () => {
     );
   }
 
-  // Empty cart state
   if (cartItems.length === 0) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
@@ -136,14 +133,12 @@ const Basket = () => {
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Cart Items List */}
         <div className="lg:col-span-2 space-y-4">
           {cartItems.map((item) => (
             <div
               key={item.id}
               className="bg-white border border-gray-100 rounded-2xl p-4 flex gap-4 hover:shadow-md transition-shadow"
             >
-              {/* Product Image */}
               <Link
                 to={`/product/${item.productId}`}
                 className="shrink-0 w-24 h-24 bg-gray-50 rounded-xl overflow-hidden"
@@ -155,7 +150,6 @@ const Basket = () => {
                 />
               </Link>
 
-              {/* Product Info */}
               <div className="flex-1 min-w-0">
                 <Link
                   to={`/product/${item.productId}`}
@@ -167,7 +161,6 @@ const Basket = () => {
                   ${(item.price || 0).toFixed(2)}
                 </p>
 
-                {/* Quantity Controls */}
                 <div className="flex items-center gap-3 mt-3">
                   <div className="flex items-center border border-gray-200 rounded-lg">
                     <button
@@ -200,7 +193,6 @@ const Basket = () => {
                 </div>
               </div>
 
-              {/* Item Total */}
               <div className="text-right">
                 <p className="text-lg font-bold text-gray-900">
                   ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
@@ -210,7 +202,6 @@ const Basket = () => {
           ))}
         </div>
 
-        {/* Order Summary */}
         <div className="lg:col-span-1">
           <div className="bg-gray-50 rounded-2xl p-6 sticky top-24">
             <h2 className="text-xl font-bold text-gray-900 mb-6">

@@ -62,23 +62,18 @@ const OrderDetails = () => {
     return icons[status] || Clock;
   };
 
-  // Check if order can be cancelled (pending or processing)
   const canCancelOrder =
     order && ["pending", "processing"].includes(order.status);
 
-  // Check if order can be edited (only pending)
   const canEditOrder = order && order.status === "pending";
 
-  // Handle reorder - add all items to cart and go to checkout
   const handleReorder = async () => {
     if (!user || !order) return;
 
     setIsReordering(true);
     try {
-      // Clear existing cart first
       await clearCart(user.id);
 
-      // Add all order items to cart
       for (const item of order.items) {
         await addToCart({
           userId: user.id,
@@ -100,10 +95,9 @@ const OrderDetails = () => {
     }
   };
 
-  // Handle edit order - navigate to a special edit page or checkout with edit mode
   const handleEditOrder = () => {
     if (!canEditOrder) return;
-    // Navigate to checkout with order items and edit mode
+
     navigate("/checkout", {
       state: {
         editOrderId: order.id,
@@ -124,7 +118,7 @@ const OrderDetails = () => {
     try {
       await orderService.cancelOrder(id);
       toast.success(t("order.orderCancelled"));
-      // Refresh order data
+
       const updatedOrder = await orderService.getById(id);
       setOrder(updatedOrder);
       setShowCancelConfirm(false);
@@ -276,7 +270,7 @@ const OrderDetails = () => {
                   <p className="text-[15px] font-semibold text-[#111827]">
                     {item.name}
                   </p>
-                  {/* Display selected options (color, memory, etc.) */}
+
                   {item.selectedOptions &&
                     Object.keys(item.selectedOptions).length > 0 && (
                       <div className="flex flex-wrap gap-[6px] mt-[4px]">
@@ -400,7 +394,6 @@ const OrderDetails = () => {
         </div>
       </div>
 
-      {/* Cancel Confirmation Modal */}
       {showCancelConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[400px] shadow-xl">

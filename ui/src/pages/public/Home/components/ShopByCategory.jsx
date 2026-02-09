@@ -6,7 +6,7 @@ import {
   Headphones,
   Camera,
   Gamepad2,
-  Package, // Default ikon
+  Package,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 const ShopByCategory = ({ categories = [] }) => {
   const { t } = useTranslation();
 
-  // Serverdən gələn ID-lərə uyğun ikonlar (Mapping)
   const iconMap = {
     computers: Monitor,
     laptops: Laptop,
@@ -25,7 +24,6 @@ const ShopByCategory = ({ categories = [] }) => {
     cameras: Camera,
   };
 
-  // Yalnız parent kateqoriyaları göstər (parentId === null)
   const parentCategories = categories.filter((cat) => cat.parentId === null);
 
   return (
@@ -42,7 +40,6 @@ const ShopByCategory = ({ categories = [] }) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
           {parentCategories.map((category) => {
-            // İkonu tapırıq, yoxdursa default 'Package' ikonu qoyuruq
             const IconComponent = iconMap[category.id] || Package;
 
             return (
@@ -58,12 +55,9 @@ const ShopByCategory = ({ categories = [] }) => {
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
 
-                {/* İkon */}
                 <div className="absolute top-[16px] left-[16px] w-[44px] h-[44px] bg-white/20 backdrop-blur-sm rounded-[12px] flex items-center justify-center">
                   <IconComponent className="w-[22px] h-[22px] text-white" />
                 </div>
-
-                {/* Ad və Ox */}
                 <div className="absolute bottom-[16px] left-[16px] right-[16px] flex items-end justify-between">
                   <h3 className="text-[20px] font-bold text-white">
                     {t(`categories.${category.id}`)}

@@ -92,7 +92,6 @@ const ShippingStep = ({
                   : "border-[#E5E7EB] hover:border-[#3B82F6]/50"
               }`}
             >
-              {/* Selection indicator */}
               <div
                 className={`absolute top-[20px] right-[20px] w-[24px] h-[24px] rounded-full border-2 flex items-center justify-center transition-colors ${
                   selectedAddressId === address.id
@@ -105,7 +104,6 @@ const ShippingStep = ({
                 )}
               </div>
 
-              {/* Default badge */}
               {address.isDefault && (
                 <span className="absolute top-[20px] left-[20px] px-[10px] py-[4px] bg-[#3B82F6] text-white text-[11px] font-medium rounded-full">
                   {t("address.defaultAddress")}
@@ -146,7 +144,6 @@ const ShippingStep = ({
             </div>
           ))}
 
-          {/* Add new address button */}
           <button
             onClick={() => setShowModal(true)}
             className="w-full p-[20px] rounded-[16px] border-2 border-dashed border-[#D1D5DB] hover:border-[#3B82F6] hover:bg-blue-50/30 transition-colors flex items-center justify-center gap-[8px] text-[#6B7280] hover:text-[#3B82F6]"
@@ -157,7 +154,6 @@ const ShippingStep = ({
         </div>
       )}
 
-      {/* Add Address Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-white rounded-[24px] w-full max-w-[500px] max-h-[90vh] overflow-y-auto">
@@ -173,7 +169,6 @@ const ShippingStep = ({
               </button>
             </div>
             <form onSubmit={handleSubmit} className="p-[24px] space-y-[16px]">
-              {/* Label selection */}
               <div>
                 <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
                   {t("order.status")}
@@ -196,7 +191,6 @@ const ShippingStep = ({
                 </div>
               </div>
 
-              {/* Name fields */}
               <div className="grid grid-cols-2 gap-[12px]">
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
@@ -228,7 +222,6 @@ const ShippingStep = ({
                 </div>
               </div>
 
-              {/* Address */}
               <div>
                 <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
                   {t("address.addressLine")}
@@ -244,7 +237,6 @@ const ShippingStep = ({
                 />
               </div>
 
-              {/* City & State */}
               <div className="grid grid-cols-2 gap-[12px]">
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
@@ -275,7 +267,6 @@ const ShippingStep = ({
                 </div>
               </div>
 
-              {/* ZIP & Phone */}
               <div className="grid grid-cols-2 gap-[12px]">
                 <div>
                   <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
@@ -306,7 +297,6 @@ const ShippingStep = ({
                 </div>
               </div>
 
-              {/* Buttons */}
               <div className="flex gap-[12px] pt-[8px]">
                 <button
                   type="button"

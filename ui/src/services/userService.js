@@ -1,7 +1,6 @@
 const API_URL = "http://localhost:3000";
 
 export const userService = {
-  // Get user by ID
   async getById(id) {
     const response = await fetch(`${API_URL}/users/${id}`);
     if (!response.ok) throw new Error("İstifadəçi tapılmadı");
@@ -10,7 +9,6 @@ export const userService = {
     return userWithoutPassword;
   },
 
-  // Update user profile
   async updateProfile(id, data) {
     const response = await fetch(`${API_URL}/users/${id}`, {
       method: "PATCH",
@@ -23,14 +21,10 @@ export const userService = {
     return userWithoutPassword;
   },
 
-  // Update avatar (base64)
   async updateAvatar(id, avatarBase64) {
     return this.updateProfile(id, { avatar: avatarBase64 });
   },
-
-  // Change password
   async changePassword(id, currentPassword, newPassword) {
-    // First verify current password
     const user = await fetch(`${API_URL}/users/${id}`).then((r) => r.json());
     if (user.password !== currentPassword) {
       throw new Error("Cari şifrə yanlışdır");
@@ -38,7 +32,6 @@ export const userService = {
     return this.updateProfile(id, { password: newPassword });
   },
 
-  // Get user stats
   async getStats(userId) {
     const [orders, wishlist] = await Promise.all([
       fetch(`${API_URL}/orders?userId=${userId}`).then((r) => r.json()),

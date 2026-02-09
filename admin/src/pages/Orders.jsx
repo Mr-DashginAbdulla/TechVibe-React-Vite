@@ -113,7 +113,6 @@ const Orders = () => {
 
   return (
     <div className="space-y-[20px]">
-      {/* Header */}
       <div>
         <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
           {t("orders.title")}
@@ -123,7 +122,6 @@ const Orders = () => {
         </p>
       </div>
 
-      {/* Filters */}
       <div className="space-y-[10px]">
         <div className="relative">
           <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
@@ -148,9 +146,7 @@ const Orders = () => {
         </div>
       </div>
 
-      {/* Orders */}
       <div className="bg-white rounded-[16px] border border-[#E5E7EB] overflow-hidden">
-        {/* Desktop Table */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -244,7 +240,6 @@ const Orders = () => {
           </table>
         </div>
 
-        {/* Mobile Cards */}
         <div className="md:hidden divide-y divide-[#E5E7EB]">
           {currentOrders.length > 0 ? (
             currentOrders.map((order) => (
@@ -290,7 +285,6 @@ const Orders = () => {
           )}
         </div>
 
-        {/* Empty desktop */}
         {currentOrders.length === 0 && (
           <div className="hidden md:block p-[50px] text-center">
             <ShoppingCart className="w-[44px] h-[44px] text-[#D1D5DB] mx-auto mb-[10px]" />
@@ -298,7 +292,6 @@ const Orders = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex flex-col sm:flex-row items-center justify-between gap-[12px] px-[14px] py-[12px] border-t border-[#E5E7EB] bg-[#FAFAFA]">
             <p className="text-[12px] text-[#6B7280]">

@@ -59,7 +59,6 @@ const OrderSuccess = () => {
       </Helmet>
 
       <div className="max-w-[1000px] mx-auto px-[16px] py-[48px]">
-        {/* Success Header */}
         <div className="text-center mb-[48px]">
           <div className="w-[80px] h-[80px] bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-[24px]">
             <CheckCircle className="w-[48px] h-[48px] text-emerald-500" />
@@ -72,7 +71,6 @@ const OrderSuccess = () => {
           </p>
         </div>
 
-        {/* Order Info Card */}
         <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[32px] mb-[24px]">
           <div className="flex flex-wrap items-center justify-center gap-[32px] mb-[32px]">
             <div className="text-center">
@@ -111,7 +109,6 @@ const OrderSuccess = () => {
             </div>
           </div>
 
-          {/* Email notification */}
           <div className="flex items-center gap-[12px] p-[16px] bg-blue-50 rounded-[12px] border border-blue-100">
             <Mail className="w-[20px] h-[20px] text-[#3B82F6]" />
             <p className="text-[14px] text-[#3B82F6]">
@@ -120,11 +117,8 @@ const OrderSuccess = () => {
           </div>
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-[24px]">
-          {/* Left - Order Items */}
           <div className="lg:col-span-2 space-y-[24px]">
-            {/* Order Items */}
             <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[24px]">
               <h2 className="text-[18px] font-bold text-[#111827] mb-[20px] flex items-center gap-[10px]">
                 <Package className="w-[20px] h-[20px] text-[#3B82F6]" />
@@ -159,7 +153,6 @@ const OrderSuccess = () => {
               </div>
             </div>
 
-            {/* Shipping Address */}
             <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[24px]">
               <h2 className="text-[18px] font-bold text-[#111827] mb-[16px] flex items-center gap-[10px]">
                 <MapPin className="w-[20px] h-[20px] text-[#3B82F6]" />
@@ -198,7 +191,6 @@ const OrderSuccess = () => {
               )}
             </div>
 
-            {/* Order Timeline */}
             <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[24px]">
               <h2 className="text-[18px] font-bold text-[#111827] mb-[20px] flex items-center gap-[10px]">
                 <Truck className="w-[20px] h-[20px] text-[#3B82F6]" />
@@ -266,7 +258,6 @@ const OrderSuccess = () => {
             </div>
           </div>
 
-          {/* Right - Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[24px] sticky top-[24px]">
               <h2 className="text-[18px] font-bold text-[#111827] mb-[20px]">
@@ -311,7 +302,6 @@ const OrderSuccess = () => {
                 </div>
               </div>
 
-              {/* Payment Method */}
               <div className="p-[16px] bg-[#F9FAFB] rounded-[12px] mb-[20px]">
                 <div className="flex items-center gap-[12px]">
                   <CreditCard className="w-[20px] h-[20px] text-[#6B7280]" />
@@ -326,7 +316,6 @@ const OrderSuccess = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="space-y-[12px]">
                 <Link
                   to={`/profile/orders/${order.id}`}

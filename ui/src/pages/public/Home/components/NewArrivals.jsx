@@ -11,7 +11,6 @@ const NewArrivals = ({
 }) => {
   const { t } = useTranslation();
 
-  // Helper function to check if product is in wishlist
   const isInWishlist = (productId) => {
     return wishlistItems.some((item) => item.productId === productId);
   };

@@ -43,7 +43,6 @@ const ReviewStep = ({
         </p>
       </div>
 
-      {/* Order Items */}
       <div className="mb-[24px]">
         <h3 className="text-[18px] font-semibold text-[#111827] mb-[16px]">
           {t("order.items")} ({cartItems.length})
@@ -77,7 +76,6 @@ const ReviewStep = ({
         </div>
       </div>
 
-      {/* Shipping Address Section */}
       <div className="mb-[24px]">
         <div className="flex items-center justify-between mb-[12px]">
           <h3 className="text-[18px] font-semibold text-[#111827]">
@@ -132,7 +130,6 @@ const ReviewStep = ({
         )}
       </div>
 
-      {/* Payment Method Section */}
       <div>
         <div className="flex items-center justify-between mb-[12px]">
           <h3 className="text-[18px] font-semibold text-[#111827]">

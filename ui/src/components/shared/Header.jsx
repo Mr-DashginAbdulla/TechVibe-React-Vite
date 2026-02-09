@@ -22,7 +22,6 @@ const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn, user, logout, getInitials } = useAuth();
 
-  // Get cart items count
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
   });
@@ -36,7 +35,6 @@ const Header = () => {
   const [categories, setCategories] = useState([]);
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
 
-  // Search autocomplete state
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
@@ -46,7 +44,6 @@ const Header = () => {
   const categoriesRef = useRef(null);
   const searchRef = useRef(null);
 
-  // Fetch categories for mega menu and products for search
   useEffect(() => {
     Promise.all([
       fetch("http://localhost:3000/categories").then((res) => res.json()),
@@ -75,7 +72,6 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Filter products based on search query
   const filteredProducts =
     searchQuery.trim().length >= 2
       ? products
@@ -117,7 +113,6 @@ const Header = () => {
               {t("nav.home")}
             </Link>
 
-            {/* Categories Mega Menu */}
             <div
               ref={categoriesRef}
               className="relative"
@@ -135,11 +130,9 @@ const Header = () => {
                 <div className="absolute left-1/2 -translate-x-1/2 top-full pt-[12px]">
                   <div className="bg-white rounded-[16px] shadow-xl border border-[#E5E7EB] p-[24px] min-w-[600px]">
                     <div className="grid grid-cols-4 gap-[32px]">
-                      {/* Get only parent categories */}
                       {categories
                         .filter((cat) => cat.parentId === null)
                         .map((parent) => {
-                          // Get children of this parent
                           const children = categories.filter(
                             (cat) => cat.parentId === parent.id,
                           );
@@ -223,7 +216,6 @@ const Header = () => {
                 }}
               />
 
-              {/* Search Suggestions Dropdown */}
               {showSearchDropdown && (
                 <div className="absolute top-full left-0 right-0 mt-[8px] bg-white rounded-[16px] shadow-xl border border-[#E5E7EB] overflow-hidden z-50">
                   {filteredProducts.length > 0 ? (
@@ -413,7 +405,6 @@ const Header = () => {
                 {t("nav.home")}
               </Link>
 
-              {/* Mobile Categories Accordion */}
               <div>
                 <button
                   onClick={() => setMobileCategoriesOpen(!mobileCategoriesOpen)}
@@ -469,7 +460,6 @@ const Header = () => {
         )}
       </div>
 
-      {/* Cart Drawer */}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );

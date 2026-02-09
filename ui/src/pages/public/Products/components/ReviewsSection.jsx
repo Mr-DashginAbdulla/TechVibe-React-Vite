@@ -14,7 +14,6 @@ const ReviewsSection = ({
 }) => {
   const { t } = useTranslation();
 
-  // Calculate rating distribution
   const ratingDistribution = [5, 4, 3, 2, 1].map((stars) => {
     const count = reviews.filter((r) => Math.floor(r.rating) === stars).length;
     const percentage =
@@ -31,9 +30,7 @@ const ReviewsSection = ({
         {t("productDetails.reviewsSubtitle")}
       </p>
 
-      {/* Reviews Summary */}
       <div className="flex flex-col md:flex-row gap-6 mb-8 p-6 bg-gray-50 rounded-xl">
-        {/* Rating Score */}
         <div className="flex flex-col items-center justify-center min-w-[120px]">
           <div className="text-5xl font-bold text-gray-900 mb-2">
             {rating !== null ? rating : "-"}
@@ -61,7 +58,6 @@ const ReviewsSection = ({
           </div>
         </div>
 
-        {/* Rating Distribution Bars */}
         <div className="flex-1 space-y-2">
           {ratingDistribution.map(({ stars, count, percentage }) => (
             <div key={stars} className="flex items-center gap-3">
@@ -80,7 +76,6 @@ const ReviewsSection = ({
           ))}
         </div>
 
-        {/* Write Review Button */}
         <div className="flex items-center">
           <button
             onClick={onWriteReview}
@@ -91,7 +86,6 @@ const ReviewsSection = ({
         </div>
       </div>
 
-      {/* Individual Reviews */}
       {reviews.length > 0 ? (
         <div className="space-y-4">
           {reviews.map((review) => {
@@ -135,7 +129,7 @@ const ReviewsSection = ({
                         />
                       ))}
                     </div>
-                    {/* Edit/Delete buttons for own reviews */}
+
                     {isOwnReview && (
                       <div className="flex items-center gap-1">
                         {onEdit && (
@@ -164,7 +158,6 @@ const ReviewsSection = ({
                   {review.comment}
                 </p>
 
-                {/* Review Images */}
                 {review.images && review.images.length > 0 && (
                   <div className="flex gap-2 mb-4 flex-wrap">
                     {review.images.map((img, imgIndex) => (
@@ -183,9 +176,7 @@ const ReviewsSection = ({
                   </div>
                 )}
 
-                {/* Vote Buttons */}
                 <div className="flex items-center gap-4">
-                  {/* Helpful */}
                   <button
                     onClick={() => onHelpful && onHelpful(review)}
                     className={`flex items-center gap-1.5 text-sm transition-colors ${
@@ -201,7 +192,6 @@ const ReviewsSection = ({
                     {t("productDetails.helpful")} ({review.helpfulCount || 0})
                   </button>
 
-                  {/* Unhelpful */}
                   <button
                     onClick={() => onUnhelpful && onUnhelpful(review)}
                     className={`flex items-center gap-1.5 text-sm transition-colors ${

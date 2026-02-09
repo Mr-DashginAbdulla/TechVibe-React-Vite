@@ -7,7 +7,6 @@ const SpecsTable = ({ specs = {} }) => {
 
   if (specEntries.length === 0) return null;
 
-  // Translate spec key - fallback to original key if translation not found
   const translateSpecKey = (key) => {
     const translationKey = `specs.${key.replace(/\s+/g, "")}`;
     const translation = t(translationKey, { defaultValue: "" });
@@ -22,7 +21,6 @@ const SpecsTable = ({ specs = {} }) => {
       <p className="text-gray-500 mb-6">{t("productDetails.specsSubtitle")}</p>
 
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-        {/* Table Header */}
         <div className="grid grid-cols-2 bg-gray-50 border-b border-gray-200">
           <div className="px-6 py-3 text-sm font-semibold text-gray-900">
             {t("productDetails.specification")}
@@ -32,7 +30,6 @@ const SpecsTable = ({ specs = {} }) => {
           </div>
         </div>
 
-        {/* Table Body */}
         <div className="divide-y divide-gray-100">
           {specEntries.map(([key, value], idx) => (
             <div

@@ -1,9 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-/**
- * CategoryCardSkeleton - Loading skeleton for category cards
- */
+
 const CategoryCardSkeleton = ({ count = 1 }) => {
   const skeletons = Array.from({ length: count }, (_, i) => (
     <div
