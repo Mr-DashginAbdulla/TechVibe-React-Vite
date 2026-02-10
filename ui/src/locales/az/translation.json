@@ -488,7 +488,11 @@
     "andAbove": "və yuxarı",
     "searchSuggestions": "Təklif olunan Məhsullar",
     "noSearchResults": "Məhsul tapılmadı",
-    "viewAllResults": "Bütün nəticələrə bax"
+    "viewAllResults": "Bütün nəticələrə bax",
+    "previousPage": "Əvvəlki",
+    "nextPage": "Növbəti",
+    "page": "Səhifə",
+    "of": "-"
   },
   "categoriesPage": {
     "title": "Kateqoriyalara Baxın",

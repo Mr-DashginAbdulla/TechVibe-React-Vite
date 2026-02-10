@@ -1552,9 +1552,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "Mini LED, 120Hz, HDR1600",
-      "image": "https://images.unsplash.com/photo-1551817958-c1b0c0f6c2e3?w=500&q=80",
+      "image": "https://gfx3.senetic.com/akeneo-catalog/b/e/8/6/be8676243736d4359d87fea424befbfb8434933f_1683306_90LM03H0_B05370_image1.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1551817958-c1b0c0f6c2e3?w=500&q=80"
+        "https://gfx3.senetic.com/akeneo-catalog/b/e/8/6/be8676243736d4359d87fea424befbfb8434933f_1683306_90LM03H0_B05370_image1.jpg"
       ],
       "specs": {
         "Screen Size": "32 inches",
@@ -1568,7 +1568,9 @@
         "Ports": "Thunderbolt 4, HDMI 2.1, DisplayPort 1.4, USB Hub"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "45",
@@ -1581,7 +1583,9 @@
       "isNew": true,
       "description": "27-inch 5K, Thunderbolt 3",
       "image": "https://www.lgcorp.com/media/release/images/33597",
-      "images": ["https://www.lgcorp.com/media/release/images/33597"],
+      "images": [
+        "https://www.lgcorp.com/media/release/images/33597"
+      ],
       "specs": {
         "Screen Size": "27 inches",
         "Resolution": "5120 x 2880 (5K)",
@@ -1711,9 +1715,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "27-inch 4K, color accurate",
-      "image": "https://images.unsplash.com/photo-1551817958-c1b0c0f6c2e3?w=500&q=80",
+      "image": "https://www.viewsonic.com/media/catalog/product/cache/aaffb233f08ae4303d28a6f089c7c9ac/v/p/vp2756-4k_front_hires_1.png",
       "images": [
-        "https://images.unsplash.com/photo-1551817958-c1b0c0f6c2e3?w=500&q=80"
+        "https://www.viewsonic.com/media/catalog/product/cache/aaffb233f08ae4303d28a6f089c7c9ac/v/p/vp2756-4k_front_hires_1.png"
       ],
       "specs": {
         "Screen Size": "27 inches",
@@ -1724,7 +1728,9 @@
         "Features": "Ergonomic Stand, Frameless Design"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "51",
@@ -3152,9 +3158,9 @@
       "isFeatured": false,
       "isNew": false,
       "description": "40MP X-Trans, classic design",
-      "image": "https://images.unsplash.com/photo-1606986628124-264d9c3c8a49?w=500&q=80",
+      "image": "https://m.media-amazon.com/images/I/71YhpUiYjrL._AC_SL1500_.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1606986628124-264d9c3c8a49?w=500&q=80"
+        "https://m.media-amazon.com/images/I/71YhpUiYjrL._AC_SL1500_.jpg"
       ],
       "specs": {
         "Sensor": "40.2MP APS-C X-Trans CMOS 5 HR",
@@ -3165,7 +3171,9 @@
         "Features": "160MP Pixel Shift Multi-Shot"
       },
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "colorOptions": [],
+      "memoryOptions": []
     },
     {
       "id": "105",

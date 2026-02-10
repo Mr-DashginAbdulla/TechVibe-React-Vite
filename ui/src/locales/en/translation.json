@@ -488,7 +488,11 @@
     "andAbove": "& above",
     "searchSuggestions": "Suggested Products",
     "noSearchResults": "No products found",
-    "viewAllResults": "View all results"
+    "viewAllResults": "View all results",
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "page": "Page",
+    "of": "of"
   },
   "categoriesPage": {
     "title": "Browse Categories",

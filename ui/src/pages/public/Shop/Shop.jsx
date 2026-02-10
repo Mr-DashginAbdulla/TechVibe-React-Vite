@@ -9,6 +9,8 @@ import {
   ChevronDown,
   Grid3X3,
   LayoutList,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 import ProductCard from "@/components/product/ProductCard";
@@ -380,6 +382,8 @@ function Shop() {
   const [loading, setLoading] = useState(true);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
 
   const filters = {
     search: searchParams.get("search") || "",
@@ -430,6 +434,14 @@ function Shop() {
 
     fetchData();
   }, [t]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchParams]);
 
   const brands = useMemo(() => {
     return [...new Set(products.map((p) => p.brand).filter(Boolean))].sort();
@@ -487,6 +499,12 @@ function Shop() {
 
     return result;
   }, [products, filters]);
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const currentProducts = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredProducts.slice(start, start + itemsPerPage);
+  }, [filteredProducts, currentPage]);
 
   const updateFilters = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
@@ -725,31 +743,101 @@ function Shop() {
             </aside>
 
             <main className="flex-1">
-              {filteredProducts.length > 0 ? (
-                <div
-                  className={`grid gap-[24px] ${
-                    viewMode === "grid"
-                      ? "grid-cols-2 lg:grid-cols-3"
-                      : "grid-cols-1"
-                  }`}
-                >
-                  {filteredProducts.map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      id={product.id}
-                      name={product.name}
-                      price={product.price}
-                      image={product.image}
-                      rating={product.rating}
-                      reviewCount={product.reviewsCount || 0}
-                      originalPrice={product.oldPrice}
-                      isNew={product.isNew}
-                      isFavorite={isInWishlist(product.id)}
-                      onAddToCart={handleAddToCart}
-                      onToggleFavorite={handleToggleFavorite}
-                    />
-                  ))}
-                </div>
+              {currentProducts.length > 0 ? (
+                <>
+                  <div
+                    className={`grid gap-[24px] ${
+                      viewMode === "grid"
+                        ? "grid-cols-2 lg:grid-cols-3"
+                        : "grid-cols-1"
+                    }`}
+                  >
+                    {currentProducts.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        name={product.name}
+                        price={product.price}
+                        image={product.image}
+                        rating={product.rating}
+                        reviewCount={product.reviewsCount || 0}
+                        originalPrice={product.oldPrice}
+                        isNew={product.isNew}
+                        isFavorite={isInWishlist(product.id)}
+                        onAddToCart={handleAddToCart}
+                        onToggleFavorite={handleToggleFavorite}
+                      />
+                    ))}
+                  </div>
+
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-center gap-[8px] mt-[40px]">
+                      <button
+                        onClick={() =>
+                          setCurrentPage((p) => Math.max(1, p - 1))
+                        }
+                        disabled={currentPage === 1}
+                        className="flex items-center gap-[4px] px-[12px] py-[8px] rounded-[8px] border border-border bg-card text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <ChevronLeft className="w-[16px] h-[16px]" />
+                        <span className="text-[14px] font-medium hidden sm:inline">
+                          {t("shop.previousPage")}
+                        </span>
+                      </button>
+
+                      <div className="flex items-center gap-[4px]">
+                        {[...Array(totalPages)].map((_, i) => {
+                          const page = i + 1;
+                          if (
+                            page === 1 ||
+                            page === totalPages ||
+                            (page >= currentPage - 1 && page <= currentPage + 1)
+                          ) {
+                            return (
+                              <button
+                                key={page}
+                                onClick={() => setCurrentPage(page)}
+                                className={`w-[36px] h-[36px] rounded-[8px] text-[14px] font-medium transition-colors ${
+                                  currentPage === page
+                                    ? "bg-primary text-primary-foreground"
+                                    : "bg-card border border-border text-foreground hover:bg-accent"
+                                }`}
+                              >
+                                {page}
+                              </button>
+                            );
+                          } else if (
+                            page === currentPage - 2 ||
+                            page === currentPage + 2
+                          ) {
+                            return (
+                              <span
+                                key={page}
+                                className="text-muted-foreground px-[4px]"
+                              >
+                                ...
+                              </span>
+                            );
+                          }
+                          return null;
+                        })}
+                      </div>
+
+                      <button
+                        onClick={() =>
+                          setCurrentPage((p) => Math.min(totalPages, p + 1))
+                        }
+                        disabled={currentPage === totalPages}
+                        className="flex items-center gap-[4px] px-[12px] py-[8px] rounded-[8px] border border-border bg-card text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <span className="text-[14px] font-medium hidden sm:inline">
+                          {t("shop.nextPage")}
+                        </span>
+                        <ChevronRight className="w-[16px] h-[16px]" />
+                      </button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="text-center py-[60px]">
                   <p className="text-[18px] text-muted-foreground mb-[16px]">
