@@ -8,18 +8,18 @@ const ProductInfo = ({ brand, name, rating, reviewsCount, isNew }) => {
     <div className="mb-6">
       <div className="flex items-center gap-3 mb-3">
         {brand && (
-          <span className="text-xs font-semibold bg-gray-100 text-gray-700 px-3 py-1.5 rounded-md uppercase tracking-wide">
+          <span className="text-xs font-semibold bg-accent text-accent-foreground px-3 py-1.5 rounded-md uppercase tracking-wide">
             {brand}
           </span>
         )}
         {isNew && (
-          <span className="text-xs font-semibold bg-emerald-500 text-white px-3 py-1.5 rounded-md">
+          <span className="text-xs font-semibold bg-primary text-primary-foreground px-3 py-1.5 rounded-md">
             {t("productDetails.new")}
           </span>
         )}
       </div>
 
-      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+      <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
         {name}
       </h1>
 
@@ -29,15 +29,15 @@ const ProductInfo = ({ brand, name, rating, reviewsCount, isNew }) => {
             <Star
               key={i}
               size={18}
-              fill={i < Math.floor(rating) ? "#F59E0B" : "none"}
+              fill={i < Math.floor(rating) ? "currentColor" : "none"}
               className={
-                i < Math.floor(rating) ? "text-amber-400" : "text-gray-300"
+                i < Math.floor(rating) ? "text-amber-400" : "text-muted"
               }
             />
           ))}
         </div>
-        <span className="text-sm font-medium text-gray-900">{rating}</span>
-        <span className="text-sm text-gray-500">
+        <span className="text-sm font-medium text-foreground">{rating}</span>
+        <span className="text-sm text-muted-foreground">
           ({reviewsCount} {t("productDetails.reviews")})
         </span>
       </div>

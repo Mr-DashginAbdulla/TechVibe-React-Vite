@@ -38,15 +38,15 @@ const CheckoutSummary = ({
   };
 
   return (
-    <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[24px] sticky top-[24px]">
-      <h3 className="text-[20px] font-bold text-[#111827] mb-[20px]">
+    <div className="bg-card rounded-[24px] shadow-sm border border-border p-[24px] sticky top-[24px]">
+      <h3 className="text-[20px] font-bold text-foreground mb-[20px]">
         {t("basket.orderSummary")}
       </h3>
 
       <div className="space-y-[12px] mb-[20px] max-h-[240px] overflow-y-auto">
         {cartItems.map((item, index) => (
           <div key={item.id || index} className="flex items-start gap-[12px]">
-            <div className="w-[56px] h-[56px] bg-[#F9FAFB] rounded-[8px] overflow-hidden border border-[#E5E7EB] shrink-0">
+            <div className="w-[56px] h-[56px] bg-background rounded-[8px] overflow-hidden border border-border shrink-0">
               <img
                 src={item.image}
                 alt={item.name}
@@ -54,7 +54,7 @@ const CheckoutSummary = ({
               />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[13px] font-medium text-[#111827] line-clamp-1">
+              <p className="text-[13px] font-medium text-foreground line-clamp-1">
                 {item.name}
               </p>
 
@@ -69,11 +69,11 @@ const CheckoutSummary = ({
                         return (
                           <span
                             key={key}
-                            className="inline-flex items-center gap-[4px] px-[6px] py-[2px] bg-[#F3F4F6] rounded-[4px] text-[11px] text-[#6B7280]"
+                            className="inline-flex items-center gap-[4px] px-[6px] py-[2px] bg-accent rounded-[4px] text-[11px] text-muted-foreground"
                           >
                             {key === "color" && value.value && (
                               <span
-                                className="w-[10px] h-[10px] rounded-full border border-gray-300"
+                                className="w-[10px] h-[10px] rounded-full border border-border"
                                 style={{ backgroundColor: value.value }}
                               />
                             )}
@@ -96,11 +96,11 @@ const CheckoutSummary = ({
                         )
                       }
                       disabled={item.quantity <= 1}
-                      className="w-[22px] h-[22px] flex items-center justify-center bg-[#F3F4F6] hover:bg-[#E5E7EB] rounded-[4px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="w-[22px] h-[22px] flex items-center justify-center bg-muted hover:bg-muted/80 rounded-[4px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                     >
-                      <Minus className="w-[12px] h-[12px] text-[#6B7280]" />
+                      <Minus className="w-[12px] h-[12px] text-muted-foreground" />
                     </button>
-                    <span className="text-[12px] font-medium text-[#374151] min-w-[20px] text-center">
+                    <span className="text-[12px] font-medium text-foreground min-w-[20px] text-center">
                       {item.quantity}
                     </span>
                     <button
@@ -108,39 +108,41 @@ const CheckoutSummary = ({
                         onUpdateQuantity(item, (item.quantity || 1) + 1)
                       }
                       disabled={item.quantity >= (item.stock || 99)}
-                      className="w-[22px] h-[22px] flex items-center justify-center bg-[#F3F4F6] hover:bg-[#E5E7EB] rounded-[4px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                      className="w-[22px] h-[22px] flex items-center justify-center bg-muted hover:bg-muted/80 rounded-[4px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                     >
-                      <Plus className="w-[12px] h-[12px] text-[#6B7280]" />
+                      <Plus className="w-[12px] h-[12px] text-muted-foreground" />
                     </button>
                   </div>
                 ) : (
-                  <p className="text-[12px] text-[#6B7280]">x{item.quantity}</p>
+                  <p className="text-[12px] text-muted-foreground">
+                    x{item.quantity}
+                  </p>
                 )}
               </div>
             </div>
-            <p className="text-[14px] font-semibold text-[#111827]">
+            <p className="text-[14px] font-semibold text-foreground">
               ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="h-px bg-[#E5E7EB] my-[16px]" />
+      <div className="h-px bg-border my-[16px]" />
 
       {currentStep >= 3 && (
         <div className="mb-[16px]">
-          <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+          <label className="block text-[14px] font-medium text-foreground mb-[8px]">
             {t("checkout.promoCode")}
           </label>
           {promoCode ? (
-            <div className="flex items-center justify-between p-[12px] bg-emerald-50 rounded-[10px] border border-emerald-200">
+            <div className="flex items-center justify-between p-[12px] bg-emerald-500/10 rounded-[10px] border border-emerald-500/20">
               <div className="flex items-center gap-[8px]">
-                <Tag className="w-[16px] h-[16px] text-emerald-600" />
-                <span className="text-[14px] font-semibold text-emerald-700">
+                <Tag className="w-[16px] h-[16px] text-emerald-600 dark:text-emerald-500" />
+                <span className="text-[14px] font-semibold text-emerald-700 dark:text-emerald-400">
                   {promoCode}
                 </span>
               </div>
-              <span className="text-[14px] font-bold text-emerald-600">
+              <span className="text-[14px] font-bold text-emerald-600 dark:text-emerald-500">
                 -${discount.toFixed(2)}
               </span>
             </div>
@@ -151,12 +153,12 @@ const CheckoutSummary = ({
                 value={inputCode}
                 onChange={(e) => setInputCode(e.target.value.toUpperCase())}
                 placeholder={t("checkout.enterCode")}
-                className="flex-1 px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="flex-1 px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground placeholder:text-muted-foreground"
               />
               <button
                 onClick={handleApply}
                 disabled={isApplying || !inputCode.trim()}
-                className="px-[16px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold text-[14px] rounded-[10px] transition-colors disabled:opacity-50"
+                className="px-[16px] py-[12px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-[14px] rounded-[10px] transition-colors disabled:opacity-50"
               >
                 {isApplying ? "..." : t("checkout.apply")}
               </button>
@@ -167,59 +169,63 @@ const CheckoutSummary = ({
 
       <div className="space-y-[12px]">
         <div className="flex justify-between text-[14px]">
-          <span className="text-[#6B7280]">
+          <span className="text-muted-foreground">
             {t("basket.subtotal")} ({cartItems.length} {t("basket.items")})
           </span>
-          <span className="text-[#111827] font-medium">
+          <span className="text-foreground font-medium">
             ${subtotal.toFixed(2)}
           </span>
         </div>
 
         <div className="flex justify-between text-[14px]">
-          <span className="text-[#6B7280]">{t("basket.shipping")}</span>
+          <span className="text-muted-foreground">{t("basket.shipping")}</span>
           {shippingCost === 0 ? (
-            <span className="text-emerald-600 font-medium">
+            <span className="text-emerald-600 dark:text-emerald-500 font-medium">
               {t("checkout.freeShipping")}
             </span>
           ) : (
-            <span className="text-[#111827] font-medium">
+            <span className="text-foreground font-medium">
               ${shippingCost.toFixed(2)}
             </span>
           )}
         </div>
 
         <div className="flex justify-between text-[14px]">
-          <span className="text-[#6B7280]">{t("checkout.tax")} (18%)</span>
-          <span className="text-[#111827] font-medium">${tax.toFixed(2)}</span>
+          <span className="text-muted-foreground">
+            {t("checkout.tax")} (18%)
+          </span>
+          <span className="text-foreground font-medium">${tax.toFixed(2)}</span>
         </div>
 
         {discount > 0 && (
           <div className="flex justify-between text-[14px]">
-            <span className="text-emerald-600">{t("checkout.discount")}</span>
-            <span className="text-emerald-600 font-medium">
+            <span className="text-emerald-600 dark:text-emerald-500">
+              {t("checkout.discount")}
+            </span>
+            <span className="text-emerald-600 dark:text-emerald-500 font-medium">
               -${discount.toFixed(2)}
             </span>
           </div>
         )}
 
-        <div className="h-px bg-[#E5E7EB]" />
+        <div className="h-px bg-border" />
 
         <div className="flex justify-between text-[18px] font-bold">
-          <span className="text-[#111827]">{t("basket.total")}</span>
-          <span className="text-[#3B82F6]">${total.toFixed(2)}</span>
+          <span className="text-foreground">{t("basket.total")}</span>
+          <span className="text-primary">${total.toFixed(2)}</span>
         </div>
       </div>
 
-      <div className="mt-[24px] pt-[20px] border-t border-[#E5E7EB] space-y-[12px]">
-        <div className="flex items-center gap-[10px] text-[13px] text-[#6B7280]">
+      <div className="mt-[24px] pt-[20px] border-t border-border space-y-[12px]">
+        <div className="flex items-center gap-[10px] text-[13px] text-muted-foreground">
           <ShieldCheck className="w-[18px] h-[18px] text-emerald-500" />
           {t("checkout.secureCheckout")}
         </div>
-        <div className="flex items-center gap-[10px] text-[13px] text-[#6B7280]">
+        <div className="flex items-center gap-[10px] text-[13px] text-muted-foreground">
           <Truck className="w-[18px] h-[18px] text-emerald-500" />
           {t("checkout.freeShippingOver")}
         </div>
-        <div className="flex items-center gap-[10px] text-[13px] text-[#6B7280]">
+        <div className="flex items-center gap-[10px] text-[13px] text-muted-foreground">
           <RotateCcw className="w-[18px] h-[18px] text-emerald-500" />
           {t("checkout.returnPolicy")}
         </div>

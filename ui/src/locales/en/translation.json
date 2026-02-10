@@ -28,7 +28,14 @@
     "refresh": "Refresh",
     "selectAll": "Select All",
     "clearAll": "Clear All",
-    "noProductsFound": "No products found."
+    "noProductsFound": "No products found.",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   },
   "nav": {
     "home": "Home",

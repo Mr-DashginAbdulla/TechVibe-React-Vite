@@ -154,7 +154,7 @@ const OrderDetails = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[400px]">
-        <Loader2 className="w-[32px] h-[32px] text-[#3B82F6] animate-spin" />
+        <Loader2 className="w-[32px] h-[32px] text-primary animate-spin" />
       </div>
     );
   }
@@ -162,10 +162,12 @@ const OrderDetails = () => {
   if (!order) {
     return (
       <div className="text-center py-[80px]">
-        <p className="text-[16px] text-[#6B7280]">{t("profile.noOrders")}</p>
+        <p className="text-[16px] text-muted-foreground">
+          {t("profile.noOrders")}
+        </p>
         <Link
           to="/profile/orders"
-          className="text-[#3B82F6] hover:underline mt-[8px] inline-block"
+          className="text-primary hover:underline mt-[8px] inline-block"
         >
           {t("order.backToOrders")}
         </Link>
@@ -178,20 +180,20 @@ const OrderDetails = () => {
       <Helmet>
         <title>{t("profile.orderDetails")} - TechVibe</title>
       </Helmet>
-      <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
+      <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
         <Link
           to="/profile/orders"
-          className="inline-flex items-center gap-[8px] text-[14px] text-[#6B7280] hover:text-[#3B82F6] mb-[16px]"
+          className="inline-flex items-center gap-[8px] text-[14px] text-muted-foreground hover:text-primary mb-[16px]"
         >
           <ArrowLeft className="w-[16px] h-[16px]" />
           {t("order.backToOrders")}
         </Link>
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-[24px] font-bold text-[#111827] mb-[4px]">
+            <h1 className="text-[24px] font-bold text-foreground mb-[4px]">
               {order.orderNumber}
             </h1>
-            <p className="text-[14px] text-[#6B7280]">
+            <p className="text-[14px] text-muted-foreground">
               {t("order.orderDate")}: {formatDate(order.createdAt)}
             </p>
           </div>
@@ -199,14 +201,14 @@ const OrderDetails = () => {
             <span
               className={`px-[16px] py-[8px] rounded-full text-[14px] font-medium ${
                 order.status === "delivered"
-                  ? "bg-green-100 text-green-700"
+                  ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400"
                   : order.status === "shipped"
-                    ? "bg-purple-100 text-purple-700"
+                    ? "bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400"
                     : order.status === "processing"
-                      ? "bg-blue-100 text-blue-700"
+                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400"
                       : order.status === "cancelled"
-                        ? "bg-red-100 text-red-700"
-                        : "bg-yellow-100 text-yellow-700"
+                        ? "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400"
+                        : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400"
               }`}
             >
               {getStatusText(order.status)}
@@ -214,7 +216,7 @@ const OrderDetails = () => {
             {canCancelOrder && (
               <button
                 onClick={() => setShowCancelConfirm(true)}
-                className="px-[12px] py-[8px] text-[13px] font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                className="px-[12px] py-[8px] text-[13px] font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
               >
                 {t("order.cancelOrder")}
               </button>
@@ -222,7 +224,7 @@ const OrderDetails = () => {
             {canEditOrder && (
               <button
                 onClick={handleEditOrder}
-                className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
               >
                 <Edit3 className="w-[14px] h-[14px]" />
                 {t("order.editOrder")}
@@ -231,7 +233,7 @@ const OrderDetails = () => {
             <button
               onClick={handleReorder}
               disabled={isReordering}
-              className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors disabled:opacity-50"
+              className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors disabled:opacity-50"
             >
               <RefreshCw
                 className={`w-[14px] h-[14px] ${isReordering ? "animate-spin" : ""}`}
@@ -243,17 +245,17 @@ const OrderDetails = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[24px]">
-        <div className="lg:col-span-2 bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
-          <h2 className="text-[18px] font-semibold text-[#111827] mb-[20px]">
+        <div className="lg:col-span-2 bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
+          <h2 className="text-[18px] font-semibold text-foreground mb-[20px]">
             {t("order.items")}
           </h2>
           <div className="space-y-[16px]">
             {order.items.map((item, index) => (
               <div
                 key={index}
-                className="flex gap-[16px] p-[16px] bg-[#F9FAFB] rounded-[12px]"
+                className="flex gap-[16px] p-[16px] bg-muted/50 rounded-[12px]"
               >
-                <div className="w-[80px] h-[80px] rounded-[10px] bg-white border border-[#E5E7EB] overflow-hidden shrink-0">
+                <div className="w-[80px] h-[80px] rounded-[10px] bg-card border border-border overflow-hidden shrink-0">
                   {item.image ? (
                     <img
                       src={item.image}
@@ -262,12 +264,12 @@ const OrderDetails = () => {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <Package className="w-[24px] h-[24px] text-[#9CA3AF]" />
+                      <Package className="w-[24px] h-[24px] text-muted-foreground" />
                     </div>
                   )}
                 </div>
                 <div className="flex-1">
-                  <p className="text-[15px] font-semibold text-[#111827]">
+                  <p className="text-[15px] font-semibold text-foreground">
                     {item.name}
                   </p>
 
@@ -282,11 +284,11 @@ const OrderDetails = () => {
                             return (
                               <span
                                 key={key}
-                                className="inline-flex items-center gap-[4px] px-[6px] py-[2px] bg-[#E5E7EB] rounded-[4px] text-[11px] text-[#6B7280]"
+                                className="inline-flex items-center gap-[4px] px-[6px] py-[2px] bg-muted rounded-[4px] text-[11px] text-muted-foreground"
                               >
                                 {key === "color" && value.value && (
                                   <span
-                                    className="w-[10px] h-[10px] rounded-full border border-gray-300"
+                                    className="w-[10px] h-[10px] rounded-full border border-gray-300 dark:border-gray-600"
                                     style={{ backgroundColor: value.value }}
                                   />
                                 )}
@@ -297,14 +299,14 @@ const OrderDetails = () => {
                         )}
                       </div>
                     )}
-                  <p className="text-[13px] text-[#6B7280] mt-[2px]">
+                  <p className="text-[13px] text-muted-foreground mt-[2px]">
                     {item.brand || ""} {item.color ? `• ${item.color}` : ""}
                   </p>
                   <div className="flex items-center justify-between mt-[8px]">
-                    <p className="text-[13px] text-[#6B7280]">
+                    <p className="text-[13px] text-muted-foreground">
                       {t("product.quantity")}: {item.quantity}
                     </p>
-                    <p className="text-[16px] font-bold text-[#111827]">
+                    <p className="text-[16px] font-bold text-foreground">
                       ${(item.price || 0).toFixed(2)}
                     </p>
                   </div>
@@ -313,22 +315,26 @@ const OrderDetails = () => {
             ))}
           </div>
 
-          <div className="mt-[24px] pt-[20px] border-t border-[#E5E7EB] space-y-[12px]">
+          <div className="mt-[24px] pt-[20px] border-t border-border space-y-[12px]">
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#6B7280]">{t("cart.subtotal")}</span>
-              <span className="text-[#111827]">
+              <span className="text-muted-foreground">
+                {t("cart.subtotal")}
+              </span>
+              <span className="text-foreground">
                 ${(order.subtotal || 0).toFixed(2)}
               </span>
             </div>
             <div className="flex justify-between text-[14px]">
-              <span className="text-[#6B7280]">{t("cart.shipping")}</span>
-              <span className="text-[#111827]">
+              <span className="text-muted-foreground">
+                {t("cart.shipping")}
+              </span>
+              <span className="text-foreground">
                 ${(order.shipping || 0).toFixed(2)}
               </span>
             </div>
-            <div className="flex justify-between text-[16px] font-bold pt-[12px] border-t border-[#E5E7EB]">
-              <span className="text-[#111827]">{t("cart.total")}</span>
-              <span className="text-[#3B82F6]">
+            <div className="flex justify-between text-[16px] font-bold pt-[12px] border-t border-border">
+              <span className="text-foreground">{t("cart.total")}</span>
+              <span className="text-primary">
                 ${(order.total || 0).toFixed(2)}
               </span>
             </div>
@@ -336,16 +342,16 @@ const OrderDetails = () => {
         </div>
 
         <div className="space-y-[24px]">
-          <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
+          <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
             <div className="flex items-center gap-[12px] mb-[16px]">
-              <div className="w-[40px] h-[40px] bg-[#F3F4F6] rounded-[10px] flex items-center justify-center">
-                <MapPin className="w-[18px] h-[18px] text-[#6B7280]" />
+              <div className="w-[40px] h-[40px] bg-muted rounded-[10px] flex items-center justify-center">
+                <MapPin className="w-[18px] h-[18px] text-muted-foreground" />
               </div>
-              <h3 className="text-[16px] font-semibold text-[#111827]">
+              <h3 className="text-[16px] font-semibold text-foreground">
                 {t("order.shippingAddress")}
               </h3>
             </div>
-            <div className="text-[14px] text-[#374151] space-y-[4px]">
+            <div className="text-[14px] text-foreground space-y-[4px]">
               <p className="font-medium">{order.shippingAddress.name}</p>
               <p>{order.shippingAddress.address}</p>
               <p>
@@ -354,8 +360,8 @@ const OrderDetails = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
-            <h3 className="text-[16px] font-semibold text-[#111827] mb-[20px]">
+          <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
+            <h3 className="text-[16px] font-semibold text-foreground mb-[20px]">
               {t("order.trackOrder")}
             </h3>
             <div className="space-y-[20px]">
@@ -368,21 +374,21 @@ const OrderDetails = () => {
                       <div
                         className={`w-[36px] h-[36px] rounded-full flex items-center justify-center ${
                           isLast
-                            ? "bg-[#3B82F6] text-white"
-                            : "bg-[#E5E7EB] text-[#6B7280]"
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-muted text-muted-foreground"
                         }`}
                       >
                         <Icon className="w-[18px] h-[18px]" />
                       </div>
                       {index < order.timeline.length - 1 && (
-                        <div className="w-[2px] h-[24px] bg-[#E5E7EB] mt-[8px]"></div>
+                        <div className="w-[2px] h-[24px] bg-muted mt-[8px]"></div>
                       )}
                     </div>
                     <div>
-                      <p className="text-[14px] font-medium text-[#111827]">
+                      <p className="text-[14px] font-medium text-foreground">
                         {event.description}
                       </p>
-                      <p className="text-[12px] text-[#6B7280]">
+                      <p className="text-[12px] text-muted-foreground">
                         {formatDate(event.date)}
                       </p>
                     </div>
@@ -396,25 +402,25 @@ const OrderDetails = () => {
 
       {showCancelConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
-          <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[400px] shadow-xl">
+          <div className="bg-card rounded-[20px] p-[24px] w-full max-w-[400px] shadow-xl border border-border">
             <div className="flex items-center gap-[12px] mb-[16px]">
-              <div className="w-[48px] h-[48px] bg-red-100 rounded-full flex items-center justify-center">
-                <AlertTriangle className="w-[24px] h-[24px] text-red-600" />
+              <div className="w-[48px] h-[48px] bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center">
+                <AlertTriangle className="w-[24px] h-[24px] text-red-600 dark:text-red-400" />
               </div>
               <div>
-                <h3 className="text-[18px] font-semibold text-[#111827]">
+                <h3 className="text-[18px] font-semibold text-foreground">
                   {t("order.cancelConfirmTitle")}
                 </h3>
               </div>
             </div>
-            <p className="text-[14px] text-[#6B7280] mb-[24px]">
+            <p className="text-[14px] text-muted-foreground mb-[24px]">
               {t("order.cancelConfirmMessage")}
             </p>
             <div className="flex gap-[12px]">
               <button
                 onClick={() => setShowCancelConfirm(false)}
                 disabled={isCancelling}
-                className="flex-1 px-[16px] py-[12px] bg-[#F3F4F6] text-[#374151] font-semibold rounded-[12px] hover:bg-[#E5E7EB] transition-colors"
+                className="flex-1 px-[16px] py-[12px] bg-muted text-foreground font-semibold rounded-[12px] hover:bg-muted/80 transition-colors"
               >
                 {t("common.no")}
               </button>

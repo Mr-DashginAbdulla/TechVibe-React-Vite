@@ -6,27 +6,27 @@ const Breadcrumb = ({ productName, category }) => {
   const { t } = useTranslation();
 
   return (
-    <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-      <Link to="/" className="hover:text-blue-600 transition-colors">
+    <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+      <Link to="/" className="hover:text-primary transition-colors">
         {t("productDetails.home")}
       </Link>
-      <ChevronRight size={14} className="text-gray-400" />
-      <Link to="/shop" className="hover:text-blue-600 transition-colors">
+      <ChevronRight size={14} className="text-muted-foreground/50" />
+      <Link to="/shop" className="hover:text-primary transition-colors">
         {t("productDetails.products")}
       </Link>
       {category && (
         <>
-          <ChevronRight size={14} className="text-gray-400" />
+          <ChevronRight size={14} className="text-muted-foreground/50" />
           <Link
             to={`/shop?category=${category}`}
-            className="hover:text-blue-600 transition-colors capitalize"
+            className="hover:text-primary transition-colors capitalize"
           >
             {t(`categories.${category}`)}
           </Link>
         </>
       )}
-      <ChevronRight size={14} className="text-gray-400" />
-      <span className="text-gray-900 font-medium truncate max-w-[200px]">
+      <ChevronRight size={14} className="text-muted-foreground/50" />
+      <span className="text-foreground font-medium truncate max-w-[200px]">
         {productName}
       </span>
     </nav>

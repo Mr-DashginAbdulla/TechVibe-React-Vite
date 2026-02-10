@@ -70,13 +70,13 @@ const FilterSidebar = ({
   return (
     <div className={`${isMobile ? "p-[20px]" : ""}`}>
       {isMobile && (
-        <div className="flex items-center justify-between mb-[24px] pb-[16px] border-b border-[#E5E7EB]">
-          <h3 className="text-[18px] font-semibold text-[#111827]">
+        <div className="flex items-center justify-between mb-[24px] pb-[16px] border-b border-border">
+          <h3 className="text-[18px] font-semibold text-foreground">
             {t("shop.filters")}
           </h3>
           <button
             onClick={onClose}
-            className="p-[8px] hover:bg-[#F3F4F6] rounded-full"
+            className="p-[8px] hover:bg-accent rounded-full text-foreground"
           >
             <X className="w-[20px] h-[20px]" />
           </button>
@@ -86,14 +86,14 @@ const FilterSidebar = ({
       {hasActiveFilters && (
         <button
           onClick={onClearFilters}
-          className="w-full mb-[20px] py-[10px] px-[16px] text-[14px] font-medium text-[#3B82F6] bg-[#EFF6FF] rounded-[10px] hover:bg-[#DBEAFE] transition-colors"
+          className="w-full mb-[20px] py-[10px] px-[16px] text-[14px] font-medium text-primary bg-primary/10 rounded-[10px] hover:bg-primary/20 transition-colors"
         >
           {t("shop.clearFilters")}
         </button>
       )}
 
       <div className="mb-[24px]">
-        <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
+        <h4 className="text-[14px] font-semibold text-foreground mb-[12px] uppercase tracking-wide">
           {t("nav.categories")}
         </h4>
         <div className="space-y-[8px]">
@@ -112,9 +112,9 @@ const FilterSidebar = ({
                         selectedFilters.categories?.includes(parent.id) || false
                       }
                       onChange={() => handleCategoryChange(parent.id)}
-                      className="w-[18px] h-[18px] rounded-[4px] border-[#D1D5DB] text-[#3B82F6] focus:ring-[#3B82F6]"
+                      className="w-[18px] h-[18px] rounded-[4px] border-input text-primary focus:ring-primary bg-background"
                     />
-                    <span className="text-[14px] font-medium text-[#111827] group-hover:text-[#3B82F6]">
+                    <span className="text-[14px] font-medium text-foreground group-hover:text-primary transition-colors">
                       {t(`categories.${parent.id}`)}
                     </span>
                   </label>
@@ -130,9 +130,9 @@ const FilterSidebar = ({
                           false
                         }
                         onChange={() => handleCategoryChange(child.id)}
-                        className="w-[16px] h-[16px] rounded-[4px] border-[#D1D5DB] text-[#3B82F6] focus:ring-[#3B82F6]"
+                        className="w-[16px] h-[16px] rounded-[4px] border-input text-primary focus:ring-primary bg-background"
                       />
-                      <span className="text-[13px] text-[#6B7280] group-hover:text-[#3B82F6]">
+                      <span className="text-[13px] text-muted-foreground group-hover:text-primary transition-colors">
                         {t(`categories.${child.id}`)}
                       </span>
                     </label>
@@ -144,7 +144,7 @@ const FilterSidebar = ({
       </div>
 
       <div className="mb-[24px]">
-        <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
+        <h4 className="text-[14px] font-semibold text-foreground mb-[12px] uppercase tracking-wide">
           {t("shop.priceRange")}
         </h4>
         <div className="flex items-center gap-[8px]">
@@ -153,24 +153,24 @@ const FilterSidebar = ({
             placeholder={t("shop.minPrice")}
             value={selectedFilters.minPrice || ""}
             onChange={(e) => handlePriceChange("minPrice", e.target.value)}
-            className="w-full px-[12px] py-[10px] border border-[#E5E7EB] rounded-[8px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+            className="w-full px-[12px] py-[10px] border border-input bg-background rounded-[8px] text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           />
-          <span className="text-[#9CA3AF]">-</span>
+          <span className="text-muted-foreground">-</span>
           <input
             type="number"
             placeholder={t("shop.maxPrice")}
             value={selectedFilters.maxPrice || ""}
             onChange={(e) => handlePriceChange("maxPrice", e.target.value)}
-            className="w-full px-[12px] py-[10px] border border-[#E5E7EB] rounded-[8px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+            className="w-full px-[12px] py-[10px] border border-input bg-background rounded-[8px] text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
       </div>
 
       <div className="mb-[24px]">
-        <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
+        <h4 className="text-[14px] font-semibold text-foreground mb-[12px] uppercase tracking-wide">
           {t("shop.brands")}
         </h4>
-        <div className="space-y-[8px] max-h-[200px] overflow-y-auto">
+        <div className="space-y-[8px] max-h-[200px] overflow-y-auto pr-2 custom-scrollbar">
           {brands.map((brand) => (
             <label
               key={brand}
@@ -180,9 +180,9 @@ const FilterSidebar = ({
                 type="checkbox"
                 checked={selectedFilters.brands?.includes(brand) || false}
                 onChange={() => handleBrandChange(brand)}
-                className="w-[18px] h-[18px] rounded-[4px] border-[#D1D5DB] text-[#3B82F6] focus:ring-[#3B82F6]"
+                className="w-[18px] h-[18px] rounded-[4px] border-input text-primary focus:ring-primary bg-background"
               />
-              <span className="text-[14px] text-[#374151] group-hover:text-[#111827]">
+              <span className="text-[14px] text-muted-foreground group-hover:text-foreground transition-colors">
                 {brand}
               </span>
             </label>
@@ -191,7 +191,7 @@ const FilterSidebar = ({
       </div>
 
       <div className="mb-[24px]">
-        <h4 className="text-[14px] font-semibold text-[#111827] mb-[12px] uppercase tracking-wide">
+        <h4 className="text-[14px] font-semibold text-foreground mb-[12px] uppercase tracking-wide">
           {t("shop.rating")}
         </h4>
         <div className="space-y-[10px]">
@@ -203,8 +203,8 @@ const FilterSidebar = ({
                 onClick={() => handleRatingChange(rating)}
                 className={`w-full flex items-center gap-[10px] px-[12px] py-[10px] rounded-[10px] border transition-all ${
                   isSelected
-                    ? "border-[#3B82F6] bg-[#EFF6FF] text-[#3B82F6]"
-                    : "border-[#E5E7EB] bg-white hover:border-[#3B82F6] hover:bg-[#F9FAFB] text-[#374151]"
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border bg-card hover:border-primary hover:bg-accent text-muted-foreground"
                 }`}
               >
                 <div className="flex items-center gap-[2px]">
@@ -212,7 +212,7 @@ const FilterSidebar = ({
                     <svg
                       key={i}
                       className={`w-[16px] h-[16px] ${
-                        i < rating ? "text-[#FBBF24]" : "text-[#E5E7EB]"
+                        i < rating ? "text-amber-400" : "text-muted"
                       }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -264,10 +264,10 @@ const SortDropdown = ({ value, onChange }) => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-[8px] px-[16px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px] font-medium text-[#374151] hover:border-[#3B82F6] transition-colors"
+        className="flex items-center gap-[8px] px-[16px] py-[10px] bg-card border border-border rounded-[10px] text-[14px] font-medium text-muted-foreground hover:border-primary hover:text-foreground transition-colors"
       >
         <span>{t("shop.sortBy")}:</span>
-        <span className="text-[#111827]">{currentLabel}</span>
+        <span className="text-foreground">{currentLabel}</span>
         <ChevronDown
           className={`w-[16px] h-[16px] transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
@@ -279,7 +279,7 @@ const SortDropdown = ({ value, onChange }) => {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 mt-[8px] w-[200px] bg-white rounded-[12px] shadow-lg border border-[#E5E7EB] py-[8px] z-20">
+          <div className="absolute right-0 mt-[8px] w-[200px] bg-popover rounded-[12px] shadow-lg border border-border py-[8px] z-20">
             {options.map((option) => (
               <button
                 key={option.value}
@@ -287,10 +287,10 @@ const SortDropdown = ({ value, onChange }) => {
                   onChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`w-full px-[16px] py-[10px] text-left text-[14px] hover:bg-[#F3F4F6] ${
+                className={`w-full px-[16px] py-[10px] text-left text-[14px] hover:bg-accent hover:text-accent-foreground transition-colors ${
                   value === option.value
-                    ? "text-[#3B82F6] font-medium bg-[#EFF6FF]"
-                    : "text-[#374151]"
+                    ? "text-primary font-medium bg-primary/10"
+                    : "text-foreground"
                 }`}
               >
                 {option.label}
@@ -355,12 +355,12 @@ const ActiveFilters = ({ filters, categories, onRemove }) => {
       {tags.map((tag, idx) => (
         <span
           key={`${tag.type}-${idx}`}
-          className="inline-flex items-center gap-[6px] px-[12px] py-[6px] bg-[#EFF6FF] text-[#3B82F6] rounded-full text-[13px] font-medium"
+          className="inline-flex items-center gap-[6px] px-[12px] py-[6px] bg-primary/10 text-primary rounded-full text-[13px] font-medium"
         >
           {tag.label}
           <button
             onClick={() => onRemove(tag.type, tag.value)}
-            className="hover:bg-[#DBEAFE] rounded-full p-[2px]"
+            className="hover:bg-primary/20 rounded-full p-[2px] transition-colors"
           >
             <X className="w-[14px] h-[14px]" />
           </button>
@@ -629,22 +629,22 @@ function Shop() {
         </title>
       </Helmet>
 
-      <div className="min-h-screen bg-[#F9FAFB]">
-        <div className="bg-white border-b border-[#E5E7EB]">
+      <div className="min-h-screen bg-background">
+        <div className="bg-card border-b border-border transition-colors">
           <div className="max-w-[1280px] mx-auto px-[16px] py-[24px]">
-            <nav className="flex items-center gap-[8px] text-[14px] text-[#6B7280] mb-[16px]">
-              <Link to="/" className="hover:text-[#3B82F6]">
+            <nav className="flex items-center gap-[8px] text-[14px] text-muted-foreground mb-[16px]">
+              <Link to="/" className="hover:text-primary transition-colors">
                 {t("nav.home")}
               </Link>
               <span>/</span>
-              <span className="text-[#111827] font-medium">
+              <span className="text-foreground font-medium">
                 {t("nav.shop")}
               </span>
             </nav>
 
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-[28px] font-bold text-[#111827]">
+                <h1 className="text-[28px] font-bold text-foreground">
                   {filters.search
                     ? t("shop.searchResults").replace(
                         "{{query}}",
@@ -652,7 +652,7 @@ function Shop() {
                       )
                     : t("shop.title")}
                 </h1>
-                <p className="text-[14px] text-[#6B7280] mt-[4px]">
+                <p className="text-[14px] text-muted-foreground mt-[4px]">
                   {t("shop.results").replace(
                     "{{count}}",
                     filteredProducts.length.toString(),
@@ -661,18 +661,18 @@ function Shop() {
               </div>
 
               <div className="hidden md:flex items-center gap-[12px]">
-                <div className="flex items-center gap-[4px] p-[4px] bg-[#F3F4F6] rounded-[8px]">
+                <div className="flex items-center gap-[4px] p-[4px] bg-accent/50 rounded-[8px]">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-[8px] rounded-[6px] ${viewMode === "grid" ? "bg-white shadow-sm" : ""}`}
+                    className={`p-[8px] rounded-[6px] transition-all ${viewMode === "grid" ? "bg-card shadow-sm text-primary" : "text-muted-foreground hover:text-foreground"}`}
                   >
-                    <Grid3X3 className="w-[18px] h-[18px] text-[#374151]" />
+                    <Grid3X3 className="w-[18px] h-[18px]" />
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`p-[8px] rounded-[6px] ${viewMode === "list" ? "bg-white shadow-sm" : ""}`}
+                    className={`p-[8px] rounded-[6px] transition-all ${viewMode === "list" ? "bg-card shadow-sm text-primary" : "text-muted-foreground hover:text-foreground"}`}
                   >
-                    <LayoutList className="w-[18px] h-[18px] text-[#374151]" />
+                    <LayoutList className="w-[18px] h-[18px]" />
                   </button>
                 </div>
                 <SortDropdown
@@ -688,7 +688,7 @@ function Shop() {
           <div className="md:hidden flex items-center justify-between mb-[20px]">
             <button
               onClick={() => setMobileFilterOpen(true)}
-              className="flex items-center gap-[8px] px-[16px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px] font-medium"
+              className="flex items-center gap-[8px] px-[16px] py-[10px] bg-card border border-border rounded-[10px] text-[14px] font-medium text-foreground"
             >
               <SlidersHorizontal className="w-[18px] h-[18px]" />
               {t("shop.filters")}
@@ -707,7 +707,7 @@ function Shop() {
 
           <div className="flex gap-[32px]">
             <aside className="hidden md:block w-[280px] shrink-0">
-              <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px] sticky top-[100px]">
+              <div className="bg-card rounded-[16px] border border-border p-[24px] sticky top-[100px]">
                 <FilterSidebar
                   categories={categories}
                   brands={brands}
@@ -752,12 +752,12 @@ function Shop() {
                 </div>
               ) : (
                 <div className="text-center py-[60px]">
-                  <p className="text-[18px] text-[#6B7280] mb-[16px]">
+                  <p className="text-[18px] text-muted-foreground mb-[16px]">
                     {t("shop.noResults")}
                   </p>
                   <button
                     onClick={clearFilters}
-                    className="px-[24px] py-[12px] bg-[#3B82F6] text-white font-semibold rounded-[12px] hover:bg-[#2563EB] transition-colors"
+                    className="px-[24px] py-[12px] bg-primary text-primary-foreground font-semibold rounded-[12px] hover:bg-primary/90 transition-colors"
                   >
                     {t("shop.clearFilters")}
                   </button>
@@ -770,10 +770,10 @@ function Shop() {
         {mobileFilterOpen && (
           <>
             <div
-              className="fixed inset-0 bg-black/50 z-40"
+              className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
               onClick={() => setMobileFilterOpen(false)}
             />
-            <div className="fixed inset-y-0 left-0 w-[320px] max-w-[90vw] bg-white z-50 overflow-y-auto">
+            <div className="fixed inset-y-0 left-0 w-[320px] max-w-[90vw] bg-background z-50 overflow-y-auto border-r border-border">
               <FilterSidebar
                 categories={categories}
                 brands={brands}

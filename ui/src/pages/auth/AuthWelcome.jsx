@@ -29,29 +29,31 @@ const AuthWelcome = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
-      <div className="w-full max-w-[420px] bg-white rounded-[24px] shadow-xl p-[40px]">
+    <div className="min-h-screen bg-background flex items-center justify-center p-[16px]">
+      <div className="w-full max-w-[420px] bg-card rounded-[24px] shadow-xl p-[40px] border border-border">
         <div className="text-center mb-[32px]">
-          <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
+          <h1 className="text-[28px] font-bold text-foreground mb-[8px]">
             {t("auth.welcomeBack")}
           </h1>
-          <p className="text-[15px] text-[#6B7280]">{t("auth.welcomeDesc")}</p>
+          <p className="text-[15px] text-muted-foreground">
+            {t("auth.welcomeDesc")}
+          </p>
         </div>
 
         <div className="space-y-[16px] mb-[32px]">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="flex items-center gap-[12px] p-[12px] bg-[#F9FAFB] rounded-[12px]"
+              className="flex items-center gap-[12px] p-[12px] bg-muted/30 rounded-[12px]"
             >
-              <div className="w-[40px] h-[40px] bg-[#3B82F6]/10 rounded-[10px] flex items-center justify-center shrink-0">
-                <benefit.icon className="w-[20px] h-[20px] text-[#3B82F6]" />
+              <div className="w-[40px] h-[40px] bg-primary/10 rounded-[10px] flex items-center justify-center shrink-0">
+                <benefit.icon className="w-[20px] h-[20px] text-primary" />
               </div>
               <div>
-                <p className="text-[14px] font-semibold text-[#111827]">
+                <p className="text-[14px] font-semibold text-foreground">
                   {benefit.title}
                 </p>
-                <p className="text-[12px] text-[#6B7280]">
+                <p className="text-[12px] text-muted-foreground">
                   {benefit.description}
                 </p>
               </div>
@@ -62,14 +64,14 @@ const AuthWelcome = () => {
         <div className="space-y-[12px] mb-[24px]">
           <Link
             to="/auth/login"
-            className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold py-[14px] rounded-[12px] transition-colors"
+            className="flex items-center justify-center gap-[8px] w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-[14px] rounded-[12px] transition-colors"
           >
             {t("auth.signIn")}
             <ArrowRight className="w-[18px] h-[18px]" />
           </Link>
           <Link
             to="/auth/register"
-            className="flex items-center justify-center gap-[8px] w-full bg-white hover:bg-[#F9FAFB] text-[#111827] font-semibold py-[14px] rounded-[12px] border border-[#E5E7EB] transition-colors"
+            className="flex items-center justify-center gap-[8px] w-full bg-card hover:bg-muted text-foreground font-semibold py-[14px] rounded-[12px] border border-border transition-colors"
           >
             <User className="w-[18px] h-[18px]" />
             {t("auth.createAccount")}
@@ -77,15 +79,15 @@ const AuthWelcome = () => {
         </div>
 
         <div className="flex items-center gap-[16px] mb-[24px]">
-          <div className="flex-1 h-[px] bg-[#E5E7EB]"></div>
-          <span className="text-[13px] text-[#9CA3AF]">
+          <div className="flex-1 h-[px] bg-border"></div>
+          <span className="text-[13px] text-muted-foreground">
             {t("auth.orContinueWith")}
           </span>
-          <div className="flex-1 h-[px] bg-[#E5E7EB]"></div>
+          <div className="flex-1 h-[px] bg-border"></div>
         </div>
 
         <div className="flex items-center justify-center gap-[12px] mb-[24px]">
-          <button className="w-[56px] h-[56px] bg-white border border-[#E5E7EB] rounded-[12px] flex items-center justify-center hover:bg-[#F9FAFB] transition-colors">
+          <button className="w-[56px] h-[56px] bg-card border border-border rounded-[12px] flex items-center justify-center hover:bg-muted/50 transition-colors">
             <svg className="w-[24px] h-[24px]" viewBox="0 0 24 24">
               <path
                 fill="#4285F4"
@@ -105,16 +107,16 @@ const AuthWelcome = () => {
               />
             </svg>
           </button>
-          <button className="w-[56px] h-[56px] bg-white border border-[#E5E7EB] rounded-[12px] flex items-center justify-center hover:bg-[#F9FAFB] transition-colors">
+          <button className="w-[56px] h-[56px] bg-card border border-border rounded-[12px] flex items-center justify-center hover:bg-muted/50 transition-colors">
             <svg
-              className="w-[24px] h-[24px]"
+              className="w-[24px] h-[24px] text-foreground"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
               <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
             </svg>
           </button>
-          <button className="w-[56px] h-[56px] bg-white border border-[#E5E7EB] rounded-[12px] flex items-center justify-center hover:bg-[#F9FAFB] transition-colors">
+          <button className="w-[56px] h-[56px] bg-card border border-border rounded-[12px] flex items-center justify-center hover:bg-muted/50 transition-colors">
             <svg className="w-[24px] h-[24px]" viewBox="0 0 24 24">
               <path fill="#F25022" d="M1 1h10v10H1z" />
               <path fill="#00A4EF" d="M1 13h10v10H1z" />
@@ -126,7 +128,7 @@ const AuthWelcome = () => {
 
         <Link
           to="/"
-          className="flex items-center justify-center w-full text-[14px] text-[#6B7280] hover:text-[#3B82F6] font-medium transition-colors"
+          className="flex items-center justify-center w-full text-[14px] text-muted-foreground hover:text-primary font-medium transition-colors"
         >
           {t("common.continueAsGuest")} →
         </Link>

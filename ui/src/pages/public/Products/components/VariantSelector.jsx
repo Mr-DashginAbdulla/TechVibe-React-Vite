@@ -10,11 +10,11 @@ const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
       {options.map((option) => (
         <div key={option.id}>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-gray-900">
+            <span className="text-sm font-semibold text-foreground">
               {option.title}
             </span>
             {selectedOptions[option.id] && (
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-muted-foreground">
                 {selectedOptions[option.id].label}
               </span>
             )}
@@ -28,8 +28,8 @@ const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
                   onClick={() => onOptionSelect(option.id, val)}
                   className={`relative w-10 h-10 rounded-full border-2 transition-all ${
                     selectedOptions[option.id]?.label === val.label
-                      ? "border-blue-500 ring-2 ring-blue-100 scale-110"
-                      : "border-gray-200 hover:border-gray-300"
+                      ? "border-primary ring-2 ring-primary/20 scale-110"
+                      : "border-border hover:border-primary/50"
                   }`}
                   title={val.label}
                 >
@@ -50,20 +50,20 @@ const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
                   onClick={() => onOptionSelect(option.id, val)}
                   className={`relative p-4 rounded-xl border-2 text-left transition-all ${
                     selectedOptions[option.id]?.label === val.label
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200 hover:border-gray-300 bg-white"
+                      ? "border-primary bg-primary/5"
+                      : "border-border hover:border-primary/50 bg-card"
                   }`}
                 >
-                  <span className="block text-sm font-bold text-gray-900">
+                  <span className="block text-sm font-bold text-foreground">
                     {val.label}
                   </span>
                   {val.tag && (
-                    <span className="text-xs text-gray-500 mt-0.5 block">
+                    <span className="text-xs text-muted-foreground mt-0.5 block">
                       {val.tag}
                     </span>
                   )}
                   {val.priceModifier > 0 && (
-                    <span className="absolute top-4 right-4 text-xs font-medium text-gray-500">
+                    <span className="absolute top-4 right-4 text-xs font-medium text-muted-foreground">
                       +${val.priceModifier}
                     </span>
                   )}

@@ -14,30 +14,30 @@ const QuantitySelector = ({ quantity, setQuantity, stock }) => {
 
   return (
     <div className="mb-6">
-      <span className="block text-sm font-semibold text-gray-900 mb-3">
+      <span className="block text-sm font-semibold text-foreground mb-3">
         {t("productDetails.quantity")}
       </span>
       <div className="flex items-center gap-4">
-        <div className="flex items-center border border-gray-300 rounded-xl bg-white">
+        <div className="flex items-center border border-input rounded-xl bg-card">
           <button
             onClick={handleDecrease}
             disabled={quantity <= 1}
-            className="p-3 hover:text-blue-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="p-3 hover:text-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-foreground"
           >
             <Minus size={18} />
           </button>
-          <span className="w-12 text-center font-bold text-gray-900">
+          <span className="w-12 text-center font-bold text-foreground">
             {quantity}
           </span>
           <button
             onClick={handleIncrease}
             disabled={quantity >= stock}
-            className="p-3 hover:text-blue-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="p-3 hover:text-primary transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-foreground"
           >
             <Plus size={18} />
           </button>
         </div>
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-muted-foreground">
           {stock} {t("productDetails.available")}
         </span>
       </div>

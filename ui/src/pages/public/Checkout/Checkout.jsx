@@ -289,7 +289,7 @@ const Checkout = () => {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB]">
+    <div className="min-h-screen bg-background">
       <Helmet>
         <title>{t("checkout.title")} - TechVibe</title>
       </Helmet>
@@ -307,19 +307,19 @@ const Checkout = () => {
                   <div
                     className={`flex items-center gap-[12px] px-[20px] py-[12px] rounded-[16px] transition-all ${
                       isCurrent
-                        ? "bg-[#3B82F6] text-white shadow-lg shadow-blue-500/25"
+                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                         : isCompleted
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-[#F3F4F6] text-[#9CA3AF]"
+                          ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-500"
+                          : "bg-muted text-muted-foreground"
                     }`}
                   >
                     <div
                       className={`w-[32px] h-[32px] rounded-full flex items-center justify-center ${
                         isCurrent
-                          ? "bg-white/20"
+                          ? "bg-primary-foreground/20"
                           : isCompleted
                             ? "bg-emerald-500 text-white"
-                            : "bg-[#E5E7EB]"
+                            : "bg-muted-foreground/20"
                       }`}
                     >
                       {isCompleted ? (
@@ -335,9 +335,7 @@ const Checkout = () => {
                   {index < STEPS.length - 1 && (
                     <div
                       className={`w-[60px] h-[3px] mx-[8px] rounded-full ${
-                        currentStep > step.id
-                          ? "bg-emerald-400"
-                          : "bg-[#E5E7EB]"
+                        currentStep > step.id ? "bg-emerald-400" : "bg-border"
                       }`}
                     />
                   )}
@@ -349,7 +347,7 @@ const Checkout = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-[32px]">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-[24px] shadow-sm border border-[#E5E7EB] p-[32px]">
+            <div className="bg-card rounded-[24px] shadow-sm border border-border p-[32px]">
               {currentStep === 1 && (
                 <ShippingStep
                   addresses={addresses}
@@ -379,14 +377,14 @@ const Checkout = () => {
                 />
               )}
 
-              <div className="flex justify-between mt-[32px] pt-[24px] border-t border-[#E5E7EB]">
+              <div className="flex justify-between mt-[32px] pt-[24px] border-t border-border">
                 <button
                   onClick={handleBack}
                   disabled={currentStep === 1}
                   className={`flex items-center gap-[8px] px-[24px] py-[14px] rounded-[12px] font-semibold transition-colors ${
                     currentStep === 1
-                      ? "bg-[#F3F4F6] text-[#9CA3AF] cursor-not-allowed"
-                      : "bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]"
+                      ? "bg-muted text-muted-foreground/50 cursor-not-allowed"
+                      : "bg-muted text-foreground hover:bg-muted/80"
                   }`}
                 >
                   <ArrowLeft className="w-[18px] h-[18px]" />
@@ -399,8 +397,8 @@ const Checkout = () => {
                     disabled={!canProceed()}
                     className={`flex items-center gap-[8px] px-[24px] py-[14px] rounded-[12px] font-semibold transition-colors ${
                       canProceed()
-                        ? "bg-[#3B82F6] text-white hover:bg-[#2563EB]"
-                        : "bg-[#E5E7EB] text-[#9CA3AF] cursor-not-allowed"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "bg-muted text-muted-foreground/50 cursor-not-allowed"
                     }`}
                   >
                     {t("common.next")}
@@ -428,15 +426,15 @@ const Checkout = () => {
             </div>
 
             <div className="flex items-center justify-center gap-[32px] mt-[24px]">
-              <div className="flex items-center gap-[8px] text-[13px] text-[#6B7280]">
+              <div className="flex items-center gap-[8px] text-[13px] text-muted-foreground">
                 <ShieldCheck className="w-[18px] h-[18px] text-emerald-500" />
                 {t("checkout.secureCheckout")}
               </div>
-              <div className="flex items-center gap-[8px] text-[13px] text-[#6B7280]">
+              <div className="flex items-center gap-[8px] text-[13px] text-muted-foreground">
                 <Lock className="w-[18px] h-[18px] text-emerald-500" />
                 {t("checkout.sslEncrypted")}
               </div>
-              <div className="flex items-center gap-[8px] text-[13px] text-[#6B7280]">
+              <div className="flex items-center gap-[8px] text-[13px] text-muted-foreground">
                 <Truck className="w-[18px] h-[18px] text-emerald-500" />
                 {t("checkout.fastDelivery")}
               </div>

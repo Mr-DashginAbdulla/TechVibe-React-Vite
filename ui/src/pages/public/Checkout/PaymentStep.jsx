@@ -37,10 +37,10 @@ const PaymentStep = ({
   return (
     <div>
       <div className="mb-[24px]">
-        <h2 className="text-[24px] font-bold text-[#111827] mb-[8px]">
+        <h2 className="text-[24px] font-bold text-foreground mb-[8px]">
           {t("checkout.step2")}
         </h2>
-        <p className="text-[15px] text-[#6B7280]">
+        <p className="text-[15px] text-muted-foreground">
           {t("checkout.selectPayment")}
         </p>
       </div>
@@ -56,38 +56,38 @@ const PaymentStep = ({
               onClick={() => onPaymentMethodChange(method.id)}
               className={`p-[20px] rounded-[16px] border-2 cursor-pointer transition-all flex items-center gap-[16px] ${
                 isSelected
-                  ? `border-[#3B82F6] bg-blue-50/50`
-                  : "border-[#E5E7EB] hover:border-[#3B82F6]/50"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary/50"
               }`}
             >
               <div
                 className={`w-[48px] h-[48px] rounded-[12px] flex items-center justify-center ${
-                  isSelected ? "bg-[#3B82F6]" : "bg-[#F3F4F6]"
+                  isSelected ? "bg-primary" : "bg-muted"
                 }`}
               >
                 <Icon
                   className={`w-[24px] h-[24px] ${
-                    isSelected ? "text-white" : "text-[#6B7280]"
+                    isSelected
+                      ? "text-primary-foreground"
+                      : "text-muted-foreground"
                   }`}
                 />
               </div>
               <div className="flex-1">
-                <p className="text-[16px] font-semibold text-[#111827]">
+                <p className="text-[16px] font-semibold text-foreground">
                   {t(`checkout.payment.${method.id}`)}
                 </p>
-                <p className="text-[14px] text-[#6B7280]">
+                <p className="text-[14px] text-muted-foreground">
                   {t(`checkout.payment.${method.id}Desc`)}
                 </p>
               </div>
               <div
                 className={`w-[24px] h-[24px] rounded-full border-2 flex items-center justify-center ${
-                  isSelected
-                    ? "border-[#3B82F6] bg-[#3B82F6]"
-                    : "border-[#D1D5DB]"
+                  isSelected ? "border-primary bg-primary" : "border-border"
                 }`}
               >
                 {isSelected && (
-                  <div className="w-[10px] h-[10px] rounded-full bg-white" />
+                  <div className="w-[10px] h-[10px] rounded-full bg-primary-foreground" />
                 )}
               </div>
             </div>
@@ -96,8 +96,8 @@ const PaymentStep = ({
       </div>
 
       {paymentMethod === "card" && (
-        <div className="bg-[#F9FAFB] rounded-[20px] p-[24px] space-y-[20px]">
-          <h3 className="text-[18px] font-semibold text-[#111827]">
+        <div className="bg-muted/30 rounded-[20px] p-[24px] space-y-[20px]">
+          <h3 className="text-[18px] font-semibold text-foreground">
             {t("checkout.cardDetails")}
           </h3>
 
@@ -136,7 +136,7 @@ const PaymentStep = ({
 
           <div className="space-y-[16px]">
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("checkout.cardNumber")}
               </label>
               <input
@@ -150,12 +150,12 @@ const PaymentStep = ({
                 }
                 placeholder="1234 5678 9012 3456"
                 maxLength={19}
-                className="w-full px-[16px] py-[14px] border border-[#E5E7EB] rounded-[12px] text-[16px] font-mono focus:outline-none focus:ring-2 focus:ring-[#3B82F6] bg-white"
+                className="w-full px-[16px] py-[14px] border border-input bg-card rounded-[12px] text-[16px] font-mono focus:outline-none focus:ring-2 focus:ring-primary text-foreground placeholder:text-muted-foreground"
               />
             </div>
 
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("checkout.cardName")}
               </label>
               <input
@@ -168,13 +168,13 @@ const PaymentStep = ({
                   })
                 }
                 placeholder={t("checkout.cardHolderPlaceholder")}
-                className="w-full px-[16px] py-[14px] border border-[#E5E7EB] rounded-[12px] text-[16px] uppercase focus:outline-none focus:ring-2 focus:ring-[#3B82F6] bg-white"
+                className="w-full px-[16px] py-[14px] border border-input bg-card rounded-[12px] text-[16px] uppercase focus:outline-none focus:ring-2 focus:ring-primary text-foreground placeholder:text-muted-foreground"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-[16px]">
               <div>
-                <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                   {t("checkout.expiry")}
                 </label>
                 <input
@@ -188,11 +188,11 @@ const PaymentStep = ({
                   }
                   placeholder={t("checkout.mmyy")}
                   maxLength={5}
-                  className="w-full px-[16px] py-[14px] border border-[#E5E7EB] rounded-[12px] text-[16px] font-mono focus:outline-none focus:ring-2 focus:ring-[#3B82F6] bg-white"
+                  className="w-full px-[16px] py-[14px] border border-input bg-card rounded-[12px] text-[16px] font-mono focus:outline-none focus:ring-2 focus:ring-primary text-foreground placeholder:text-muted-foreground"
                 />
               </div>
               <div>
-                <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                   {t("checkout.cvv")}
                 </label>
                 <input
@@ -206,29 +206,29 @@ const PaymentStep = ({
                   }
                   placeholder="•••"
                   maxLength={4}
-                  className="w-full px-[16px] py-[14px] border border-[#E5E7EB] rounded-[12px] text-[16px] font-mono focus:outline-none focus:ring-2 focus:ring-[#3B82F6] bg-white"
+                  className="w-full px-[16px] py-[14px] border border-input bg-card rounded-[12px] text-[16px] font-mono focus:outline-none focus:ring-2 focus:ring-primary text-foreground placeholder:text-muted-foreground"
                 />
               </div>
             </div>
           </div>
 
-          <p className="text-[13px] text-[#6B7280] text-center">
+          <p className="text-[13px] text-muted-foreground text-center">
             {t("checkout.cardSecureNote")}
           </p>
         </div>
       )}
 
       {paymentMethod === "cash" && (
-        <div className="bg-emerald-50 rounded-[20px] p-[24px] border border-emerald-200">
+        <div className="bg-emerald-500/10 rounded-[20px] p-[24px] border border-emerald-500/20">
           <div className="flex items-start gap-[16px]">
-            <div className="w-[48px] h-[48px] bg-emerald-100 rounded-[12px] flex items-center justify-center shrink-0">
-              <Banknote className="w-[24px] h-[24px] text-emerald-600" />
+            <div className="w-[48px] h-[48px] bg-emerald-500/20 rounded-[12px] flex items-center justify-center shrink-0">
+              <Banknote className="w-[24px] h-[24px] text-emerald-600 dark:text-emerald-500" />
             </div>
             <div>
-              <h3 className="text-[18px] font-semibold text-emerald-800 mb-[8px]">
+              <h3 className="text-[18px] font-semibold text-emerald-700 dark:text-emerald-500 mb-[8px]">
                 {t("checkout.payment.cash")}
               </h3>
-              <p className="text-[14px] text-emerald-700">
+              <p className="text-[14px] text-emerald-600 dark:text-emerald-400">
                 {t("checkout.cashNote")}
               </p>
             </div>
@@ -237,16 +237,16 @@ const PaymentStep = ({
       )}
 
       {paymentMethod === "gpay" && (
-        <div className="bg-purple-50 rounded-[20px] p-[24px] border border-purple-200">
+        <div className="bg-purple-500/10 rounded-[20px] p-[24px] border border-purple-500/20">
           <div className="flex items-start gap-[16px]">
-            <div className="w-[48px] h-[48px] bg-purple-100 rounded-[12px] flex items-center justify-center shrink-0">
-              <Smartphone className="w-[24px] h-[24px] text-purple-600" />
+            <div className="w-[48px] h-[48px] bg-purple-500/20 rounded-[12px] flex items-center justify-center shrink-0">
+              <Smartphone className="w-[24px] h-[24px] text-purple-600 dark:text-purple-400" />
             </div>
             <div>
-              <h3 className="text-[18px] font-semibold text-purple-800 mb-[8px]">
+              <h3 className="text-[18px] font-semibold text-purple-800 dark:text-purple-400 mb-[8px]">
                 {t("checkout.payment.gpay")}
               </h3>
-              <p className="text-[14px] text-purple-700">
+              <p className="text-[14px] text-purple-700 dark:text-purple-300">
                 {t("checkout.gpayNote")}
               </p>
             </div>

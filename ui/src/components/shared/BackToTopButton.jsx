@@ -27,7 +27,7 @@ const BackToTopButton = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-[24px] right-[24px] z-50 w-[48px] h-[48px] bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
+      className={`fixed bottom-[24px] right-[24px] z-50 w-[48px] h-[48px] bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
         isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-[20px] pointer-events-none"

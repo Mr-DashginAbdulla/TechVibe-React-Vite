@@ -136,16 +136,16 @@ const VerifyCode = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px]">
+    <div className="min-h-screen bg-background flex items-center justify-center p-[16px]">
       <Helmet>
         <title>{t("auth.resetPassword")} - TechVibe</title>
       </Helmet>
-      <div className="w-full max-w-[440px] bg-white rounded-[24px] shadow-xl p-[40px]">
+      <div className="w-full max-w-[440px] bg-card rounded-[24px] shadow-xl p-[40px] border border-border">
         <div className="text-center mb-[32px]">
-          <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
+          <h1 className="text-[28px] font-bold text-foreground mb-[8px]">
             {isVerified ? t("profile.newPassword") : t("auth.resetPassword")}
           </h1>
-          <p className="text-[15px] text-[#6B7280]">
+          <p className="text-[15px] text-muted-foreground">
             {isVerified
               ? `${t("auth.resetPassword")} for ${email}`
               : t("auth.enterVerificationCode")}
@@ -155,23 +155,23 @@ const VerifyCode = () => {
         {!isVerified ? (
           <>
             <div className="flex justify-center mb-[24px]">
-              <div className="w-[72px] h-[72px] bg-[#EEF2FF] rounded-full flex items-center justify-center">
-                <CheckCircle className="w-[36px] h-[36px] text-[#3B82F6]" />
+              <div className="w-[72px] h-[72px] bg-primary/10 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-[36px] h-[36px] text-primary" />
               </div>
             </div>
 
-            <div className="bg-[#F0FDF4] border border-[#86EFAC] rounded-[12px] px-[16px] py-[12px] flex items-center gap-[10px] mb-[24px]">
-              <CheckCircle className="w-[18px] h-[18px] text-[#22C55E] shrink-0" />
-              <p className="text-[14px] text-[#15803D]">
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-[12px] px-[16px] py-[12px] flex items-center gap-[10px] mb-[24px]">
+              <CheckCircle className="w-[18px] h-[18px] text-green-600 dark:text-green-400 shrink-0" />
+              <p className="text-[14px] text-green-700 dark:text-green-300">
                 {t("auth.passwordResetLinkSent")}
               </p>
             </div>
 
             <div className="mb-[24px]">
-              <label className="block text-[15px] font-medium text-[#111827] mb-[8px]">
+              <label className="block text-[15px] font-medium text-foreground mb-[8px]">
                 {t("auth.verificationCode")}
               </label>
-              <p className="text-[13px] text-[#6B7280] mb-[16px]">
+              <p className="text-[13px] text-muted-foreground mb-[16px]">
                 {t("auth.enter6DigitCode")}
               </p>
 
@@ -187,7 +187,7 @@ const VerifyCode = () => {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={index === 0 ? handlePaste : undefined}
-                    className="w-[48px] h-[56px] text-center text-[20px] font-semibold border border-[#E5E7EB] rounded-[12px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+                    className="w-[48px] h-[56px] text-center text-[20px] font-semibold border border-input bg-background rounded-[12px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
                   />
                 ))}
               </div>
@@ -196,7 +196,7 @@ const VerifyCode = () => {
             <button
               type="button"
               onClick={handleVerifyCode}
-              className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold py-[14px] rounded-[12px] transition-colors mb-[16px]"
+              className="flex items-center justify-center gap-[8px] w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-[14px] rounded-[12px] transition-colors mb-[16px]"
             >
               {t("auth.verifyCode")}
               <CheckCircle className="w-[18px] h-[18px]" />
@@ -205,7 +205,7 @@ const VerifyCode = () => {
             <button
               type="button"
               onClick={handleResendCode}
-              className="flex items-center justify-center gap-[8px] w-full text-[#6B7280] hover:text-[#374151] font-medium py-[12px] transition-colors"
+              className="flex items-center justify-center gap-[8px] w-full text-muted-foreground hover:text-foreground font-medium py-[12px] transition-colors"
             >
               <RefreshCcw className="w-[16px] h-[16px]" />
               {t("auth.resendCode")}
@@ -214,13 +214,13 @@ const VerifyCode = () => {
         ) : (
           <form onSubmit={handleResetPassword} className="space-y-[20px]">
             <div className="flex justify-center mb-[8px]">
-              <div className="w-[72px] h-[72px] bg-[#DCFCE7] rounded-full flex items-center justify-center">
-                <Lock className="w-[36px] h-[36px] text-[#22C55E]" />
+              <div className="w-[72px] h-[72px] bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center">
+                <Lock className="w-[36px] h-[36px] text-green-600 dark:text-green-400" />
               </div>
             </div>
 
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("profile.newPassword")}
               </label>
               <div className="relative">
@@ -229,12 +229,12 @@ const VerifyCode = () => {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder={t("auth.passwordPlaceholder")}
-                  className="w-full px-[16px] py-[12px] pr-[44px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+                  className="w-full px-[16px] py-[12px] pr-[44px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-[12px] top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#6B7280]"
+                  className="absolute right-[12px] top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   {showPassword ? (
                     <EyeOff className="w-[20px] h-[20px]" />
@@ -246,7 +246,7 @@ const VerifyCode = () => {
             </div>
 
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("profile.confirmNewPassword")}
               </label>
               <div className="relative">
@@ -255,12 +255,12 @@ const VerifyCode = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder={t("auth.confirmPasswordPlaceholder")}
-                  className="w-full px-[16px] py-[12px] pr-[44px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+                  className="w-full px-[16px] py-[12px] pr-[44px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-[12px] top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#6B7280]"
+                  className="absolute right-[12px] top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   {showConfirmPassword ? (
                     <EyeOff className="w-[20px] h-[20px]" />
@@ -274,7 +274,7 @@ const VerifyCode = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-[#93C5FD] text-white font-semibold py-[14px] rounded-[12px] transition-colors"
+              className="flex items-center justify-center gap-[8px] w-full bg-primary hover:bg-primary/90 disabled:opacity-70 text-primary-foreground font-semibold py-[14px] rounded-[12px] transition-colors"
             >
               {isLoading ? (
                 <>
@@ -293,7 +293,7 @@ const VerifyCode = () => {
 
         <Link
           to="/auth/login"
-          className="flex items-center justify-center gap-[8px] w-full mt-[16px] text-[#3B82F6] hover:text-[#2563EB] font-medium transition-colors"
+          className="flex items-center justify-center gap-[8px] w-full mt-[16px] text-primary hover:text-primary/80 font-medium transition-colors"
         >
           <ArrowLeft className="w-[16px] h-[16px]" />
           {t("auth.backToLogin")}

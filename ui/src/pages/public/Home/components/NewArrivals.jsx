@@ -16,18 +16,18 @@ const NewArrivals = ({
   };
 
   return (
-    <section className="py-[60px] bg-white">
+    <section className="py-[60px] bg-background">
       <div className="container mx-auto px-[16px]">
         <div className="flex items-center justify-between mb-[32px]">
           <div className="flex items-center gap-[12px]">
-            <div className="w-[4px] h-[32px] bg-[#10B981] rounded-full"></div>
-            <h2 className="text-[28px] font-bold text-[#111827]">
+            <div className="w-[4px] h-[32px] bg-emerald-500 rounded-full"></div>
+            <h2 className="text-[28px] font-bold text-foreground">
               {t("home.newArrivals")}
             </h2>
           </div>
           <Link
             to="/shop"
-            className="flex items-center gap-[8px] text-[#3B82F6] hover:text-[#2563EB] font-medium transition-colors"
+            className="flex items-center gap-[8px] text-primary hover:text-primary/90 font-medium transition-colors"
           >
             {t("home.viewAll")}
             <ArrowRight className="w-[18px] h-[18px]" />
@@ -47,7 +47,7 @@ const NewArrivals = ({
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 py-10">
+          <p className="text-center text-muted-foreground py-10">
             {t("common.noProductsFound")}
           </p>
         )}

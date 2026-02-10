@@ -77,20 +77,20 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-[16px] py-[40px]">
+    <div className="min-h-screen bg-background flex items-center justify-center p-[16px] py-[40px]">
       <Helmet>
         <title>{t("auth.createAccount")} - TechVibe</title>
       </Helmet>
-      <div className="w-full max-w-[480px] bg-white rounded-[24px] shadow-xl p-[40px]">
+      <div className="w-full max-w-[480px] bg-card rounded-[24px] shadow-xl p-[40px] border border-border">
         <div className="text-center mb-[32px]">
-          <h1 className="text-[28px] font-bold text-[#111827] mb-[8px]">
+          <h1 className="text-[28px] font-bold text-foreground mb-[8px]">
             {t("auth.createAccount")}
           </h1>
-          <p className="text-[15px] text-[#6B7280]">
+          <p className="text-[15px] text-muted-foreground">
             {t("auth.hasAccount")}{" "}
             <Link
               to="/auth/login"
-              className="text-[#3B82F6] font-medium hover:underline"
+              className="text-primary font-medium hover:underline"
             >
               {t("auth.signIn")}
             </Link>
@@ -100,7 +100,7 @@ const Register = () => {
         <form className="space-y-[20px]" onSubmit={handleSubmit}>
           <div className="flex gap-[16px]">
             <div className="flex-1">
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("auth.firstName")}
               </label>
               <input
@@ -109,11 +109,11 @@ const Register = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder={t("auth.firstNamePlaceholder")}
-                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+                className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
               />
             </div>
             <div className="flex-1">
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("auth.lastName")}
               </label>
               <input
@@ -122,13 +122,13 @@ const Register = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder={t("auth.lastNamePlaceholder")}
-                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+                className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+            <label className="block text-[14px] font-medium text-foreground mb-[8px]">
               {t("auth.email")}
             </label>
             <input
@@ -137,12 +137,12 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder={t("auth.emailPlaceholder")}
-              className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+              className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-foreground"
             />
           </div>
 
           <div>
-            <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+            <label className="block text-[14px] font-medium text-foreground mb-[8px]">
               {t("auth.password")}
             </label>
             <div className="relative">
@@ -152,12 +152,12 @@ const Register = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder={t("auth.passwordPlaceholder")}
-                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all pr-[48px]"
+                className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all pr-[48px] text-foreground"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-[14px] top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#374151] transition-colors"
+                className="absolute right-[14px] top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 {showPassword ? (
                   <EyeOff className="w-[20px] h-[20px]" />
@@ -169,7 +169,7 @@ const Register = () => {
           </div>
 
           <div>
-            <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+            <label className="block text-[14px] font-medium text-foreground mb-[8px]">
               {t("auth.confirmPassword")}
             </label>
             <div className="relative">
@@ -179,12 +179,12 @@ const Register = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder={t("auth.confirmPasswordPlaceholder")}
-                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all pr-[48px]"
+                className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all pr-[48px] text-foreground"
               />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-[14px] top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#374151] transition-colors"
+                className="absolute right-[14px] top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 {showConfirmPassword ? (
                   <EyeOff className="w-[20px] h-[20px]" />
@@ -201,15 +201,18 @@ const Register = () => {
               id="terms"
               checked={agreedToTerms}
               onChange={(e) => setAgreedToTerms(e.target.checked)}
-              className="w-[18px] h-[18px] mt-[2px] rounded-[4px] border-[#E5E7EB] text-[#3B82F6] focus:ring-[#3B82F6]"
+              className="w-[18px] h-[18px] mt-[2px] rounded-[4px] border-input text-primary focus:ring-primary"
             />
-            <label htmlFor="terms" className="text-[14px] text-[#6B7280]">
+            <label
+              htmlFor="terms"
+              className="text-[14px] text-muted-foreground"
+            >
               {t("auth.agreeToTerms")}{" "}
-              <Link to="/terms" className="text-[#3B82F6] hover:underline">
+              <Link to="/terms" className="text-primary hover:underline">
                 {t("auth.termsOfService")}
               </Link>{" "}
               {t("common.and")}{" "}
-              <Link to="/privacy" className="text-[#3B82F6] hover:underline">
+              <Link to="/privacy" className="text-primary hover:underline">
                 {t("auth.privacyPolicy")}
               </Link>
             </label>
@@ -218,7 +221,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex items-center justify-center gap-[8px] w-full bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-[#93C5FD] text-white font-semibold py-[14px] rounded-[12px] transition-colors"
+            className="flex items-center justify-center gap-[8px] w-full bg-primary hover:bg-primary/90 disabled:opacity-70 text-primary-foreground font-semibold py-[14px] rounded-[12px] transition-colors"
           >
             {isLoading ? (
               <>
@@ -235,15 +238,15 @@ const Register = () => {
         </form>
 
         <div className="flex items-center gap-[16px] my-[24px]">
-          <div className="flex-1 h-px bg-[#E5E7EB]"></div>
-          <span className="text-[13px] text-[#9CA3AF]">
+          <div className="flex-1 h-px bg-border"></div>
+          <span className="text-[13px] text-muted-foreground">
             {t("auth.orSignUpWith")}
           </span>
-          <div className="flex-1 h-px bg-[#E5E7EB]"></div>
+          <div className="flex-1 h-px bg-border"></div>
         </div>
 
         <div className="flex items-center justify-center gap-[12px]">
-          <button className="flex-1 h-[48px] bg-white border border-[#E5E7EB] rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-[#F9FAFB] transition-colors">
+          <button className="flex-1 h-[48px] bg-card border border-border rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-muted/50 transition-colors">
             <svg className="w-[20px] h-[20px]" viewBox="0 0 24 24">
               <path
                 fill="#4285F4"
@@ -262,30 +265,30 @@ const Register = () => {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            <span className="text-[14px] font-medium text-[#374151]">
+            <span className="text-[14px] font-medium text-foreground">
               Google
             </span>
           </button>
-          <button className="flex-1 h-[48px] bg-white border border-[#E5E7EB] rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-[#F9FAFB] transition-colors">
+          <button className="flex-1 h-[48px] bg-card border border-border rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-muted/50 transition-colors">
             <svg
-              className="w-[20px] h-[20px]"
+              className="w-[20px] h-[20px] text-foreground"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
               <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
             </svg>
-            <span className="text-[14px] font-medium text-[#374151]">
+            <span className="text-[14px] font-medium text-foreground">
               Apple
             </span>
           </button>
-          <button className="flex-1 h-[48px] bg-white border border-[#E5E7EB] rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-[#F9FAFB] transition-colors">
+          <button className="flex-1 h-[48px] bg-card border border-border rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-muted/50 transition-colors">
             <svg className="w-[20px] h-[20px]" viewBox="0 0 24 24">
               <path fill="#F25022" d="M1 1h10v10H1z" />
               <path fill="#00A4EF" d="M1 13h10v10H1z" />
               <path fill="#7FBA00" d="M13 1h10v10H13z" />
               <path fill="#FFB900" d="M13 13h10v10H13z" />
             </svg>
-            <span className="text-[14px] font-medium text-[#374151]">
+            <span className="text-[14px] font-medium text-foreground">
               Microsoft
             </span>
           </button>
@@ -293,7 +296,7 @@ const Register = () => {
 
         <Link
           to="/"
-          className="flex items-center justify-center w-full mt-[20px] text-[14px] text-[#6B7280] hover:text-[#3B82F6] font-medium transition-colors"
+          className="flex items-center justify-center w-full mt-[20px] text-[14px] text-muted-foreground hover:text-primary font-medium transition-colors"
         >
           {t("common.continueAsGuest")} →
         </Link>

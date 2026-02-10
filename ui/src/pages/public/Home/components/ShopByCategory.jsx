@@ -27,13 +27,13 @@ const ShopByCategory = ({ categories = [] }) => {
   const parentCategories = categories.filter((cat) => cat.parentId === null);
 
   return (
-    <section className="py-[60px] bg-[#F9FAFB]">
+    <section className="py-[60px] bg-muted/30">
       <div className="container mx-auto px-[16px]">
         <div className="text-center mb-[40px]">
-          <h2 className="text-[28px] font-bold text-[#111827] mb-[12px]">
+          <h2 className="text-[28px] font-bold text-foreground mb-[12px]">
             {t("home.shopByCategory")}
           </h2>
-          <p className="text-[16px] text-[#6B7280]">
+          <p className="text-[16px] text-muted-foreground">
             {t("home.shopByCategoryDesc")}
           </p>
         </div>
@@ -62,8 +62,8 @@ const ShopByCategory = ({ categories = [] }) => {
                   <h3 className="text-[20px] font-bold text-white">
                     {t(`categories.${category.id}`)}
                   </h3>
-                  <div className="w-[36px] h-[36px] bg-white rounded-full flex items-center justify-center group-hover:bg-[#3B82F6] transition-colors">
-                    <ArrowUpRight className="w-[18px] h-[18px] text-[#111827] group-hover:text-white transition-colors" />
+                  <div className="w-[36px] h-[36px] bg-white rounded-full flex items-center justify-center group-hover:bg-primary transition-colors">
+                    <ArrowUpRight className="w-[18px] h-[18px] text-black group-hover:text-white transition-colors" />
                   </div>
                 </div>
               </Link>

@@ -10,7 +10,7 @@ const MainLayout = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-300">
       <ScrollToTop />
       <Helmet>
         <title>TechVibe - {t("home.heroTitle")}</title>

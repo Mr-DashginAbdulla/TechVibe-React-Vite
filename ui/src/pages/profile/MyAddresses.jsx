@@ -115,7 +115,7 @@ const MyAddresses = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[400px]">
-        <Loader2 className="w-[32px] h-[32px] text-[#3B82F6] animate-spin" />
+        <Loader2 className="w-[32px] h-[32px] text-primary animate-spin" />
       </div>
     );
   }
@@ -125,18 +125,18 @@ const MyAddresses = () => {
       <Helmet>
         <title>{t("profile.myAddresses")} - TechVibe</title>
       </Helmet>
-      <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px] flex items-center justify-between">
+      <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px] flex items-center justify-between">
         <div>
-          <h1 className="text-[24px] font-bold text-[#111827] mb-[4px]">
+          <h1 className="text-[24px] font-bold text-foreground mb-[4px]">
             {t("profile.myAddresses")}
           </h1>
-          <p className="text-[15px] text-[#6B7280]">
+          <p className="text-[15px] text-muted-foreground">
             {t("order.shippingAddress")}
           </p>
         </div>
         <button
           onClick={() => handleOpenModal()}
-          className="flex items-center gap-[8px] px-[20px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-[12px] transition-colors"
+          className="flex items-center gap-[8px] px-[20px] py-[12px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-[12px] transition-colors"
         >
           <Plus className="w-[18px] h-[18px]" />
           {t("address.addNew")}
@@ -144,14 +144,14 @@ const MyAddresses = () => {
       </div>
 
       {addresses.length === 0 ? (
-        <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[60px] text-center">
-          <MapPin className="w-[48px] h-[48px] text-[#9CA3AF] mx-auto mb-[16px]" />
-          <p className="text-[16px] font-medium text-[#6B7280]">
+        <div className="bg-card rounded-[20px] shadow-sm border border-border p-[60px] text-center">
+          <MapPin className="w-[48px] h-[48px] text-muted-foreground mx-auto mb-[16px]" />
+          <p className="text-[16px] font-medium text-muted-foreground">
             {t("address.noAddresses")}
           </p>
           <button
             onClick={() => handleOpenModal()}
-            className="mt-[16px] text-[#3B82F6] hover:underline"
+            className="mt-[16px] text-primary hover:underline"
           >
             {t("address.addFirstAddress")}
           </button>
@@ -161,46 +161,46 @@ const MyAddresses = () => {
           {addresses.map((address) => (
             <div
               key={address.id}
-              className={`bg-white rounded-[20px] shadow-sm border-2 p-[24px] relative ${
-                address.isDefault ? "border-[#3B82F6]" : "border-[#E5E7EB]"
+              className={`bg-card rounded-[20px] shadow-sm border-2 p-[24px] relative ${
+                address.isDefault ? "border-primary" : "border-border"
               }`}
             >
               {address.isDefault && (
-                <span className="absolute top-[16px] right-[16px] px-[10px] py-[4px] bg-[#3B82F6] text-white text-[11px] font-medium rounded-full">
+                <span className="absolute top-[16px] right-[16px] px-[10px] py-[4px] bg-primary text-primary-foreground text-[11px] font-medium rounded-full">
                   {t("address.defaultAddress")}
                 </span>
               )}
               <div className="flex items-center gap-[12px] mb-[16px]">
-                <div className="w-[44px] h-[44px] bg-[#F3F4F6] rounded-[12px] flex items-center justify-center">
+                <div className="w-[44px] h-[44px] bg-muted rounded-[12px] flex items-center justify-center">
                   {address.label === "Home" ? (
-                    <Home className="w-[20px] h-[20px] text-[#6B7280]" />
+                    <Home className="w-[20px] h-[20px] text-muted-foreground" />
                   ) : (
-                    <Building2 className="w-[20px] h-[20px] text-[#6B7280]" />
+                    <Building2 className="w-[20px] h-[20px] text-muted-foreground" />
                   )}
                 </div>
                 <div>
-                  <p className="text-[16px] font-semibold text-[#111827]">
+                  <p className="text-[16px] font-semibold text-foreground">
                     {address.label === "Home"
                       ? t("address.home")
                       : t("address.work")}
                   </p>
-                  <p className="text-[13px] text-[#6B7280]">
+                  <p className="text-[13px] text-muted-foreground">
                     {address.firstName} {address.lastName}
                   </p>
                 </div>
               </div>
-              <div className="text-[14px] text-[#374151] space-y-[4px] mb-[20px]">
+              <div className="text-[14px] text-foreground space-y-[4px] mb-[20px]">
                 <p>{address.address}</p>
                 <p>
                   {address.city}, {address.state} {address.zipCode}
                 </p>
                 <p>{address.country}</p>
-                <p className="text-[#6B7280]">{address.phone}</p>
+                <p className="text-muted-foreground">{address.phone}</p>
               </div>
               <div className="flex items-center gap-[8px]">
                 <button
                   onClick={() => handleOpenModal(address)}
-                  className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-[#374151] bg-[#F3F4F6] hover:bg-[#E5E7EB] rounded-[8px] transition-colors"
+                  className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-foreground bg-muted hover:bg-muted/80 rounded-[8px] transition-colors"
                 >
                   <Edit2 className="w-[14px] h-[14px]" />
                   {t("common.edit")}
@@ -209,14 +209,14 @@ const MyAddresses = () => {
                   <>
                     <button
                       onClick={() => handleSetDefault(address.id)}
-                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-[#3B82F6] bg-blue-50 hover:bg-blue-100 rounded-[8px] transition-colors"
+                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-primary bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-[8px] transition-colors"
                     >
                       <Check className="w-[14px] h-[14px]" />
                       {t("address.setDefault")}
                     </button>
                     <button
                       onClick={() => handleDelete(address.id)}
-                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-[8px] transition-colors"
+                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-red-600 dark:text-red-400 bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 rounded-[8px] transition-colors"
                     >
                       <Trash2 className="w-[14px] h-[14px]" />
                     </button>
@@ -230,23 +230,23 @@ const MyAddresses = () => {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
-          <div className="bg-white rounded-[24px] w-full max-w-[500px] max-h-[90vh] overflow-y-auto">
-            <div className="p-[24px] border-b border-[#E5E7EB] flex items-center justify-between">
-              <h2 className="text-[20px] font-bold text-[#111827]">
+          <div className="bg-card rounded-[24px] w-full max-w-[500px] max-h-[90vh] overflow-y-auto border border-border">
+            <div className="p-[24px] border-b border-border flex items-center justify-between">
+              <h2 className="text-[20px] font-bold text-foreground">
                 {editingAddress
                   ? t("address.editAddress")
                   : t("address.addNew")}
               </h2>
               <button
                 onClick={handleCloseModal}
-                className="p-[8px] hover:bg-[#F3F4F6] rounded-[8px]"
+                className="p-[8px] hover:bg-muted rounded-[8px]"
               >
-                <X className="w-[20px] h-[20px] text-[#6B7280]" />
+                <X className="w-[20px] h-[20px] text-muted-foreground" />
               </button>
             </div>
             <form onSubmit={handleSubmit} className="p-[24px] space-y-[16px]">
               <div>
-                <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                   {t("order.status")}
                 </label>
                 <div className="flex gap-[8px]">
@@ -257,8 +257,8 @@ const MyAddresses = () => {
                       onClick={() => setFormData({ ...formData, label })}
                       className={`flex-1 py-[12px] rounded-[10px] text-[14px] font-medium transition-colors ${
                         formData.label === label
-                          ? "bg-[#3B82F6] text-white"
-                          : "bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]"
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-foreground hover:bg-muted/80"
                       }`}
                     >
                       {label === "Home" ? t("address.home") : t("address.work")}
@@ -268,7 +268,7 @@ const MyAddresses = () => {
               </div>
               <div className="grid grid-cols-2 gap-[12px]">
                 <div>
-                  <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                  <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                     {t("auth.firstName")}
                   </label>
                   <input
@@ -277,12 +277,12 @@ const MyAddresses = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, firstName: e.target.value })
                     }
-                    className="w-full px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                    className="w-full px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                  <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                     {t("auth.lastName")}
                   </label>
                   <input
@@ -291,13 +291,13 @@ const MyAddresses = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, lastName: e.target.value })
                     }
-                    className="w-full px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                    className="w-full px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                     required
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                   {t("address.addressLine")}
                 </label>
                 <input
@@ -306,13 +306,13 @@ const MyAddresses = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, address: e.target.value })
                   }
-                  className="w-full px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                  className="w-full px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                   required
                 />
               </div>
               <div className="grid grid-cols-2 gap-[12px]">
                 <div>
-                  <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                  <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                     {t("address.city")}
                   </label>
                   <input
@@ -321,12 +321,12 @@ const MyAddresses = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, city: e.target.value })
                     }
-                    className="w-full px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                    className="w-full px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                  <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                     {t("address.state")}
                   </label>
                   <input
@@ -335,13 +335,13 @@ const MyAddresses = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, state: e.target.value })
                     }
-                    className="w-full px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                    className="w-full px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-[12px]">
                 <div>
-                  <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                  <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                     {t("address.zipCode")}
                   </label>
                   <input
@@ -350,11 +350,11 @@ const MyAddresses = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, zipCode: e.target.value })
                     }
-                    className="w-full px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                    className="w-full px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                   />
                 </div>
                 <div>
-                  <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                  <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                     {t("profile.phone")}
                   </label>
                   <input
@@ -363,7 +363,7 @@ const MyAddresses = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
                     }
-                    className="w-full px-[14px] py-[12px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                    className="w-full px-[14px] py-[12px] border border-input bg-background rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                     required
                   />
                 </div>
@@ -372,13 +372,13 @@ const MyAddresses = () => {
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="flex-1 py-[14px] text-[14px] font-semibold text-[#374151] bg-[#F3F4F6] hover:bg-[#E5E7EB] rounded-[12px] transition-colors"
+                  className="flex-1 py-[14px] text-[14px] font-semibold text-foreground bg-muted hover:bg-muted/80 rounded-[12px] transition-colors"
                 >
                   {t("common.cancel")}
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-[14px] text-[14px] font-semibold text-white bg-[#3B82F6] hover:bg-[#2563EB] rounded-[12px] transition-colors"
+                  className="flex-1 py-[14px] text-[14px] font-semibold text-primary-foreground bg-primary hover:bg-primary/90 rounded-[12px] transition-colors"
                 >
                   {editingAddress ? t("common.save") : t("common.add")}
                 </button>

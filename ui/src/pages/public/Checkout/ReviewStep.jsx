@@ -35,25 +35,25 @@ const ReviewStep = ({
   return (
     <div>
       <div className="mb-[24px]">
-        <h2 className="text-[24px] font-bold text-[#111827] mb-[8px]">
+        <h2 className="text-[24px] font-bold text-foreground mb-[8px]">
           {t("checkout.step3")}
         </h2>
-        <p className="text-[15px] text-[#6B7280]">
+        <p className="text-[15px] text-muted-foreground">
           {t("checkout.reviewOrder")}
         </p>
       </div>
 
       <div className="mb-[24px]">
-        <h3 className="text-[18px] font-semibold text-[#111827] mb-[16px]">
+        <h3 className="text-[18px] font-semibold text-foreground mb-[16px]">
           {t("order.items")} ({cartItems.length})
         </h3>
         <div className="space-y-[12px]">
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-[16px] p-[16px] bg-[#F9FAFB] rounded-[14px]"
+              className="flex items-center gap-[16px] p-[16px] bg-muted/30 rounded-[14px]"
             >
-              <div className="w-[72px] h-[72px] bg-white rounded-[10px] overflow-hidden border border-[#E5E7EB] shrink-0">
+              <div className="w-[72px] h-[72px] bg-card rounded-[10px] overflow-hidden border border-border shrink-0">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -61,14 +61,14 @@ const ReviewStep = ({
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[15px] font-semibold text-[#111827] line-clamp-1">
+                <p className="text-[15px] font-semibold text-foreground line-clamp-1">
                   {item.name}
                 </p>
-                <p className="text-[14px] text-[#6B7280]">
+                <p className="text-[14px] text-muted-foreground">
                   {t("product.quantity")}: {item.quantity}
                 </p>
               </div>
-              <p className="text-[16px] font-bold text-[#3B82F6]">
+              <p className="text-[16px] font-bold text-primary">
                 ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
               </p>
             </div>
@@ -78,12 +78,12 @@ const ReviewStep = ({
 
       <div className="mb-[24px]">
         <div className="flex items-center justify-between mb-[12px]">
-          <h3 className="text-[18px] font-semibold text-[#111827]">
+          <h3 className="text-[18px] font-semibold text-foreground">
             {t("order.shippingAddress")}
           </h3>
           <button
             onClick={() => onChangeStep(1)}
-            className="flex items-center gap-[6px] px-[12px] py-[6px] text-[13px] font-medium text-[#3B82F6] hover:bg-blue-50 rounded-[8px] transition-colors"
+            className="flex items-center gap-[6px] px-[12px] py-[6px] text-[13px] font-medium text-primary hover:bg-primary/10 rounded-[8px] transition-colors"
           >
             <Edit2 className="w-[14px] h-[14px]" />
             {t("common.edit")}
@@ -91,39 +91,39 @@ const ReviewStep = ({
         </div>
 
         {selectedAddress ? (
-          <div className="p-[20px] bg-[#F9FAFB] rounded-[16px] border border-[#E5E7EB]">
+          <div className="p-[20px] bg-muted/30 rounded-[16px] border border-border">
             <div className="flex items-start gap-[16px]">
-              <div className="w-[44px] h-[44px] bg-white rounded-[10px] flex items-center justify-center border border-[#E5E7EB] shrink-0">
+              <div className="w-[44px] h-[44px] bg-card rounded-[10px] flex items-center justify-center border border-border shrink-0">
                 {selectedAddress.label === "Home" ? (
-                  <Home className="w-[20px] h-[20px] text-[#6B7280]" />
+                  <Home className="w-[20px] h-[20px] text-muted-foreground" />
                 ) : (
-                  <Building2 className="w-[20px] h-[20px] text-[#6B7280]" />
+                  <Building2 className="w-[20px] h-[20px] text-muted-foreground" />
                 )}
               </div>
               <div>
-                <p className="text-[15px] font-semibold text-[#111827]">
+                <p className="text-[15px] font-semibold text-foreground">
                   {selectedAddress.firstName} {selectedAddress.lastName}
                 </p>
-                <p className="text-[14px] text-[#6B7280] mt-[4px]">
+                <p className="text-[14px] text-muted-foreground mt-[4px]">
                   {selectedAddress.address}
                 </p>
-                <p className="text-[14px] text-[#6B7280]">
+                <p className="text-[14px] text-muted-foreground">
                   {selectedAddress.city}, {selectedAddress.state}{" "}
                   {selectedAddress.zipCode}
                 </p>
-                <p className="text-[14px] text-[#6B7280]">
+                <p className="text-[14px] text-muted-foreground">
                   {selectedAddress.country}
                 </p>
-                <p className="text-[14px] text-[#6B7280] mt-[4px]">
+                <p className="text-[14px] text-muted-foreground mt-[4px]">
                   📞 {selectedAddress.phone}
                 </p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="p-[20px] bg-red-50 rounded-[16px] border border-red-200 flex items-center gap-[12px]">
-            <MapPin className="w-[20px] h-[20px] text-red-500" />
-            <p className="text-[14px] text-red-600">
+          <div className="p-[20px] bg-destructive/10 rounded-[16px] border border-destructive/20 flex items-center gap-[12px]">
+            <MapPin className="w-[20px] h-[20px] text-destructive" />
+            <p className="text-[14px] text-destructive">
               {t("checkout.noAddressSelected")}
             </p>
           </div>
@@ -132,28 +132,28 @@ const ReviewStep = ({
 
       <div>
         <div className="flex items-center justify-between mb-[12px]">
-          <h3 className="text-[18px] font-semibold text-[#111827]">
+          <h3 className="text-[18px] font-semibold text-foreground">
             {t("order.paymentMethod")}
           </h3>
           <button
             onClick={() => onChangeStep(2)}
-            className="flex items-center gap-[6px] px-[12px] py-[6px] text-[13px] font-medium text-[#3B82F6] hover:bg-blue-50 rounded-[8px] transition-colors"
+            className="flex items-center gap-[6px] px-[12px] py-[6px] text-[13px] font-medium text-primary hover:bg-primary/10 rounded-[8px] transition-colors"
           >
             <Edit2 className="w-[14px] h-[14px]" />
             {t("common.edit")}
           </button>
         </div>
 
-        <div className="p-[20px] bg-[#F9FAFB] rounded-[16px] border border-[#E5E7EB]">
+        <div className="p-[20px] bg-muted/30 rounded-[16px] border border-border">
           <div className="flex items-center gap-[16px]">
-            <div className="w-[44px] h-[44px] bg-[#3B82F6] rounded-[10px] flex items-center justify-center">
-              <PaymentIcon className="w-[22px] h-[22px] text-white" />
+            <div className="w-[44px] h-[44px] bg-primary rounded-[10px] flex items-center justify-center">
+              <PaymentIcon className="w-[22px] h-[22px] text-primary-foreground" />
             </div>
             <div>
-              <p className="text-[15px] font-semibold text-[#111827]">
+              <p className="text-[15px] font-semibold text-foreground">
                 {t(`checkout.payment.${paymentMethod}`)}
               </p>
-              <p className="text-[14px] text-[#6B7280]">
+              <p className="text-[14px] text-muted-foreground">
                 {t(`checkout.payment.${paymentMethod}Desc`)}
               </p>
             </div>

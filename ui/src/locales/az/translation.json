@@ -28,7 +28,14 @@
     "refresh": "Yenilə",
     "selectAll": "Hamısını seç",
     "clearAll": "Hamısını təmizlə",
-    "noProductsFound": "Məhsul tapılmadı."
+    "noProductsFound": "Məhsul tapılmadı.",
+    "language": "Dil",
+    "theme": "Tema"
+  },
+  "theme": {
+    "light": "Açıq",
+    "dark": "Qaranlıq",
+    "system": "Sistem"
   },
   "nav": {
     "home": "Ana səhifə",

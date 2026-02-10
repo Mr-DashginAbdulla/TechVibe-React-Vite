@@ -45,26 +45,28 @@ const ProfileSidebar = () => {
   };
 
   return (
-    <aside className="w-[280px] bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px] h-fit sticky top-[96px]">
-      <div className="flex items-center gap-[16px] pb-[24px] border-b border-[#E5E7EB]">
+    <aside className="w-[280px] bg-card rounded-[20px] shadow-sm border border-border p-[24px] h-fit sticky top-[96px]">
+      <div className="flex items-center gap-[16px] pb-[24px] border-b border-border">
         {user?.avatar ? (
           <img
             src={user.avatar}
             alt="Avatar"
-            className="w-[56px] h-[56px] rounded-full object-cover"
+            className="w-[56px] h-[56px] rounded-full object-cover border border-border"
           />
         ) : (
-          <div className="w-[56px] h-[56px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center">
-            <span className="text-[20px] font-bold text-white">
+          <div className="w-[56px] h-[56px] bg-linear-to-br from-primary to-purple-600 rounded-full flex items-center justify-center">
+            <span className="text-[20px] font-bold text-primary-foreground">
               {getInitials()}
             </span>
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <p className="text-[16px] font-semibold text-[#111827] truncate">
+          <p className="text-[16px] font-semibold text-foreground truncate">
             {user?.firstName} {user?.lastName}
           </p>
-          <p className="text-[13px] text-[#6B7280] truncate">{user?.email}</p>
+          <p className="text-[13px] text-muted-foreground truncate">
+            {user?.email}
+          </p>
         </div>
       </div>
 
@@ -77,8 +79,8 @@ const ProfileSidebar = () => {
             className={({ isActive }) =>
               `flex items-center gap-[12px] px-[16px] py-[12px] rounded-[12px] text-[15px] font-medium transition-colors ${
                 isActive
-                  ? "bg-[#3B82F6] text-white"
-                  : "text-[#374151] hover:bg-[#F3F4F6]"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
               }`
             }
           >
@@ -89,10 +91,10 @@ const ProfileSidebar = () => {
         ))}
       </nav>
 
-      <div className="mt-[20px] pt-[20px] border-t border-[#E5E7EB]">
+      <div className="mt-[20px] pt-[20px] border-t border-border">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-[12px] w-full px-[16px] py-[12px] rounded-[12px] text-[15px] font-medium text-red-600 hover:bg-red-50 transition-colors"
+          className="flex items-center gap-[12px] w-full px-[16px] py-[12px] rounded-[12px] text-[15px] font-medium text-destructive hover:bg-destructive/10 transition-colors"
         >
           <LogOut className="w-[20px] h-[20px]" />
           <span>{t("nav.logout")}</span>

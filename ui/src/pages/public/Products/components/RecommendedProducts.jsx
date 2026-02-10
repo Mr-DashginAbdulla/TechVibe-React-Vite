@@ -13,14 +13,14 @@ const RecommendedProducts = ({
   if (products.length === 0) return null;
 
   return (
-    <div className="border-t border-gray-100 pt-12">
+    <div className="border-t border-border pt-12">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">
+        <h2 className="text-2xl font-bold text-foreground">
           {t("productDetails.recommendedProducts")}
         </h2>
         <Link
           to="/shop"
-          className="text-blue-600 font-semibold text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all"
+          className="text-primary font-semibold text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all"
         >
           {t("productDetails.viewAllProducts")}
           <ArrowRight size={16} />

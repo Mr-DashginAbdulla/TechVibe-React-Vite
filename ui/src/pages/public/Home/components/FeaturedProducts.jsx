@@ -30,25 +30,25 @@ const FeaturedProducts = ({
   };
 
   return (
-    <section className="py-[60px] bg-white">
+    <section className="py-[60px] bg-background">
       <div className="container mx-auto px-[16px]">
         <div className="flex items-center justify-between mb-[32px]">
-          <h2 className="text-[28px] font-bold text-[#111827]">
+          <h2 className="text-[28px] font-bold text-foreground">
             {t("home.featuredProducts")}
           </h2>
 
           <div className="flex items-center gap-[12px]">
             <button
               onClick={() => scroll("left")}
-              className="w-[44px] h-[44px] bg-white border border-[#E5E7EB] rounded-full flex items-center justify-center hover:bg-[#F3F4F6] transition-colors"
+              className="w-[44px] h-[44px] bg-background border border-border rounded-full flex items-center justify-center hover:bg-accent transition-colors"
             >
-              <ChevronLeft className="w-[20px] h-[20px] text-[#374151]" />
+              <ChevronLeft className="w-[20px] h-[20px] text-muted-foreground" />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="w-[44px] h-[44px] bg-[#3B82F6] rounded-full flex items-center justify-center hover:bg-[#2563EB] transition-colors"
+              className="w-[44px] h-[44px] bg-primary rounded-full flex items-center justify-center hover:bg-primary/90 transition-colors"
             >
-              <ChevronRight className="w-[20px] h-[20px] text-white" />
+              <ChevronRight className="w-[20px] h-[20px] text-primary-foreground" />
             </button>
           </div>
         </div>
@@ -71,7 +71,7 @@ const FeaturedProducts = ({
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 py-10">
+          <p className="text-center text-muted-foreground py-10">
             Öne çıxan məhsul tapılmadı.
           </p>
         )}

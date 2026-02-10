@@ -25,12 +25,12 @@ const ProfileLayout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB]">
+    <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-[16px] py-[24px] lg:py-[32px]">
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="lg:hidden flex items-center gap-[8px] mb-[16px] px-[16px] py-[10px] bg-white rounded-[12px] border border-[#E5E7EB] text-[14px] font-medium text-[#374151]"
+          className="lg:hidden flex items-center gap-[8px] mb-[16px] px-[16px] py-[10px] bg-card rounded-[12px] border border-border text-[14px] font-medium text-foreground"
         >
           {isSidebarOpen ? (
             <X className="w-[18px] h-[18px]" />

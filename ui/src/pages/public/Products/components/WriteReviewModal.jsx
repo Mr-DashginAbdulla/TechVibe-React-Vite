@@ -98,28 +98,28 @@ const WriteReviewModal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-background/80 backdrop-blur-sm"
         onClick={handleClose}
       />
 
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6 max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6 max-h-[90vh] overflow-y-auto border border-border">
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <X size={20} />
         </button>
 
-        <h2 className="text-xl font-bold text-gray-900 mb-2">
+        <h2 className="text-xl font-bold text-foreground mb-2">
           {isEditMode
             ? t("productDetails.editReview")
             : t("productDetails.writeReview")}
         </h2>
-        <p className="text-sm text-gray-500 mb-6">{productName}</p>
+        <p className="text-sm text-muted-foreground mb-6">{productName}</p>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-3">
+            <label className="block text-sm font-medium text-foreground mb-3">
               {t("productDetails.yourRating")}
             </label>
             <div className="flex gap-1">
@@ -134,11 +134,13 @@ const WriteReviewModal = ({
                 >
                   <Star
                     size={32}
-                    fill={star <= (hoverRating || rating) ? "#F59E0B" : "none"}
+                    fill={
+                      star <= (hoverRating || rating) ? "currentColor" : "none"
+                    }
                     className={
                       star <= (hoverRating || rating)
                         ? "text-amber-400"
-                        : "text-gray-300"
+                        : "text-muted"
                     }
                   />
                 </button>
@@ -147,7 +149,7 @@ const WriteReviewModal = ({
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-foreground mb-2">
               {t("productDetails.yourReviewText")}
             </label>
             <textarea
@@ -155,12 +157,12 @@ const WriteReviewModal = ({
               onChange={(e) => setComment(e.target.value)}
               placeholder={t("productDetails.reviewPlaceholder")}
               rows={4}
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-3 border border-input bg-background rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-foreground mb-2">
               {t("productDetails.uploadPhotos")} ({images.length}/{MAX_IMAGES})
             </label>
 
@@ -169,7 +171,7 @@ const WriteReviewModal = ({
                 {images.map((img, index) => (
                   <div
                     key={index}
-                    className="relative aspect-square rounded-lg overflow-hidden border border-gray-200"
+                    className="relative aspect-square rounded-lg overflow-hidden border border-border"
                   >
                     <img
                       src={img}
@@ -179,7 +181,7 @@ const WriteReviewModal = ({
                     <button
                       type="button"
                       onClick={() => handleRemoveImage(index)}
-                      className="absolute top-1 right-1 w-6 h-6 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition-colors"
+                      className="absolute top-1 right-1 w-6 h-6 bg-destructive hover:bg-destructive/90 rounded-full flex items-center justify-center text-white transition-colors"
                     >
                       <Trash2 size={12} />
                     </button>
@@ -201,7 +203,7 @@ const WriteReviewModal = ({
                 />
                 <label
                   htmlFor="review-images"
-                  className={`flex items-center justify-center gap-2 w-full py-3 px-4 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-500 transition-colors cursor-pointer ${
+                  className={`flex items-center justify-center gap-2 w-full py-3 px-4 border-2 border-dashed border-border rounded-xl text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer ${
                     isUploading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 >
@@ -219,7 +221,7 @@ const WriteReviewModal = ({
                 </label>
               </div>
             )}
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-muted-foreground mt-2">
               {t("productDetails.maxPhotosHint", { max: MAX_IMAGES })}
             </p>
           </div>
@@ -227,7 +229,7 @@ const WriteReviewModal = ({
           <button
             type="submit"
             disabled={rating === 0}
-            className="w-full bg-gray-900 hover:bg-gray-800 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-colors"
+            className="w-full bg-primary hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed text-primary-foreground font-semibold py-3 rounded-xl transition-colors"
           >
             {isEditMode
               ? t("productDetails.updateReview")

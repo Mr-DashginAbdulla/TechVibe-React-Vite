@@ -10,16 +10,16 @@ const PriceBlock = ({ price, oldPrice, stock }) => {
   return (
     <div className="mb-6">
       <div className="flex items-end gap-3 mb-2">
-        <span className="text-3xl font-bold text-gray-900">
+        <span className="text-3xl font-bold text-foreground">
           ${price.toFixed(2)}
         </span>
         {oldPrice && (
-          <span className="text-lg text-gray-400 line-through mb-0.5">
+          <span className="text-lg text-muted-foreground line-through mb-0.5">
             ${oldPrice.toFixed(2)}
           </span>
         )}
         {oldPrice && (
-          <span className="bg-emerald-100 text-emerald-700 text-sm font-semibold px-2.5 py-1 rounded-md mb-0.5">
+          <span className="bg-primary/10 text-primary text-sm font-semibold px-2.5 py-1 rounded-md mb-0.5">
             {t("productDetails.save")} ${savings}
           </span>
         )}

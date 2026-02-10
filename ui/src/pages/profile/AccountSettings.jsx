@@ -123,7 +123,7 @@ const AccountSettings = () => {
       <Helmet>
         <title>{t("profile.accountSettings")} - TechVibe</title>
       </Helmet>
-      <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
+      <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
         <div className="flex items-center gap-[20px]">
           <div className="relative">
             {user?.avatar ? (
@@ -133,8 +133,8 @@ const AccountSettings = () => {
                 className="w-[80px] h-[80px] rounded-full object-cover"
               />
             ) : (
-              <div className="w-[80px] h-[80px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center">
-                <span className="text-[28px] font-bold text-white">
+              <div className="w-[80px] h-[80px] bg-linear-to-br from-primary to-purple-600 rounded-full flex items-center justify-center">
+                <span className="text-[28px] font-bold text-primary-foreground">
                   {user?.firstName?.[0]}
                   {user?.lastName?.[0]}
                 </span>
@@ -143,7 +143,7 @@ const AccountSettings = () => {
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={isLoading}
-              className="absolute bottom-0 right-0 w-[32px] h-[32px] bg-[#3B82F6] rounded-full flex items-center justify-center text-white hover:bg-[#2563EB] transition-colors"
+              className="absolute bottom-0 right-0 w-[32px] h-[32px] bg-primary rounded-full flex items-center justify-center text-primary-foreground hover:bg-primary/90 transition-colors"
             >
               {isLoading ? (
                 <Loader2 className="w-[16px] h-[16px] animate-spin" />
@@ -160,10 +160,10 @@ const AccountSettings = () => {
             />
           </div>
           <div>
-            <h1 className="text-[24px] font-bold text-[#111827]">
+            <h1 className="text-[24px] font-bold text-foreground">
               {t("profile.accountSettings")}
             </h1>
-            <p className="text-[15px] text-[#6B7280]">
+            <p className="text-[15px] text-muted-foreground">
               {t("profile.personalInfo")}
             </p>
           </div>
@@ -174,8 +174,8 @@ const AccountSettings = () => {
         <div
           className={`p-[16px] rounded-[12px] flex items-center gap-[12px] ${
             message.type === "success"
-              ? "bg-green-50 text-green-700"
-              : "bg-red-50 text-red-700"
+              ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400"
+              : "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400"
           }`}
         >
           {message.type === "success" ? (
@@ -192,8 +192,8 @@ const AccountSettings = () => {
             onClick={() => setActiveTab(tab.key)}
             className={`flex items-center gap-[8px] px-[16px] py-[12px] rounded-[12px] text-[14px] font-medium transition-colors ${
               activeTab === tab.key
-                ? "bg-[#3B82F6] text-white"
-                : "bg-white text-[#374151] border border-[#E5E7EB] hover:bg-[#F3F4F6]"
+                ? "bg-primary text-primary-foreground"
+                : "bg-card text-muted-foreground border border-border hover:bg-muted hover:text-foreground"
             }`}
           >
             <tab.icon className="w-[18px] h-[18px]" />
@@ -202,15 +202,15 @@ const AccountSettings = () => {
         ))}
       </div>
 
-      <div className="bg-white rounded-[20px] shadow-sm border border-[#E5E7EB] p-[24px]">
+      <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
         {activeTab === "personal" && (
           <form onSubmit={handlePersonalSubmit} className="space-y-[20px]">
-            <h2 className="text-[18px] font-semibold text-[#111827] mb-[20px]">
+            <h2 className="text-[18px] font-semibold text-foreground mb-[20px]">
               {t("profile.personalInfo")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
               <div>
-                <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                   {t("auth.firstName")}
                 </label>
                 <input
@@ -222,12 +222,12 @@ const AccountSettings = () => {
                       firstName: e.target.value,
                     })
                   }
-                  className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                  className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                   required
                 />
               </div>
               <div>
-                <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+                <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                   {t("auth.lastName")}
                 </label>
                 <input
@@ -239,13 +239,13 @@ const AccountSettings = () => {
                       lastName: e.target.value,
                     })
                   }
-                  className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                  className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 Email
               </label>
               <input
@@ -254,12 +254,12 @@ const AccountSettings = () => {
                 onChange={(e) =>
                   setPersonalData({ ...personalData, email: e.target.value })
                 }
-                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                 required
               />
             </div>
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("profile.phone")}
               </label>
               <input
@@ -269,13 +269,13 @@ const AccountSettings = () => {
                   setPersonalData({ ...personalData, phone: e.target.value })
                 }
                 placeholder="+994XXXXXXXXX"
-                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
               />
             </div>
             <button
               type="submit"
               disabled={isLoading}
-              className="flex items-center justify-center gap-[8px] px-[24px] py-[14px] bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-[#93C5FD] text-white font-semibold rounded-[12px] transition-colors"
+              className="flex items-center justify-center gap-[8px] px-[24px] py-[14px] bg-primary hover:bg-primary/90 disabled:opacity-70 text-primary-foreground font-semibold rounded-[12px] transition-colors"
             >
               {isLoading && (
                 <Loader2 className="w-[18px] h-[18px] animate-spin" />
@@ -290,11 +290,11 @@ const AccountSettings = () => {
             onSubmit={handlePasswordSubmit}
             className="space-y-[20px] max-w-[400px]"
           >
-            <h2 className="text-[18px] font-semibold text-[#111827] mb-[20px]">
+            <h2 className="text-[18px] font-semibold text-foreground mb-[20px]">
               {t("profile.changePassword")}
             </h2>
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("profile.currentPassword")}
               </label>
               <div className="relative">
@@ -307,13 +307,13 @@ const AccountSettings = () => {
                       currentPassword: e.target.value,
                     })
                   }
-                  className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] pr-[48px]"
+                  className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary pr-[48px] text-foreground"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  className="absolute right-[14px] top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute right-[14px] top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   {showCurrentPassword ? (
                     <EyeOff className="w-[20px] h-[20px]" />
@@ -324,7 +324,7 @@ const AccountSettings = () => {
               </div>
             </div>
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("profile.newPassword")}
               </label>
               <div className="relative">
@@ -337,13 +337,13 @@ const AccountSettings = () => {
                       newPassword: e.target.value,
                     })
                   }
-                  className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] pr-[48px]"
+                  className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary pr-[48px] text-foreground"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowNewPassword(!showNewPassword)}
-                  className="absolute right-[14px] top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute right-[14px] top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   {showNewPassword ? (
                     <EyeOff className="w-[20px] h-[20px]" />
@@ -354,7 +354,7 @@ const AccountSettings = () => {
               </div>
             </div>
             <div>
-              <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+              <label className="block text-[14px] font-medium text-foreground mb-[8px]">
                 {t("profile.confirmNewPassword")}
               </label>
               <input
@@ -366,14 +366,14 @@ const AccountSettings = () => {
                     confirmPassword: e.target.value,
                   })
                 }
-                className="w-full px-[16px] py-[12px] border border-[#E5E7EB] rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="w-full px-[16px] py-[12px] border border-input bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={isLoading}
-              className="flex items-center justify-center gap-[8px] px-[24px] py-[14px] bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-[#93C5FD] text-white font-semibold rounded-[12px] transition-colors"
+              className="flex items-center justify-center gap-[8px] px-[24px] py-[14px] bg-primary hover:bg-primary/90 disabled:opacity-70 text-primary-foreground font-semibold rounded-[12px] transition-colors"
             >
               {isLoading && (
                 <Loader2 className="w-[18px] h-[18px] animate-spin" />
@@ -385,19 +385,23 @@ const AccountSettings = () => {
 
         {activeTab === "notifications" && (
           <div>
-            <h2 className="text-[18px] font-semibold text-[#111827] mb-[20px]">
+            <h2 className="text-[18px] font-semibold text-foreground mb-[20px]">
               {t("profile.notifications")}
             </h2>
-            <p className="text-[15px] text-[#6B7280]">{t("common.loading")}</p>
+            <p className="text-[15px] text-muted-foreground">
+              {t("common.loading")}
+            </p>
           </div>
         )}
 
         {activeTab === "privacy" && (
           <div>
-            <h2 className="text-[18px] font-semibold text-[#111827] mb-[20px]">
+            <h2 className="text-[18px] font-semibold text-foreground mb-[20px]">
               {t("auth.privacyPolicy")}
             </h2>
-            <p className="text-[15px] text-[#6B7280]">{t("common.loading")}</p>
+            <p className="text-[15px] text-muted-foreground">
+              {t("common.loading")}
+            </p>
           </div>
         )}
       </div>

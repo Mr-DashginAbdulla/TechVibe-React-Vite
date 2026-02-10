@@ -26,15 +26,15 @@ const TrustBadges = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-t border-gray-100">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-t border-border">
       {badges.map((badge, index) => (
         <div key={index} className="flex items-center gap-3">
           <div
-            className={`w-10 h-10 rounded-full ${badge.bg} flex items-center justify-center`}
+            className={`w-10 h-10 rounded-full ${badge.bg === "bg-emerald-50" ? "bg-emerald-500/10" : badge.bg === "bg-blue-50" ? "bg-blue-500/10" : "bg-purple-500/10"} flex items-center justify-center`}
           >
             <badge.icon size={18} className={badge.color} />
           </div>
-          <span className="text-sm text-gray-600 font-medium">
+          <span className="text-sm text-muted-foreground font-medium">
             {badge.text}
           </span>
         </div>

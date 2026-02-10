@@ -23,16 +23,16 @@ const ReviewsSection = ({
 
   return (
     <div className="mb-12">
-      <h2 className="text-2xl font-bold text-gray-900 mb-1">
+      <h2 className="text-2xl font-bold text-foreground mb-1">
         {t("productDetails.customerReviews")}
       </h2>
-      <p className="text-gray-500 mb-6">
+      <p className="text-muted-foreground mb-6">
         {t("productDetails.reviewsSubtitle")}
       </p>
 
-      <div className="flex flex-col md:flex-row gap-6 mb-8 p-6 bg-gray-50 rounded-xl">
+      <div className="flex flex-col md:flex-row gap-6 mb-8 p-6 bg-muted/30 rounded-xl">
         <div className="flex flex-col items-center justify-center min-w-[120px]">
-          <div className="text-5xl font-bold text-gray-900 mb-2">
+          <div className="text-5xl font-bold text-foreground mb-2">
             {rating !== null ? rating : "-"}
           </div>
           <div className="flex mb-2">
@@ -41,17 +41,19 @@ const ReviewsSection = ({
                 key={i}
                 size={18}
                 fill={
-                  rating !== null && i < Math.floor(rating) ? "#F59E0B" : "none"
+                  rating !== null && i < Math.floor(rating)
+                    ? "currentColor"
+                    : "none"
                 }
                 className={
                   rating !== null && i < Math.floor(rating)
                     ? "text-amber-400"
-                    : "text-gray-300"
+                    : "text-muted"
                 }
               />
             ))}
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-muted-foreground">
             {totalReviews > 0
               ? `${totalReviews} ${t("productDetails.reviews")}`
               : t("productDetails.noReviews")}
@@ -61,17 +63,17 @@ const ReviewsSection = ({
         <div className="flex-1 space-y-2">
           {ratingDistribution.map(({ stars, count, percentage }) => (
             <div key={stars} className="flex items-center gap-3">
-              <span className="text-sm font-medium text-gray-600 w-6">
+              <span className="text-sm font-medium text-muted-foreground w-6">
                 {stars}
               </span>
-              <Star size={14} fill="#F59E0B" className="text-amber-400" />
-              <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+              <Star size={14} fill="currentColor" className="text-amber-400" />
+              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                 <div
                   className="h-full bg-amber-400 rounded-full transition-all"
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <span className="text-sm text-gray-500 w-8">{count}</span>
+              <span className="text-sm text-muted-foreground w-8">{count}</span>
             </div>
           ))}
         </div>
@@ -79,7 +81,7 @@ const ReviewsSection = ({
         <div className="flex items-center">
           <button
             onClick={onWriteReview}
-            className="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-xl transition-colors"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 px-6 rounded-xl transition-colors"
           >
             {t("productDetails.writeReview")}
           </button>
@@ -96,7 +98,7 @@ const ReviewsSection = ({
             return (
               <div
                 key={review.id}
-                className="bg-white border border-gray-100 rounded-xl p-6 hover:shadow-md transition-shadow"
+                className="bg-card border border-border rounded-xl p-6 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-3">
@@ -106,10 +108,10 @@ const ReviewsSection = ({
                         : "U"}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 text-sm">
+                      <h4 className="font-semibold text-foreground text-sm">
                         {review.userName}
                       </h4>
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-muted-foreground">
                         {review.date}
                       </span>
                     </div>
@@ -120,11 +122,9 @@ const ReviewsSection = ({
                         <Star
                           key={i}
                           size={14}
-                          fill={i < review.rating ? "#F59E0B" : "none"}
+                          fill={i < review.rating ? "currentColor" : "none"}
                           className={
-                            i < review.rating
-                              ? "text-amber-400"
-                              : "text-gray-200"
+                            i < review.rating ? "text-amber-400" : "text-muted"
                           }
                         />
                       ))}
@@ -135,7 +135,7 @@ const ReviewsSection = ({
                         {onEdit && (
                           <button
                             onClick={() => onEdit(review)}
-                            className="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
                             title={t("productDetails.editReview")}
                           >
                             <Pencil size={16} />
@@ -144,7 +144,7 @@ const ReviewsSection = ({
                         {onDelete && (
                           <button
                             onClick={() => onDelete(review.id)}
-                            className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                            className="p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
                             title={t("productDetails.deleteReview")}
                           >
                             <Trash2 size={16} />
@@ -154,7 +154,7 @@ const ReviewsSection = ({
                     )}
                   </div>
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                   {review.comment}
                 </p>
 
@@ -163,7 +163,7 @@ const ReviewsSection = ({
                     {review.images.map((img, imgIndex) => (
                       <div
                         key={imgIndex}
-                        className="w-20 h-20 rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:opacity-80 transition-opacity"
+                        className="w-20 h-20 rounded-lg overflow-hidden border border-border cursor-pointer hover:opacity-80 transition-opacity"
                         onClick={() => window.open(img, "_blank")}
                       >
                         <img
@@ -181,8 +181,8 @@ const ReviewsSection = ({
                     onClick={() => onHelpful && onHelpful(review)}
                     className={`flex items-center gap-1.5 text-sm transition-colors ${
                       hasVotedHelpful
-                        ? "text-green-600"
-                        : "text-gray-500 hover:text-green-600"
+                        ? "text-emerald-600"
+                        : "text-muted-foreground hover:text-emerald-600"
                     }`}
                   >
                     <ThumbsUp
@@ -196,8 +196,8 @@ const ReviewsSection = ({
                     onClick={() => onUnhelpful && onUnhelpful(review)}
                     className={`flex items-center gap-1.5 text-sm transition-colors ${
                       hasVotedUnhelpful
-                        ? "text-red-500"
-                        : "text-gray-500 hover:text-red-500"
+                        ? "text-destructive"
+                        : "text-muted-foreground hover:text-destructive"
                     }`}
                   >
                     <ThumbsDown
@@ -213,7 +213,7 @@ const ReviewsSection = ({
           })}
         </div>
       ) : (
-        <p className="text-gray-500 text-center py-8">
+        <p className="text-muted-foreground text-center py-8">
           {t("productDetails.noReviews")}
         </p>
       )}

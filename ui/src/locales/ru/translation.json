@@ -28,7 +28,14 @@
     "refresh": "Обновить",
     "selectAll": "Выбрать все",
     "clearAll": "Очистить все",
-    "noProductsFound": "Товары не найдены."
+    "noProductsFound": "Товары не найдены.",
+    "language": "Язык",
+    "theme": "Тема"
+  },
+  "theme": {
+    "light": "Светлая",
+    "dark": "Темная",
+    "system": "Системная"
   },
   "nav": {
     "home": "Главная",

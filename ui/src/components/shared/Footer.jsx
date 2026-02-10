@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import logoImg from "@/assets/images/TechVibeLogo-DarkTransparent.png";
+import logoLight from "@/assets/images/TechVibeLogo-LightTransparent.png";
+import logoDark from "@/assets/images/TechVibeLogo-DarkTransparent.png";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -42,25 +43,30 @@ const Footer = () => {
   const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];
 
   return (
-    <footer className="bg-[#0F172A] text-white">
-      <div className="container mx-auto px-[16px] py-[60px]">
+    <footer className="bg-muted text-foreground pt-[60px] pb-[24px] mt-auto border-t border-border">
+      <div className="container mx-auto px-[16px] mb-[40px]">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-[40px]">
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="inline-block mb-[16px]">
               <img
-                src={logoImg}
-                alt="TechVibe Logo"
-                className="h-[40px] w-auto"
+                src={logoLight}
+                alt="TechVibe"
+                className="h-[40px] w-auto dark:hidden"
+              />
+              <img
+                src={logoDark}
+                alt="TechVibe"
+                className="h-[40px] w-auto hidden dark:block"
               />
             </Link>
-            <p className="text-[14px] text-[#94A3B8] leading-relaxed">
+            <p className="text-[14px] text-muted-foreground leading-relaxed">
               {t("footer.description")}
             </p>
           </div>
 
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="font-semibold text-[15px] mb-[20px] text-white">
+              <h4 className="font-semibold text-[15px] mb-[20px] text-foreground">
                 {category}
               </h4>
               <ul className="space-y-[12px]">
@@ -68,7 +74,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <Link
                       to={link.href}
-                      className="text-[14px] text-[#94A3B8] hover:text-white transition-colors"
+                      className="text-[14px] text-muted-foreground hover:text-primary transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -80,8 +86,8 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t border-[#1E293B]">
-        <div className="container mx-auto px-[16px] py-[24px]">
+      <div className="border-t border-border pt-[24px]">
+        <div className="container mx-auto px-[16px]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-[20px]">
             <div className="flex items-center gap-[12px]">
               {socialLinks.map((social) => (
@@ -90,27 +96,27 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-[40px] h-[40px] rounded-full bg-[#1E293B] hover:bg-[#3B82F6] flex items-center justify-center transition-colors"
+                  className="w-[40px] h-[40px] rounded-full bg-background hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-colors text-muted-foreground border border-border"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-[18px] h-[18px] text-white" />
+                  <social.icon className="w-[18px] h-[18px]" />
                 </a>
               ))}
             </div>
 
-            <p className="text-[14px] text-[#64748B]">
+            <p className="text-[14px] text-muted-foreground">
               {t("footer.copyright")}
             </p>
 
             <div className="flex items-center gap-[8px]">
-              <span className="text-[13px] text-[#64748B] mr-[4px]">
+              <span className="text-[13px] text-muted-foreground mr-[4px]">
                 {t("footer.weAccept")}:
               </span>
               <div className="flex gap-[8px]">
                 {paymentMethods.map((method) => (
                   <span
                     key={method}
-                    className="px-[12px] py-[6px] bg-[#1E293B] rounded-[6px] text-[12px] font-medium text-[#94A3B8]"
+                    className="px-[12px] py-[6px] bg-background border border-border rounded-[6px] text-[12px] font-medium text-muted-foreground"
                   >
                     {method}
                   </span>

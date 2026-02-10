@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { LenisProvider } from "@/context/LenisProvider";
 import AppRoutes from "@/routes/AppRoutes";
 import store from "@/store/store";
@@ -14,21 +15,23 @@ function App() {
       <BrowserRouter>
         <LenisProvider>
           <ScrollToTop />
-          <AuthProvider>
-            <AppRoutes />
-            <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
-          </AuthProvider>
+          <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+            <AuthProvider>
+              <AppRoutes />
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </AuthProvider>
+          </ThemeProvider>
         </LenisProvider>
       </BrowserRouter>
     </Provider>
