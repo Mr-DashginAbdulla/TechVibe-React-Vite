@@ -35,18 +35,6 @@
       "isVerified": false,
       "avatar": "",
       "createdAt": "2026-01-25T08:26:50.315Z"
-    },
-    {
-      "firstName": "Test",
-      "lastName": "User",
-      "email": "test@example.com",
-      "password": "Qwerty123@",
-      "role": "user",
-      "phone": "",
-      "id": "user-1770746174929",
-      "isVerified": false,
-      "avatar": "",
-      "createdAt": "2026-02-10T17:56:14.929Z"
     }
   ],
   "categories": [
@@ -1583,9 +1571,7 @@
       "isNew": true,
       "description": "27-inch 5K, Thunderbolt 3",
       "image": "https://www.lgcorp.com/media/release/images/33597",
-      "images": [
-        "https://www.lgcorp.com/media/release/images/33597"
-      ],
+      "images": ["https://www.lgcorp.com/media/release/images/33597"],
       "specs": {
         "Screen Size": "27 inches",
         "Resolution": "5120 x 2880 (5K)",
@@ -7228,168 +7214,7 @@
       "id": 1
     }
   ],
-  "orders": [
-    {
-      "userId": "mkth60qz-s7vce3",
-      "items": [
-        {
-          "productId": "2",
-          "name": "MacBook Pro 14",
-          "price": 2199,
-          "quantity": 1,
-          "image": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80",
-          "selectedOptions": {
-            "color": {
-              "label": "Space Black",
-              "value": "#1D1D1F",
-              "priceModifier": 0
-            },
-            "memory": {
-              "label": "1TB",
-              "priceModifier": 200
-            }
-          }
-        }
-      ],
-      "shippingAddress": {
-        "label": "Home",
-        "firstName": "John",
-        "lastName": "Doe",
-        "address": "Yasamal",
-        "city": "Bakı",
-        "state": "Bakı",
-        "zipCode": "1001",
-        "country": "Azerbaijan",
-        "phone": "+994 12 345 67 89"
-      },
-      "paymentMethod": "cash",
-      "subtotal": 2199,
-      "shippingCost": 0,
-      "tax": 395.82,
-      "discount": 0,
-      "promoCode": null,
-      "total": 2594.82,
-      "status": "pending",
-      "createdAt": "2026-02-10T17:52:05.930Z",
-      "orderNumber": "ORD-2026-5930",
-      "timeline": [
-        {
-          "status": "ordered",
-          "date": "2026-02-10T17:52:05.930Z",
-          "description": "Order placed"
-        }
-      ],
-      "id": 1
-    },
-    {
-      "userId": "mkth60qz-s7vce3",
-      "items": [
-        {
-          "productId": "2",
-          "name": "MacBook Pro 14",
-          "price": 2199,
-          "quantity": 1,
-          "image": "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&q=80",
-          "selectedOptions": {
-            "color": {
-              "label": "Space Black",
-              "value": "#1D1D1F",
-              "priceModifier": 0
-            },
-            "memory": {
-              "label": "1TB",
-              "priceModifier": 200
-            }
-          }
-        }
-      ],
-      "shippingAddress": {
-        "label": "Home",
-        "firstName": "John",
-        "lastName": "Doe",
-        "address": "Yasamal",
-        "city": "Bakı",
-        "state": "Bakı",
-        "zipCode": "1001",
-        "country": "Azerbaijan",
-        "phone": "+994 12 345 67 89"
-      },
-      "paymentMethod": "cash",
-      "subtotal": 2199,
-      "shippingCost": 0,
-      "tax": 395.82,
-      "discount": 0,
-      "promoCode": null,
-      "total": 2594.82,
-      "status": "delivered",
-      "createdAt": "2026-02-10T17:52:08.011Z",
-      "orderNumber": "ORD-2026-8011",
-      "timeline": [
-        {
-          "status": "ordered",
-          "date": "2026-02-10T17:52:08.011Z",
-          "description": "Order placed"
-        },
-        {
-          "status": "processing",
-          "date": "2026-02-10T17:54:08.647Z",
-          "description": "İşlənir"
-        },
-        {
-          "status": "shipped",
-          "date": "2026-02-10T17:54:30.767Z",
-          "description": "Göndərildi"
-        },
-        {
-          "status": "delivered",
-          "date": "2026-02-10T17:54:39.775Z",
-          "description": "Çatdırıldı"
-        }
-      ],
-      "id": 2
-    }
-  ],
-  "cart": [
-    {
-      "userId": "mkth60qz-s7vce3",
-      "productId": "1",
-      "name": "MacBook Air M2",
-      "price": 1199,
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80",
-      "quantity": 1,
-      "selectedOptions": {},
-      "id": 1
-    },
-    {
-      "userId": "mkth60qz-s7vce3",
-      "productId": "3",
-      "name": "Dell XPS 13 Plus",
-      "price": 1399,
-      "image": "https://notebooks.az/image/cache/catalog/Dell%20Xps%2013%20Plus/snimok-500x500-500x500.jpg",
-      "quantity": 1,
-      "selectedOptions": {},
-      "id": 2
-    },
-    {
-      "userId": "mkth60qz-s7vce3",
-      "productId": "5",
-      "name": "HP Spectre x360",
-      "price": 1549,
-      "image": "https://images.unsplash.com/photo-1544731612-de7f96afe55f?w=500&q=80",
-      "quantity": 1,
-      "selectedOptions": {},
-      "id": 3
-    },
-    {
-      "userId": "mkth60qz-s7vce3",
-      "productId": "7",
-      "name": "ASUS ROG Zephyrus G14",
-      "price": 1599,
-      "image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80",
-      "quantity": 1,
-      "selectedOptions": {},
-      "id": 4
-    }
-  ],
+  "orders": [],
+  "cart": [],
   "wishlist": []
 }
