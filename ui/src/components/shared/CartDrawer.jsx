@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -19,11 +20,13 @@ import {
   useGetAllProductsQuery,
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
+import { useLenisContext } from "@/context/LenisProvider";
 
 const CartDrawer = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const lenis = useLenisContext();
 
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
@@ -48,12 +51,14 @@ const CartDrawer = ({ isOpen, onClose }) => {
     if (isOpen) {
       document.addEventListener("keydown", handleEsc);
       document.body.style.overflow = "hidden";
+      if (lenis) lenis.stop();
     }
     return () => {
       document.removeEventListener("keydown", handleEsc);
       document.body.style.overflow = "";
+      if (lenis) lenis.start();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, lenis]);
 
   const handleQuantityChange = async (item, newQuantity) => {
     if (newQuantity < 1) return;
@@ -94,7 +99,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
     navigate("/profile/cart");
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -185,7 +190,14 @@ const CartDrawer = ({ isOpen, onClose }) => {
                 </div>
               ) : (
                 <>
-                  <div className="flex-1 overflow-y-auto p-[16px] space-y-[12px]">
+                  <div
+                    className="flex-1 overflow-y-auto p-[16px] space-y-[12px]"
+                    style={{
+                      overscrollBehavior: "contain",
+                      scrollBehavior: "smooth",
+                    }}
+                    onWheel={(e) => e.stopPropagation()}
+                  >
                     {cartItems.map((item) => (
                       <div
                         key={item.id}
@@ -308,7 +320,8 @@ const CartDrawer = ({ isOpen, onClose }) => {
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };
 
