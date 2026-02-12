@@ -12,6 +12,7 @@ import Orders from "@/pages/Orders";
 import OrderDetail from "@/pages/OrderDetail";
 import Users from "@/pages/Users";
 import Reviews from "@/pages/Reviews";
+import Brands from "@/pages/Brands";
 import Settings from "@/pages/Settings";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="orders/:id" element={<OrderDetail />} />
             <Route path="users" element={<Users />} />
             <Route path="reviews" element={<Reviews />} />
+            <Route path="brands" element={<Brands />} />
             <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>

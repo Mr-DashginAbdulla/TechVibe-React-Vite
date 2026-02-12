@@ -96,6 +96,25 @@ export const reviewService = {
     }),
 };
 
+export const brandService = {
+  getAll: () => fetchApi("/brands"),
+  getById: (id) => fetchApi(`/brands/${id}`),
+  create: (data) =>
+    fetchApi("/brands", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  update: (id, data) =>
+    fetchApi(`/brands/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+  delete: (id) =>
+    fetchApi(`/brands/${id}`, {
+      method: "DELETE",
+    }),
+};
+
 export const authService = {
   login: async (email, password) => {
     const users = await fetchApi(`/users?email=${email}`);
@@ -120,5 +139,6 @@ export default {
   orderService,
   userService,
   reviewService,
+  brandService,
   authService,
 };

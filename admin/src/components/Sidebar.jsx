@@ -7,6 +7,7 @@ import {
   ShoppingCart,
   Users,
   Star,
+  Award,
   Settings,
   LogOut,
   Shield,
@@ -26,6 +27,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { path: "/orders", icon: ShoppingCart, label: t("sidebar.orders") },
     { path: "/users", icon: Users, label: t("sidebar.users") },
     { path: "/reviews", icon: Star, label: t("sidebar.reviews") },
+    { path: "/brands", icon: Award, label: t("sidebar.brands") },
     { path: "/settings", icon: Settings, label: t("sidebar.settings") },
   ];
 

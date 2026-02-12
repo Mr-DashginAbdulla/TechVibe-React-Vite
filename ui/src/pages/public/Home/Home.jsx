@@ -3,11 +3,12 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import HeroSection from "./HeroSection";
+import HeroSlider from "./HeroSlider";
 import NewArrivals from "./components/NewArrivals";
 import ShopByCategory from "./components/ShopByCategory";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
+import BrandCarousel from "./components/BrandCarousel";
 import { ProductCardSkeleton } from "@/components/ui";
 
 import {
@@ -178,7 +179,7 @@ function Home() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <HeroSection />
+        <HeroSlider />
       </motion.div>
 
       <motion.div
@@ -202,6 +203,15 @@ function Home() {
         transition={{ duration: 0.5, delay: 0.1 }}
       >
         <ShopByCategory categories={categories} />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <BrandCarousel />
       </motion.div>
 
       <motion.div

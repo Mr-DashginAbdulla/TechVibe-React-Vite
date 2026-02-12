@@ -49,6 +49,7 @@
     "users": "Users",
     "categories": "Categories",
     "reviews": "Reviews",
+    "brands": "Brands",
     "settings": "Settings",
     "logout": "Logout"
   },
@@ -321,6 +322,23 @@
     "totalReviews": "Total reviews",
     "averageRating": "Average rating",
     "deleteReview": "Delete Review"
+  },
+  "brands": {
+    "title": "Brands",
+    "subtitle": "Manage partner brands displayed on the homepage",
+    "addBrand": "Add Brand",
+    "editBrand": "Edit Brand",
+    "deleteBrand": "Delete Brand",
+    "brandName": "Brand Name",
+    "logo": "Logo",
+    "logoUrl": "Logo URL",
+    "website": "Website",
+    "preview": "Logo preview",
+    "deleteConfirm": "Are you sure you want to delete this brand?",
+    "deleteSuccess": "Brand deleted successfully",
+    "saveSuccess": "Brand saved successfully",
+    "noBrands": "No brands found",
+    "totalBrands": "Total brands"
   },
   "settings": {
     "title": "Settings",

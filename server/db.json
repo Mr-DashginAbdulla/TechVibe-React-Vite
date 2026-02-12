@@ -7218,5 +7218,105 @@
   ],
   "orders": [],
   "cart": [],
-  "wishlist": []
+  "wishlist": [],
+  "brands": [
+    {
+      "id": "brand-1",
+      "name": "Apple",
+      "logo": "https://cdn-icons-png.flaticon.com/512/0/747.png",
+      "website": "https://www.apple.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-2",
+      "name": "Samsung",
+      "logo": "https://www.shutterstock.com/image-vector/samsung-company-logo-south-korean-260nw-2394493913.jpg",
+      "website": "https://www.samsung.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-3",
+      "name": "Sony",
+      "logo": "https://www.citypng.com/public/uploads/preview/hd-sony-black-logo-transparent-png-701751694773079o9p4y1cy4c.png",
+      "website": "https://www.sony.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-4",
+      "name": "ASUS",
+      "logo": "https://www.citypng.com/public/uploads/preview/hd-asus-official-logo-transparent-png-701751694773683zhb9eu5zq3.png",
+      "website": "https://www.asus.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-5",
+      "name": "Lenovo",
+      "logo": "https://www.citypng.com/public/uploads/preview/hd-lenovo-black-logo-transparent-background-701751694772190gyqemmsai8.png?v=2026020417",
+      "website": "https://www.lenovo.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-6",
+      "name": "Dell",
+      "logo": "https://cdn.freebiesupply.com/images/large/2x/dell-logo-black-transparent.png",
+      "website": "https://www.dell.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-7",
+      "name": "HP",
+      "logo": "https://logo.clearbit.com/hp.com",
+      "website": "https://www.hp.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-8",
+      "name": "Razer",
+      "logo": "https://logo.clearbit.com/razer.com",
+      "website": "https://www.razer.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-9",
+      "name": "JBL",
+      "logo": "https://logo.clearbit.com/jbl.com",
+      "website": "https://www.jbl.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-10",
+      "name": "Bose",
+      "logo": "https://logo.clearbit.com/bose.com",
+      "website": "https://www.bose.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-11",
+      "name": "LG",
+      "logo": "https://logo.clearbit.com/lg.com",
+      "website": "https://www.lg.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-12",
+      "name": "Microsoft",
+      "logo": "https://logo.clearbit.com/microsoft.com",
+      "website": "https://www.microsoft.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-13",
+      "name": "Google",
+      "logo": "https://logo.clearbit.com/google.com",
+      "website": "https://www.google.com",
+      "isActive": true
+    },
+    {
+      "id": "brand-14",
+      "name": "Acer",
+      "logo": "https://logo.clearbit.com/acer.com",
+      "website": "https://www.acer.com",
+      "isActive": true
+    }
+  ]
 }

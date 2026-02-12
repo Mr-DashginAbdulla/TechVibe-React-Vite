@@ -151,6 +151,24 @@
     "easyReturns": "Asan qaytarma",
     "easyReturnsDesc": "30 günlük qaytarma siyasəti"
   },
+  "heroSlider": {
+    "slide1Badge": "Yeni Gələnlər",
+    "slide1Title": "Ən Son Smartfonları Kəşf Edin",
+    "slide1Subtitle": "Möhtəşəm ekranlar, güclü prosessorlar və professional kameralarla müasir mobil texnologiyanı yaşayın.",
+    "slide1Cta": "Telefonlara Bax",
+    "slide2Badge": "Yay Endirimi — 40%-ə qədər",
+    "slide2Title": "Premium Noutbuklar Ən Yaxşı Qiymətlərlə",
+    "slide2Subtitle": "Ultrabooklardan oyun noutbuklarına — mövsümi endirimlərlə ideal noutbukunuzu tapın.",
+    "slide2Cta": "Endirimlərə Bax",
+    "slide3Badge": "Oyun Təchizatını Yenilə",
+    "slide3Title": "Oyun Avadanlığı və Aksesuarlar",
+    "slide3Subtitle": "Klaviaturalar, qulaqlıqlar, joystiklər və daha çox — mükəmməl oyun təcrübəsi üçün hər şey.",
+    "slide3Cta": "Oyun Məhsulları",
+    "slide4Badge": "Pulsuz Çatdırılma Həftəsi",
+    "slide4Title": "Hər Həyat Tərzi Üçün Premium Audio",
+    "slide4Subtitle": "Ən yaxşı brendlərdən qulaqlıqlar və dinamiklər. Bu həftə bütün sifarişlərə pulsuz çatdırılma.",
+    "slide4Cta": "Audio Məhsullar"
+  },
   "home": {
     "heroTitle": "Texnologiyada ən sonunculaları kəşf edin",
     "heroSubtitle": "Əlçatmaz qiymətlərlə premium qadjetlər və aksesuarlar",
@@ -166,7 +184,9 @@
     "newsletterDesc": "Eksklüziv endirimlər və yeniliklər üçün bülletenimizə abunə olun",
     "enterEmail": "Emailinizi daxil edin",
     "subscribe": "Abunə ol",
-    "thankYou": "Abunə olduğunuz üçün təşəkkürlər!"
+    "thankYou": "Abunə olduğunuz üçün təşəkkürlər!",
+    "trustedBrands": "Etibarlı Brendlər",
+    "trustedBrandsDesc": "Dünyanın aparıcı texnologiya brendləri ilə əməkdaşlıq edirik"
   },
   "categories": {
     "computers": "Kompüterlər və Aksesuarlar",

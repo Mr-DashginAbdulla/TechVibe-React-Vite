@@ -151,6 +151,24 @@
     "easyReturns": "Easy Returns",
     "easyReturnsDesc": "30-day return policy"
   },
+  "heroSlider": {
+    "slide1Badge": "New Arrivals",
+    "slide1Title": "Discover the Latest Smartphones",
+    "slide1Subtitle": "Experience cutting-edge mobile technology with stunning displays, powerful processors, and pro-level cameras.",
+    "slide1Cta": "Explore Phones",
+    "slide2Badge": "Summer Sale — Up to 40% Off",
+    "slide2Title": "Premium Laptops at Unbeatable Prices",
+    "slide2Subtitle": "From ultrabooks to gaming powerhouses — find your perfect laptop with exclusive seasonal discounts.",
+    "slide2Cta": "Shop the Sale",
+    "slide3Badge": "Level Up Your Setup",
+    "slide3Title": "Gaming Gear & Accessories",
+    "slide3Subtitle": "Keyboards, headsets, controllers, and more — everything you need for the ultimate gaming experience.",
+    "slide3Cta": "Shop Gaming",
+    "slide4Badge": "Free Shipping Week",
+    "slide4Title": "Premium Audio for Every Lifestyle",
+    "slide4Subtitle": "Discover headphones and speakers from top brands. Free shipping on all orders this week only.",
+    "slide4Cta": "Shop Audio"
+  },
   "home": {
     "heroTitle": "Discover the Latest in Tech",
     "heroSubtitle": "Premium gadgets and accessories at unbeatable prices",
@@ -166,7 +184,9 @@
     "newsletterDesc": "Subscribe to our newsletter for exclusive deals and updates",
     "enterEmail": "Enter your email",
     "subscribe": "Subscribe",
-    "thankYou": "Thank you for subscribing!"
+    "thankYou": "Thank you for subscribing!",
+    "trustedBrands": "Trusted by Top Brands",
+    "trustedBrandsDesc": "We partner with the world's leading technology brands"
   },
   "categories": {
     "computers": "Computers & Accessories",

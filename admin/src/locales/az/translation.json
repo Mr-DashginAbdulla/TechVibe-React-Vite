@@ -49,6 +49,7 @@
     "users": "İstifadəçilər",
     "categories": "Kateqoriyalar",
     "reviews": "Rəylər",
+    "brands": "Brendlər",
     "settings": "Parametrlər",
     "logout": "Çıxış"
   },
@@ -321,6 +322,23 @@
     "totalReviews": "Ümumi rəy",
     "averageRating": "Orta reytinq",
     "deleteReview": "Rəyi sil"
+  },
+  "brands": {
+    "title": "Brendlər",
+    "subtitle": "Ana səhifədə göstərilən partnyor brendləri idarə edin",
+    "addBrand": "Brend əlavə et",
+    "editBrand": "Brendi redaktə et",
+    "deleteBrand": "Brendi sil",
+    "brandName": "Brend adı",
+    "logo": "Logo",
+    "logoUrl": "Logo URL",
+    "website": "Veb sayt",
+    "preview": "Logo önizləmə",
+    "deleteConfirm": "Bu brendi silmək istədiyinizə əminsiniz?",
+    "deleteSuccess": "Brend uğurla silindi",
+    "saveSuccess": "Brend uğurla saxlanıldı",
+    "noBrands": "Brend tapılmadı",
+    "totalBrands": "Ümumi brend"
   },
   "settings": {
     "title": "Parametrlər",
