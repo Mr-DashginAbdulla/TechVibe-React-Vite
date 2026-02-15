@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Search,
-  Star,
-  Trash2,
-  MessageSquare,
-  ThumbsUp,
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
+import { Search, MessageSquare } from "lucide-react";
 import { toast } from "react-toastify";
 import { reviewService, productService } from "@/services/api";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import Pagination from "@/components/common/Pagination";
+import DeleteConfirmModal from "@/components/common/DeleteConfirmModal";
+import ReviewCard from "@/components/reviews/ReviewCard";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -23,39 +17,38 @@ const Reviews = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [ratingFilter, setRatingFilter] = useState("");
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [reviewsData, productsData] = await Promise.all([
+          reviewService.getAll(),
+          productService.getAll(),
+        ]);
+        setReviews(reviewsData);
+        setProducts(productsData);
+      } catch {
+        toast.error(t("messages.error"));
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchData();
   }, []);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, ratingFilter]);
-
-  const fetchData = async () => {
-    try {
-      const [reviewsData, productsData] = await Promise.all([
-        reviewService.getAll(),
-        productService.getAll(),
-      ]);
-      setReviews(reviewsData);
-      setProducts(productsData);
-    } catch (error) {
-      toast.error(t("messages.error"));
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleDelete = async () => {
     try {
       await reviewService.delete(reviewToDelete.id);
       setReviews(reviews.filter((r) => r.id !== reviewToDelete.id));
       toast.success(t("reviews.deleteSuccess"));
-      setShowDeleteModal(false);
-    } catch (error) {
+      setReviewToDelete(null);
+    } catch {
       toast.error(t("messages.error"));
     }
   };
@@ -79,25 +72,7 @@ const Reviews = () => {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentReviews = filteredReviews.slice(startIndex, endIndex);
 
-  const goToPage = (p) => {
-    if (p >= 1 && p <= totalPages) setCurrentPage(p);
-  };
-  const getPageNumbers = () => {
-    const pages = [],
-      max = 5;
-    let start = Math.max(1, currentPage - Math.floor(max / 2));
-    let end = Math.min(totalPages, start + max - 1);
-    if (end - start + 1 < max) start = Math.max(1, end - max + 1);
-    for (let i = start; i <= end; i++) pages.push(i);
-    return pages;
-  };
-
-  if (loading)
-    return (
-      <div className="flex items-center justify-center h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3B82F6]"></div>
-      </div>
-    );
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className="space-y-[20px]">
@@ -138,61 +113,13 @@ const Reviews = () => {
       <div className="space-y-[12px]">
         {currentReviews.length > 0 ? (
           currentReviews.map((review) => (
-            <div
+            <ReviewCard
               key={review.id}
-              className="bg-white rounded-[14px] border border-[#E5E7EB] p-[14px] sm:p-[18px]"
-            >
-              <div className="flex gap-[12px]">
-                <img
-                  src={getProductImage(review.productId)}
-                  alt=""
-                  className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[10px] object-cover shrink-0 hidden xs:block"
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-[10px]">
-                    <div className="min-w-0">
-                      <p className="text-[14px] font-semibold text-[#111827]">
-                        {review.userName}
-                      </p>
-                      <p className="text-[12px] sm:text-[13px] text-[#6B7280] truncate">
-                        {getProductName(review.productId)}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-[6px] shrink-0">
-                      <div className="flex gap-px">
-                        {[1, 2, 3, 4, 5].map((s) => (
-                          <Star
-                            key={s}
-                            className={`w-[14px] h-[14px] ${s <= review.rating ? "text-[#F59E0B] fill-[#F59E0B]" : "text-[#E5E7EB]"}`}
-                          />
-                        ))}
-                      </div>
-                      <button
-                        onClick={() => {
-                          setReviewToDelete(review);
-                          setShowDeleteModal(true);
-                        }}
-                        className="p-[6px] hover:bg-red-50 rounded-[6px]"
-                      >
-                        <Trash2 className="w-[16px] h-[16px] text-[#EF4444]" />
-                      </button>
-                    </div>
-                  </div>
-                  <p className="text-[13px] sm:text-[14px] text-[#374151] mt-[8px] line-clamp-2 sm:line-clamp-none">
-                    {review.comment}
-                  </p>
-                  <div className="flex items-center gap-[12px] mt-[8px] text-[11px] sm:text-[12px] text-[#6B7280]">
-                    <span>{new Date(review.date).toLocaleDateString()}</span>
-                    {review.helpful > 0 && (
-                      <div className="flex items-center gap-[3px]">
-                        <ThumbsUp className="w-[12px] h-[12px]" />
-                        {review.helpful}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+              review={review}
+              productName={getProductName(review.productId)}
+              productImage={getProductImage(review.productId)}
+              onDelete={setReviewToDelete}
+            />
           ))
         ) : (
           <div className="bg-white rounded-[14px] border border-[#E5E7EB] p-[50px] text-center">
@@ -204,81 +131,24 @@ const Reviews = () => {
         )}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-[12px] bg-white rounded-[14px] border border-[#E5E7EB] px-[14px] py-[12px]">
-          <p className="text-[12px] text-[#6B7280]">
-            {startIndex + 1}-{Math.min(endIndex, filteredReviews.length)} /{" "}
-            {filteredReviews.length}
-          </p>
-          <div className="flex items-center gap-[3px]">
-            <button
-              onClick={() => goToPage(1)}
-              disabled={currentPage === 1}
-              className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
-            >
-              <ChevronsLeft className="w-[16px] h-[16px] text-[#374151]" />
-            </button>
-            <button
-              onClick={() => goToPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
-            >
-              <ChevronLeft className="w-[16px] h-[16px] text-[#374151]" />
-            </button>
-            <div className="flex gap-[3px] mx-[6px]">
-              {getPageNumbers().map((p) => (
-                <button
-                  key={p}
-                  onClick={() => goToPage(p)}
-                  className={`w-[32px] h-[32px] rounded-[6px] text-[13px] font-medium ${currentPage === p ? "bg-[#3B82F6] text-white" : "text-[#374151] hover:bg-[#E5E7EB]"}`}
-                >
-                  {p}
-                </button>
-              ))}
-            </div>
-            <button
-              onClick={() => goToPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
-            >
-              <ChevronRight className="w-[16px] h-[16px] text-[#374151]" />
-            </button>
-            <button
-              onClick={() => goToPage(totalPages)}
-              disabled={currentPage === totalPages}
-              className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
-            >
-              <ChevronsRight className="w-[16px] h-[16px] text-[#374151]" />
-            </button>
-          </div>
-        </div>
-      )}
+      <div className="bg-white rounded-[14px] border border-[#E5E7EB] overflow-hidden">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          startIndex={startIndex}
+          endIndex={endIndex}
+          totalItems={filteredReviews.length}
+        />
+      </div>
 
-      {showDeleteModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
-          <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[360px]">
-            <h3 className="text-[17px] font-bold text-[#111827] mb-[10px]">
-              {t("reviews.deleteReview")}
-            </h3>
-            <p className="text-[14px] text-[#6B7280] mb-[20px]">
-              {t("reviews.deleteConfirm")}
-            </p>
-            <div className="flex gap-[10px]">
-              <button
-                onClick={() => setShowDeleteModal(false)}
-                className="flex-1 px-[14px] py-[10px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[10px]"
-              >
-                {t("common.cancel")}
-              </button>
-              <button
-                onClick={handleDelete}
-                className="flex-1 px-[14px] py-[10px] bg-[#EF4444] text-white font-medium rounded-[10px]"
-              >
-                {t("common.delete")}
-              </button>
-            </div>
-          </div>
-        </div>
+      {reviewToDelete && (
+        <DeleteConfirmModal
+          title={t("reviews.deleteReview")}
+          message={t("reviews.deleteConfirm")}
+          onConfirm={handleDelete}
+          onCancel={() => setReviewToDelete(null)}
+        />
       )}
     </div>
   );

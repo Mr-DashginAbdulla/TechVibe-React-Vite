@@ -2871,9 +2871,10 @@
       "isFeatured": true,
       "isNew": true,
       "description": "Sub 63g, HERO 25K sensor",
-      "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&q=80",
+      "image": "https://m.media-amazon.com/images/I/51uy8gOG-iL._AC_SL1400_.jpg",
       "images": [
-        "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&q=80"
+        "https://m.media-amazon.com/images/I/51uy8gOG-iL._AC_SL1400_.jpg",
+        "https://compstore.az/uploads/2023/01/logitech_g_pro_x_white_2.webp"
       ],
       "specs": {
         "Type": "Wireless Esports Gaming Mouse",
@@ -2884,7 +2885,18 @@
         "Features": "Zero additive PTFE feet, ambidextrous or ergonomic"
       },
       "rating": 4.4,
-      "reviewsCount": 5
+      "reviewsCount": 5,
+      "colorOptions": [
+        {
+          "name": "Black",
+          "hex": "#000000"
+        },
+        {
+          "name": "White",
+          "hex": "#ffffff"
+        }
+      ],
+      "memoryOptions": []
     },
     {
       "id": "94",
@@ -3647,7 +3659,11 @@
       "rating": 5,
       "comment": "Qiymətinə görə əladır.",
       "date": "2026-01-13",
-      "helpful": 6
+      "helpful": 6,
+      "unhelpfulCount": 0,
+      "unhelpfulBy": [],
+      "helpfulCount": 0,
+      "helpfulBy": []
     },
     {
       "id": "r9_5",
@@ -3656,7 +3672,9 @@
       "rating": 4,
       "comment": "Gözlədiyimdən yaxşı çıxdı!",
       "date": "2026-01-14",
-      "helpful": 8
+      "helpful": 8,
+      "unhelpfulCount": 0,
+      "unhelpfulBy": []
     },
     {
       "id": "r10_1",
@@ -6567,7 +6585,9 @@
       "rating": 4,
       "comment": "Gözlədiyimdən yaxşı çıxdı!",
       "date": "2026-01-10",
-      "helpful": 0
+      "helpful": 0,
+      "unhelpfulCount": 0,
+      "unhelpfulBy": []
     },
     {
       "id": "r93_2",
@@ -7223,7 +7243,58 @@
     {
       "id": "brand-1",
       "name": "Apple",
-      "logo": "https://cdn-icons-png.flaticon.com/512/0/747.png",
+      "logo": {
+        "0": "h",
+        "1": "t",
+        "2": "t",
+        "3": "p",
+        "4": "s",
+        "5": ":",
+        "6": "/",
+        "7": "/",
+        "8": "c",
+        "9": "d",
+        "10": "n",
+        "11": "-",
+        "12": "i",
+        "13": "c",
+        "14": "o",
+        "15": "n",
+        "16": "s",
+        "17": "-",
+        "18": "p",
+        "19": "n",
+        "20": "g",
+        "21": ".",
+        "22": "f",
+        "23": "l",
+        "24": "a",
+        "25": "t",
+        "26": "i",
+        "27": "c",
+        "28": "o",
+        "29": "n",
+        "30": ".",
+        "31": "c",
+        "32": "o",
+        "33": "m",
+        "34": "/",
+        "35": "5",
+        "36": "1",
+        "37": "2",
+        "38": "/",
+        "39": "0",
+        "40": "/",
+        "41": "7",
+        "42": "4",
+        "43": "7",
+        "44": ".",
+        "45": "p",
+        "46": "n",
+        "47": "g",
+        "light": "https://toppng.com/uploads/preview/apple-official-logo-11609355224dijk29rjup.png",
+        "dark": "https://toppng.com/uploads/preview/apple-official-logo-11609355224dijk29rjup.png"
+      },
       "website": "https://www.apple.com",
       "isActive": true
     },

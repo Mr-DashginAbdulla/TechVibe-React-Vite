@@ -47,9 +47,14 @@ const BrandCarousel = () => {
               title={brand.name}
             >
               <img
-                src={brand.logo}
+                src={brand.logo.light}
                 alt={brand.name}
-                className="max-h-[36px] sm:max-h-[40px] max-w-[100px] sm:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="max-h-[36px] sm:max-h-[40px] max-w-[100px] sm:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 dark:hidden"
+              />
+              <img
+                src={brand.logo.dark}
+                alt={brand.name}
+                className="max-h-[36px] sm:max-h-[40px] max-w-[100px] sm:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 hidden dark:block"
               />
             </a>
           ))}
