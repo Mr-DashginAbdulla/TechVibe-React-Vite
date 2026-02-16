@@ -106,7 +106,12 @@
     "emailRequired": "Введите email и пароль",
     "invalidEmail": "Введите корректный email",
     "passwordMismatch": "Пароли не совпадают",
-    "passwordMinLength": "Пароль должен содержать минимум 6 символов",
+    "passwordMinLength": "Пароль должен содержать минимум 8 символов",
+    "passwordUppercase": "Должна быть хотя бы одна заглавная буква (A-Z)",
+    "passwordLowercase": "Должна быть хотя бы одна строчная буква (a-z)",
+    "passwordNumber": "Должна быть хотя бы одна цифра (0-9)",
+    "passwordSpecial": "Должен быть хотя бы один спецсимвол (!@#$%^&*...)",
+    "passwordNoPersonalInfo": "Пароль не должен содержать ваше имя или email",
     "acceptTerms": "Вы должны принять условия",
     "fillAllFields": "Заполните все поля"
   },

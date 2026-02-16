@@ -17,7 +17,7 @@ export const CartLoginPrompt = ({ onClose }) => {
         {t("basket.loginRequiredDesc")}
       </p>
       <Link
-        to="/auth/login"
+        to="/auth"
         onClick={onClose}
         className="px-[24px] py-[12px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-[12px] transition-colors"
       >

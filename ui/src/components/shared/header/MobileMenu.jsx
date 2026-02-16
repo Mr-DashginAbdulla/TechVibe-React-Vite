@@ -67,7 +67,7 @@ const MobileMenu = ({ categories, onClose }) => {
         </Link>
         {!isLoggedIn && (
           <Link
-            to="/auth/login"
+            to="/auth"
             className="mx-[16px] mt-[8px] py-[12px] bg-primary text-primary-foreground font-semibold rounded-[12px] text-center"
             onClick={onClose}
           >

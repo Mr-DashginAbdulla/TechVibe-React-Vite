@@ -106,7 +106,12 @@
     "emailRequired": "Email və şifrəni daxil edin",
     "invalidEmail": "Düzgün email daxil edin",
     "passwordMismatch": "Şifrələr uyğun gəlmir",
-    "passwordMinLength": "Şifrə minimum 6 simvol olmalıdır",
+    "passwordMinLength": "Şifrə minimum 8 simvol olmalıdır",
+    "passwordUppercase": "Ən azı bir böyük hərf olmalıdır (A-Z)",
+    "passwordLowercase": "Ən azı bir kiçik hərf olmalıdır (a-z)",
+    "passwordNumber": "Ən azı bir rəqəm olmalıdır (0-9)",
+    "passwordSpecial": "Ən azı bir xüsusi simvol olmalıdır (!@#$%^&*...)",
+    "passwordNoPersonalInfo": "Şifrədə adınız və ya emailiniz olmamalıdır",
     "acceptTerms": "Şərtləri qəbul etməlisiniz",
     "fillAllFields": "Bütün sahələri doldurun"
   },

@@ -30,7 +30,7 @@ const ProfileDropdown = () => {
   if (!isLoggedIn) {
     return (
       <Link
-        to="/auth/login"
+        to="/auth"
         className="hidden sm:flex items-center gap-[8px] px-[20px] py-[10px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-[12px] transition-colors shadow-sm"
       >
         {t("nav.login")}

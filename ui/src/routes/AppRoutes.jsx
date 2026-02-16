@@ -63,7 +63,7 @@ export default function AppRoutes() {
       </Route>
 
       <Route path="/auth">
-        <Route index element={<Navigate to="/auth/login" replace />} />
+        <Route index element={<AuthWelcome />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="forgot-password" element={<ForgotPassword />} />

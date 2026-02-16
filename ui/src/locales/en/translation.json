@@ -106,7 +106,12 @@
     "emailRequired": "Please enter email and password",
     "invalidEmail": "Please enter a valid email",
     "passwordMismatch": "Passwords do not match",
-    "passwordMinLength": "Password must be at least 6 characters",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordUppercase": "Must contain at least one uppercase letter (A-Z)",
+    "passwordLowercase": "Must contain at least one lowercase letter (a-z)",
+    "passwordNumber": "Must contain at least one number (0-9)",
+    "passwordSpecial": "Must contain at least one special character (!@#$%^&*...)",
+    "passwordNoPersonalInfo": "Password must not contain your name or email",
     "acceptTerms": "You must accept the terms",
     "fillAllFields": "Please fill all fields"
   },

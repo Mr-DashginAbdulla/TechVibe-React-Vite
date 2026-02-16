@@ -408,5 +408,13 @@
     "sessionExpired": "Sessiya bitdi. Yenidən daxil olun.",
     "unauthorized": "Bu əməliyyatı yerinə yetirmək icazəniz yoxdur",
     "validationError": "Formu yoxlayın"
+  },
+  "validation": {
+    "passwordMinLength": "Şifrə minimum 8 simvol olmalıdır",
+    "passwordUppercase": "Ən azı bir böyük hərf olmalıdır (A-Z)",
+    "passwordLowercase": "Ən azı bir kiçik hərf olmalıdır (a-z)",
+    "passwordNumber": "Ən azı bir rəqəm olmalıdır (0-9)",
+    "passwordSpecial": "Ən azı bir xüsusi simvol olmalıdır (!@#$%^&*...)",
+    "passwordNoPersonalInfo": "Şifrədə adınız və ya emailiniz olmamalıdır"
   }
 }
