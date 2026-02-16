@@ -9,6 +9,7 @@ import ShopByCategory from "./components/ShopByCategory";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
 import BrandCarousel from "./components/BrandCarousel";
+import StoreLocation from "./components/StoreLocation";
 import { ProductCardSkeleton } from "@/components/ui";
 
 import {
@@ -235,6 +236,15 @@ function Home() {
         transition={{ duration: 0.5, delay: 0.1 }}
       >
         <Newsletter />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <StoreLocation />
       </motion.div>
     </>
   );

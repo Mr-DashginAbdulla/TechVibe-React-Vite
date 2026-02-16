@@ -3412,7 +3412,11 @@
       "rating": 4,
       "comment": "Gözlədiyimdən yaxşı çıxdı!",
       "date": "2026-01-10",
-      "helpful": 0
+      "helpful": 0,
+      "helpfulCount": 0,
+      "helpfulBy": [],
+      "unhelpfulCount": 0,
+      "unhelpfulBy": []
     },
     {
       "id": "r3_2",

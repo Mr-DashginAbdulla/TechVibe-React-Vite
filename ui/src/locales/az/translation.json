@@ -615,5 +615,14 @@
     "gyro": "Giroskop",
     "CloudGaming": "Bulud Oyunları",
     "StreamingServices": "Axın Xidmətləri"
+  },
+  "storeLocation": {
+    "title": "Mağazamıza Gəlin",
+    "subtitle": "Ən son texnologiya məhsullarını şəxsən yaxından görün",
+    "addressLabel": "Ünvan",
+    "address": "28 May küçəsi, Bakı, Azərbaycan",
+    "workingHoursLabel": "İş saatları",
+    "workingHours": "B.e – Ş: 10:00 – 21:00\nBazar: 11:00 – 19:00",
+    "phoneLabel": "Telefon"
   }
 }

@@ -615,5 +615,14 @@
     "gyro": "Gyro",
     "CloudGaming": "Cloud Gaming",
     "StreamingServices": "Streaming Services"
+  },
+  "storeLocation": {
+    "title": "Visit Our Store",
+    "subtitle": "Come and experience the latest tech products in person",
+    "addressLabel": "Address",
+    "address": "28 May Street, Baku, Azerbaijan",
+    "workingHoursLabel": "Working Hours",
+    "workingHours": "Mon – Sat: 10:00 – 21:00\nSun: 11:00 – 19:00",
+    "phoneLabel": "Phone"
   }
 }
