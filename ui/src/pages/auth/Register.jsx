@@ -10,6 +10,8 @@ import { validatePassword } from "@/utils/passwordValidation";
 import FormInput from "@/components/ui/FormInput";
 import PasswordInput from "@/components/ui/PasswordInput";
 import SocialLoginButtons from "@/components/ui/SocialLoginButtons";
+import logoLight from "@/assets/images/TechVibeLogo-LightTransparent.png";
+import logoDark from "@/assets/images/TechVibeLogo-DarkTransparent.png";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -110,6 +112,18 @@ const Register = () => {
       </Helmet>
       <div className="w-full max-w-[480px] bg-card rounded-[24px] shadow-xl p-[40px] border border-border">
         <div className="text-center mb-[32px]">
+          <div className="flex justify-center mb-[24px]">
+            <img
+              src={logoLight}
+              alt="TechVibe"
+              className="h-[40px] dark:hidden"
+            />
+            <img
+              src={logoDark}
+              alt="TechVibe"
+              className="h-[40px] hidden dark:block"
+            />
+          </div>
           <h1 className="text-[28px] font-bold text-foreground mb-[8px]">
             {t("auth.createAccount")}
           </h1>

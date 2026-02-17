@@ -1583,9 +1583,7 @@
       "isNew": true,
       "description": "27-inch 5K, Thunderbolt 3",
       "image": "https://www.lgcorp.com/media/release/images/33597",
-      "images": [
-        "https://www.lgcorp.com/media/release/images/33597"
-      ],
+      "images": ["https://www.lgcorp.com/media/release/images/33597"],
       "specs": {
         "Screen Size": "27 inches",
         "Resolution": "5120 x 2880 (5K)",

@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import Logo from "@/assets/images/TechVibeLogo-LightTransparent.png";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
@@ -52,12 +53,11 @@ const Sidebar = ({ isOpen, onClose }) => {
       >
         <div className="h-[72px] flex items-center justify-between px-[24px] border-b border-[#E5E7EB]">
           <Link to="/" className="flex items-center gap-[10px]">
-            <div className="w-[40px] h-[40px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-[10px] flex items-center justify-center">
-              <span className="text-white font-bold text-[18px]">T</span>
-            </div>
+            <img src={Logo} alt="TechVibe" className="h-[40px] w-auto" />
             <div>
-              <h1 className="text-[18px] font-bold text-[#111827]">TechVibe</h1>
-              <p className="text-[11px] text-[#6B7280]">Admin Panel</p>
+              <p className="text-[11px] text-[#6B7280] font-medium ml-1">
+                Admin Panel
+              </p>
             </div>
           </Link>
           <button

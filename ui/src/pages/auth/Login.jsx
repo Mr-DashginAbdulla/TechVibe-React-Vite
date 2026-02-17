@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { authService } from "@/services/authService";
 import { useAuth } from "@/context/AuthContext";
+import logoLight from "@/assets/images/TechVibeLogo-LightTransparent.png";
+import logoDark from "@/assets/images/TechVibeLogo-DarkTransparent.png";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -121,6 +123,18 @@ const Login = () => {
         <div className="flex-1 p-[40px]">
           <div className="max-w-[360px] mx-auto">
             <div className="mb-[32px]">
+              <div className="flex justify-center mb-[24px]">
+                <img
+                  src={logoLight}
+                  alt="TechVibe"
+                  className="h-[40px] dark:hidden"
+                />
+                <img
+                  src={logoDark}
+                  alt="TechVibe"
+                  className="h-[40px] hidden dark:block"
+                />
+              </div>
               <h1 className="text-[28px] font-bold text-foreground mb-[8px]">
                 {t("auth.signIn")}
               </h1>

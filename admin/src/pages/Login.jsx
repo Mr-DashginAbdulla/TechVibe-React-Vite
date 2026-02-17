@@ -3,6 +3,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Mail, Lock, AlertCircle } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import Logo from "@/assets/images/TechVibeLogo-DarkTransparent.png";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -36,11 +37,11 @@ const Login = () => {
     <div className="min-h-screen bg-linear-to-br from-[#3B82F6] to-[#6366F1] flex items-center justify-center p-[24px]">
       <div className="w-full max-w-[420px]">
         <div className="text-center mb-[32px]">
-          <div className="inline-flex items-center justify-center w-[64px] h-[64px] bg-white rounded-[16px] shadow-lg mb-[16px]">
-            <span className="text-[32px] font-bold text-transparent bg-clip-text bg-linear-to-br from-[#3B82F6] to-[#6366F1]">
-              T
-            </span>
-          </div>
+          <img
+            src={Logo}
+            alt="TechVibe"
+            className="h-[60px] mx-auto mb-[24px]"
+          />
           <h1 className="text-[28px] font-bold text-white">
             {t("login.title")}
           </h1>

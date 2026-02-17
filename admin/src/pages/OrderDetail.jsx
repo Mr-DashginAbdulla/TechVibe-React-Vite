@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "react-toastify";
-import { orderService } from "@/services/api";
+import { orderService, productService } from "@/services/api";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import OrderItemsList from "@/components/orders/OrderItemsList";
 import OrderTimeline from "@/components/orders/OrderTimeline";
@@ -31,10 +31,50 @@ const OrderDetail = () => {
 
   const updateStatus = async (newStatus) => {
     try {
-      await orderService.update(id, { status: newStatus });
-      setOrder({ ...order, status: newStatus });
+      const currentStatus = order.status;
+      const isSoldStatus = (status) =>
+        !["pending", "cancelled"].includes(status);
+
+      // Determine if stock should change
+      let stockMultiplier = 0;
+      if (!isSoldStatus(currentStatus) && isSoldStatus(newStatus)) {
+        // Pending/Cancelled -> Sold (Decrease stock)
+        stockMultiplier = -1;
+      } else if (isSoldStatus(currentStatus) && !isSoldStatus(newStatus)) {
+        // Sold -> Pending/Cancelled (Increase stock)
+        // Wait, moving back to pending shouldn't happen logically usually, but if it does, return stock.
+        // And importantly, Sold -> Cancelled returns stock.
+        stockMultiplier = 1;
+      }
+
+      // Update stock for each item if needed
+      if (stockMultiplier !== 0) {
+        await Promise.all(
+          order.items.map(async (item) => {
+            const product = await productService.getById(item.productId);
+            if (product) {
+              const newStock = product.stock + item.quantity * stockMultiplier;
+              await productService.update(item.productId, {
+                stock: newStock >= 0 ? newStock : 0,
+              });
+            }
+          }),
+        );
+      }
+
+      const newTimelineEntry = {
+        status: newStatus,
+        date: new Date().toISOString(),
+        note: "Status updated by admin",
+      };
+
+      const updatedTimeline = [...(order.timeline || []), newTimelineEntry];
+
+      await orderService.updateStatus(id, newStatus, updatedTimeline);
+      setOrder({ ...order, status: newStatus, timeline: updatedTimeline });
       toast.success(t("orders.statusUpdated"));
-    } catch {
+    } catch (error) {
+      console.error(error);
       toast.error(t("orders.statusError"));
     }
   };
@@ -95,7 +135,7 @@ const OrderDetail = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[20px]">
         <div className="lg:col-span-2 space-y-[16px]">
           <OrderItemsList items={order.items} />
-          <OrderTimeline history={order.history} />
+          <OrderTimeline history={order.timeline} />
         </div>
         <OrderSidebar
           order={order}
