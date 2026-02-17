@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/context/AuthContext";
 import AdminLayout from "@/layouts/AdminLayout";
-import Login from "@/pages/Login";
+
+// Login page is now handled via LoginModal in AdminLayout
 import Dashboard from "@/pages/Dashboard";
 import Products from "@/pages/Products";
 import ProductForm from "@/pages/ProductForm";
@@ -20,7 +21,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Navigate to="/" replace />} />
           <Route path="/" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="products" element={<Products />} />

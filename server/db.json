@@ -35,18 +35,6 @@
       "isVerified": false,
       "avatar": "",
       "createdAt": "2026-01-25T08:26:50.315Z"
-    },
-    {
-      "id": "mlohxg2y-1p9cux",
-      "firstName": "TestJohn",
-      "lastName": "UserSmith",
-      "email": "johnsmith@techvibe.test",
-      "password": "TestPassword123!VibeMaster2024!",
-      "phone": "",
-      "isVerified": false,
-      "avatar": "",
-      "createdAt": "2026-02-16T01:29:01.354Z",
-      "memberSince": "2026-02-16T01:29:01.354Z"
     }
   ],
   "categories": [
@@ -1583,7 +1571,9 @@
       "isNew": true,
       "description": "27-inch 5K, Thunderbolt 3",
       "image": "https://www.lgcorp.com/media/release/images/33597",
-      "images": ["https://www.lgcorp.com/media/release/images/33597"],
+      "images": [
+        "https://www.lgcorp.com/media/release/images/33597"
+      ],
       "specs": {
         "Screen Size": "27 inches",
         "Resolution": "5120 x 2880 (5K)",

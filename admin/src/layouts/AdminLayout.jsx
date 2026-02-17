@@ -3,6 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import LoginModal from "@/components/LoginModal";
 
 const AdminLayout = () => {
   const { isLoggedIn, isLoading } = useAuth();
@@ -16,19 +17,25 @@ const AdminLayout = () => {
     );
   }
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" replace />;
-  }
-
+  // If not logged in, we show the layout in a "locked" state with the modal
   return (
-    <div className="min-h-screen bg-[#F9FAFB]">
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <div className="lg:ml-[260px]">
-        <Header onMenuClick={() => setSidebarOpen(true)} />
-        <main className="p-[16px] sm:p-[24px]">
-          <Outlet />
-        </main>
+    <div className="min-h-screen bg-[#F9FAFB] relative selection:bg-blue-500/30">
+      {/* Background Content - Blurred if not logged in */}
+      <div
+        className={`transition-all duration-500 ${!isLoggedIn ? "filter blur-sm pointer-events-none select-none brightness-75" : ""}`}
+      >
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <div className="lg:ml-[260px]">
+          <Header onMenuClick={() => setSidebarOpen(true)} />
+          <main className="p-[16px] sm:p-[24px]">
+            {/* Only render Outlet if logged in to prevent data fetching errors */}
+            {isLoggedIn ? <Outlet /> : <div className="h-[80vh]" />}
+          </main>
+        </div>
       </div>
+
+      {/* Login Modal Overlay */}
+      {!isLoggedIn && <LoginModal />}
     </div>
   );
 };
