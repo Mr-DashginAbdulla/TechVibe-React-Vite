@@ -17,10 +17,8 @@ const AdminLayout = () => {
     );
   }
 
-  // If not logged in, we show the layout in a "locked" state with the modal
   return (
     <div className="min-h-screen bg-[#F9FAFB] relative selection:bg-blue-500/30">
-      {/* Background Content - Blurred if not logged in */}
       <div
         className={`transition-all duration-500 ${!isLoggedIn ? "filter blur-sm pointer-events-none select-none brightness-75" : ""}`}
       >
@@ -28,13 +26,10 @@ const AdminLayout = () => {
         <div className="lg:ml-[260px]">
           <Header onMenuClick={() => setSidebarOpen(true)} />
           <main className="p-[16px] sm:p-[24px]">
-            {/* Only render Outlet if logged in to prevent data fetching errors */}
             {isLoggedIn ? <Outlet /> : <div className="h-[80vh]" />}
           </main>
         </div>
       </div>
-
-      {/* Login Modal Overlay */}
       {!isLoggedIn && <LoginModal />}
     </div>
   );

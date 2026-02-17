@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/context/AuthContext";
 import AdminLayout from "@/layouts/AdminLayout";
 
-// Login page is now handled via LoginModal in AdminLayout
 import Dashboard from "@/pages/Dashboard";
 import Products from "@/pages/Products";
 import ProductForm from "@/pages/ProductForm";
