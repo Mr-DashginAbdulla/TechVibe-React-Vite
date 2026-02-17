@@ -146,7 +146,33 @@ const ProductDetails = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+
+    if (product) {
+      const viewedProduct = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        brand: product.brand,
+      };
+
+      const saved = localStorage.getItem("recentlyViewed");
+      let recentlyViewed = saved ? JSON.parse(saved) : [];
+
+      // Remove if already exists to move to top
+      recentlyViewed = recentlyViewed.filter((p) => p.id !== product.id);
+
+      // Add to beginning
+      recentlyViewed.unshift(viewedProduct);
+
+      // Limit to 10
+      if (recentlyViewed.length > 10) {
+        recentlyViewed = recentlyViewed.slice(0, 10);
+      }
+
+      localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+    }
+  }, [id, product]);
 
   const handleOptionSelect = (optionId, valueObj) => {
     setSelectedOptions((prev) => ({

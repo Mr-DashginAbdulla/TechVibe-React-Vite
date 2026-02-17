@@ -10,8 +10,8 @@ const SearchBar = ({ products }) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
-  const [searchHistory, setSearchHistory] = useState(() => {
-    const saved = localStorage.getItem("searchHistory");
+  const [recentlyViewed, setRecentlyViewed] = useState(() => {
+    const saved = localStorage.getItem("recentlyViewed");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -25,33 +25,27 @@ const SearchBar = ({ products }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const addToHistory = (query) => {
-    const trimmedQuery = query.trim();
-    if (!trimmedQuery) return;
+  // Update recently viewed list when dropdown is opened to catch any new views
+  useEffect(() => {
+    if (showSearchDropdown && searchQuery.trim().length < 2) {
+      const saved = localStorage.getItem("recentlyViewed");
+      if (saved) {
+        setRecentlyViewed(JSON.parse(saved));
+      }
+    }
+  }, [showSearchDropdown, searchQuery]);
 
-    setSearchHistory((prev) => {
-      const newHistory = [
-        trimmedQuery,
-        ...prev.filter((item) => item !== trimmedQuery),
-      ].slice(0, 5);
-      localStorage.setItem("searchHistory", JSON.stringify(newHistory));
-      return newHistory;
-    });
-  };
-
-  const removeFromHistory = (e, itemToRemove) => {
-    e.stopPropagation(); // Prevent clicking the item itself
-    setSearchHistory((prev) => {
-      const newHistory = prev.filter((item) => item !== itemToRemove);
-      localStorage.setItem("searchHistory", JSON.stringify(newHistory));
-      return newHistory;
-    });
+  const removeFromHistory = (e, productId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const newHistory = recentlyViewed.filter((item) => item.id !== productId);
+    setRecentlyViewed(newHistory);
+    localStorage.setItem("recentlyViewed", JSON.stringify(newHistory));
   };
 
   const handleSearch = (query) => {
     const trimmedQuery = query.trim();
     if (trimmedQuery) {
-      addToHistory(trimmedQuery);
       navigate(`/shop?search=${encodeURIComponent(trimmedQuery)}`);
       setSearchQuery("");
       setShowSearchDropdown(false);
@@ -72,7 +66,7 @@ const SearchBar = ({ products }) => {
   const shouldShowDropdown =
     showSearchDropdown &&
     (filteredProducts.length > 0 ||
-      (searchQuery.trim().length < 2 && searchHistory.length > 0));
+      (searchQuery.trim().length < 2 && recentlyViewed.length > 0));
 
   return (
     <div
@@ -101,34 +95,45 @@ const SearchBar = ({ products }) => {
         {shouldShowDropdown && (
           <div className="absolute top-full left-0 right-0 mt-[8px] bg-popover rounded-[16px] shadow-xl border border-border overflow-hidden z-50">
             {searchQuery.trim().length < 2 ? (
-              // Search History View
+              // Recently Viewed Products View
               <>
                 <div className="px-[16px] py-[10px] border-b border-border">
                   <p className="text-[12px] font-semibold text-muted-foreground uppercase tracking-wide">
-                    {t("shop.recentSearches") || "Recent Searches"}
+                    {t("shop.recentlyViewed") || "Recently Viewed"}
                   </p>
                 </div>
                 <div className="max-h-[320px] overflow-y-auto">
-                  {searchHistory.map((item, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleSearch(item)}
-                      className="flex items-center justify-between px-[16px] py-[10px] hover:bg-muted/50 transition-colors cursor-pointer group"
+                  {recentlyViewed.map((product) => (
+                    <Link
+                      key={product.id}
+                      to={`/product/${product.id}`}
+                      onClick={() => {
+                        setSearchQuery("");
+                        setShowSearchDropdown(false);
+                      }}
+                      className="flex items-center gap-[12px] px-[16px] py-[12px] hover:bg-muted/50 transition-colors group relative"
                     >
-                      <div className="flex items-center gap-[10px]">
-                        <Search className="w-[14px] h-[14px] text-muted-foreground" />
-                        <span className="text-[14px] text-foreground">
-                          {item}
-                        </span>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-[40px] h-[40px] object-cover rounded-[8px]"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[14px] font-medium text-foreground truncate">
+                          {product.name}
+                        </p>
+                        <p className="text-[12px] text-muted-foreground">
+                          ${product.price?.toFixed(2)}
+                        </p>
                       </div>
                       <button
-                        onClick={(e) => removeFromHistory(e, item)}
-                        className="p-[4px] rounded-full hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors opacity-0 group-hover:opacity-100"
+                        onClick={(e) => removeFromHistory(e, product.id)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-[6px] rounded-full bg-background/80 hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors opacity-0 group-hover:opacity-100 shadow-sm"
                         title={t("common.remove") || "Remove"}
                       >
                         <X className="w-[14px] h-[14px]" />
                       </button>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </>
@@ -146,7 +151,6 @@ const SearchBar = ({ products }) => {
                       key={product.id}
                       to={`/product/${product.id}`}
                       onClick={() => {
-                        addToHistory(searchQuery);
                         setSearchQuery("");
                         setShowSearchDropdown(false);
                       }}

@@ -30,7 +30,8 @@
     "clearAll": "Очистить все",
     "noProductsFound": "Товары не найдены.",
     "language": "Язык",
-    "theme": "Тема"
+    "theme": "Тема",
+    "remove": "Удалить"
   },
   "theme": {
     "light": "Светлая",
@@ -512,7 +513,8 @@
     "andAbove": "и выше",
     "searchSuggestions": "Рекомендуемые товары",
     "noSearchResults": "Товары не найдены",
-    "viewAllResults": "Показать все результаты"
+    "viewAllResults": "Показать все результаты",
+    "recentlyViewed": "Недавно просмотренные"
   },
   "categoriesPage": {
     "title": "Просмотр категорий",
