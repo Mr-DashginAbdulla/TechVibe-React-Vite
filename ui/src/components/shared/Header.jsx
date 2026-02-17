@@ -88,7 +88,9 @@ const Header = () => {
               <Search className="w-[22px] h-[22px]" />
             </button>
 
-            <SettingsDropdown />
+            <div className="hidden lg:flex items-center gap-[12px]">
+              <SettingsDropdown />
+            </div>
 
             <button
               onClick={() => setIsCartOpen(true)}
@@ -102,7 +104,9 @@ const Header = () => {
               )}
             </button>
 
-            <ProfileDropdown />
+            <div className="hidden lg:block">
+              <ProfileDropdown />
+            </div>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
