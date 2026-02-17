@@ -43,8 +43,10 @@ const ProductGrid = ({
           rating={product.rating}
           reviewCount={product.reviewsCount || 0}
           originalPrice={product.oldPrice}
+          description={product.description}
           isNew={product.isNew}
           isFavorite={isInWishlist(product.id)}
+          viewMode={viewMode}
           onAddToCart={onAddToCart}
           onToggleFavorite={onToggleFavorite}
         />

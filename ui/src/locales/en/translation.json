@@ -31,7 +31,8 @@
     "noProductsFound": "No products found.",
     "language": "Language",
     "theme": "Theme",
-    "remove": "Remove"
+    "remove": "Remove",
+    "viewDetails": "View Details"
   },
   "theme": {
     "light": "Light",

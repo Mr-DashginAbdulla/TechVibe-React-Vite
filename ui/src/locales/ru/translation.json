@@ -31,7 +31,8 @@
     "noProductsFound": "Товары не найдены.",
     "language": "Язык",
     "theme": "Тема",
-    "remove": "Удалить"
+    "remove": "Удалить",
+    "viewDetails": "Подробнее"
   },
   "theme": {
     "light": "Светлая",
