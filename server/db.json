@@ -35,6 +35,18 @@
       "isVerified": false,
       "avatar": "",
       "createdAt": "2026-01-25T08:26:50.315Z"
+    },
+    {
+      "id": "mlohxg2y-1p9cux",
+      "firstName": "TestJohn",
+      "lastName": "UserSmith",
+      "email": "johnsmith@techvibe.test",
+      "password": "VibeMaster2024!",
+      "phone": "",
+      "isVerified": false,
+      "avatar": "",
+      "createdAt": "2026-02-16T01:29:01.354Z",
+      "memberSince": "2026-02-16T01:29:01.354Z"
     }
   ],
   "categories": [

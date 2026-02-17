@@ -30,7 +30,8 @@
     "clearAll": "Clear All",
     "noProductsFound": "No products found.",
     "language": "Language",
-    "theme": "Theme"
+    "theme": "Theme",
+    "remove": "Remove"
   },
   "theme": {
     "light": "Light",
@@ -517,7 +518,8 @@
     "previousPage": "Previous",
     "nextPage": "Next",
     "page": "Page",
-    "of": "of"
+    "of": "of",
+    "recentSearches": "Recent Searches"
   },
   "categoriesPage": {
     "title": "Browse Categories",

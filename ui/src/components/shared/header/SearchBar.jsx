@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Search, ArrowRight } from "lucide-react";
+import { Search, ArrowRight, X } from "lucide-react";
 
 const SearchBar = ({ products }) => {
   const { t } = useTranslation();
@@ -10,6 +10,10 @@ const SearchBar = ({ products }) => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [searchHistory, setSearchHistory] = useState(() => {
+    const saved = localStorage.getItem("searchHistory");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -21,6 +25,39 @@ const SearchBar = ({ products }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const addToHistory = (query) => {
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) return;
+
+    setSearchHistory((prev) => {
+      const newHistory = [
+        trimmedQuery,
+        ...prev.filter((item) => item !== trimmedQuery),
+      ].slice(0, 5);
+      localStorage.setItem("searchHistory", JSON.stringify(newHistory));
+      return newHistory;
+    });
+  };
+
+  const removeFromHistory = (e, itemToRemove) => {
+    e.stopPropagation(); // Prevent clicking the item itself
+    setSearchHistory((prev) => {
+      const newHistory = prev.filter((item) => item !== itemToRemove);
+      localStorage.setItem("searchHistory", JSON.stringify(newHistory));
+      return newHistory;
+    });
+  };
+
+  const handleSearch = (query) => {
+    const trimmedQuery = query.trim();
+    if (trimmedQuery) {
+      addToHistory(trimmedQuery);
+      navigate(`/shop?search=${encodeURIComponent(trimmedQuery)}`);
+      setSearchQuery("");
+      setShowSearchDropdown(false);
+    }
+  };
+
   const filteredProducts =
     searchQuery.trim().length >= 2
       ? products
@@ -31,6 +68,11 @@ const SearchBar = ({ products }) => {
           )
           .slice(0, 5)
       : [];
+
+  const shouldShowDropdown =
+    showSearchDropdown &&
+    (filteredProducts.length > 0 ||
+      (searchQuery.trim().length < 2 && searchHistory.length > 0));
 
   return (
     <div
@@ -45,28 +87,53 @@ const SearchBar = ({ products }) => {
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
-            setShowSearchDropdown(e.target.value.trim().length >= 2);
+            setShowSearchDropdown(true);
           }}
-          onFocus={() => {
-            if (searchQuery.trim().length >= 2) {
-              setShowSearchDropdown(true);
-            }
-          }}
+          onFocus={() => setShowSearchDropdown(true)}
           className="w-full pl-[42px] pr-[16px] py-[10px] bg-muted/50 border border-transparent focus:border-primary/20 rounded-[12px] text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-muted-foreground"
           onKeyDown={(e) => {
-            if (e.key === "Enter" && searchQuery.trim()) {
-              navigate(
-                `/shop?search=${encodeURIComponent(searchQuery.trim())}`,
-              );
-              setSearchQuery("");
-              setShowSearchDropdown(false);
+            if (e.key === "Enter") {
+              handleSearch(searchQuery);
             }
           }}
         />
 
-        {showSearchDropdown && (
+        {shouldShowDropdown && (
           <div className="absolute top-full left-0 right-0 mt-[8px] bg-popover rounded-[16px] shadow-xl border border-border overflow-hidden z-50">
-            {filteredProducts.length > 0 ? (
+            {searchQuery.trim().length < 2 ? (
+              // Search History View
+              <>
+                <div className="px-[16px] py-[10px] border-b border-border">
+                  <p className="text-[12px] font-semibold text-muted-foreground uppercase tracking-wide">
+                    {t("shop.recentSearches") || "Recent Searches"}
+                  </p>
+                </div>
+                <div className="max-h-[320px] overflow-y-auto">
+                  {searchHistory.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleSearch(item)}
+                      className="flex items-center justify-between px-[16px] py-[10px] hover:bg-muted/50 transition-colors cursor-pointer group"
+                    >
+                      <div className="flex items-center gap-[10px]">
+                        <Search className="w-[14px] h-[14px] text-muted-foreground" />
+                        <span className="text-[14px] text-foreground">
+                          {item}
+                        </span>
+                      </div>
+                      <button
+                        onClick={(e) => removeFromHistory(e, item)}
+                        className="p-[4px] rounded-full hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors opacity-0 group-hover:opacity-100"
+                        title={t("common.remove") || "Remove"}
+                      >
+                        <X className="w-[14px] h-[14px]" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : filteredProducts.length > 0 ? (
+              // Product Suggestions View
               <>
                 <div className="px-[16px] py-[10px] border-b border-border">
                   <p className="text-[12px] font-semibold text-muted-foreground uppercase tracking-wide">
@@ -79,6 +146,7 @@ const SearchBar = ({ products }) => {
                       key={product.id}
                       to={`/product/${product.id}`}
                       onClick={() => {
+                        addToHistory(searchQuery);
                         setSearchQuery("");
                         setShowSearchDropdown(false);
                       }}
@@ -104,8 +172,7 @@ const SearchBar = ({ products }) => {
                 <Link
                   to={`/shop?search=${encodeURIComponent(searchQuery)}`}
                   onClick={() => {
-                    setSearchQuery("");
-                    setShowSearchDropdown(false);
+                    handleSearch(searchQuery);
                   }}
                   className="flex items-center justify-center gap-[8px] px-[16px] py-[12px] bg-muted/30 text-[14px] font-medium text-primary hover:bg-muted/50 border-t border-border transition-colors"
                 >

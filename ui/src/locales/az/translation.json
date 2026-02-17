@@ -30,7 +30,8 @@
     "clearAll": "Hamısını təmizlə",
     "noProductsFound": "Məhsul tapılmadı.",
     "language": "Dil",
-    "theme": "Tema"
+    "theme": "Tema",
+    "remove": "Sil"
   },
   "theme": {
     "light": "Açıq",
@@ -517,7 +518,8 @@
     "previousPage": "Əvvəlki",
     "nextPage": "Növbəti",
     "page": "Səhifə",
-    "of": "-"
+    "of": "-",
+    "recentSearches": "Son Axtarışlar"
   },
   "categoriesPage": {
     "title": "Kateqoriyalara Baxın",
