@@ -102,7 +102,13 @@ const SearchBar = ({ products }) => {
                     {t("shop.recentlyViewed") || "Recently Viewed"}
                   </p>
                 </div>
-                <div className="max-h-[320px] overflow-y-auto">
+                <div
+                  className="max-h-[320px] overflow-y-auto"
+                  style={{
+                    overscrollBehavior: "contain",
+                  }}
+                  onWheel={(e) => e.stopPropagation()}
+                >
                   {recentlyViewed.map((product) => (
                     <Link
                       key={product.id}
@@ -145,7 +151,13 @@ const SearchBar = ({ products }) => {
                     {t("shop.searchSuggestions")}
                   </p>
                 </div>
-                <div className="max-h-[320px] overflow-y-auto">
+                <div
+                  className="max-h-[320px] overflow-y-auto"
+                  style={{
+                    overscrollBehavior: "contain",
+                  }}
+                  onWheel={(e) => e.stopPropagation()}
+                >
                   {filteredProducts.map((product) => (
                     <Link
                       key={product.id}
