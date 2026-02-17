@@ -60,11 +60,11 @@ const ImagesSection = ({ images, setImages }) => {
         </div>
 
         <div className="flex items-center gap-[8px]">
-          <div className="h-[1px] flex-1 bg-[#E5E7EB]" />
+          <div className="h-px flex-1 bg-[#E5E7EB]" />
           <span className="text-[12px] text-[#6B7280]">
             {t("products.upload")}
           </span>
-          <div className="h-[1px] flex-1 bg-[#E5E7EB]" />
+          <div className="h-px flex-1 bg-[#E5E7EB]" />
         </div>
 
         <button
