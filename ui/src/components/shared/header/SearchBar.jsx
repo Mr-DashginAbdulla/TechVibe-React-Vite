@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Search, ArrowRight, X } from "lucide-react";
 
-const SearchBar = ({ products }) => {
+const SearchBar = ({ products, className = "", onSearch }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const searchRef = useRef(null);
@@ -19,11 +19,14 @@ const SearchBar = ({ products }) => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearchDropdown(false);
+        if (onSearch && searchQuery.trim().length === 0) {
+          // Optional: trigger close if clicking outside with empty search
+        }
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [onSearch, searchQuery]);
 
   // Update recently viewed list when dropdown is opened to catch any new views
   useEffect(() => {
@@ -49,6 +52,7 @@ const SearchBar = ({ products }) => {
       navigate(`/shop?search=${encodeURIComponent(trimmedQuery)}`);
       setSearchQuery("");
       setShowSearchDropdown(false);
+      if (onSearch) onSearch();
     }
   };
 
@@ -69,10 +73,7 @@ const SearchBar = ({ products }) => {
       (searchQuery.trim().length < 2 && recentlyViewed.length > 0));
 
   return (
-    <div
-      className="hidden md:flex items-center flex-1 max-w-[400px] mx-[32px]"
-      ref={searchRef}
-    >
+    <div className={`relative ${className}`} ref={searchRef}>
       <div className="relative w-full">
         <Search className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted-foreground" />
         <input
@@ -116,6 +117,7 @@ const SearchBar = ({ products }) => {
                       onClick={() => {
                         setSearchQuery("");
                         setShowSearchDropdown(false);
+                        if (onSearch) onSearch();
                       }}
                       className="flex items-center gap-[12px] px-[16px] py-[12px] hover:bg-muted/50 transition-colors group relative"
                     >
@@ -165,6 +167,7 @@ const SearchBar = ({ products }) => {
                       onClick={() => {
                         setSearchQuery("");
                         setShowSearchDropdown(false);
+                        if (onSearch) onSearch();
                       }}
                       className="flex items-center gap-[12px] px-[16px] py-[12px] hover:bg-muted/50 transition-colors"
                     >

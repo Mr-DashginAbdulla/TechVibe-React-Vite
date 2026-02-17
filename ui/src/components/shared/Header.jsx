@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useGetCartQuery } from "@/store/api/productsApi";
@@ -24,6 +24,7 @@ const Header = () => {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
 
@@ -72,9 +73,21 @@ const Header = () => {
 
           <DesktopNav categories={categories} />
 
-          <SearchBar products={products} />
+          {/* Desktop Search Bar */}
+          <SearchBar
+            products={products}
+            className="hidden md:flex items-center flex-1 max-w-[400px] mx-[32px]"
+          />
 
           <div className="flex items-center gap-[12px]">
+            {/* Mobile Search Toggle */}
+            <button
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="md:hidden p-[10px] rounded-[12px] hover:bg-accent text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Search className="w-[22px] h-[22px]" />
+            </button>
+
             <SettingsDropdown />
 
             <button
@@ -109,6 +122,17 @@ const Header = () => {
             categories={categories}
             onClose={() => setMobileMenuOpen(false)}
           />
+        )}
+
+        {/* Mobile Search Overlay */}
+        {isSearchOpen && (
+          <div className="md:hidden absolute top-[72px] left-0 right-0 bg-background border-b border-border p-[16px] shadow-lg animate-in slide-in-from-top-2">
+            <SearchBar
+              products={products}
+              className="w-full"
+              onSearch={() => setIsSearchOpen(false)}
+            />
+          </div>
         )}
       </div>
 
