@@ -1,28 +1,34 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
+import LoadingSpinner from "@/components/shared/LoadingSpinner";
 
-import Home from "@/pages/public/Home/Home";
-import Shop from "@/pages/public/Shop/Shop";
-import Deals from "@/pages/public/Deals/Deals";
-import ProductDetails from "@/pages/public/Products/ProductDetails";
-import Checkout from "@/pages/public/Checkout/Checkout";
-import OrderSuccess from "@/pages/public/OrderSuccess/OrderSuccess";
+const Home = lazy(() => import("@/pages/public/Home/Home"));
+const Shop = lazy(() => import("@/pages/public/Shop/Shop"));
+const Deals = lazy(() => import("@/pages/public/Deals/Deals"));
+const ProductDetails = lazy(
+  () => import("@/pages/public/Products/ProductDetails"),
+);
+const Checkout = lazy(() => import("@/pages/public/Checkout/Checkout"));
+const OrderSuccess = lazy(
+  () => import("@/pages/public/OrderSuccess/OrderSuccess"),
+);
 
-import Login from "@/pages/auth/Login";
-import Register from "@/pages/auth/Register";
-import ForgotPassword from "@/pages/auth/ForgotPassword";
-import VerifyCode from "@/pages/auth/VerifyCode";
-import ResetSuccess from "@/pages/auth/ResetSuccess";
-import AuthWelcome from "@/pages/auth/AuthWelcome";
+const Login = lazy(() => import("@/pages/auth/Login"));
+const Register = lazy(() => import("@/pages/auth/Register"));
+const ForgotPassword = lazy(() => import("@/pages/auth/ForgotPassword"));
+const VerifyCode = lazy(() => import("@/pages/auth/VerifyCode"));
+const ResetSuccess = lazy(() => import("@/pages/auth/ResetSuccess"));
+const AuthWelcome = lazy(() => import("@/pages/auth/AuthWelcome"));
 
-import ProfileLayout from "@/pages/profile/ProfileLayout";
-import ProfileOverview from "@/pages/profile/ProfileOverview";
-import AccountSettings from "@/pages/profile/AccountSettings";
-import MyAddresses from "@/pages/profile/MyAddresses";
-import MyOrders from "@/pages/profile/MyOrders";
-import OrderDetails from "@/pages/profile/OrderDetails";
-import MyWishlist from "@/pages/profile/MyWishlist";
-import ProfileCart from "@/pages/profile/ProfileCart";
+const ProfileLayout = lazy(() => import("@/pages/profile/ProfileLayout"));
+const ProfileOverview = lazy(() => import("@/pages/profile/ProfileOverview"));
+const AccountSettings = lazy(() => import("@/pages/profile/AccountSettings"));
+const MyAddresses = lazy(() => import("@/pages/profile/MyAddresses"));
+const MyOrders = lazy(() => import("@/pages/profile/MyOrders"));
+const OrderDetails = lazy(() => import("@/pages/profile/OrderDetails"));
+const MyWishlist = lazy(() => import("@/pages/profile/MyWishlist"));
+const ProfileCart = lazy(() => import("@/pages/profile/ProfileCart"));
 
 import { useTranslation } from "react-i18next";
 
@@ -48,44 +54,46 @@ const NotFound = () => {
 
 export default function AppRoutes() {
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/deals" element={<Deals />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route
-          path="/basket"
-          element={<Navigate to="/profile/cart" replace />}
-        />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/order-success/:orderId" element={<OrderSuccess />} />
-      </Route>
+    <Suspense fallback={<LoadingSpinner />}>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/deals" element={<Deals />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route
+            path="/basket"
+            element={<Navigate to="/profile/cart" replace />}
+          />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-success/:orderId" element={<OrderSuccess />} />
+        </Route>
 
-      <Route path="/auth">
-        <Route index element={<AuthWelcome />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="verify-code" element={<VerifyCode />} />
-        <Route path="reset-success" element={<ResetSuccess />} />
-        <Route path="welcome" element={<AuthWelcome />} />
-      </Route>
+        <Route path="/auth">
+          <Route index element={<AuthWelcome />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="verify-code" element={<VerifyCode />} />
+          <Route path="reset-success" element={<ResetSuccess />} />
+          <Route path="welcome" element={<AuthWelcome />} />
+        </Route>
 
-      <Route path="/profile" element={<ProfileLayout />}>
-        <Route index element={<ProfileOverview />} />
-        <Route path="overview" element={<ProfileOverview />} />
-        <Route path="settings" element={<AccountSettings />} />
-        <Route path="addresses" element={<MyAddresses />} />
-        <Route path="orders" element={<MyOrders />} />
-        <Route path="orders/:id" element={<OrderDetails />} />
-        <Route path="wishlist" element={<MyWishlist />} />
-        <Route path="cart" element={<ProfileCart />} />
-      </Route>
+        <Route path="/profile" element={<ProfileLayout />}>
+          <Route index element={<ProfileOverview />} />
+          <Route path="overview" element={<ProfileOverview />} />
+          <Route path="settings" element={<AccountSettings />} />
+          <Route path="addresses" element={<MyAddresses />} />
+          <Route path="orders" element={<MyOrders />} />
+          <Route path="orders/:id" element={<OrderDetails />} />
+          <Route path="wishlist" element={<MyWishlist />} />
+          <Route path="cart" element={<ProfileCart />} />
+        </Route>
 
-      <Route path="/terms" element={<Navigate to="/" replace />} />
-      <Route path="/privacy" element={<Navigate to="/" replace />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Route path="/terms" element={<Navigate to="/" replace />} />
+        <Route path="/privacy" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   );
 }

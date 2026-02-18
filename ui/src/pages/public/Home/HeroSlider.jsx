@@ -248,13 +248,24 @@ const HeroSlider = () => {
             animate="center"
             exit="exit"
             transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="absolute inset-0"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = Math.abs(offset.x) * velocity.x;
+              if (swipe < -10000) {
+                nextSlide();
+              } else if (swipe > 10000) {
+                prevSlide();
+              }
+            }}
+            className="absolute inset-0 cursor-grab active:cursor-grabbing"
           >
             <div className="absolute inset-0">
               <img
                 src={slide.image}
                 alt=""
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover pointer-events-none"
               />
               <div
                 className={`absolute inset-0 bg-linear-to-r ${slide.gradient} ${slide.darkGradient}`}

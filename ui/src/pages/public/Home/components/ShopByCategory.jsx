@@ -38,7 +38,7 @@ const ShopByCategory = ({ categories = [] }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
+        <div className="flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-[16px] sm:gap-[24px] pb-4 sm:pb-0 -mx-[16px] px-[16px] sm:mx-0 sm:px-0 scrollbar-hide">
           {parentCategories.map((category) => {
             const IconComponent = iconMap[category.id] || Package;
 
@@ -46,7 +46,7 @@ const ShopByCategory = ({ categories = [] }) => {
               <Link
                 key={category.id}
                 to={`/shop?category=${category.id}`}
-                className="group relative h-[220px] rounded-[20px] overflow-hidden"
+                className="group relative h-[220px] rounded-[20px] overflow-hidden shrink-0 w-[85%] sm:w-auto snap-center"
               >
                 <img
                   src={category.image}

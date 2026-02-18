@@ -56,11 +56,11 @@ const FeaturedProducts = ({
         {products.length > 0 ? (
           <div
             id="featured-products-container"
-            className="flex gap-[24px] overflow-x-auto scrollbar-hide pb-[16px]"
+            className="flex gap-[24px] overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-[16px] -mx-[16px] px-[16px] sm:mx-0 sm:px-0"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {products.map((product) => (
-              <div key={product.id} className="shrink-0 w-[280px]">
+              <div key={product.id} className="shrink-0 w-[280px] snap-center">
                 <ProductCard
                   {...product}
                   isFavorite={isInWishlist(product.id)}

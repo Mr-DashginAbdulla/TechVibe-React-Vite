@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ImageGallery = ({ images = [], productName, isNew = false }) => {
@@ -13,14 +14,36 @@ const ImageGallery = ({ images = [], productName, isNew = false }) => {
     setActiveIndex((prev) => (prev === totalImages - 1 ? 0 : prev + 1));
   };
 
+  const swipeHandlers = {
+    drag: "x",
+    dragConstraints: { left: 0, right: 0 },
+    dragElastic: 1,
+    onDragEnd: (e, { offset, velocity }) => {
+      const swipe = Math.abs(offset.x) * velocity.x;
+      if (swipe < -10000) {
+        handleNext();
+      } else if (swipe > 10000) {
+        handlePrev();
+      }
+    },
+  };
+
   return (
     <div className="relative bg-card rounded-3xl overflow-hidden border border-border">
-      <div className="aspect-4/3 flex items-center justify-center p-8 relative group">
-        <img
-          src={images[activeIndex] || "https://via.placeholder.com/500"}
-          alt={productName}
-          className="max-w-full max-h-full object-contain mix-blend-multiply dark:mix-blend-normal transition-transform duration-500 group-hover:scale-105"
-        />
+      <div className="aspect-4/3 flex items-center justify-center p-8 relative group overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={activeIndex}
+            src={images[activeIndex] || "https://via.placeholder.com/500"}
+            alt={productName}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            {...swipeHandlers}
+            className="max-w-full max-h-full object-contain mix-blend-multiply dark:mix-blend-normal cursor-grab active:cursor-grabbing"
+          />
+        </AnimatePresence>
 
         {totalImages > 1 && (
           <>
