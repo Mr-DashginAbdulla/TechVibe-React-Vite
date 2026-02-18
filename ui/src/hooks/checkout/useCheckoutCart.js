@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import { showToast as toast } from "@/components/shared/StyledToast";
 import {
   useGetCartQuery,
   useGetAllProductsQuery,

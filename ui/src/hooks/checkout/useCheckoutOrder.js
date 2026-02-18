@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import { showToast as toast } from "@/components/shared/StyledToast";
 import { useClearCartMutation } from "@/store/api/productsApi";
 import { orderService } from "@/services/orderService";
 

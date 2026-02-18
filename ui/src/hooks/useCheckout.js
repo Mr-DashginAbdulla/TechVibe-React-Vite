@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import { showToast as toast } from "@/components/shared/StyledToast";
 import { useAuth } from "@/context/AuthContext";
 
 import { useCheckoutAddress } from "./checkout/useCheckoutAddress";

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { toast } from "react-toastify";
+import { showToast } from "@/components/shared/StyledToast";
 import i18n from "@/locales/i18n";
 
 const AuthContext = createContext(null);
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("auth_token");
-    toast.info(i18n.t("messages.logoutSuccess"));
+    showToast.info(i18n.t("messages.logoutSuccess"));
   };
 
   const updateUser = (updatedUserData) => {

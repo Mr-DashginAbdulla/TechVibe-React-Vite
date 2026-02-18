@@ -3492,7 +3492,9 @@
       "rating": 4,
       "comment": "Dizaynı çox gözəldir.",
       "date": "2026-01-10",
-      "helpful": 0
+      "helpful": 0,
+      "unhelpfulCount": 0,
+      "unhelpfulBy": []
     },
     {
       "id": "r5_2",

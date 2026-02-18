@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import { showToast as toast } from "@/components/shared/StyledToast";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   useGetCartQuery,

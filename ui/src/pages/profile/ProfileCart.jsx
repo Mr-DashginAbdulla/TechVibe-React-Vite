@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
-import { toast } from "react-toastify";
+import { showToast as toast } from "@/components/shared/StyledToast";
 import {
   ShoppingCart,
   Plus,

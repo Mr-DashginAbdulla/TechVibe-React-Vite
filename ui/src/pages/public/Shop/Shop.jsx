@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import { showToast as toast } from "@/components/shared/StyledToast";
 import { SlidersHorizontal } from "lucide-react";
 import FilterSidebar from "./components/FilterSidebar";
 import ActiveFilters from "./components/ActiveFilters";

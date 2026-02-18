@@ -21,7 +21,7 @@ function App() {
               <ToastContainer
                 position="top-right"
                 autoClose={3000}
-                hideProgressBar={false}
+                hideProgressBar
                 newestOnTop
                 closeOnClick
                 rtl={false}
@@ -29,6 +29,11 @@ function App() {
                 draggable
                 pauseOnHover
                 theme="light"
+                toastClassName={() =>
+                  "relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
+                }
+                bodyClassName={() => "text-sm font-white font-med block p-3"}
+                style={{ width: "auto", minWidth: "300px" }}
               />
             </AuthProvider>
           </ThemeProvider>

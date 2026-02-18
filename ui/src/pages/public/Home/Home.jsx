@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+import { showToast as toast } from "@/components/shared/StyledToast";
 import { motion } from "framer-motion";
 import HeroSlider from "./HeroSlider";
 import NewArrivals from "./components/NewArrivals";
