@@ -6,7 +6,7 @@ const BrandCarousel = () => {
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/brands?isActive=true")
+    fetch(`${import.meta.env.VITE_API_URL}/brands?isActive=true`)
       .then((res) => res.json())
       .then((data) => setBrands(data))
       .catch(() => setBrands([]));

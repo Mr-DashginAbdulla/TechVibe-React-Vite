@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const generateUniqueId = () => {
   const timestamp = Date.now().toString(36);
@@ -7,9 +7,7 @@ const generateUniqueId = () => {
 };
 
 export const authService = {
-
   async register(userData) {
-
     const existingUsers = await fetch(
       `${API_URL}/users?email=${userData.email}`,
     );
@@ -87,7 +85,6 @@ export const authService = {
   },
 
   async updatePassword(email, newPassword) {
-
     const response = await fetch(`${API_URL}/users?email=${email}`);
     const users = await response.json();
 

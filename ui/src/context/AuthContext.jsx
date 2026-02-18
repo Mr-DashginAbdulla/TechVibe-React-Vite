@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
       if (storedUserId) {
         try {
           const response = await fetch(
-            `http://localhost:3000/users/${storedUserId}`,
+            `${import.meta.env.VITE_API_URL}/users/${storedUserId}`,
           );
 
           if (response.ok) {
