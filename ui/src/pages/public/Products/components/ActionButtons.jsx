@@ -31,8 +31,8 @@ const ActionButtons = ({
         onClick={onToggleWishlist}
         className={`shrink-0 w-14 h-14 rounded-xl border-2 flex items-center justify-center transition-all ${
           isInWishlist
-            ? "border-red-500/30 bg-red-500/10 text-red-500"
-            : "border-border text-muted-foreground hover:border-red-500/30 hover:text-red-500"
+            ? "border-destructive/30 bg-destructive/10 text-destructive"
+            : "border-border text-muted-foreground hover:border-destructive/30 hover:text-destructive"
         }`}
       >
         <Heart size={22} fill={isInWishlist ? "currentColor" : "none"} />

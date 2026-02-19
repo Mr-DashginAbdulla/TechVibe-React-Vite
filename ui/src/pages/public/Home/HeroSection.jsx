@@ -56,7 +56,7 @@ const HeroSection = () => {
           </div>
 
           <div className="flex-1 relative">
-            <div className="absolute top-[20px] right-[20px] z-10 bg-emerald-500 text-white px-[16px] py-[10px] rounded-[12px] shadow-lg">
+            <div className="absolute top-[20px] right-[20px] z-10 bg-success text-white px-[16px] py-[10px] rounded-[12px] shadow-lg">
               <p className="text-[12px] font-medium">
                 {t("hero.limitedOffer")}
               </p>

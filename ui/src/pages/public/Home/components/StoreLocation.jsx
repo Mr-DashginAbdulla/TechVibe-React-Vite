@@ -47,8 +47,8 @@ const StoreLocation = () => {
               </div>
 
               <div className="flex items-start gap-[16px] mb-[24px]">
-                <div className="w-[48px] h-[48px] bg-emerald-500/10 rounded-[14px] flex items-center justify-center shrink-0">
-                  <Clock className="w-[24px] h-[24px] text-emerald-500" />
+                <div className="w-[48px] h-[48px] bg-success/10 rounded-[14px] flex items-center justify-center shrink-0">
+                  <Clock className="w-[24px] h-[24px] text-success" />
                 </div>
                 <div>
                   <h3 className="text-[16px] font-semibold text-foreground mb-[4px]">
@@ -61,8 +61,8 @@ const StoreLocation = () => {
               </div>
 
               <div className="flex items-start gap-[16px]">
-                <div className="w-[48px] h-[48px] bg-blue-500/10 rounded-[14px] flex items-center justify-center shrink-0">
-                  <Phone className="w-[24px] h-[24px] text-blue-500" />
+                <div className="w-[48px] h-[48px] bg-primary/10 rounded-[14px] flex items-center justify-center shrink-0">
+                  <Phone className="w-[24px] h-[24px] text-primary" />
                 </div>
                 <div>
                   <h3 className="text-[16px] font-semibold text-foreground mb-[4px]">

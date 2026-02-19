@@ -157,7 +157,7 @@ function Home() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12">
-        <div className="h-[400px] bg-gray-100 rounded-2xl mb-12 animate-pulse" />
+        <div className="h-[400px] bg-muted rounded-2xl mb-12 animate-pulse" />
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (

@@ -102,7 +102,7 @@ const ReviewsSection = ({
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-10 h-10 rounded-full bg-linear-to-br from-primary to-primary/70 flex items-center justify-center text-white font-bold text-sm">
                       {review.userName
                         ? review.userName.charAt(0).toUpperCase()
                         : "U"}
@@ -181,8 +181,8 @@ const ReviewsSection = ({
                     onClick={() => onHelpful && onHelpful(review)}
                     className={`flex items-center gap-1.5 text-sm transition-colors ${
                       hasVotedHelpful
-                        ? "text-emerald-600"
-                        : "text-muted-foreground hover:text-emerald-600"
+                        ? "text-success"
+                        : "text-muted-foreground hover:text-success"
                     }`}
                   >
                     <ThumbsUp

@@ -69,8 +69,8 @@ const ProfileCart = () => {
 
       <div className="bg-card rounded-[20px] shadow-sm border border-border">
         <div className="flex items-center gap-[16px] p-[24px] border-b border-border">
-          <div className="w-[48px] h-[48px] bg-blue-100 dark:bg-blue-900/20 rounded-[12px] flex items-center justify-center">
-            <ShoppingCart className="w-[24px] h-[24px] text-blue-600 dark:text-blue-400" />
+          <div className="w-[48px] h-[48px] bg-primary/10 rounded-[12px] flex items-center justify-center">
+            <ShoppingCart className="w-[24px] h-[24px] text-primary" />
           </div>
           <div className="flex-1">
             <h1 className="text-[22px] font-bold text-foreground">
@@ -85,7 +85,7 @@ const ProfileCart = () => {
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-[60px] px-[24px]">
             <div className="relative mb-[20px]">
-              <div className="w-[80px] h-[80px] bg-linear-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full flex items-center justify-center">
+              <div className="w-[80px] h-[80px] bg-linear-to-br from-primary/10 to-primary/5 rounded-full flex items-center justify-center">
                 <ShoppingBag className="w-[36px] h-[36px] text-primary" />
               </div>
             </div>
@@ -156,7 +156,7 @@ const ProfileCart = () => {
                       </div>
                       <button
                         onClick={() => handleRemoveItem(item.id)}
-                        className="p-[8px] text-muted-foreground hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-[8px] transition-colors"
+                        className="p-[8px] text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-[8px] transition-colors"
                       >
                         <Trash2 className="w-[18px] h-[18px]" />
                       </button>
@@ -184,7 +184,7 @@ const ProfileCart = () => {
                 <span className="text-[15px] text-muted-foreground">
                   {t("basket.shipping")}
                 </span>
-                <span className="text-[15px] font-medium text-emerald-600">
+                <span className="text-[15px] font-medium text-success">
                   {t("basket.free")}
                 </span>
               </div>

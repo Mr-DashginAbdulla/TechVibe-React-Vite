@@ -135,14 +135,14 @@ const CheckoutSummary = ({
             {t("checkout.promoCode")}
           </label>
           {promoCode ? (
-            <div className="flex items-center justify-between p-[12px] bg-emerald-500/10 rounded-[10px] border border-emerald-500/20">
+            <div className="flex items-center justify-between p-[12px] bg-success/10 rounded-[10px] border border-success/20">
               <div className="flex items-center gap-[8px]">
-                <Tag className="w-[16px] h-[16px] text-emerald-600 dark:text-emerald-500" />
-                <span className="text-[14px] font-semibold text-emerald-700 dark:text-emerald-400">
+                <Tag className="w-[16px] h-[16px] text-success" />
+                <span className="text-[14px] font-semibold text-success">
                   {promoCode}
                 </span>
               </div>
-              <span className="text-[14px] font-bold text-emerald-600 dark:text-emerald-500">
+              <span className="text-[14px] font-bold text-success">
                 -${discount.toFixed(2)}
               </span>
             </div>
@@ -180,7 +180,7 @@ const CheckoutSummary = ({
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("basket.shipping")}</span>
           {shippingCost === 0 ? (
-            <span className="text-emerald-600 dark:text-emerald-500 font-medium">
+            <span className="text-success font-medium">
               {t("checkout.freeShipping")}
             </span>
           ) : (
@@ -199,10 +199,8 @@ const CheckoutSummary = ({
 
         {discount > 0 && (
           <div className="flex justify-between text-[14px]">
-            <span className="text-emerald-600 dark:text-emerald-500">
-              {t("checkout.discount")}
-            </span>
-            <span className="text-emerald-600 dark:text-emerald-500 font-medium">
+            <span className="text-success">{t("checkout.discount")}</span>
+            <span className="text-success font-medium">
               -${discount.toFixed(2)}
             </span>
           </div>
@@ -218,15 +216,15 @@ const CheckoutSummary = ({
 
       <div className="mt-[24px] pt-[20px] border-t border-border space-y-[12px]">
         <div className="flex items-center gap-[10px] text-[13px] text-muted-foreground">
-          <ShieldCheck className="w-[18px] h-[18px] text-emerald-500" />
+          <ShieldCheck className="w-[18px] h-[18px] text-success" />
           {t("checkout.secureCheckout")}
         </div>
         <div className="flex items-center gap-[10px] text-[13px] text-muted-foreground">
-          <Truck className="w-[18px] h-[18px] text-emerald-500" />
+          <Truck className="w-[18px] h-[18px] text-success" />
           {t("checkout.freeShippingOver")}
         </div>
         <div className="flex items-center gap-[10px] text-[13px] text-muted-foreground">
-          <RotateCcw className="w-[18px] h-[18px] text-emerald-500" />
+          <RotateCcw className="w-[18px] h-[18px] text-success" />
           {t("checkout.returnPolicy")}
         </div>
       </div>

@@ -32,10 +32,8 @@ const OrderSummarySide = ({ order }) => {
         </div>
         {order.discount > 0 && (
           <div className="flex justify-between text-[14px]">
-            <span className="text-emerald-600 dark:text-emerald-400">
-              {t("checkout.discount")}
-            </span>
-            <span className="text-emerald-600 dark:text-emerald-400 font-medium">
+            <span className="text-success">{t("checkout.discount")}</span>
+            <span className="text-success font-medium">
               -${(order.discount || 0).toFixed(2)}
             </span>
           </div>

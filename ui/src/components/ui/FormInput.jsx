@@ -4,7 +4,7 @@ const FieldErrors = ({ errors }) => {
   return (
     <div className="mt-[6px] space-y-[2px]">
       {list.map((msg, i) => (
-        <p key={i} className="text-[12px] text-red-500">
+        <p key={i} className="text-[12px] text-destructive">
           {msg}
         </p>
       ))}
@@ -16,7 +16,7 @@ const baseClass =
   "w-full px-[16px] py-[12px] border bg-background rounded-[12px] text-[15px] focus:outline-none focus:ring-2 focus:border-transparent transition-all text-foreground";
 
 const errorClass =
-  "border-red-500 focus:ring-red-400 bg-red-50 dark:bg-red-950/20";
+  "border-destructive focus:ring-destructive/70 bg-destructive/5";
 
 const normalClass = "border-input focus:ring-primary";
 

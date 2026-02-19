@@ -26,7 +26,7 @@ const PriceBlock = ({ price, oldPrice, stock }) => {
       </div>
 
       {discount > 0 && (
-        <p className="text-emerald-600 text-sm font-medium flex items-center gap-1.5 mb-4">
+        <p className="text-success text-sm font-medium flex items-center gap-1.5 mb-4">
           <Zap size={14} className="fill-current" />
           {discount}% {t("productDetails.off")} -{" "}
           {t("productDetails.limitedOffer")}
@@ -36,15 +36,15 @@ const PriceBlock = ({ price, oldPrice, stock }) => {
       <div className="flex items-center gap-2">
         {stock > 0 ? (
           <>
-            <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-            <span className="text-sm font-medium text-emerald-600">
+            <span className="w-2 h-2 bg-success rounded-full"></span>
+            <span className="text-sm font-medium text-success">
               {t("productDetails.inStock")} - {t("productDetails.shipsWithin")}
             </span>
           </>
         ) : (
           <>
-            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-            <span className="text-sm font-medium text-red-500">
+            <span className="w-2 h-2 bg-destructive rounded-full"></span>
+            <span className="text-sm font-medium text-destructive">
               {t("productDetails.outOfStock")}
             </span>
           </>

@@ -133,7 +133,7 @@ const AccountSettings = () => {
                 className="w-[80px] h-[80px] rounded-full object-cover"
               />
             ) : (
-              <div className="w-[80px] h-[80px] bg-linear-to-br from-primary to-purple-600 rounded-full flex items-center justify-center">
+              <div className="w-[80px] h-[80px] bg-linear-to-br from-primary to-gradient-to rounded-full flex items-center justify-center">
                 <span className="text-[28px] font-bold text-primary-foreground">
                   {user?.firstName?.[0]}
                   {user?.lastName?.[0]}
@@ -174,8 +174,8 @@ const AccountSettings = () => {
         <div
           className={`p-[16px] rounded-[12px] flex items-center gap-[12px] ${
             message.type === "success"
-              ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400"
-              : "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400"
+              ? "bg-success/10 text-success"
+              : "bg-destructive/10 text-destructive"
           }`}
         >
           {message.type === "success" ? (

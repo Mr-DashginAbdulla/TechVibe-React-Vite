@@ -101,7 +101,7 @@ const PaymentStep = ({
             {t("checkout.cardDetails")}
           </h3>
 
-          <div className="bg-linear-to-br from-[#1E3A8A] to-[#3B82F6] rounded-[16px] p-[24px] text-white relative overflow-hidden">
+          <div className="bg-linear-to-br from-gradient-from to-gradient-to rounded-[16px] p-[24px] text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-white/10 rounded-full -mr-[100px] -mt-[100px]" />
             <div className="absolute bottom-0 left-0 w-[150px] h-[150px] bg-white/5 rounded-full -ml-[75px] -mb-[75px]" />
 
@@ -219,16 +219,16 @@ const PaymentStep = ({
       )}
 
       {paymentMethod === "cash" && (
-        <div className="bg-emerald-500/10 rounded-[20px] p-[24px] border border-emerald-500/20">
+        <div className="bg-success/10 rounded-[20px] p-[24px] border border-success/20">
           <div className="flex items-start gap-[16px]">
-            <div className="w-[48px] h-[48px] bg-emerald-500/20 rounded-[12px] flex items-center justify-center shrink-0">
-              <Banknote className="w-[24px] h-[24px] text-emerald-600 dark:text-emerald-500" />
+            <div className="w-[48px] h-[48px] bg-success/20 rounded-[12px] flex items-center justify-center shrink-0">
+              <Banknote className="w-[24px] h-[24px] text-success" />
             </div>
             <div>
-              <h3 className="text-[18px] font-semibold text-emerald-700 dark:text-emerald-500 mb-[8px]">
+              <h3 className="text-[18px] font-semibold text-success mb-[8px]">
                 {t("checkout.payment.cash")}
               </h3>
-              <p className="text-[14px] text-emerald-600 dark:text-emerald-400">
+              <p className="text-[14px] text-success/80">
                 {t("checkout.cashNote")}
               </p>
             </div>
@@ -237,16 +237,16 @@ const PaymentStep = ({
       )}
 
       {paymentMethod === "gpay" && (
-        <div className="bg-purple-500/10 rounded-[20px] p-[24px] border border-purple-500/20">
+        <div className="bg-primary/10 rounded-[20px] p-[24px] border border-primary/20">
           <div className="flex items-start gap-[16px]">
-            <div className="w-[48px] h-[48px] bg-purple-500/20 rounded-[12px] flex items-center justify-center shrink-0">
-              <Smartphone className="w-[24px] h-[24px] text-purple-600 dark:text-purple-400" />
+            <div className="w-[48px] h-[48px] bg-primary/20 rounded-[12px] flex items-center justify-center shrink-0">
+              <Smartphone className="w-[24px] h-[24px] text-primary" />
             </div>
             <div>
-              <h3 className="text-[18px] font-semibold text-purple-800 dark:text-purple-400 mb-[8px]">
+              <h3 className="text-[18px] font-semibold text-primary mb-[8px]">
                 {t("checkout.payment.gpay")}
               </h3>
-              <p className="text-[14px] text-purple-700 dark:text-purple-300">
+              <p className="text-[14px] text-primary/80">
                 {t("checkout.gpayNote")}
               </p>
             </div>

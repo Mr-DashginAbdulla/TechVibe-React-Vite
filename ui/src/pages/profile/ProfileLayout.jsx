@@ -15,7 +15,7 @@ const ProfileLayout = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-[40px] h-[40px] border-4 border-[#3B82F6] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-[40px] h-[40px] border-4 border-spinner border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }

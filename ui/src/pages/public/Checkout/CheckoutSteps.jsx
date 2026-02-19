@@ -19,7 +19,7 @@ const CheckoutSteps = ({ steps, currentStep }) => {
                   isCurrent
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                     : isCompleted
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-500"
+                      ? "bg-success/10 text-success dark:text-success"
                       : "bg-muted text-muted-foreground"
                 }`}
               >
@@ -28,7 +28,7 @@ const CheckoutSteps = ({ steps, currentStep }) => {
                     isCurrent
                       ? "bg-primary-foreground/20"
                       : isCompleted
-                        ? "bg-emerald-500 text-white"
+                        ? "bg-success text-white"
                         : "bg-muted-foreground/20"
                   }`}
                 >
@@ -45,7 +45,7 @@ const CheckoutSteps = ({ steps, currentStep }) => {
               {index < steps.length - 1 && (
                 <div
                   className={`w-[60px] h-[3px] mx-[8px] rounded-full ${
-                    currentStep > step.id ? "bg-emerald-400" : "bg-border"
+                    currentStep > step.id ? "bg-success" : "bg-border"
                   }`}
                 />
               )}

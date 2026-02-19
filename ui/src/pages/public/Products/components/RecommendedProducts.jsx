@@ -7,6 +7,7 @@ const RecommendedProducts = ({
   products = [],
   onAddToCart,
   onToggleFavorite,
+  isProductInWishlist = () => false,
 }) => {
   const { t } = useTranslation();
 
@@ -44,6 +45,7 @@ const RecommendedProducts = ({
                 ? Math.round((1 - product.price / product.oldPrice) * 100)
                 : null
             }
+            isFavorite={isProductInWishlist(product.id)}
             onAddToCart={() => onAddToCart(product)}
             onToggleFavorite={() => onToggleFavorite(product.id)}
           />

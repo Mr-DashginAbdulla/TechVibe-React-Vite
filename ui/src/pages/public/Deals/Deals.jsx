@@ -161,7 +161,7 @@ function Deals() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-spinner"></div>
       </div>
     );
   }
@@ -173,7 +173,7 @@ function Deals() {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <div className="bg-linear-to-br from-red-600 to-red-900 text-white relative overflow-hidden">
+        <div className="bg-linear-to-br from-destructive to-destructive/80 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
 
@@ -249,7 +249,7 @@ function Deals() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[24px]">
               {dealsProducts.map((product) => (
                 <div key={product.id} className="relative">
-                  <div className="absolute top-[12px] left-[12px] z-10 px-[10px] py-[4px] bg-[#DC2626] text-white text-[12px] font-bold rounded-[6px]">
+                  <div className="absolute top-[12px] left-[12px] z-10 px-[10px] py-[4px] bg-destructive text-white text-[12px] font-bold rounded-[6px]">
                     -{product.discountPercent}%
                   </div>
                   <ProductCard

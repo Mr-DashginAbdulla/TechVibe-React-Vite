@@ -21,6 +21,7 @@ const ProductDetails = () => {
     reviews,
     relatedProducts,
     isInWishlist,
+    isProductInWishlist,
     quantity,
     setQuantity,
     selectedOptions,
@@ -40,12 +41,12 @@ const ProductDetails = () => {
 
   if (productError || !product) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-foreground mb-2">
             {t("productDetails.productNotFound")}
           </h2>
-          <p className="text-gray-500">
+          <p className="text-muted-foreground">
             The product you're looking for doesn't exist.
           </p>
         </div>
@@ -122,9 +123,8 @@ const ProductDetails = () => {
           <RecommendedProducts
             products={relatedProducts}
             onAddToCart={handlers.handleRelatedAddToCart}
-            onToggleFavorite={(productId) =>
-              console.log("Toggle favorite:", productId)
-            }
+            onToggleFavorite={handlers.handleRelatedToggleFavorite}
+            isProductInWishlist={isProductInWishlist}
           />
         </div>
       </div>

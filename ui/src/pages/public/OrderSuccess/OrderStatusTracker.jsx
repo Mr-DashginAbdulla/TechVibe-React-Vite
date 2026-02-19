@@ -39,7 +39,7 @@ const OrderStatusTracker = () => {
             <div className="flex flex-col items-center">
               <div
                 className={`w-[24px] h-[24px] rounded-full flex items-center justify-center ${
-                  step.done ? "bg-emerald-500" : "bg-muted"
+                  step.done ? "bg-success" : "bg-muted"
                 }`}
               >
                 {step.done && (
@@ -49,7 +49,7 @@ const OrderStatusTracker = () => {
               {index < arr.length - 1 && (
                 <div
                   className={`w-[2px] h-[40px] ${
-                    step.done ? "bg-emerald-300/50" : "bg-muted"
+                    step.done ? "bg-success/50" : "bg-muted"
                   }`}
                 />
               )}

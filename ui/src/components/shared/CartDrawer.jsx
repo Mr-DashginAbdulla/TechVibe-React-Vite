@@ -111,7 +111,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-0 right-0 h-screen w-full max-w-[420px] bg-white dark:bg-[#111827] z-70 shadow-2xl border-l border-border"
+            className="fixed top-0 right-0 h-screen w-full max-w-[420px] bg-card z-70 shadow-2xl border-l border-border"
           >
             <CartDrawerHeader itemCount={cartItems.length} onClose={onClose} />
 

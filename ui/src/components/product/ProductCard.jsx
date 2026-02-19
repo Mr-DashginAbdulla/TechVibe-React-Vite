@@ -32,7 +32,7 @@ const ProductCard = ({
               </span>
             )}
             {isNew && (
-              <span className="bg-emerald-500 text-white text-[12px] font-semibold px-[10px] py-[4px] rounded-[6px]">
+              <span className="bg-success text-white text-[12px] font-semibold px-[10px] py-[4px] rounded-[6px]">
                 {t("product.new")}
               </span>
             )}
@@ -43,11 +43,11 @@ const ProductCard = ({
               e.preventDefault();
               onToggleFavorite?.(id);
             }}
-            className="absolute top-[12px] right-[12px] z-10 w-[36px] h-[36px] bg-card rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform text-muted-foreground hover:text-red-500"
+            className="absolute top-[12px] right-[12px] z-10 w-[36px] h-[36px] bg-card rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform text-muted-foreground hover:text-destructive"
           >
             <Heart
               className={`w-[18px] h-[18px] ${
-                isFavorite ? "fill-red-500 text-red-500" : ""
+                isFavorite ? "fill-destructive text-destructive" : ""
               }`}
             />
           </button>
@@ -140,7 +140,7 @@ const ProductCard = ({
           </span>
         )}
         {isNew && (
-          <span className="bg-emerald-500 text-white text-[12px] font-semibold px-[10px] py-[4px] rounded-[6px]">
+          <span className="bg-success text-white text-[12px] font-semibold px-[10px] py-[4px] rounded-[6px]">
             {t("product.new")}
           </span>
         )}
@@ -151,11 +151,11 @@ const ProductCard = ({
           e.preventDefault();
           onToggleFavorite?.(id);
         }}
-        className="absolute top-[12px] right-[12px] z-10 w-[36px] h-[36px] bg-card rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform text-muted-foreground hover:text-red-500"
+        className="absolute top-[12px] right-[12px] z-10 w-[36px] h-[36px] bg-card rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform text-muted-foreground hover:text-destructive"
       >
         <Heart
           className={`w-[18px] h-[18px] ${
-            isFavorite ? "fill-red-500 text-red-500" : ""
+            isFavorite ? "fill-destructive text-destructive" : ""
           }`}
         />
       </button>

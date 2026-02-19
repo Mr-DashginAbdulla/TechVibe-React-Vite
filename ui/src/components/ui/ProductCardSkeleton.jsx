@@ -5,9 +5,9 @@ const ProductCardSkeleton = ({ count = 1 }) => {
   const skeletons = Array.from({ length: count }, (_, i) => (
     <div
       key={i}
-      className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+      className="bg-card rounded-2xl overflow-hidden shadow-sm border border-border"
     >
-      <div className="aspect-square bg-gray-100">
+      <div className="aspect-square bg-muted">
         <Skeleton height="100%" borderRadius={0} />
       </div>
 

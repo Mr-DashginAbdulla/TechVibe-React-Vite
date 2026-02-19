@@ -6,8 +6,8 @@ const OrderSuccessHeader = () => {
 
   return (
     <div className="text-center mb-[48px]">
-      <div className="w-[80px] h-[80px] bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-[24px]">
-        <CheckCircle className="w-[48px] h-[48px] text-emerald-500" />
+      <div className="w-[80px] h-[80px] bg-success/10 dark:bg-success/10 rounded-full flex items-center justify-center mx-auto mb-[24px]">
+        <CheckCircle className="w-[48px] h-[48px] text-success" />
       </div>
       <h1 className="text-[32px] font-bold text-foreground mb-[12px]">
         {t("checkout.orderConfirmed")}

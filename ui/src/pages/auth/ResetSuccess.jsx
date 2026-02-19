@@ -18,14 +18,14 @@ const ResetSuccess = () => {
         </div>
 
         <div className="flex justify-center mb-[24px]">
-          <div className="w-[72px] h-[72px] bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center">
-            <Check className="w-[36px] h-[36px] text-green-600 dark:text-green-400" />
+          <div className="w-[72px] h-[72px] bg-success/10 rounded-full flex items-center justify-center">
+            <Check className="w-[36px] h-[36px] text-success" />
           </div>
         </div>
 
-        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-[12px] px-[16px] py-[12px] flex items-center gap-[10px] mb-[24px]">
-          <CheckCircle className="w-[18px] h-[18px] text-green-600 dark:text-green-400 shrink-0" />
-          <p className="text-[14px] text-green-700 dark:text-green-300">
+        <div className="bg-success/10 border border-success/20 rounded-[12px] px-[16px] py-[12px] flex items-center gap-[10px] mb-[24px]">
+          <CheckCircle className="w-[18px] h-[18px] text-success shrink-0" />
+          <p className="text-[14px] text-success">
             {t("auth.verificationSuccessful")}
           </p>
         </div>

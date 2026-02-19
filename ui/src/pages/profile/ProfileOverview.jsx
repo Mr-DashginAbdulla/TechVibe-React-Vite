@@ -73,15 +73,11 @@ const ProfileOverview = () => {
 
   const getStatusColor = (status) => {
     const colors = {
-      pending:
-        "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400",
-      processing:
-        "bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400",
-      shipped:
-        "bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400",
-      delivered:
-        "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400",
-      cancelled: "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400",
+      pending: "bg-warning/10 text-warning",
+      processing: "bg-info/10 text-info",
+      shipped: "bg-primary/10 text-primary",
+      delivered: "bg-success/10 text-success",
+      cancelled: "bg-destructive/10 text-destructive",
     };
     return colors[status] || "bg-muted text-muted-foreground";
   };
@@ -128,23 +124,23 @@ const ProfileOverview = () => {
             <div
               className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center mb-[12px] ${
                 stat.color === "blue"
-                  ? "bg-blue-100 dark:bg-blue-900/20"
+                  ? "bg-info/10"
                   : stat.color === "green"
-                    ? "bg-green-100 dark:bg-green-900/20"
+                    ? "bg-success/10"
                     : stat.color === "purple"
-                      ? "bg-purple-100 dark:bg-purple-900/20"
-                      : "bg-pink-100 dark:bg-pink-900/20"
+                      ? "bg-primary/10"
+                      : "bg-destructive/10"
               }`}
             >
               <stat.icon
                 className={`w-[22px] h-[22px] ${
                   stat.color === "blue"
-                    ? "text-blue-600 dark:text-blue-400"
+                    ? "text-info"
                     : stat.color === "green"
-                      ? "text-green-600 dark:text-green-400"
+                      ? "text-success"
                       : stat.color === "purple"
-                        ? "text-purple-600 dark:text-purple-400"
-                        : "text-pink-600 dark:text-pink-400"
+                        ? "text-primary"
+                        : "text-destructive"
                 }`}
               />
             </div>
@@ -229,8 +225,8 @@ const ProfileOverview = () => {
                 <span
                   className={`inline-flex px-[10px] py-[4px] rounded-full text-[12px] font-medium ${
                     user?.isVerified
-                      ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400"
-                      : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400"
+                      ? "bg-success/10 text-success"
+                      : "bg-warning/10 text-warning"
                   }`}
                 >
                   {user?.isVerified ? "✓" : "!"}

@@ -13,40 +13,32 @@ import { CheckCircle, XCircle, AlertTriangle, Info, X } from "lucide-react";
 const StyledToast = ({ title, message, type, closeToast }) => {
   const styles = {
     success: {
-      icon: (
-        <CheckCircle className="w-6 h-6 text-emerald-500 dark:text-emerald-400" />
-      ),
-      container:
-        "bg-emerald-50/90 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800",
-      title: "text-emerald-800 dark:text-emerald-300",
-      body: "text-emerald-600 dark:text-emerald-400",
-      progress: "bg-emerald-500",
+      icon: <CheckCircle className="w-6 h-6 text-success" />,
+      container: "bg-success/10 border-success/20",
+      title: "text-success",
+      body: "text-success/80",
+      progress: "bg-success",
     },
     error: {
-      icon: <XCircle className="w-6 h-6 text-rose-500 dark:text-rose-400" />,
-      container:
-        "bg-rose-50/90 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800",
-      title: "text-rose-800 dark:text-rose-300",
-      body: "text-rose-600 dark:text-rose-400",
-      progress: "bg-rose-500",
+      icon: <XCircle className="w-6 h-6 text-destructive" />,
+      container: "bg-destructive/10 border-destructive/20",
+      title: "text-destructive",
+      body: "text-destructive/80",
+      progress: "bg-destructive",
     },
     warning: {
-      icon: (
-        <AlertTriangle className="w-6 h-6 text-amber-500 dark:text-amber-400" />
-      ),
-      container:
-        "bg-amber-50/90 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800",
-      title: "text-amber-800 dark:text-amber-300",
-      body: "text-amber-600 dark:text-amber-400",
-      progress: "bg-amber-500",
+      icon: <AlertTriangle className="w-6 h-6 text-warning" />,
+      container: "bg-warning/10 border-warning/20",
+      title: "text-warning",
+      body: "text-warning/80",
+      progress: "bg-warning",
     },
     info: {
-      icon: <Info className="w-6 h-6 text-blue-500 dark:text-blue-400" />,
-      container:
-        "bg-blue-50/90 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800",
-      title: "text-blue-800 dark:text-blue-300",
-      body: "text-blue-600 dark:text-blue-400",
-      progress: "bg-blue-500",
+      icon: <Info className="w-6 h-6 text-info" />,
+      container: "bg-info/10 border-info/20",
+      title: "text-info",
+      body: "text-info/80",
+      progress: "bg-info",
     },
   };
 

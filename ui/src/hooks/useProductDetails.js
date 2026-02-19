@@ -60,8 +60,13 @@ export const useProductDetails = () => {
     handleDeleteReview,
   } = useProductReviews(id, user);
 
-  const { wishlistItems, isInWishlist, handleToggleWishlist } =
-    useProductWishlist(id, user);
+  const {
+    wishlistItems,
+    isInWishlist,
+    isProductInWishlist,
+    handleToggleWishlist,
+    handleRelatedToggleFavorite,
+  } = useProductWishlist(id, user);
 
   useRecentlyViewed(product);
 
@@ -80,6 +85,7 @@ export const useProductDetails = () => {
     relatedProducts,
     wishlistItems,
     isInWishlist,
+    isProductInWishlist,
     cartItems,
     quantity,
     selectedOptions,
@@ -101,6 +107,8 @@ export const useProductDetails = () => {
       handleBuyNow: () => handleBuyNow(t),
       handleToggleWishlist: () => handleToggleWishlist(product, t),
       handleRelatedAddToCart: (prod) => handleRelatedAddToCart(prod, t),
+      handleRelatedToggleFavorite: (productId) =>
+        handleRelatedToggleFavorite(productId, t),
       handleSubmitReview: (data) => handleSubmitReview(data, t),
       handleEditReview,
       handleHelpful: (review) => handleHelpful(review, t),

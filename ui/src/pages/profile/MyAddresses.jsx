@@ -209,14 +209,14 @@ const MyAddresses = () => {
                   <>
                     <button
                       onClick={() => handleSetDefault(address.id)}
-                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-primary bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-[8px] transition-colors"
+                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-primary bg-primary/10 hover:bg-primary/15 rounded-[8px] transition-colors"
                     >
                       <Check className="w-[14px] h-[14px]" />
                       {t("address.setDefault")}
                     </button>
                     <button
                       onClick={() => handleDelete(address.id)}
-                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-red-600 dark:text-red-400 bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30 rounded-[8px] transition-colors"
+                      className="flex items-center gap-[6px] px-[14px] py-[8px] text-[13px] font-medium text-destructive bg-destructive/10 hover:bg-destructive/15 rounded-[8px] transition-colors"
                     >
                       <Trash2 className="w-[14px] h-[14px]" />
                     </button>

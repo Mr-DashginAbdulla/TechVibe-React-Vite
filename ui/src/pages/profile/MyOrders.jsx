@@ -39,15 +39,11 @@ const MyOrders = () => {
 
   const getStatusColor = (status) => {
     const colors = {
-      pending:
-        "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400",
-      processing:
-        "bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400",
-      shipped:
-        "bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400",
-      delivered:
-        "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400",
-      cancelled: "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400",
+      pending: "bg-warning/10 text-warning",
+      processing: "bg-info/10 text-info",
+      shipped: "bg-primary/10 text-primary",
+      delivered: "bg-success/10 text-success",
+      cancelled: "bg-destructive/10 text-destructive",
     };
     return colors[status] || "bg-muted text-muted-foreground";
   };

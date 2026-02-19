@@ -15,9 +15,7 @@ const CartDrawerFooter = ({ subtotal, onCheckout, onViewCart }) => {
         </div>
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("basket.shipping")}</span>
-          <span className="text-emerald-500 font-medium">
-            {t("basket.free")}
-          </span>
+          <span className="text-success font-medium">{t("basket.free")}</span>
         </div>
         <div className="h-px bg-border" />
         <div className="flex justify-between text-[16px] font-bold">

@@ -92,8 +92,8 @@ const MyWishlist = () => {
       </Helmet>
       <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
         <div className="flex items-center gap-[12px]">
-          <div className="w-[48px] h-[48px] bg-pink-100 dark:bg-pink-900/20 rounded-[12px] flex items-center justify-center">
-            <Heart className="w-[24px] h-[24px] text-pink-600 dark:text-pink-400" />
+          <div className="w-[48px] h-[48px] bg-destructive/10 rounded-[12px] flex items-center justify-center">
+            <Heart className="w-[24px] h-[24px] text-destructive" />
           </div>
           <div>
             <h1 className="text-[24px] font-bold text-foreground">
@@ -131,7 +131,7 @@ const MyWishlist = () => {
             >
               <button
                 onClick={() => handleRemove(item.id)}
-                className="absolute top-[12px] right-[12px] z-10 w-[36px] h-[36px] bg-card rounded-full flex items-center justify-center shadow-md hover:scale-110 hover:bg-red-50 dark:hover:bg-red-900/50 transition-all text-red-500"
+                className="absolute top-[12px] right-[12px] z-10 w-[36px] h-[36px] bg-card rounded-full flex items-center justify-center shadow-md hover:scale-110 hover:bg-destructive/10 transition-all text-destructive"
                 title={t("wishlist.removeFromList")}
               >
                 <Trash2 className="w-[18px] h-[18px]" />

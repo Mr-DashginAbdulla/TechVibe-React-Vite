@@ -5,7 +5,7 @@ const Newsletter = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-[60px] bg-linear-to-br from-primary to-purple-600">
+    <section className="py-[60px] bg-linear-to-br from-primary to-gradient-to">
       <div className="container mx-auto px-[16px]">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-[32px]">
           <div className="text-center lg:text-left">

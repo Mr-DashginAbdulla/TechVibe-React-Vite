@@ -35,7 +35,7 @@ const OrderInfoBar = ({ order, estimatedDelivery }) => {
           <p className="text-[13px] text-muted-foreground mb-[4px]">
             {t("checkout.estimatedDelivery")}
           </p>
-          <p className="text-[16px] font-semibold text-emerald-600 dark:text-emerald-400">
+          <p className="text-[16px] font-semibold text-success">
             {estimatedDelivery.toLocaleDateString("az-AZ", {
               year: "numeric",
               month: "long",
@@ -45,11 +45,9 @@ const OrderInfoBar = ({ order, estimatedDelivery }) => {
         </div>
       </div>
 
-      <div className="flex items-center gap-[12px] p-[16px] bg-blue-50 dark:bg-blue-900/20 rounded-[12px] border border-blue-100 dark:border-blue-800">
-        <Mail className="w-[20px] h-[20px] text-blue-600 dark:text-blue-400" />
-        <p className="text-[14px] text-blue-600 dark:text-blue-400">
-          {t("checkout.emailSent")}
-        </p>
+      <div className="flex items-center gap-[12px] p-[16px] bg-info/10 rounded-[12px] border border-info/20">
+        <Mail className="w-[20px] h-[20px] text-info" />
+        <p className="text-[14px] text-info">{t("checkout.emailSent")}</p>
       </div>
     </div>
   );

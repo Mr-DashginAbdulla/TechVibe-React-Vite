@@ -201,14 +201,14 @@ const OrderDetails = () => {
             <span
               className={`px-[16px] py-[8px] rounded-full text-[14px] font-medium ${
                 order.status === "delivered"
-                  ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400"
+                  ? "bg-success/10 text-success"
                   : order.status === "shipped"
-                    ? "bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400"
+                    ? "bg-primary/10 text-primary"
                     : order.status === "processing"
-                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400"
+                      ? "bg-info/10 text-info"
                       : order.status === "cancelled"
-                        ? "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400"
-                        : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400"
+                        ? "bg-destructive/10 text-destructive"
+                        : "bg-warning/10 text-warning"
               }`}
             >
               {getStatusText(order.status)}
@@ -216,7 +216,7 @@ const OrderDetails = () => {
             {canCancelOrder && (
               <button
                 onClick={() => setShowCancelConfirm(true)}
-                className="px-[12px] py-[8px] text-[13px] font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                className="px-[12px] py-[8px] text-[13px] font-medium text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
               >
                 {t("order.cancelOrder")}
               </button>
@@ -224,7 +224,7 @@ const OrderDetails = () => {
             {canEditOrder && (
               <button
                 onClick={handleEditOrder}
-                className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-info hover:bg-info/10 rounded-lg transition-colors"
               >
                 <Edit3 className="w-[14px] h-[14px]" />
                 {t("order.editOrder")}
@@ -233,7 +233,7 @@ const OrderDetails = () => {
             <button
               onClick={handleReorder}
               disabled={isReordering}
-              className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors disabled:opacity-50"
+              className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-success hover:bg-success/10 rounded-lg transition-colors disabled:opacity-50"
             >
               <RefreshCw
                 className={`w-[14px] h-[14px] ${isReordering ? "animate-spin" : ""}`}
@@ -288,7 +288,7 @@ const OrderDetails = () => {
                               >
                                 {key === "color" && value.value && (
                                   <span
-                                    className="w-[10px] h-[10px] rounded-full border border-gray-300 dark:border-gray-600"
+                                    className="w-[10px] h-[10px] rounded-full border border-border"
                                     style={{ backgroundColor: value.value }}
                                   />
                                 )}
@@ -404,8 +404,8 @@ const OrderDetails = () => {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
           <div className="bg-card rounded-[20px] p-[24px] w-full max-w-[400px] shadow-xl border border-border">
             <div className="flex items-center gap-[12px] mb-[16px]">
-              <div className="w-[48px] h-[48px] bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center">
-                <AlertTriangle className="w-[24px] h-[24px] text-red-600 dark:text-red-400" />
+              <div className="w-[48px] h-[48px] bg-destructive/10 rounded-full flex items-center justify-center">
+                <AlertTriangle className="w-[24px] h-[24px] text-destructive" />
               </div>
               <div>
                 <h3 className="text-[18px] font-semibold text-foreground">
@@ -427,7 +427,7 @@ const OrderDetails = () => {
               <button
                 onClick={handleCancelOrder}
                 disabled={isCancelling}
-                className="flex-1 px-[16px] py-[12px] bg-red-600 text-white font-semibold rounded-[12px] hover:bg-red-700 transition-colors disabled:opacity-50"
+                className="flex-1 px-[16px] py-[12px] bg-destructive text-white font-semibold rounded-[12px] hover:bg-destructive/90 transition-colors disabled:opacity-50"
               >
                 {isCancelling ? t("common.loading") : t("order.confirmCancel")}
               </button>

@@ -20,7 +20,7 @@ const NewArrivals = ({
       <div className="container mx-auto px-[16px]">
         <div className="flex items-center justify-between mb-[32px]">
           <div className="flex items-center gap-[12px]">
-            <div className="w-[4px] h-[32px] bg-emerald-500 rounded-full"></div>
+            <div className="w-[4px] h-[32px] bg-primary rounded-full"></div>
             <h2 className="text-[28px] font-bold text-foreground">
               {t("home.newArrivals")}
             </h2>

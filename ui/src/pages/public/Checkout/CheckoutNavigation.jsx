@@ -44,7 +44,7 @@ const CheckoutNavigation = ({
         <button
           onClick={handlePlaceOrder}
           disabled={isSubmitting}
-          className="flex items-center gap-[8px] px-[32px] py-[14px] bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-[12px] transition-colors disabled:opacity-50"
+          className="flex items-center gap-[8px] px-[32px] py-[14px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-[12px] transition-colors disabled:opacity-50"
         >
           {isSubmitting ? (
             <span className="animate-pulse">{t("common.loading")}</span>

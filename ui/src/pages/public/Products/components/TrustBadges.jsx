@@ -8,20 +8,20 @@ const TrustBadges = () => {
     {
       icon: ShieldCheck,
       text: t("productDetails.secureCheckout"),
-      color: "text-emerald-600",
-      bg: "bg-emerald-50",
+      color: "text-success",
+      bg: "bg-success",
     },
     {
       icon: Truck,
       text: t("productDetails.freeShipping"),
-      color: "text-blue-600",
-      bg: "bg-blue-50",
+      color: "text-primary",
+      bg: "bg-primary",
     },
     {
       icon: RotateCcw,
       text: t("productDetails.returnPolicy"),
-      color: "text-purple-600",
-      bg: "bg-purple-50",
+      color: "text-primary",
+      bg: "bg-primary",
     },
   ];
 
@@ -30,7 +30,7 @@ const TrustBadges = () => {
       {badges.map((badge, index) => (
         <div key={index} className="flex items-center gap-3">
           <div
-            className={`w-10 h-10 rounded-full ${badge.bg === "bg-emerald-50" ? "bg-emerald-500/10" : badge.bg === "bg-blue-50" ? "bg-blue-500/10" : "bg-purple-500/10"} flex items-center justify-center`}
+            className={`w-10 h-10 rounded-full ${badge.bg}/10 flex items-center justify-center`}
           >
             <badge.icon size={18} className={badge.color} />
           </div>

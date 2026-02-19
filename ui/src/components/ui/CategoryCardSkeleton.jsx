@@ -1,12 +1,11 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-
 const CategoryCardSkeleton = ({ count = 1 }) => {
   const skeletons = Array.from({ length: count }, (_, i) => (
     <div
       key={i}
-      className="relative overflow-hidden rounded-2xl bg-gray-100"
+      className="relative overflow-hidden rounded-2xl bg-muted"
       style={{ aspectRatio: "1/1" }}
     >
       <Skeleton height="100%" borderRadius={16} />

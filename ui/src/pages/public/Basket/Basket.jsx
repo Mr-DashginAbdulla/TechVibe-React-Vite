@@ -95,7 +95,7 @@ const Basket = () => {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
         <div className="relative mb-8">
-          <div className="w-32 h-32 bg-linear-to-br from-primary/10 to-purple-500/10 rounded-full flex items-center justify-center">
+          <div className="w-32 h-32 bg-linear-to-br from-primary/10 to-primary/5 rounded-full flex items-center justify-center">
             <ShoppingCart size={56} className="text-primary" />
           </div>
           <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-muted rounded-full flex items-center justify-center">
@@ -217,7 +217,7 @@ const Basket = () => {
               </div>
               <div className="flex justify-between text-muted-foreground">
                 <span>{t("basket.shipping")}</span>
-                <span className="text-emerald-600 dark:text-emerald-400 font-medium">
+                <span className="text-success font-medium">
                   {t("basket.free")}
                 </span>
               </div>

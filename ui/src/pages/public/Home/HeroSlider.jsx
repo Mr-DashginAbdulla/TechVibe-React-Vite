@@ -37,7 +37,7 @@ const slides = [
     gradient: "from-emerald-600/90 via-teal-600/80 to-cyan-700/90",
     darkGradient:
       "dark:from-emerald-900/95 dark:via-teal-900/90 dark:to-cyan-950/95",
-    accentColor: "bg-emerald-500",
+    accentColor: "bg-success",
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ const slides = [
     gradient: "from-blue-600/90 via-sky-600/80 to-cyan-700/90",
     darkGradient:
       "dark:from-blue-900/95 dark:via-sky-900/90 dark:to-cyan-950/95",
-    accentColor: "bg-blue-500",
+    accentColor: "bg-primary",
   },
 ];
 
@@ -118,7 +118,7 @@ const SlideContent = ({ slide, t }) => (
       <motion.div variants={itemVariants}>
         <Link
           to={slide.ctaLink}
-          className="inline-flex items-center gap-[8px] bg-white text-gray-900 font-semibold px-[28px] py-[14px] rounded-[12px] hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg"
+          className="inline-flex items-center gap-[8px] bg-white text-foreground font-semibold px-[28px] py-[14px] rounded-[12px] hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg"
         >
           {t(slide.ctaKey)}
           <ChevronRight className="w-[18px] h-[18px]" />

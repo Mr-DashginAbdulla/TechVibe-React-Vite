@@ -37,13 +37,13 @@ const NotFound = () => {
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-[16px]">
       <div className="max-w-[520px] text-center">
-        <p className="text-[40px] font-bold text-[#111827] mb-[8px]">404</p>
-        <p className="text-[16px] text-[#6B7280] mb-[20px]">
+        <p className="text-[40px] font-bold text-foreground mb-[8px]">404</p>
+        <p className="text-[16px] text-muted-foreground mb-[20px]">
           {t("common.pageNotFound")}
         </p>
         <a
           href="/"
-          className="inline-flex items-center justify-center px-[16px] py-[10px] rounded-[12px] bg-[#3B82F6] text-white font-semibold hover:bg-[#2563EB] transition-colors"
+          className="inline-flex items-center justify-center px-[16px] py-[10px] rounded-[12px] bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
         >
           {t("common.goToHome")}
         </a>
