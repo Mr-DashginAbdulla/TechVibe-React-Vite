@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { showToast as toast } from "@/components/shared/StyledToast";
@@ -14,9 +14,15 @@ export const useCheckout = () => {
   const location = useLocation();
   const { user } = useAuth();
 
-  const buyNowItem = location.state?.buyNowItem;
-  const editOrderId = location.state?.editOrderId;
-  const editOrderItems = location.state?.editOrderItems;
+  // Store checkout params in refs so they persist across location changes
+  // (e.g. when navigate() is called after placing an order)
+  const buyNowItemRef = useRef(location.state?.buyNowItem);
+  const editOrderIdRef = useRef(location.state?.editOrderId);
+  const editOrderItemsRef = useRef(location.state?.editOrderItems);
+
+  const buyNowItem = buyNowItemRef.current;
+  const editOrderId = editOrderIdRef.current;
+  const editOrderItems = editOrderItemsRef.current;
 
   const [currentStep, setCurrentStep] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState("card");

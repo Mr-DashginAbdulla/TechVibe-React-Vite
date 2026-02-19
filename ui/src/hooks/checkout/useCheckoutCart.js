@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { showToast as toast } from "@/components/shared/StyledToast";
 import {
@@ -26,8 +26,12 @@ export const useCheckoutCart = (user, buyNowItem, editOrderItems) => {
   // Products Data
   const { data: allProducts = [] } = useGetAllProductsQuery();
 
-  // Initialize Items
+  const itemsInitialized = useRef(false);
+
+  // Initialize Items (only once when source data becomes available)
   useEffect(() => {
+    if (itemsInitialized.current) return;
+
     let items = [];
     if (buyNowItem) {
       items = [buyNowItem];
@@ -48,8 +52,10 @@ export const useCheckoutCart = (user, buyNowItem, editOrderItems) => {
         };
       });
       setLocalItems(itemsWithStock);
+      itemsInitialized.current = true;
     } else if (items.length > 0) {
       setLocalItems(items);
+      itemsInitialized.current = true;
     }
   }, [buyNowItem, editOrderItems, cartItems, allProducts]);
 

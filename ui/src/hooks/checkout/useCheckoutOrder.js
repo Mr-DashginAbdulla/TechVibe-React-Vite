@@ -75,7 +75,7 @@ export const useCheckoutOrder = (
         await clearCart(user.id);
       }
 
-      navigate(`/order-success/${order.id}`);
+      navigate(`/order-success/${order.id}`, { replace: true });
     } catch (error) {
       console.error("Error placing order:", error);
       toast.error(t("checkout.orderError"));

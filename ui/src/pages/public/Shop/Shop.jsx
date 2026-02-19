@@ -257,7 +257,7 @@ function Shop() {
 
       if (existingItem) {
         await removeFromWishlist(existingItem.id).unwrap();
-        toast.success(t("productDetails.removedFromWishlist"));
+        toast.info(t("productDetails.removedFromWishlist"));
       } else {
         await addToWishlist({
           userId: user.id,

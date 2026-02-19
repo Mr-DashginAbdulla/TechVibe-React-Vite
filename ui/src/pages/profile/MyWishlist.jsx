@@ -35,7 +35,7 @@ const MyWishlist = () => {
   const handleRemove = async (id) => {
     try {
       await removeFromWishlist(id).unwrap();
-      toast.success(t("wishlist.removed"));
+      toast.info(t("wishlist.removed"));
     } catch (error) {
       console.error("Error removing from wishlist:", error);
       toast.error(t("messages.somethingWentWrong"));
