@@ -1,6 +1,9 @@
-import { useState, useRef, useEffect } from "react";
-import { Star, X, ImagePlus, Trash2, Loader2 } from "lucide-react";
+import { useEffect } from "react";
+import { X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import useWriteReview from "./reviews/useWriteReview";
+import StarRatingInput from "./reviews/StarRatingInput";
+import ImageUploader from "./reviews/ImageUploader";
 
 const WriteReviewModal = ({
   isOpen,
@@ -10,88 +13,41 @@ const WriteReviewModal = ({
   editData = null,
 }) => {
   const { t } = useTranslation();
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const [images, setImages] = useState([]);
-  const [isUploading, setIsUploading] = useState(false);
-  const fileInputRef = useRef(null);
 
-  const MAX_IMAGES = 3;
-  const isEditMode = !!editData;
+  const {
+    rating,
+    setRating,
+    hoverRating,
+    setHoverRating,
+    comment,
+    setComment,
+    images,
+    isUploading,
+    isEditMode,
+    MAX_IMAGES,
+    handleImageUpload,
+    handleRemoveImage,
+    handleSubmit,
+    handleClose,
+  } = useWriteReview(editData, isOpen, onSubmit, onClose);
 
   useEffect(() => {
-    if (editData) {
-      setRating(editData.rating || 0);
-      setComment(editData.comment || "");
-      setImages(editData.images || []);
-    } else {
-      setRating(0);
-      setComment("");
-      setImages([]);
+    if (isOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        window.scrollTo(0, scrollY);
+      };
     }
-  }, [editData, isOpen]);
-
-  const handleImageUpload = async (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length === 0) return;
-
-    const remainingSlots = MAX_IMAGES - images.length;
-    const filesToProcess = files.slice(0, remainingSlots);
-
-    if (filesToProcess.length === 0) return;
-
-    setIsUploading(true);
-
-    try {
-      const newImages = await Promise.all(
-        filesToProcess.map((file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
-          });
-        }),
-      );
-
-      setImages((prev) => [...prev, ...newImages]);
-    } catch (error) {
-      console.error("Error uploading images:", error);
-    } finally {
-      setIsUploading(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
-    }
-  };
-
-  const handleRemoveImage = (index) => {
-    setImages((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (rating === 0) return;
-
-    onSubmit({
-      rating,
-      comment,
-      images,
-      ...(isEditMode && { id: editData.id }),
-    });
-    setRating(0);
-    setComment("");
-    setImages([]);
-    onClose();
-  };
-
-  const handleClose = () => {
-    setRating(0);
-    setComment("");
-    setImages([]);
-    onClose();
-  };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -102,50 +58,43 @@ const WriteReviewModal = ({
         onClick={handleClose}
       />
 
-      <div className="relative bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6 max-h-[90vh] overflow-y-auto border border-border">
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <X size={20} />
-        </button>
+      <div
+        className="relative bg-card rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto border border-border"
+        style={{
+          overscrollBehavior: "contain",
+          WebkitOverflowScrolling: "touch",
+        }}
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
+        <div className="sticky top-0 z-10 bg-card pt-6 px-6 pb-2 border-b border-border rounded-t-2xl">
+          <button
+            onClick={handleClose}
+            className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <X size={20} />
+          </button>
 
-        <h2 className="text-xl font-bold text-foreground mb-2">
-          {isEditMode
-            ? t("productDetails.editReview")
-            : t("productDetails.writeReview")}
-        </h2>
-        <p className="text-sm text-muted-foreground mb-6">{productName}</p>
+          <h2 className="text-xl font-bold text-foreground mb-1">
+            {isEditMode
+              ? t("productDetails.editReview")
+              : t("productDetails.writeReview")}
+          </h2>
+          <p className="text-sm text-muted-foreground">{productName}</p>
+        </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="p-6">
           <div className="mb-6">
             <label className="block text-sm font-medium text-foreground mb-3">
               {t("productDetails.yourRating")}
             </label>
-            <div className="flex gap-1">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  key={star}
-                  type="button"
-                  onClick={() => setRating(star)}
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                  className="p-1 transition-transform hover:scale-110"
-                >
-                  <Star
-                    size={32}
-                    fill={
-                      star <= (hoverRating || rating) ? "currentColor" : "none"
-                    }
-                    className={
-                      star <= (hoverRating || rating)
-                        ? "text-amber-400"
-                        : "text-muted"
-                    }
-                  />
-                </button>
-              ))}
-            </div>
+            <StarRatingInput
+              rating={rating}
+              hoverRating={hoverRating}
+              onRate={setRating}
+              onHover={setHoverRating}
+              onLeave={() => setHoverRating(0)}
+            />
           </div>
 
           <div className="mb-6">
@@ -165,65 +114,13 @@ const WriteReviewModal = ({
             <label className="block text-sm font-medium text-foreground mb-2">
               {t("productDetails.uploadPhotos")} ({images.length}/{MAX_IMAGES})
             </label>
-
-            {images.length > 0 && (
-              <div className="grid grid-cols-3 gap-3 mb-3">
-                {images.map((img, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-square rounded-lg overflow-hidden border border-border"
-                  >
-                    <img
-                      src={img}
-                      alt={`Preview ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveImage(index)}
-                      className="absolute top-1 right-1 w-6 h-6 bg-destructive hover:bg-destructive/90 rounded-full flex items-center justify-center text-white transition-colors"
-                    >
-                      <Trash2 size={12} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {images.length < MAX_IMAGES && (
-              <div className="relative">
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleImageUpload}
-                  className="hidden"
-                  id="review-images"
-                />
-                <label
-                  htmlFor="review-images"
-                  className={`flex items-center justify-center gap-2 w-full py-3 px-4 border-2 border-dashed border-border rounded-xl text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer ${
-                    isUploading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-                >
-                  {isUploading ? (
-                    <>
-                      <Loader2 size={20} className="animate-spin" />
-                      {t("common.loading")}
-                    </>
-                  ) : (
-                    <>
-                      <ImagePlus size={20} />
-                      {t("productDetails.addPhotos")}
-                    </>
-                  )}
-                </label>
-              </div>
-            )}
-            <p className="text-xs text-muted-foreground mt-2">
-              {t("productDetails.maxPhotosHint", { max: MAX_IMAGES })}
-            </p>
+            <ImageUploader
+              images={images}
+              maxImages={MAX_IMAGES}
+              isUploading={isUploading}
+              onUpload={handleImageUpload}
+              onRemove={handleRemoveImage}
+            />
           </div>
 
           <button

@@ -7254,7 +7254,65 @@
       "id": 1
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "userId": "mkth60qz-s7vce3",
+      "items": [
+        {
+          "productId": "73",
+          "name": "EA Sports FC 26",
+          "price": 69.99,
+          "quantity": 1,
+          "image": "https://m.media-amazon.com/images/I/81aMKJCm9BL._SL1500_.jpg",
+          "selectedOptions": {}
+        }
+      ],
+      "shippingAddress": {
+        "label": "Home",
+        "firstName": "John",
+        "lastName": "Doe",
+        "address": "Yasamal",
+        "city": "Bakı",
+        "state": "Bakı",
+        "zipCode": "1001",
+        "country": "Azerbaijan",
+        "phone": "+994 12 345 67 89"
+      },
+      "paymentMethod": "gpay",
+      "subtotal": 69.99,
+      "shippingCost": 0,
+      "tax": 12.598199999999999,
+      "discount": 0,
+      "promoCode": null,
+      "total": 82.5882,
+      "status": "cancelled",
+      "createdAt": "2026-02-20T14:57:15.058Z",
+      "orderNumber": "ORD-2026-5058",
+      "timeline": [
+        {
+          "status": "ordered",
+          "date": "2026-02-20T14:57:15.058Z",
+          "description": "Order placed"
+        },
+        {
+          "status": "shipped",
+          "date": "2026-02-20T15:01:21.735Z",
+          "note": "Status updated by admin"
+        },
+        {
+          "status": "processing",
+          "date": "2026-02-20T15:01:33.340Z",
+          "note": "Status updated by admin"
+        },
+        {
+          "status": "cancelled",
+          "date": "2026-02-20T15:02:14.780Z",
+          "note": "Status updated by admin"
+        }
+      ],
+      "id": 1
+    }
+  ],
   "cart": [],
   "wishlist": [],
   "brands": [
