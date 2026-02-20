@@ -22,9 +22,15 @@ const ResetSuccess = lazy(() => import("@/pages/auth/ResetSuccess"));
 const AuthWelcome = lazy(() => import("@/pages/auth/AuthWelcome"));
 
 const ProfileLayout = lazy(() => import("@/pages/profile/ProfileLayout"));
-const ProfileOverview = lazy(() => import("@/pages/profile/ProfileOverview"));
-const AccountSettings = lazy(() => import("@/pages/profile/AccountSettings"));
-const MyAddresses = lazy(() => import("@/pages/profile/MyAddresses"));
+const ProfileOverview = lazy(
+  () => import("@/pages/profile/ProfileOverview/ProfileOverview"),
+);
+const AccountSettings = lazy(
+  () => import("@/pages/profile/AccountSettings/AccountSettings"),
+);
+const MyAddresses = lazy(
+  () => import("@/pages/profile/MyAddresses/MyAddresses"),
+);
 const MyOrders = lazy(() => import("@/pages/profile/MyOrders"));
 const OrderDetails = lazy(
   () => import("@/pages/profile/OrderDetails/OrderDetails"),
