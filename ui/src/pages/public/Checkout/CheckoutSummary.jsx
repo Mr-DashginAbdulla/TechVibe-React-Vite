@@ -15,11 +15,11 @@ const CheckoutSummary = ({
   subtotal,
   shippingCost,
   freeShippingThreshold = 50,
-  tax,
   discount,
   total,
   promoCode,
   onApplyPromo,
+  onRemovePromo,
   onUpdateQuantity,
   currentStep,
 }) => {
@@ -142,9 +142,18 @@ const CheckoutSummary = ({
                   {promoCode}
                 </span>
               </div>
-              <span className="text-[14px] font-bold text-success">
-                -${discount.toFixed(2)}
-              </span>
+              <div className="flex items-center gap-[8px]">
+                <span className="text-[14px] font-bold text-success">
+                  -{discount.toFixed(2)}$
+                </span>
+                <button
+                  onClick={onRemovePromo}
+                  className="p-[4px] rounded-full hover:bg-success/20 text-success transition-colors"
+                  title={t("checkout.removePromo")}
+                >
+                  <X className="w-[14px] h-[14px]" />
+                </button>
+              </div>
             </div>
           ) : (
             <div className="flex gap-[8px]">
@@ -188,13 +197,6 @@ const CheckoutSummary = ({
               ${shippingCost.toFixed(2)}
             </span>
           )}
-        </div>
-
-        <div className="flex justify-between text-[14px]">
-          <span className="text-muted-foreground">
-            {t("checkout.tax")} (18%)
-          </span>
-          <span className="text-foreground font-medium">${tax.toFixed(2)}</span>
         </div>
 
         {discount > 0 && (

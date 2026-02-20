@@ -38,12 +38,12 @@ const Checkout = () => {
     selectedAddress,
     subtotal,
     shippingCost,
-    tax,
     total,
     canProceed,
     handleNext,
     handleBack,
     handleApplyPromo,
+    handleRemovePromo,
     handleUpdateQuantity,
     handlePlaceOrder,
     FREE_SHIPPING_THRESHOLD,
@@ -113,11 +113,11 @@ const Checkout = () => {
               subtotal={subtotal}
               shippingCost={shippingCost}
               freeShippingThreshold={FREE_SHIPPING_THRESHOLD}
-              tax={tax}
               discount={discount}
               total={total}
               promoCode={promoCode}
               onApplyPromo={handleApplyPromo}
+              onRemovePromo={handleRemovePromo}
               onUpdateQuantity={handleUpdateQuantity}
               currentStep={currentStep}
             />

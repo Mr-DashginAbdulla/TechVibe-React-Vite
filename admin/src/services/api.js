@@ -115,6 +115,25 @@ export const brandService = {
     }),
 };
 
+export const promoCodeService = {
+  getAll: () => fetchApi("/promoCodes"),
+  getById: (id) => fetchApi(`/promoCodes/${id}`),
+  create: (data) =>
+    fetchApi("/promoCodes", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+  update: (id, data) =>
+    fetchApi(`/promoCodes/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+  delete: (id) =>
+    fetchApi(`/promoCodes/${id}`, {
+      method: "DELETE",
+    }),
+};
+
 export const authService = {
   login: async (email, password) => {
     const users = await fetchApi(`/users?email=${email}`);

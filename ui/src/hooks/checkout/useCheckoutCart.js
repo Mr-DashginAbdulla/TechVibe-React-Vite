@@ -84,35 +84,45 @@ export const useCheckoutCart = (user, buyNowItem, editOrderItems) => {
   );
 
   const shippingCost = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
-  const tax = subtotal * 0.18;
-  const total = subtotal + shippingCost + tax - discount;
+  const total = subtotal + shippingCost - discount;
 
   // Promo Code Handler
   const handleApplyPromo = async (code) => {
-    const promoCodes = {
-      STUDENT10: { discount: 10, type: "percentage", minOrder: 50 },
-      SAVE20: { discount: 20, type: "fixed", minOrder: 100 },
-    };
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+    try {
+      const response = await fetch(`${API_URL}/validate-promo`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: code.toUpperCase(), subtotal }),
+      });
 
-    const promo = promoCodes[code.toUpperCase()];
-    if (promo) {
-      if (subtotal >= promo.minOrder) {
-        const discountAmount =
-          promo.type === "percentage"
-            ? (subtotal * promo.discount) / 100
-            : promo.discount;
-        setDiscount(discountAmount);
-        setPromoCode(code.toUpperCase());
-        toast.success(t("checkout.promoApplied"));
-        return true;
-      } else {
-        toast.error(t("checkout.minOrderRequired", { amount: promo.minOrder }));
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.minOrder) {
+          toast.error(
+            t("checkout.minOrderRequired", { amount: data.minOrder }),
+          );
+        } else {
+          toast.error(data.error || t("checkout.invalidPromo"));
+        }
         return false;
       }
-    } else {
+
+      setDiscount(data.discountAmount);
+      setPromoCode(data.code);
+      toast.success(t("checkout.promoApplied"));
+      return true;
+    } catch {
       toast.error(t("checkout.invalidPromo"));
       return false;
     }
+  };
+
+  // Remove Promo Code
+  const handleRemovePromo = () => {
+    setPromoCode("");
+    setDiscount(0);
   };
 
   return {
@@ -121,12 +131,12 @@ export const useCheckoutCart = (user, buyNowItem, editOrderItems) => {
     setLocalItems,
     subtotal,
     shippingCost,
-    tax,
     total,
     promoCode,
     discount,
     setDiscount,
     handleApplyPromo,
+    handleRemovePromo,
     handleUpdateQuantity,
     isLoading: isCartLoading,
     FREE_SHIPPING_THRESHOLD,

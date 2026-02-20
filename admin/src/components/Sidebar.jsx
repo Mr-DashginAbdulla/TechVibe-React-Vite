@@ -12,6 +12,7 @@ import {
   LogOut,
   Shield,
   X,
+  Tag,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import Logo from "@/assets/images/TechVibeLogo-LightTransparent.png";
@@ -29,6 +30,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { path: "/users", icon: Users, label: t("sidebar.users") },
     { path: "/reviews", icon: Star, label: t("sidebar.reviews") },
     { path: "/brands", icon: Award, label: t("sidebar.brands") },
+    { path: "/promo-codes", icon: Tag, label: t("sidebar.promoCodes") },
     { path: "/settings", icon: Settings, label: t("sidebar.settings") },
   ];
 
