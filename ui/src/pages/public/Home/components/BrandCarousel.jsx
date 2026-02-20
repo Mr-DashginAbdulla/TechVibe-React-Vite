@@ -1,9 +1,28 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/context/ThemeContext";
+
+/**
+ * Normalises the brand.logo field which can come in two shapes:
+ *   1. Plain string  →  use the same URL for both modes
+ *   2. { light, dark } object  →  use the appropriate variant
+ */
+const resolveLogo = (logo, isDark) => {
+  if (!logo) return "";
+  if (typeof logo === "string") return logo;
+  return isDark ? logo.dark || logo.light || "" : logo.light || logo.dark || "";
+};
 
 const BrandCarousel = () => {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [brands, setBrands] = useState([]);
+
+  // Resolve "system" theme to the actual OS preference
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/brands?isActive=true`)
@@ -47,14 +66,9 @@ const BrandCarousel = () => {
               title={brand.name}
             >
               <img
-                src={brand.logo.light}
+                src={resolveLogo(brand.logo, isDark)}
                 alt={brand.name}
-                className="max-h-[36px] sm:max-h-[40px] max-w-[100px] sm:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 dark:hidden"
-              />
-              <img
-                src={brand.logo.dark}
-                alt={brand.name}
-                className="max-h-[36px] sm:max-h-[40px] max-w-[100px] sm:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 hidden dark:block"
+                className="max-h-[36px] sm:max-h-[40px] max-w-[100px] sm:max-w-[120px] object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
               />
             </a>
           ))}

@@ -80,11 +80,17 @@ function Brands() {
     }
   };
 
+  const normalizeLogo = (logo) => {
+    if (!logo) return { light: "", dark: "" };
+    if (typeof logo === "string") return { light: logo, dark: logo };
+    return { light: logo.light || "", dark: logo.dark || "" };
+  };
+
   const handleEdit = (brand) => {
     setEditingBrand(brand);
     setForm({
       name: brand.name,
-      logo: brand.logo || { light: "", dark: "" },
+      logo: normalizeLogo(brand.logo),
       website: brand.website || "",
       isActive: brand.isActive ?? true,
     });

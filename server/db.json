@@ -1571,7 +1571,9 @@
       "isNew": true,
       "description": "27-inch 5K, Thunderbolt 3",
       "image": "https://www.lgcorp.com/media/release/images/33597",
-      "images": ["https://www.lgcorp.com/media/release/images/33597"],
+      "images": [
+        "https://www.lgcorp.com/media/release/images/33597"
+      ],
       "specs": {
         "Screen Size": "27 inches",
         "Resolution": "5120 x 2880 (5K)",
@@ -7260,56 +7262,8 @@
       "id": "brand-1",
       "name": "Apple",
       "logo": {
-        "0": "h",
-        "1": "t",
-        "2": "t",
-        "3": "p",
-        "4": "s",
-        "5": ":",
-        "6": "/",
-        "7": "/",
-        "8": "c",
-        "9": "d",
-        "10": "n",
-        "11": "-",
-        "12": "i",
-        "13": "c",
-        "14": "o",
-        "15": "n",
-        "16": "s",
-        "17": "-",
-        "18": "p",
-        "19": "n",
-        "20": "g",
-        "21": ".",
-        "22": "f",
-        "23": "l",
-        "24": "a",
-        "25": "t",
-        "26": "i",
-        "27": "c",
-        "28": "o",
-        "29": "n",
-        "30": ".",
-        "31": "c",
-        "32": "o",
-        "33": "m",
-        "34": "/",
-        "35": "5",
-        "36": "1",
-        "37": "2",
-        "38": "/",
-        "39": "0",
-        "40": "/",
-        "41": "7",
-        "42": "4",
-        "43": "7",
-        "44": ".",
-        "45": "p",
-        "46": "n",
-        "47": "g",
-        "light": "https://toppng.com/uploads/preview/apple-official-logo-11609355224dijk29rjup.png",
-        "dark": "https://toppng.com/uploads/preview/apple-official-logo-11609355224dijk29rjup.png"
+        "light": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/3/31/Apple_logo_white.svg"
       },
       "website": "https://www.apple.com",
       "isActive": true
@@ -7317,91 +7271,130 @@
     {
       "id": "brand-2",
       "name": "Samsung",
-      "logo": "https://www.shutterstock.com/image-vector/samsung-company-logo-south-korean-260nw-2394493913.jpg",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg"
+      },
       "website": "https://www.samsung.com",
       "isActive": true
     },
     {
       "id": "brand-3",
       "name": "Sony",
-      "logo": "https://www.citypng.com/public/uploads/preview/hd-sony-black-logo-transparent-png-701751694773079o9p4y1cy4c.png",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg"
+      },
       "website": "https://www.sony.com",
       "isActive": true
     },
     {
       "id": "brand-4",
       "name": "ASUS",
-      "logo": "https://www.citypng.com/public/uploads/preview/hd-asus-official-logo-transparent-png-701751694773683zhb9eu5zq3.png",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg"
+      },
       "website": "https://www.asus.com",
       "isActive": true
     },
     {
       "id": "brand-5",
       "name": "Lenovo",
-      "logo": "https://www.citypng.com/public/uploads/preview/hd-lenovo-black-logo-transparent-background-701751694772190gyqemmsai8.png?v=2026020417",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg"
+      },
       "website": "https://www.lenovo.com",
       "isActive": true
     },
     {
       "id": "brand-6",
       "name": "Dell",
-      "logo": "https://cdn.freebiesupply.com/images/large/2x/dell-logo-black-transparent.png",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg"
+      },
       "website": "https://www.dell.com",
       "isActive": true
     },
     {
       "id": "brand-7",
       "name": "HP",
-      "logo": "https://logo.clearbit.com/hp.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg"
+      },
       "website": "https://www.hp.com",
       "isActive": true
     },
     {
       "id": "brand-8",
       "name": "Razer",
-      "logo": "https://logo.clearbit.com/razer.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/en/9/9a/Razer_logo.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/en/9/9a/Razer_logo.svg"
+      },
       "website": "https://www.razer.com",
       "isActive": true
     },
     {
       "id": "brand-9",
       "name": "JBL",
-      "logo": "https://logo.clearbit.com/jbl.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/0/0e/JBL_logo.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/0/0e/JBL_logo.svg"
+      },
       "website": "https://www.jbl.com",
       "isActive": true
     },
     {
       "id": "brand-10",
       "name": "Bose",
-      "logo": "https://logo.clearbit.com/bose.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Bose_Corporation_logo.svg/2560px-Bose_Corporation_logo.svg.png",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Bose_Corporation_logo.svg/2560px-Bose_Corporation_logo.svg.png"
+      },
       "website": "https://www.bose.com",
       "isActive": true
     },
     {
       "id": "brand-11",
       "name": "LG",
-      "logo": "https://logo.clearbit.com/lg.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/2/20/LG_symbol.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/2/20/LG_symbol.svg"
+      },
       "website": "https://www.lg.com",
       "isActive": true
     },
     {
       "id": "brand-12",
       "name": "Microsoft",
-      "logo": "https://logo.clearbit.com/microsoft.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg"
+      },
       "website": "https://www.microsoft.com",
       "isActive": true
     },
     {
       "id": "brand-13",
       "name": "Google",
-      "logo": "https://logo.clearbit.com/google.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+      },
       "website": "https://www.google.com",
       "isActive": true
     },
     {
       "id": "brand-14",
       "name": "Acer",
-      "logo": "https://logo.clearbit.com/acer.com",
+      "logo": {
+        "light": "https://upload.wikimedia.org/wikipedia/commons/0/00/Acer_2011.svg",
+        "dark": "https://upload.wikimedia.org/wikipedia/commons/0/00/Acer_2011.svg"
+      },
       "website": "https://www.acer.com",
       "isActive": true
     }
@@ -7424,7 +7417,7 @@
       "code": "WELCOME20",
       "type": "percentage",
       "discount": 20,
-      "minOrder": 50,
+      "minOrder": 500,
       "maxUses": 500,
       "usedCount": 0,
       "isActive": true,
