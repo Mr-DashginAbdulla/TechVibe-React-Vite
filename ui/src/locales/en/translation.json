@@ -427,7 +427,17 @@
     "addedToCart": "Added to cart!",
     "cartUpdated": "Cart updated!",
     "addedToWishlist": "Added to wishlist!",
-    "removedFromWishlist": "Removed from wishlist!"
+    "removedFromWishlist": "Removed from wishlist!",
+    "compareTitle": "Compare Products",
+    "compareSubtitle": "Select products to compare specifications side by side",
+    "thisProduct": "This Product",
+    "viewProduct": "View Product",
+    "notAvailable": "—",
+    "addProduct": "Add Product",
+    "searchProducts": "Search products...",
+    "removeProduct": "Remove",
+    "selectToCompare": "Select products above to start comparing specifications",
+    "noResults": "No products found"
   },
   "basket": {
     "title": "Shopping Cart",

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Breadcrumb from "./components/Breadcrumb";
 import ImageGallery from "./components/ImageGallery";
 import SpecsTable from "./components/SpecsTable";
+import ProductComparison from "./components/ProductComparison";
 import ReviewsSection from "./components/ReviewsSection";
 import WriteReviewModal from "./components/WriteReviewModal";
 import RecommendedProducts from "./components/RecommendedProducts";
@@ -97,6 +98,8 @@ const ProductDetails = () => {
           </div>
 
           {product.specs && <SpecsTable specs={product.specs} />}
+
+          <ProductComparison product={product} />
 
           <ReviewsSection
             reviews={reviews}

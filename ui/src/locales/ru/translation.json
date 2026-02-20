@@ -406,7 +406,17 @@
     "addedToCart": "Добавлено в корзину!",
     "cartUpdated": "Корзина обновлена!",
     "addedToWishlist": "Добавлено в избранное!",
-    "removedFromWishlist": "Удалено из избранного!"
+    "removedFromWishlist": "Удалено из избранного!",
+    "compareTitle": "Сравнить товары",
+    "compareSubtitle": "Выберите товары для сравнения характеристик",
+    "thisProduct": "Этот товар",
+    "viewProduct": "Посмотреть товар",
+    "notAvailable": "—",
+    "addProduct": "Добавить товар",
+    "searchProducts": "Поиск товаров...",
+    "removeProduct": "Удалить",
+    "selectToCompare": "Выберите товары выше для сравнения характеристик",
+    "noResults": "Товары не найдены"
   },
   "basket": {
     "title": "Корзина",

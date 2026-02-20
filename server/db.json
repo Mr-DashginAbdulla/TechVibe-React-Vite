@@ -3359,7 +3359,9 @@
       "rating": 4,
       "comment": "Gözlədiyimdən yaxşı çıxdı!",
       "date": "2026-01-12",
-      "helpful": 4
+      "helpful": 4,
+      "helpfulCount": 0,
+      "helpfulBy": []
     },
     {
       "id": "r2_1",
@@ -5911,7 +5913,9 @@
       "rating": 4,
       "comment": "Dizaynı çox gözəldir.",
       "date": "2026-01-12",
-      "helpful": 4
+      "helpful": 4,
+      "unhelpfulCount": 0,
+      "unhelpfulBy": []
     },
     {
       "id": "r73_4",
@@ -5920,7 +5924,9 @@
       "rating": 5,
       "comment": "Uzun müddətdir istifadə edirəm, problemsiz işləyir.",
       "date": "2026-01-13",
-      "helpful": 6
+      "helpful": 6,
+      "unhelpfulCount": 0,
+      "unhelpfulBy": []
     },
     {
       "id": "r73_5",
@@ -5929,7 +5935,9 @@
       "rating": 4,
       "comment": "Ailə üçün aldım, hamı razıdır.",
       "date": "2026-01-14",
-      "helpful": 8
+      "helpful": 8,
+      "helpfulCount": 0,
+      "helpfulBy": []
     },
     {
       "id": "r74_1",

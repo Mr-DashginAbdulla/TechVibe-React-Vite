@@ -427,7 +427,17 @@
     "addedToCart": "Səbətə əlavə edildi!",
     "cartUpdated": "Səbət yeniləndi!",
     "addedToWishlist": "İstək siyahısına əlavə edildi!",
-    "removedFromWishlist": "İstək siyahısından silindi!"
+    "removedFromWishlist": "İstək siyahısından silindi!",
+    "compareTitle": "Məhsulları Müqayisə Et",
+    "compareSubtitle": "Xüsusiyyətləri yan-yana müqayisə etmək üçün məhsulları seçin",
+    "thisProduct": "Bu Məhsul",
+    "viewProduct": "Məhsula bax",
+    "notAvailable": "—",
+    "addProduct": "Məhsul əlavə et",
+    "searchProducts": "Məhsul axtar...",
+    "removeProduct": "Sil",
+    "selectToCompare": "Müqayisəyə başlamaq üçün yuxarıdan məhsul seçin",
+    "noResults": "Məhsul tapılmadı"
   },
   "basket": {
     "title": "Səbət",
