@@ -5,7 +5,7 @@ import { showToast as toast } from "@/components/shared/StyledToast";
 import { motion } from "framer-motion";
 import HeroSlider from "./HeroSlider";
 import NewArrivals from "./components/NewArrivals";
-import SubcategoryProducts from "./components/SubcategoryProducts";
+import CategoryShowcase from "./components/CategoryShowcase";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
 import BrandCarousel from "./components/BrandCarousel";
@@ -213,7 +213,7 @@ function Home() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <SubcategoryProducts
+        <CategoryShowcase
           categories={categories}
           products={products}
           onAddToCart={handleAddToCart}
