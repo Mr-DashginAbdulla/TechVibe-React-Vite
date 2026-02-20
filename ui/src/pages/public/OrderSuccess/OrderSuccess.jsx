@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Loader2 } from "lucide-react";
 
-import { useOrderSuccess } from "@/hooks/useOrderSuccess";
+import { useOrderSuccess } from "@/hooks/profile/useOrderSuccess";
 import OrderSuccessHeader from "./OrderSuccessHeader";
 import OrderInfoBar from "./OrderInfoBar";
 import OrderItemsList from "./OrderItemsList";

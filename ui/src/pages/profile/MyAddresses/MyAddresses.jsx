@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Loader2 } from "lucide-react";
 
-import { useMyAddresses } from "@/hooks/useMyAddresses";
+import { useMyAddresses } from "@/hooks/profile/useMyAddresses";
 import AddressesHeader from "./AddressesHeader";
 import AddressCard from "./AddressCard";
 import EmptyAddresses from "./EmptyAddresses";

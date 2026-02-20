@@ -7,18 +7,17 @@ import {
   useGetRelatedProductsQuery,
 } from "@/store/api/productsApi";
 
-import { useProductSelection } from "./useProductSelection";
-import { useProductCart } from "./useProductCart";
-import { useProductReviews } from "./useProductReviews";
-import { useProductWishlist } from "./useProductWishlist";
-import { useRecentlyViewed } from "./useRecentlyViewed";
+import { useProductSelection } from "./product/useProductSelection";
+import { useProductCart } from "./product/useProductCart";
+import { useProductReviews } from "./product/useProductReviews";
+import { useProductWishlist } from "./product/useProductWishlist";
+import { useRecentlyViewed } from "./product/useRecentlyViewed";
 
 export const useProductDetails = () => {
   const { id } = useParams();
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  // 1. Fetch Core Product Data
   const {
     data: product,
     isLoading: productLoading,
@@ -30,7 +29,6 @@ export const useProductDetails = () => {
     { skip: !product?.category },
   );
 
-  // 2. Initialize Sub-Hooks
   const {
     selectedOptions,
     calculatedPrice,
@@ -70,14 +68,10 @@ export const useProductDetails = () => {
 
   useRecentlyViewed(product);
 
-  // 3. Scroll to top on id change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
-
-  // 4. Return Unified API
   return {
-    // Data
     product,
     productLoading,
     productError,
@@ -95,12 +89,9 @@ export const useProductDetails = () => {
     editReviewData,
     user,
 
-    // State Setters
     setQuantity,
     setReviewModalOpen,
     setEditReviewData,
-
-    // Handlers (Wrapped to inject 't' where needed)
     handlers: {
       handleOptionSelect,
       handleAddToCart: () => handleAddToCart(t),

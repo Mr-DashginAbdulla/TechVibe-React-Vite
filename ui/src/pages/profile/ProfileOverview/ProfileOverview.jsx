@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Loader2 } from "lucide-react";
 
-import { useProfileOverview } from "@/hooks/useProfileOverview";
+import { useProfileOverview } from "@/hooks/profile/useProfileOverview";
 import ProfileWelcome from "./ProfileWelcome";
 import ProfileStatsGrid from "./ProfileStatsGrid";
 import ProfileInfoCards from "./ProfileInfoCards";

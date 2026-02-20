@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Check } from "lucide-react";
 
-import { useAccountSettings } from "@/hooks/useAccountSettings";
+import { useAccountSettings } from "@/hooks/profile/useAccountSettings";
 import SettingsHeader from "./SettingsHeader";
 import SettingsTabs from "./SettingsTabs";
 import PersonalInfoForm from "./PersonalInfoForm";

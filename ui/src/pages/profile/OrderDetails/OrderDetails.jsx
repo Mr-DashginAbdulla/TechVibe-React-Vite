@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Loader2 } from "lucide-react";
 
-import { useOrderDetails } from "@/hooks/useOrderDetails";
+import { useOrderDetails } from "@/hooks/profile/useOrderDetails";
 import OrderDetailsHeader from "./OrderDetailsHeader";
 import OrderItemsList from "./OrderItemsList";
 import OrderShippingInfo from "./OrderShippingInfo";
