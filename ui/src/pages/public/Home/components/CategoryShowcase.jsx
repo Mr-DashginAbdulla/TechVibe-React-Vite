@@ -115,7 +115,7 @@ const CategoryRow = ({
           <div
             className={`absolute inset-0 bg-linear-to-br ${gradient} mix-blend-multiply opacity-90`}
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
         <div className="relative z-10 text-white flex flex-col items-start h-full justify-center">
