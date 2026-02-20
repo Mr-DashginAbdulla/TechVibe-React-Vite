@@ -180,7 +180,7 @@ const OrderDetails = () => {
       <Helmet>
         <title>{t("profile.orderDetails")} - TechVibe</title>
       </Helmet>
-      <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
+      <div className="bg-card rounded-[20px] shadow-sm border border-border p-[16px] sm:p-[24px]">
         <Link
           to="/profile/orders"
           className="inline-flex items-center gap-[8px] text-[14px] text-muted-foreground hover:text-primary mb-[16px]"
@@ -188,18 +188,18 @@ const OrderDetails = () => {
           <ArrowLeft className="w-[16px] h-[16px]" />
           {t("order.backToOrders")}
         </Link>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[16px]">
           <div>
-            <h1 className="text-[24px] font-bold text-foreground mb-[4px]">
+            <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground mb-[4px]">
               {order.orderNumber}
             </h1>
-            <p className="text-[14px] text-muted-foreground">
+            <p className="text-[13px] sm:text-[14px] text-muted-foreground">
               {t("order.orderDate")}: {formatDate(order.createdAt)}
             </p>
           </div>
-          <div className="flex items-center gap-[12px]">
+          <div className="flex flex-wrap items-center gap-[8px] sm:gap-[12px]">
             <span
-              className={`px-[16px] py-[8px] rounded-full text-[14px] font-medium ${
+              className={`px-[12px] sm:px-[16px] py-[6px] sm:py-[8px] rounded-full text-[13px] sm:text-[14px] font-medium ${
                 order.status === "delivered"
                   ? "bg-success/10 text-success"
                   : order.status === "shipped"
@@ -216,7 +216,7 @@ const OrderDetails = () => {
             {canCancelOrder && (
               <button
                 onClick={() => setShowCancelConfirm(true)}
-                className="px-[12px] py-[8px] text-[13px] font-medium text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
+                className="px-[10px] sm:px-[12px] py-[6px] sm:py-[8px] text-[12px] sm:text-[13px] font-medium text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
               >
                 {t("order.cancelOrder")}
               </button>
@@ -224,7 +224,7 @@ const OrderDetails = () => {
             {canEditOrder && (
               <button
                 onClick={handleEditOrder}
-                className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-info hover:bg-info/10 rounded-lg transition-colors"
+                className="flex items-center gap-[6px] px-[10px] sm:px-[12px] py-[6px] sm:py-[8px] text-[12px] sm:text-[13px] font-medium text-info hover:bg-info/10 rounded-lg transition-colors"
               >
                 <Edit3 className="w-[14px] h-[14px]" />
                 {t("order.editOrder")}
@@ -233,7 +233,7 @@ const OrderDetails = () => {
             <button
               onClick={handleReorder}
               disabled={isReordering}
-              className="flex items-center gap-[6px] px-[12px] py-[8px] text-[13px] font-medium text-success hover:bg-success/10 rounded-lg transition-colors disabled:opacity-50"
+              className="flex items-center gap-[6px] px-[10px] sm:px-[12px] py-[6px] sm:py-[8px] text-[12px] sm:text-[13px] font-medium text-success hover:bg-success/10 rounded-lg transition-colors disabled:opacity-50"
             >
               <RefreshCw
                 className={`w-[14px] h-[14px] ${isReordering ? "animate-spin" : ""}`}
