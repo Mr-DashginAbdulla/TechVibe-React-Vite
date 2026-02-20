@@ -192,7 +192,9 @@
     "subscribe": "Подписаться",
     "thankYou": "Спасибо за подписку!",
     "trustedBrands": "Доверие ведущих брендов",
-    "trustedBrandsDesc": "Мы сотрудничаем с мировыми лидерами в области технологий"
+    "trustedBrandsDesc": "Мы сотрудничаем с мировыми лидерами в области технологий",
+    "exploreBySubcategory": "Каталог товаров",
+    "exploreBySubcategoryDesc": "Просмотрите товары по подкатегориям"
   },
   "categories": {
     "computers": "Компьютеры и аксессуары",

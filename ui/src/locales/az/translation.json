@@ -193,7 +193,9 @@
     "subscribe": "Abunə ol",
     "thankYou": "Abunə olduğunuz üçün təşəkkürlər!",
     "trustedBrands": "Etibarlı Brendlər",
-    "trustedBrandsDesc": "Dünyanın aparıcı texnologiya brendləri ilə əməkdaşlıq edirik"
+    "trustedBrandsDesc": "Dünyanın aparıcı texnologiya brendləri ilə əməkdaşlıq edirik",
+    "exploreBySubcategory": "Məhsulları Kəşf Et",
+    "exploreBySubcategoryDesc": "Bütün alt kateqoriyalarda məhsullara baxın"
   },
   "categories": {
     "computers": "Kompüterlər və Aksesuarlar",

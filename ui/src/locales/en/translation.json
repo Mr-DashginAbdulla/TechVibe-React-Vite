@@ -193,7 +193,9 @@
     "subscribe": "Subscribe",
     "thankYou": "Thank you for subscribing!",
     "trustedBrands": "Trusted by Top Brands",
-    "trustedBrandsDesc": "We partner with the world's leading technology brands"
+    "trustedBrandsDesc": "We partner with the world's leading technology brands",
+    "exploreBySubcategory": "Explore Products",
+    "exploreBySubcategoryDesc": "Browse products across all subcategories"
   },
   "categories": {
     "computers": "Computers & Accessories",

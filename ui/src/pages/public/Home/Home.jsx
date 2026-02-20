@@ -5,7 +5,7 @@ import { showToast as toast } from "@/components/shared/StyledToast";
 import { motion } from "framer-motion";
 import HeroSlider from "./HeroSlider";
 import NewArrivals from "./components/NewArrivals";
-import ShopByCategory from "./components/ShopByCategory";
+import SubcategoryProducts from "./components/SubcategoryProducts";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
 import BrandCarousel from "./components/BrandCarousel";
@@ -66,6 +66,7 @@ function Home() {
           originalPrice: product.oldPrice,
           isNew: product.isNew,
           isFeatured: product.isFeatured,
+          category: product.category,
         }));
 
         setProducts(formattedProducts);
@@ -203,7 +204,7 @@ function Home() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <ShopByCategory categories={categories} />
+        <BrandCarousel />
       </motion.div>
 
       <motion.div
@@ -212,7 +213,13 @@ function Home() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <BrandCarousel />
+        <SubcategoryProducts
+          categories={categories}
+          products={products}
+          onAddToCart={handleAddToCart}
+          onToggleFavorite={handleToggleFavorite}
+          wishlistItems={wishlistItems}
+        />
       </motion.div>
 
       <motion.div

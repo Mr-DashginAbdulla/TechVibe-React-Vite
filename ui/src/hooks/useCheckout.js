@@ -14,8 +14,6 @@ export const useCheckout = () => {
   const location = useLocation();
   const { user } = useAuth();
 
-  // Store checkout params in refs so they persist across location changes
-  // (e.g. when navigate() is called after placing an order)
   const buyNowItemRef = useRef(location.state?.buyNowItem);
   const editOrderIdRef = useRef(location.state?.editOrderId);
   const editOrderItemsRef = useRef(location.state?.editOrderItems);
@@ -33,7 +31,6 @@ export const useCheckout = () => {
     cvv: "",
   });
 
-  // 1. Address Management
   const {
     addresses,
     setAddresses,
@@ -43,7 +40,6 @@ export const useCheckout = () => {
     isLoading: isAddressLoading,
   } = useCheckoutAddress(user);
 
-  // 2. Cart & Product Management
   const {
     checkoutItems,
     subtotal,
@@ -58,7 +54,6 @@ export const useCheckout = () => {
     FREE_SHIPPING_THRESHOLD,
   } = useCheckoutCart(user, buyNowItem, editOrderItems);
 
-  // 3. Order Placement
   const { handlePlaceOrder, isSubmitting } = useCheckoutOrder(
     user,
     checkoutItems,
@@ -70,7 +65,6 @@ export const useCheckout = () => {
 
   const isLoading = isAddressLoading || isCartLoading;
 
-  // Auth Protection
   useEffect(() => {
     if (!user) {
       toast.error(t("basket.loginRequired"));
@@ -79,7 +73,6 @@ export const useCheckout = () => {
     }
   }, [user, navigate, t]);
 
-  // Empty Cart Redirect
   useEffect(() => {
     if (
       checkoutItems.length === 0 &&
@@ -92,7 +85,6 @@ export const useCheckout = () => {
     }
   }, [checkoutItems, isLoading, buyNowItem, editOrderItems, navigate, t]);
 
-  // Step Validation
   const canProceed = () => {
     if (currentStep === 1) {
       return selectedAddressId !== null;

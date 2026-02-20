@@ -118,7 +118,7 @@ const SlideContent = ({ slide, t }) => (
       <motion.div variants={itemVariants}>
         <Link
           to={slide.ctaLink}
-          className="inline-flex items-center gap-[8px] bg-white text-foreground font-semibold px-[28px] py-[14px] rounded-[12px] hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg"
+          className="inline-flex items-center gap-[8px] bg-white text-gray-900 font-semibold px-[28px] py-[14px] rounded-[12px] hover:bg-white/90 transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg"
         >
           {t(slide.ctaKey)}
           <ChevronRight className="w-[18px] h-[18px]" />
