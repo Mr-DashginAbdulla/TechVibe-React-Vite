@@ -22,7 +22,7 @@ const ReviewCard = ({
 }) => {
   const { t } = useTranslation();
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const isOwnReview = review.userId === userId;
+  const isOwnReview = !!userId && review.userId === userId;
   const hasVotedHelpful = review.helpfulBy?.includes(userId);
   const hasVotedUnhelpful = review.unhelpfulBy?.includes(userId);
 

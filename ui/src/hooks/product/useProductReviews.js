@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { showToast as toast } from "@/components/shared/StyledToast";
+import { useAuthModal } from "@/context/AuthModalContext";
 import {
   useGetProductReviewsQuery,
   useAddReviewMutation,
@@ -8,6 +9,7 @@ import {
 } from "@/store/api/productsApi";
 
 export const useProductReviews = (productId, user) => {
+  const { openAuthModal } = useAuthModal();
   const { data: reviews = [] } = useGetProductReviewsQuery(productId);
 
   const [addReview] = useAddReviewMutation();
@@ -22,7 +24,7 @@ export const useProductReviews = (productId, user) => {
     t,
   ) => {
     if (!user) {
-      toast.error(t("messages.loginRequired"));
+      openAuthModal();
       return;
     }
 
@@ -64,7 +66,7 @@ export const useProductReviews = (productId, user) => {
 
   const handleHelpful = async (review, t) => {
     if (!user) {
-      toast.error(t("messages.loginRequired"));
+      openAuthModal();
       return;
     }
 
@@ -107,7 +109,7 @@ export const useProductReviews = (productId, user) => {
 
   const handleUnhelpful = async (review, t) => {
     if (!user) {
-      toast.error(t("messages.loginRequired"));
+      openAuthModal();
       return;
     }
 
@@ -148,7 +150,16 @@ export const useProductReviews = (productId, user) => {
   };
 
   const handleDeleteReview = async (reviewId, t) => {
-    if (!user) return;
+    if (!user) {
+      openAuthModal();
+      return;
+    }
+
+    const review = reviews.find((r) => r.id === reviewId);
+    if (!review || review.userId !== user.id) {
+      toast.error(t("messages.notAuthorized"));
+      return;
+    }
 
     try {
       await deleteReview(reviewId).unwrap();

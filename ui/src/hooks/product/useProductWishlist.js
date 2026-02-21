@@ -1,4 +1,5 @@
 import { showToast as toast } from "@/components/shared/StyledToast";
+import { useAuthModal } from "@/context/AuthModalContext";
 import {
   useAddToWishlistMutation,
   useRemoveFromWishlistMutation,
@@ -7,6 +8,7 @@ import {
 } from "@/store/api/productsApi";
 
 export const useProductWishlist = (productId, user) => {
+  const { openAuthModal } = useAuthModal();
   const { data: wishlistItems = [] } = useCheckWishlistItemQuery(
     { userId: user?.id, productId },
     { skip: !user?.id },
@@ -26,7 +28,7 @@ export const useProductWishlist = (productId, user) => {
 
   const handleToggleWishlist = async (product, t) => {
     if (!user) {
-      toast.error(t("messages.loginToUseWishlist"));
+      openAuthModal();
       return;
     }
 
@@ -53,7 +55,7 @@ export const useProductWishlist = (productId, user) => {
 
   const handleRelatedToggleFavorite = async (pid, t) => {
     if (!user) {
-      toast.error(t("messages.loginToUseWishlist"));
+      openAuthModal();
       return;
     }
 

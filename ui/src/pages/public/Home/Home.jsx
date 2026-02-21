@@ -21,10 +21,12 @@ import {
   useRemoveFromWishlistMutation,
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 function Home() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { openAuthModal } = useAuthModal();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -87,7 +89,7 @@ function Home() {
 
   const handleAddToCart = async (productId) => {
     if (!user) {
-      toast.error(t("messages.loginToAddToCart"));
+      openAuthModal();
       return;
     }
 
@@ -124,7 +126,7 @@ function Home() {
 
   const handleToggleFavorite = async (productId) => {
     if (!user) {
-      toast.error(t("messages.loginToUseWishlist"));
+      openAuthModal();
       return;
     }
 

@@ -21,10 +21,12 @@ import {
   useRemoveFromWishlistMutation,
 } from "@/store/api/productsApi";
 import { useAuth } from "@/context/AuthContext";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 function Shop() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { openAuthModal } = useAuthModal();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [products, setProducts] = useState([]);
@@ -206,7 +208,7 @@ function Shop() {
 
   const handleAddToCart = async (productId) => {
     if (!user) {
-      toast.error(t("auth.signIn") + " to add items to cart");
+      openAuthModal();
       return;
     }
 
@@ -243,7 +245,7 @@ function Shop() {
 
   const handleToggleFavorite = async (productId) => {
     if (!user) {
-      toast.error(t("auth.signIn") + " to use wishlist");
+      openAuthModal();
       return;
     }
 

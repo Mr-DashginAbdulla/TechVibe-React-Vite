@@ -11,6 +11,7 @@ import RecommendedProducts from "./components/RecommendedProducts";
 import ProductActionPanel from "./components/ProductActionPanel";
 import { ProductDetailsSkeleton } from "@/components/ui";
 import { useProductDetails } from "@/hooks/useProductDetails";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 const ProductDetails = () => {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ const ProductDetails = () => {
     handlers,
     user,
   } = useProductDetails();
+  const { openAuthModal } = useAuthModal();
 
   if (productLoading) {
     return <ProductDetailsSkeleton />;
@@ -113,6 +115,10 @@ const ProductDetails = () => {
             }
             totalReviews={reviews.length}
             onWriteReview={() => {
+              if (!user) {
+                openAuthModal();
+                return;
+              }
               setEditReviewData(null);
               setReviewModalOpen(true);
             }}

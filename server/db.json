@@ -3360,8 +3360,12 @@
       "comment": "Gözlədiyimdən yaxşı çıxdı!",
       "date": "2026-01-12",
       "helpful": 4,
-      "helpfulCount": 0,
-      "helpfulBy": []
+      "helpfulCount": 1,
+      "helpfulBy": [
+        "mkth60qz-s7vce3"
+      ],
+      "unhelpfulCount": 0,
+      "unhelpfulBy": []
     },
     {
       "id": "r2_1",

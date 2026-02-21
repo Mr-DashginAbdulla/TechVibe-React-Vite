@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { showToast as toast } from "@/components/shared/StyledToast";
+import { useAuthModal } from "@/context/AuthModalContext";
 import {
   useGetCartQuery,
   useAddToCartMutation,
@@ -15,6 +16,7 @@ export const useProductCart = (
 ) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const { openAuthModal } = useAuthModal();
 
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
@@ -25,7 +27,7 @@ export const useProductCart = (
 
   const handleAddToCart = async (t) => {
     if (!user) {
-      toast.error(t("messages.loginToAddToCart"));
+      openAuthModal();
       return;
     }
 
@@ -64,7 +66,7 @@ export const useProductCart = (
 
   const handleBuyNow = (t) => {
     if (!user) {
-      toast.error(t("messages.loginRequired"));
+      openAuthModal();
       return;
     }
 
@@ -83,7 +85,7 @@ export const useProductCart = (
 
   const handleRelatedAddToCart = (prod, t) => {
     if (!user) {
-      toast.error(t("messages.loginToAddToCart"));
+      openAuthModal();
       return;
     }
     addToCart({
