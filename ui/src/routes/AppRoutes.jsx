@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
 import LoadingSpinner from "@/components/shared/LoadingSpinner";
+import { useTranslation } from "react-i18next";
 
 const Home = lazy(() => import("@/pages/public/Home/Home"));
 const Shop = lazy(() => import("@/pages/public/Shop/Shop"));
@@ -38,7 +39,18 @@ const OrderDetails = lazy(
 const MyWishlist = lazy(() => import("@/pages/profile/MyWishlist"));
 const ProfileCart = lazy(() => import("@/pages/profile/ProfileCart"));
 
-import { useTranslation } from "react-i18next";
+// Static pages
+const Contact = lazy(() => import("@/pages/public/Contact/Contact"));
+const FAQ = lazy(() => import("@/pages/public/FAQ/FAQ"));
+const Shipping = lazy(() => import("@/pages/public/Shipping/Shipping"));
+const Returns = lazy(() => import("@/pages/public/Returns/Returns"));
+const About = lazy(() => import("@/pages/public/About/About"));
+const Careers = lazy(() => import("@/pages/public/Careers/Careers"));
+const Press = lazy(() => import("@/pages/public/Press/Press"));
+const Blog = lazy(() => import("@/pages/public/Blog/Blog"));
+const Privacy = lazy(() => import("@/pages/public/Privacy/Privacy"));
+const Terms = lazy(() => import("@/pages/public/Terms/Terms"));
+const Cookies = lazy(() => import("@/pages/public/Cookies/Cookies"));
 
 const NotFound = () => {
   const { t } = useTranslation();
@@ -75,6 +87,23 @@ export default function AppRoutes() {
           />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-success/:orderId" element={<OrderSuccess />} />
+
+          {/* Support pages */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/returns" element={<Returns />} />
+
+          {/* Company pages */}
+          <Route path="/about" element={<About />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/press" element={<Press />} />
+          <Route path="/blog" element={<Blog />} />
+
+          {/* Legal pages */}
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/cookies" element={<Cookies />} />
         </Route>
 
         <Route path="/auth">
@@ -98,8 +127,6 @@ export default function AppRoutes() {
           <Route path="cart" element={<ProfileCart />} />
         </Route>
 
-        <Route path="/terms" element={<Navigate to="/" replace />} />
-        <Route path="/privacy" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
