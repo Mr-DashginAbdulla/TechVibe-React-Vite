@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
+import ProtectedRoute from "@/routes/ProtectedRoute";
 import LoadingSpinner from "@/components/shared/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 
@@ -113,18 +114,19 @@ export default function AppRoutes() {
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="verify-code" element={<VerifyCode />} />
           <Route path="reset-success" element={<ResetSuccess />} />
-          <Route path="welcome" element={<AuthWelcome />} />
         </Route>
 
-        <Route path="/profile" element={<ProfileLayout />}>
-          <Route index element={<ProfileOverview />} />
-          <Route path="overview" element={<ProfileOverview />} />
-          <Route path="settings" element={<AccountSettings />} />
-          <Route path="addresses" element={<MyAddresses />} />
-          <Route path="orders" element={<MyOrders />} />
-          <Route path="orders/:id" element={<OrderDetails />} />
-          <Route path="wishlist" element={<MyWishlist />} />
-          <Route path="cart" element={<ProfileCart />} />
+        <Route path="/profile" element={<ProtectedRoute />}>
+          <Route element={<ProfileLayout />}>
+            <Route index element={<ProfileOverview />} />
+            <Route path="overview" element={<ProfileOverview />} />
+            <Route path="settings" element={<AccountSettings />} />
+            <Route path="addresses" element={<MyAddresses />} />
+            <Route path="orders" element={<MyOrders />} />
+            <Route path="orders/:id" element={<OrderDetails />} />
+            <Route path="wishlist" element={<MyWishlist />} />
+            <Route path="cart" element={<ProfileCart />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />

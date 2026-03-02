@@ -17,7 +17,7 @@
       "firstName": "Admin",
       "lastName": "User",
       "email": "admin@techvibe.com",
-      "password": "admin",
+      "password": "",
       "role": "admin",
       "phone": "",
       "isVerified": true,
@@ -35,6 +35,18 @@
       "isVerified": false,
       "avatar": "",
       "createdAt": "2026-01-25T08:26:50.315Z"
+    },
+    {
+      "id": "mlw63hye-z34q4a",
+      "firstName": "Dashgin",
+      "lastName": "Abdulla",
+      "email": "test@gmail.com",
+      "password": "ArsenalIsTheBest1886@",
+      "phone": "",
+      "isVerified": false,
+      "avatar": "",
+      "createdAt": "2026-02-21T10:19:57.734Z",
+      "memberSince": "2026-02-21T10:19:57.734Z"
     }
   ],
   "categories": [
@@ -130,7 +142,7 @@
       "price": 1199,
       "category": "laptops",
       "brand": "Apple",
-      "stock": 10,
+      "stock": 12,
       "isFeatured": true,
       "isNew": true,
       "description": "M2 chip, 13.6-inch Liquid Retina display",
@@ -176,7 +188,11 @@
         }
       ],
       "rating": 4.3,
-      "reviewsCount": 3
+      "reviewsCount": 3,
+      "categoryId": "laptops",
+      "discount": 0,
+      "colors": [],
+      "reviewCount": 0
     },
     {
       "id": "2",
@@ -3360,10 +3376,8 @@
       "comment": "Gözlədiyimdən yaxşı çıxdı!",
       "date": "2026-01-12",
       "helpful": 4,
-      "helpfulCount": 1,
-      "helpfulBy": [
-        "mkth60qz-s7vce3"
-      ],
+      "helpfulCount": 0,
+      "helpfulBy": [],
       "unhelpfulCount": 0,
       "unhelpfulBy": []
     },
