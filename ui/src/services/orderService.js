@@ -5,7 +5,7 @@ export const orderService = {
     const response = await fetch(
       `${API_URL}/orders?userId=${userId}&_sort=createdAt&_order=desc`,
     );
-    if (!response.ok) throw new Error("Sifarişlər yüklənmədi");
+    if (!response.ok) throw new Error("ORDERS_LOAD_FAILED");
     return response.json();
   },
 
@@ -16,18 +16,18 @@ export const orderService = {
     const response = await fetch(
       `${API_URL}/orders?userId=${userId}&status=${status}&_sort=createdAt&_order=desc`,
     );
-    if (!response.ok) throw new Error("Sifarişlər yüklənmədi");
+    if (!response.ok) throw new Error("ORDERS_LOAD_FAILED");
     return response.json();
   },
 
   async getById(id) {
     const response = await fetch(`${API_URL}/orders/${id}`);
-    if (!response.ok) throw new Error("Sifariş tapılmadı");
+    if (!response.ok) throw new Error("ORDER_NOT_FOUND");
     return response.json();
   },
 
   async create(orderData) {
-    const orderNumber = `ORD-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`;
+    const orderNumber = `ORD-${new Date().getFullYear()}-${Date.now().toString(36).toUpperCase()}`;
     const response = await fetch(`${API_URL}/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -45,7 +45,7 @@ export const orderService = {
         createdAt: new Date().toISOString(),
       }),
     });
-    if (!response.ok) throw new Error("Sifariş yaradılmadı");
+    if (!response.ok) throw new Error("ORDER_CREATE_FAILED");
     return response.json();
   },
 
@@ -60,7 +60,7 @@ export const orderService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status, timeline }),
     });
-    if (!response.ok) throw new Error("Sifariş statusu yenilənmədi");
+    if (!response.ok) throw new Error("ORDER_STATUS_UPDATE_FAILED");
     return response.json();
   },
 
@@ -68,7 +68,7 @@ export const orderService = {
     const order = await this.getById(id);
 
     if (!["pending", "processing"].includes(order.status)) {
-      throw new Error("Bu sifariş artıq ləğv edilə bilməz");
+      throw new Error("ORDER_CANCEL_NOT_ALLOWED");
     }
 
     const timeline = [
@@ -85,7 +85,7 @@ export const orderService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "cancelled", timeline }),
     });
-    if (!response.ok) throw new Error("Sifariş ləğv ediləbilmədi");
+    if (!response.ok) throw new Error("ORDER_CANCEL_FAILED");
     return response.json();
   },
 
@@ -93,7 +93,7 @@ export const orderService = {
     const order = await this.getById(id);
 
     if (order.status !== "pending") {
-      throw new Error("Bu sifariş artıq dəyişdirilə bilməz");
+      throw new Error("ORDER_EDIT_NOT_ALLOWED");
     }
 
     const subtotal = items.reduce(
@@ -109,7 +109,7 @@ export const orderService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ items, subtotal, shippingCost, tax, total }),
     });
-    if (!response.ok) throw new Error("Sifariş məhsulları yenilənmədi");
+    if (!response.ok) throw new Error("ORDER_ITEMS_UPDATE_FAILED");
     return response.json();
   },
 };

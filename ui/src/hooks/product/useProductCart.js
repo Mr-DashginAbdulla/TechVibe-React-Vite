@@ -6,7 +6,7 @@ import {
   useGetCartQuery,
   useAddToCartMutation,
   useUpdateCartItemMutation,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 
 export const useProductCart = (
   user,

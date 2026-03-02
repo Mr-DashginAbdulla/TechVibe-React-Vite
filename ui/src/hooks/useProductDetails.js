@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import {
   useGetProductByIdQuery,
   useGetRelatedProductsQuery,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 
 import { useProductSelection } from "./product/useProductSelection";
 import { useProductCart } from "./product/useProductCart";

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useGetCartQuery } from "@/store/api/productsApi";
+import { useGetCartQuery } from "@/store/api/apiSlice";
 import { useLenisContext } from "@/context/LenisProvider";
 import logoLight from "@/assets/images/TechVibeLogo-LightTransparent.png";
 import logoDark from "@/assets/images/TechVibeLogo-DarkTransparent.png";

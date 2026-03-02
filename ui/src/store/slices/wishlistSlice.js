@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { productsApi } from "../api/productsApi";
+import { apiSlice } from "../api/apiSlice";
 
 const initialState = {
   items: [],
@@ -22,23 +22,23 @@ const wishlistSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        productsApi.endpoints.getWishlist.matchFulfilled,
+        apiSlice.endpoints.getWishlist.matchFulfilled,
         (state, action) => {
           state.items = action.payload;
           state.isLoading = false;
         },
       )
-      .addMatcher(productsApi.endpoints.getWishlist.matchPending, (state) => {
+      .addMatcher(apiSlice.endpoints.getWishlist.matchPending, (state) => {
         state.isLoading = true;
       })
       .addMatcher(
-        productsApi.endpoints.addToWishlist.matchFulfilled,
+        apiSlice.endpoints.addToWishlist.matchFulfilled,
         (state, action) => {
           state.items.push(action.payload);
         },
       )
       .addMatcher(
-        productsApi.endpoints.removeFromWishlist.matchFulfilled,
+        apiSlice.endpoints.removeFromWishlist.matchFulfilled,
         (state, action) => {
           state.items = state.items.filter(
             (item) => item.id !== action.meta.arg.originalArgs,

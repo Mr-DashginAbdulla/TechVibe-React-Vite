@@ -14,7 +14,7 @@ export const authService = {
     const users = await existingUsers.json();
 
     if (users.length > 0) {
-      throw new Error("Bu email artıq qeydiyyatdan keçib");
+      throw new Error("EMAIL_EXISTS");
     }
 
     const now = new Date().toISOString();
@@ -39,7 +39,7 @@ export const authService = {
     });
 
     if (!response.ok) {
-      throw new Error("Qeydiyyat uğursuz oldu");
+      throw new Error("REGISTER_FAILED");
     }
 
     const newUser = await response.json();
@@ -53,13 +53,13 @@ export const authService = {
     const users = await response.json();
 
     if (users.length === 0) {
-      throw new Error("Bu email ilə istifadəçi tapılmadı");
+      throw new Error("USER_NOT_FOUND");
     }
 
     const user = users[0];
 
     if (user.password !== password) {
-      throw new Error("Şifrə yanlışdır");
+      throw new Error("WRONG_PASSWORD");
     }
 
     const { password: _, ...userWithoutPassword } = user;
@@ -76,7 +76,7 @@ export const authService = {
     const response = await fetch(`${API_URL}/users/${id}`);
 
     if (!response.ok) {
-      throw new Error("İstifadəçi tapılmadı");
+      throw new Error("USER_NOT_FOUND");
     }
 
     const user = await response.json();
@@ -89,7 +89,7 @@ export const authService = {
     const users = await response.json();
 
     if (users.length === 0) {
-      throw new Error("İstifadəçi tapılmadı");
+      throw new Error("USER_NOT_FOUND");
     }
 
     const user = users[0];
@@ -103,7 +103,7 @@ export const authService = {
     });
 
     if (!updateResponse.ok) {
-      throw new Error("Şifrə yenilənərkən xəta baş verdi");
+      throw new Error("PASSWORD_UPDATE_FAILED");
     }
 
     return true;

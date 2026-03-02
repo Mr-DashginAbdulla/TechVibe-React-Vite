@@ -143,6 +143,28 @@
     "dataLoadError": "Məlumatlar yüklənərkən xəta baş verdi",
     "logoutSuccess": "Hesabdan çıxış edildi"
   },
+  "serviceErrors": {
+    "EMAIL_EXISTS": "Bu email artıq qeydiyyatdan keçib",
+    "REGISTER_FAILED": "Qeydiyyat uğursuz oldu",
+    "USER_NOT_FOUND": "Bu email ilə istifadəçi tapılmadı",
+    "WRONG_PASSWORD": "Şifrə yanlışdır",
+    "PASSWORD_UPDATE_FAILED": "Şifrə yenilənmədi",
+    "ORDERS_LOAD_FAILED": "Sifarişlər yüklənmədi",
+    "ORDER_NOT_FOUND": "Sifariş tapılmadı",
+    "ORDER_CREATE_FAILED": "Sifariş yaradılmadı",
+    "ORDER_STATUS_UPDATE_FAILED": "Sifariş statusu yenilənmədi",
+    "ORDER_CANCEL_NOT_ALLOWED": "Bu sifariş artıq ləğv edilə bilməz",
+    "ORDER_CANCEL_FAILED": "Sifariş ləğv ediləbilmədi",
+    "ORDER_EDIT_NOT_ALLOWED": "Bu sifariş artıq dəyişdirilə bilməz",
+    "ORDER_ITEMS_UPDATE_FAILED": "Sifariş məhsulları yenilənmədi",
+    "ADDRESSES_LOAD_FAILED": "Ünvanlar yüklənmədi",
+    "ADDRESS_NOT_FOUND": "Ünvan tapılmadı",
+    "ADDRESS_CREATE_FAILED": "Ünvan əlavə edilmədi",
+    "ADDRESS_UPDATE_FAILED": "Ünvan yenilənmədi",
+    "ADDRESS_DELETE_FAILED": "Ünvan silinmədi",
+    "PROFILE_UPDATE_FAILED": "Profil yenilənmədi",
+    "WRONG_CURRENT_PASSWORD": "Cari şifrə yanlışdır"
+  },
   "hero": {
     "title1": "Gələcək.",
     "title2": "Hazırlandı.",
@@ -903,5 +925,29 @@
     "coverageTitle": "Media İşıqlandırması",
     "contactTitle": "Mətbuat Sorğuları",
     "contactDesc": "Müsahibə tələbləri, sitat və media sorğuları üçün kommunikasiya komandamızla əlaqə saxlayın."
+  },
+  "errors": {
+    "goBack": "Geri Qayıt",
+    "helpText": "Problem davam edərsə, dəstək komandamızla əlaqə saxlayın.",
+    "404": {
+      "title": "Səhifə Tapılmadı",
+      "description": "Axtardığınız səhifə mövcud deyil və ya köçürülüb. Gəlin sizi düzgün yola qaytaraq."
+    },
+    "401": {
+      "title": "Giriş Tələb Olunur",
+      "description": "Bu səhifəyə daxil olmaq üçün hesabınıza giriş etməlisiniz. Zəhmət olmasa daxil olun və yenidən cəhd edin."
+    },
+    "403": {
+      "title": "Giriş Qadağandır",
+      "description": "Bu səhifəni görməyə icazəniz yoxdur. Bunun xəta olduğunu düşünürsünüzsə, dəstək ilə əlaqə saxlayın."
+    },
+    "500": {
+      "title": "Server Xətası",
+      "description": "Bizim tərəfdə nəsə səhv getdi. Komandamız məlumatlandırılıb və düzəliş üzərində işləyir."
+    },
+    "503": {
+      "title": "Texniki İşlər",
+      "description": "Planlaşdırılmış texniki xidmət aparırıq. Tezliklə yenidən onlayn olacağıq. Səbriniz üçün təşəkkür edirik."
+    }
   }
 }

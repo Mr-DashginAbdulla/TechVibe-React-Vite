@@ -5,7 +5,7 @@ import {
   useRemoveFromWishlistMutation,
   useCheckWishlistItemQuery,
   useGetWishlistQuery,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 
 export const useProductWishlist = (productId, user) => {
   const { openAuthModal } = useAuthModal();

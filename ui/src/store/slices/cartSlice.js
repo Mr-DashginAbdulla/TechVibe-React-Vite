@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { productsApi } from "../api/productsApi";
+import { apiSlice } from "../api/apiSlice";
 
 const initialState = {
   items: [],
@@ -22,23 +22,23 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        productsApi.endpoints.getCart.matchFulfilled,
+        apiSlice.endpoints.getCart.matchFulfilled,
         (state, action) => {
           state.items = action.payload;
           state.isLoading = false;
         },
       )
-      .addMatcher(productsApi.endpoints.getCart.matchPending, (state) => {
+      .addMatcher(apiSlice.endpoints.getCart.matchPending, (state) => {
         state.isLoading = true;
       })
       .addMatcher(
-        productsApi.endpoints.addToCart.matchFulfilled,
+        apiSlice.endpoints.addToCart.matchFulfilled,
         (state, action) => {
           state.items.push(action.payload);
         },
       )
       .addMatcher(
-        productsApi.endpoints.removeFromCart.matchFulfilled,
+        apiSlice.endpoints.removeFromCart.matchFulfilled,
         (state, action) => {
           state.items = state.items.filter(
             (item) => item.id !== action.meta.arg.originalArgs,

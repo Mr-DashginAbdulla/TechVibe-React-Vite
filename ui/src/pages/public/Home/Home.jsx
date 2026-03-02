@@ -19,7 +19,7 @@ import {
   useGetWishlistQuery,
   useAddToWishlistMutation,
   useRemoveFromWishlistMutation,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
 

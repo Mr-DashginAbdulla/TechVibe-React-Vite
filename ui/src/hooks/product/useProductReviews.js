@@ -6,7 +6,7 @@ import {
   useAddReviewMutation,
   useUpdateReviewMutation,
   useDeleteReviewMutation,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 
 export const useProductReviews = (productId, user) => {
   const { openAuthModal } = useAuthModal();

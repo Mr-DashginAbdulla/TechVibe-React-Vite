@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useGetAllProductsQuery } from "@/store/api/productsApi";
+import { useGetAllProductsQuery } from "@/store/api/apiSlice";
 
 const useProductComparison = (product) => {
   const { t } = useTranslation();

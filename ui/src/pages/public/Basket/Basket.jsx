@@ -15,7 +15,7 @@ import {
   useGetCartQuery,
   useUpdateCartItemMutation,
   useRemoveFromCartMutation,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 import { useAuth } from "@/context/AuthContext";
 
 const Basket = () => {

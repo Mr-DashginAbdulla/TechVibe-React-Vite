@@ -143,6 +143,28 @@
     "dataLoadError": "Error loading data",
     "logoutSuccess": "Successfully logged out"
   },
+  "serviceErrors": {
+    "EMAIL_EXISTS": "This email is already registered",
+    "REGISTER_FAILED": "Registration failed",
+    "USER_NOT_FOUND": "User not found with this email",
+    "WRONG_PASSWORD": "Incorrect password",
+    "PASSWORD_UPDATE_FAILED": "Failed to update password",
+    "ORDERS_LOAD_FAILED": "Failed to load orders",
+    "ORDER_NOT_FOUND": "Order not found",
+    "ORDER_CREATE_FAILED": "Failed to create order",
+    "ORDER_STATUS_UPDATE_FAILED": "Failed to update order status",
+    "ORDER_CANCEL_NOT_ALLOWED": "This order can no longer be cancelled",
+    "ORDER_CANCEL_FAILED": "Failed to cancel order",
+    "ORDER_EDIT_NOT_ALLOWED": "This order can no longer be edited",
+    "ORDER_ITEMS_UPDATE_FAILED": "Failed to update order items",
+    "ADDRESSES_LOAD_FAILED": "Failed to load addresses",
+    "ADDRESS_NOT_FOUND": "Address not found",
+    "ADDRESS_CREATE_FAILED": "Failed to add address",
+    "ADDRESS_UPDATE_FAILED": "Failed to update address",
+    "ADDRESS_DELETE_FAILED": "Failed to delete address",
+    "PROFILE_UPDATE_FAILED": "Failed to update profile",
+    "WRONG_CURRENT_PASSWORD": "Current password is incorrect"
+  },
   "hero": {
     "title1": "Future.",
     "title2": "Crafted.",
@@ -903,5 +925,29 @@
     "coverageTitle": "Media Coverage",
     "contactTitle": "Press Inquiries",
     "contactDesc": "For interview requests, quotes, or media inquiries, reach out to our communications team."
+  },
+  "errors": {
+    "goBack": "Go Back",
+    "helpText": "If the problem persists, please contact our support team.",
+    "404": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved. Let's get you back on track."
+    },
+    "401": {
+      "title": "Authentication Required",
+      "description": "You need to sign in to access this page. Please log in and try again."
+    },
+    "403": {
+      "title": "Access Denied",
+      "description": "You don't have permission to view this page. Contact support if you believe this is an error."
+    },
+    "500": {
+      "title": "Server Error",
+      "description": "Something went wrong on our end. Our team has been notified and is working on a fix."
+    },
+    "503": {
+      "title": "Under Maintenance",
+      "description": "We're performing scheduled maintenance. We'll be back online shortly. Thank you for your patience."
+    }
   }
 }

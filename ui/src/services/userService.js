@@ -3,7 +3,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const userService = {
   async getById(id) {
     const response = await fetch(`${API_URL}/users/${id}`);
-    if (!response.ok) throw new Error("İstifadəçi tapılmadı");
+    if (!response.ok) throw new Error("USER_NOT_FOUND");
     const user = await response.json();
     const { password, ...userWithoutPassword } = user;
     return userWithoutPassword;
@@ -15,7 +15,7 @@ export const userService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error("Profil yenilənmədi");
+    if (!response.ok) throw new Error("PROFILE_UPDATE_FAILED");
     const user = await response.json();
     const { password, ...userWithoutPassword } = user;
     return userWithoutPassword;
@@ -27,7 +27,7 @@ export const userService = {
   async changePassword(id, currentPassword, newPassword) {
     const user = await fetch(`${API_URL}/users/${id}`).then((r) => r.json());
     if (user.password !== currentPassword) {
-      throw new Error("Cari şifrə yanlışdır");
+      throw new Error("WRONG_CURRENT_PASSWORD");
     }
     return this.updateProfile(id, { password: newPassword });
   },

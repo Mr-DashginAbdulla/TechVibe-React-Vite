@@ -3,13 +3,13 @@ const API_URL = import.meta.env.VITE_API_URL;
 export const addressService = {
   async getByUserId(userId) {
     const response = await fetch(`${API_URL}/addresses?userId=${userId}`);
-    if (!response.ok) throw new Error("Ünvanlar yüklənmədi");
+    if (!response.ok) throw new Error("ADDRESSES_LOAD_FAILED");
     return response.json();
   },
 
   async getById(id) {
     const response = await fetch(`${API_URL}/addresses/${id}`);
-    if (!response.ok) throw new Error("Ünvan tapılmadı");
+    if (!response.ok) throw new Error("ADDRESS_NOT_FOUND");
     return response.json();
   },
 
@@ -19,7 +19,7 @@ export const addressService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(addressData),
     });
-    if (!response.ok) throw new Error("Ünvan əlavə edilmədi");
+    if (!response.ok) throw new Error("ADDRESS_CREATE_FAILED");
     return response.json();
   },
 
@@ -29,7 +29,7 @@ export const addressService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (!response.ok) throw new Error("Ünvan yenilənmədi");
+    if (!response.ok) throw new Error("ADDRESS_UPDATE_FAILED");
     return response.json();
   },
 
@@ -37,7 +37,7 @@ export const addressService = {
     const response = await fetch(`${API_URL}/addresses/${id}`, {
       method: "DELETE",
     });
-    if (!response.ok) throw new Error("Ünvan silinmədi");
+    if (!response.ok) throw new Error("ADDRESS_DELETE_FAILED");
     return true;
   },
 

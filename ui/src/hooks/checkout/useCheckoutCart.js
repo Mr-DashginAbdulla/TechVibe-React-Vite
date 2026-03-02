@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { showToast as toast } from "@/components/shared/StyledToast";
-import {
-  useGetCartQuery,
-  useGetAllProductsQuery,
-} from "@/store/api/productsApi";
+import { useGetCartQuery, useGetAllProductsQuery } from "@/store/api/apiSlice";
 
 const SHIPPING_COST = 5.0;
 const FREE_SHIPPING_THRESHOLD = 50;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { showToast as toast } from "@/components/shared/StyledToast";
-import { useClearCartMutation } from "@/store/api/productsApi";
+import { useClearCartMutation } from "@/store/api/apiSlice";
 import { orderService } from "@/services/orderService";
 
 export const useCheckoutOrder = (

@@ -9,7 +9,7 @@ import {
   useUpdateCartItemMutation,
   useRemoveFromCartMutation,
   useGetAllProductsQuery,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 import { useAuth } from "@/context/AuthContext";
 import { useLenisContext } from "@/context/LenisProvider";
 import CartDrawerHeader from "./cart/CartDrawerHeader";

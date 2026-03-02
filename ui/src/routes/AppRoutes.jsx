@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "@/layouts/MainLayout";
 import ProtectedRoute from "@/routes/ProtectedRoute";
 import LoadingSpinner from "@/components/shared/LoadingSpinner";
-import { useTranslation } from "react-i18next";
 
 const Home = lazy(() => import("@/pages/public/Home/Home"));
 const Shop = lazy(() => import("@/pages/public/Shop/Shop"));
@@ -52,26 +51,7 @@ const Blog = lazy(() => import("@/pages/public/Blog/Blog"));
 const Privacy = lazy(() => import("@/pages/public/Privacy/Privacy"));
 const Terms = lazy(() => import("@/pages/public/Terms/Terms"));
 const Cookies = lazy(() => import("@/pages/public/Cookies/Cookies"));
-
-const NotFound = () => {
-  const { t } = useTranslation();
-  return (
-    <div className="min-h-[60vh] flex items-center justify-center px-[16px]">
-      <div className="max-w-[520px] text-center">
-        <p className="text-[40px] font-bold text-foreground mb-[8px]">404</p>
-        <p className="text-[16px] text-muted-foreground mb-[20px]">
-          {t("common.pageNotFound")}
-        </p>
-        <a
-          href="/"
-          className="inline-flex items-center justify-center px-[16px] py-[10px] rounded-[12px] bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
-        >
-          {t("common.goToHome")}
-        </a>
-      </div>
-    </div>
-  );
-};
+const NotFound = lazy(() => import("@/pages/public/NotFound/NotFound"));
 
 export default function AppRoutes() {
   return (

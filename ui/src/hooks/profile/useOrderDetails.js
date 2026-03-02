@@ -7,7 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import {
   useAddToCartMutation,
   useClearCartMutation,
-} from "@/store/api/productsApi";
+} from "@/store/api/apiSlice";
 import { Package, Truck, CheckCircle, Clock, XCircle } from "lucide-react";
 
 export const useOrderDetails = (id) => {
