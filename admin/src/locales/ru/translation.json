@@ -65,8 +65,9 @@
   },
   "dashboard": {
     "title": "Панель управления",
-    "subtitle": "Обзор магазина",
+    "subtitle": "Вот что происходит в вашем магазине сегодня",
     "totalRevenue": "Общий доход",
+    "revenue": "Доход",
     "orders": "Заказы",
     "users": "Пользователи",
     "products": "Товары",
@@ -74,7 +75,20 @@
     "topProducts": "Топ товары",
     "noOrdersFound": "Заказы не найдены",
     "thisMonth": "в этом месяце",
-    "lastMonth": "по сравнению с прошлым месяцем"
+    "lastMonth": "по сравнению с прошлым месяцем",
+    "revenueOverview": "Обзор доходов",
+    "last6Months": "Тренд за последние 6 месяцев",
+    "ordersByStatus": "Заказы по статусам",
+    "totalOrdersLabel": "всего заказов",
+    "categoryRevenue": "Доход по категориям",
+    "topCategories": "Самые эффективные категории",
+    "lowStockAlerts": "Уведомления о низком запасе",
+    "itemsLowStock": "товаров требуют пополнения",
+    "allStocked": "Все товары в наличии!",
+    "left": "осталось",
+    "goodMorning": "Доброе утро",
+    "goodAfternoon": "Добрый день",
+    "goodEvening": "Добрый вечер"
   },
   "products": {
     "title": "Товары",

@@ -65,8 +65,9 @@
   },
   "dashboard": {
     "title": "İdarə paneli",
-    "subtitle": "Mağazanızın ümumi görünüşü",
+    "subtitle": "Bugün mağazanızda baş verənlər",
     "totalRevenue": "Ümumi Gəlir",
+    "revenue": "Gəlir",
     "orders": "Sifarişlər",
     "users": "İstifadəçilər",
     "products": "Məhsullar",
@@ -74,7 +75,20 @@
     "topProducts": "Top Məhsullar",
     "noOrdersFound": "Sifariş tapılmadı",
     "thisMonth": "bu ay",
-    "lastMonth": "keçən aya nisbətən"
+    "lastMonth": "keçən aya nisbətən",
+    "revenueOverview": "Gəlir İcmalı",
+    "last6Months": "Son 6 ayın trendi",
+    "ordersByStatus": "Statusa Görə Sifarişlər",
+    "totalOrdersLabel": "ümumi sifariş",
+    "categoryRevenue": "Kateqoriyaya Görə Gəlir",
+    "topCategories": "Ən yaxşı performans göstərən kateqoriyalar",
+    "lowStockAlerts": "Aşağı Stok Xəbərdarlıqları",
+    "itemsLowStock": "məhsulun yenilənməsinə ehtiyac var",
+    "allStocked": "Bütün məhsullar stokdadır!",
+    "left": "qalıb",
+    "goodMorning": "Sabahınız xeyir",
+    "goodAfternoon": "Günortanız xeyir",
+    "goodEvening": "Axşamınız xeyir"
   },
   "products": {
     "title": "Məhsullar",

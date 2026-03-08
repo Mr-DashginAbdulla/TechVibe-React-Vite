@@ -65,8 +65,9 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "subtitle": "Store overview",
+    "subtitle": "Here's what's happening with your store today",
     "totalRevenue": "Total Revenue",
+    "revenue": "Revenue",
     "orders": "Orders",
     "users": "Users",
     "products": "Products",
@@ -74,7 +75,20 @@
     "topProducts": "Top Products",
     "noOrdersFound": "No orders found",
     "thisMonth": "this month",
-    "lastMonth": "vs last month"
+    "lastMonth": "vs last month",
+    "revenueOverview": "Revenue Overview",
+    "last6Months": "Last 6 months trend",
+    "ordersByStatus": "Orders by Status",
+    "totalOrdersLabel": "total orders",
+    "categoryRevenue": "Revenue by Category",
+    "topCategories": "Top performing categories",
+    "lowStockAlerts": "Low Stock Alerts",
+    "itemsLowStock": "items need restocking",
+    "allStocked": "All products are well stocked!",
+    "left": "left",
+    "goodMorning": "Good Morning",
+    "goodAfternoon": "Good Afternoon",
+    "goodEvening": "Good Evening"
   },
   "products": {
     "title": "Products",
