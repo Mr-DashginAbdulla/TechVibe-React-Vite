@@ -88,7 +88,14 @@
     "left": "qalıb",
     "goodMorning": "Sabahınız xeyir",
     "goodAfternoon": "Günortanız xeyir",
-    "goodEvening": "Axşamınız xeyir"
+    "goodEvening": "Axşamınız xeyir",
+    "revenueByBrand": "Brendə Görə Gəlir",
+    "topBrands": "Ən yaxşı performans göstərən brendlər",
+    "dailyOrders": "Gündəlik Sifarişlər",
+    "last30Days": "Son 30 gün",
+    "avgPerDay": "Gündəlik orta",
+    "avgOrderValue": "Orta Sifariş Dəyəri",
+    "overall": "Ümumi"
   },
   "products": {
     "title": "Məhsullar",

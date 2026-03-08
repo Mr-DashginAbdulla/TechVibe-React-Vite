@@ -88,7 +88,14 @@
     "left": "осталось",
     "goodMorning": "Доброе утро",
     "goodAfternoon": "Добрый день",
-    "goodEvening": "Добрый вечер"
+    "goodEvening": "Добрый вечер",
+    "revenueByBrand": "Доход по Брендам",
+    "topBrands": "Самые эффективные бренды",
+    "dailyOrders": "Ежедневные Заказы",
+    "last30Days": "Последние 30 дней",
+    "avgPerDay": "В среднем за день",
+    "avgOrderValue": "Средняя Стоимость Заказа",
+    "overall": "В целом"
   },
   "products": {
     "title": "Товары",

@@ -22,6 +22,9 @@ import RevenueChart from "@/components/dashboard/RevenueChart";
 import OrderStatusChart from "@/components/dashboard/OrderStatusChart";
 import CategoryRevenueChart from "@/components/dashboard/CategoryRevenueChart";
 import LowStockAlert from "@/components/dashboard/LowStockAlert";
+import BrandRevenueChart from "@/components/dashboard/BrandRevenueChart";
+import DailyOrdersChart from "@/components/dashboard/DailyOrdersChart";
+import AOVChart from "@/components/dashboard/AOVChart";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -242,6 +245,17 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px]">
         <CategoryRevenueChart orders={data.orders} products={data.products} />
         <LowStockAlert products={data.products} />
+      </div>
+
+      {/* Daily Orders Timeline */}
+      <div>
+        <DailyOrdersChart orders={data.orders} />
+      </div>
+
+      {/* Brand Revenue + AOV */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px]">
+        <BrandRevenueChart orders={data.orders} products={data.products} />
+        <AOVChart orders={data.orders} />
       </div>
     </div>
   );
