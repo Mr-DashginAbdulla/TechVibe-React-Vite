@@ -427,7 +427,13 @@
     "signingIn": "Daxil olunur...",
     "invalidCredentials": "Email və ya şifrə yanlışdır",
     "loginSuccess": "Xoş gəldiniz!",
-    "accessDenied": "Giriş qadağandır. Admin icazəsi tələb olunur."
+    "accessDenied": "Giriş qadağandır. Admin icazəsi tələb olunur.",
+    "errors": {
+      "userNotFound": "İstifadəçi tapılmadı",
+      "wrongPassword": "Şifrə yanlışdır",
+      "unauthorizedRole": "Admin səlahiyyəti yoxdur",
+      "generic": "Xəta baş verdi. Yenidən cəhd edin."
+    }
   },
   "messages": {
     "success": "Əməliyyat uğurlu",

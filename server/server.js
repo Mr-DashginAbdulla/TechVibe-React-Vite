@@ -16,7 +16,7 @@ server.post("/login", (req, res) => {
     const { password, ...userWithoutPassword } = user;
     res.json(userWithoutPassword);
   } else {
-    res.status(401).json({ error: "Email və ya şifrə yanlışdır" });
+    res.status(401).json({ error: "INVALID_CREDENTIALS" });
   }
 });
 
@@ -81,6 +81,22 @@ server.post("/validate-promo", (req, res) => {
     discountAmount: parseFloat(discountAmount.toFixed(2)),
     description: promo.description,
   });
+});
+
+// Bulk clear cart for a user (P12: eliminates N+1 DELETE problem)
+server.delete("/cart/clear/:userId", (req, res) => {
+  const userId = req.params.userId;
+  const db = router.db;
+
+  const userCart = db.get("cart").filter({ userId }).value();
+
+  if (!userCart || userCart.length === 0) {
+    return res.json({ success: true, deletedCount: 0 });
+  }
+
+  db.get("cart").remove({ userId }).write();
+
+  res.json({ success: true, deletedCount: userCart.length });
 });
 
 server.use(router);

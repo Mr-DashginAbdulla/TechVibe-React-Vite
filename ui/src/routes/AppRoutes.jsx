@@ -51,6 +51,7 @@ const Blog = lazy(() => import("@/pages/public/Blog/Blog"));
 const Privacy = lazy(() => import("@/pages/public/Privacy/Privacy"));
 const Terms = lazy(() => import("@/pages/public/Terms/Terms"));
 const Cookies = lazy(() => import("@/pages/public/Cookies/Cookies"));
+const Categories = lazy(() => import("@/pages/public/Categories/Categories"));
 const NotFound = lazy(() => import("@/pages/public/NotFound/NotFound"));
 
 export default function AppRoutes() {
@@ -62,12 +63,11 @@ export default function AppRoutes() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/deals" element={<Deals />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/categories" element={<Categories />} />
           <Route
             path="/basket"
             element={<Navigate to="/profile/cart" replace />}
           />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-success/:orderId" element={<OrderSuccess />} />
 
           {/* Support pages */}
           <Route path="/contact" element={<Contact />} />
@@ -96,16 +96,22 @@ export default function AppRoutes() {
           <Route path="reset-success" element={<ResetSuccess />} />
         </Route>
 
-        <Route path="/profile" element={<ProtectedRoute />}>
-          <Route element={<ProfileLayout />}>
-            <Route index element={<ProfileOverview />} />
-            <Route path="overview" element={<ProfileOverview />} />
-            <Route path="settings" element={<AccountSettings />} />
-            <Route path="addresses" element={<MyAddresses />} />
-            <Route path="orders" element={<MyOrders />} />
-            <Route path="orders/:id" element={<OrderDetails />} />
-            <Route path="wishlist" element={<MyWishlist />} />
-            <Route path="cart" element={<ProfileCart />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<MainLayout />}>
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-success/:orderId" element={<OrderSuccess />} />
+          </Route>
+          <Route path="/profile">
+            <Route element={<ProfileLayout />}>
+              <Route index element={<ProfileOverview />} />
+              <Route path="overview" element={<ProfileOverview />} />
+              <Route path="settings" element={<AccountSettings />} />
+              <Route path="addresses" element={<MyAddresses />} />
+              <Route path="orders" element={<MyOrders />} />
+              <Route path="orders/:id" element={<OrderDetails />} />
+              <Route path="wishlist" element={<MyWishlist />} />
+              <Route path="cart" element={<ProfileCart />} />
+            </Route>
           </Route>
         </Route>
 

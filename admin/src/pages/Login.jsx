@@ -33,7 +33,12 @@ const Login = () => {
       await login(email, password);
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      const errorMessages = {
+        USER_NOT_FOUND: t("login.errors.userNotFound"),
+        WRONG_PASSWORD: t("login.errors.wrongPassword"),
+        UNAUTHORIZED_ROLE: t("login.errors.unauthorizedRole"),
+      };
+      setError(errorMessages[err.message] || t("login.errors.generic"));
     } finally {
       setLoading(false);
     }

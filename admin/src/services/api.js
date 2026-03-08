@@ -138,14 +138,14 @@ export const authService = {
   login: async (email, password) => {
     const users = await fetchApi(`/users?email=${email}`);
     if (users.length === 0) {
-      throw new Error("İstifadəçi tapılmadı");
+      throw new Error("USER_NOT_FOUND");
     }
     const user = users[0];
     if (user.password !== password) {
-      throw new Error("Şifrə yanlışdır");
+      throw new Error("WRONG_PASSWORD");
     }
     if (user.role !== "admin" && user.role !== "super-admin") {
-      throw new Error("Admin səlahiyyəti yoxdur");
+      throw new Error("UNAUTHORIZED_ROLE");
     }
     const { password: _, ...userWithoutPassword } = user;
     return userWithoutPassword;

@@ -15,8 +15,8 @@ function Categories() {
     const fetchData = async () => {
       try {
         const [categoriesRes, productsRes] = await Promise.all([
-          fetch("http://localhost:3000/categories"),
-          fetch("http://localhost:3000/products"),
+          fetch(`${import.meta.env.VITE_API_URL}/categories`),
+          fetch(`${import.meta.env.VITE_API_URL}/products`),
         ]);
 
         if (!categoriesRes.ok || !productsRes.ok)
@@ -80,6 +80,7 @@ function Categories() {
                   <img
                     src={category.image}
                     alt={category.name}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />

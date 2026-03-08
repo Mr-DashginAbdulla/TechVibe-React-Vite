@@ -427,7 +427,13 @@
     "signingIn": "Signing in...",
     "invalidCredentials": "Invalid email or password",
     "loginSuccess": "Welcome back!",
-    "accessDenied": "Access denied. Admin privileges required."
+    "accessDenied": "Access denied. Admin privileges required.",
+    "errors": {
+      "userNotFound": "User not found",
+      "wrongPassword": "Incorrect password",
+      "unauthorizedRole": "Admin privileges required",
+      "generic": "An error occurred. Please try again."
+    }
   },
   "messages": {
     "success": "Operation successful",

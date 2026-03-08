@@ -66,17 +66,10 @@ export const apiSlice = createApi({
     }),
 
     clearCart: builder.mutation({
-      async queryFn(userId, _queryApi, _extraOptions, fetchWithBQ) {
-        const cartResult = await fetchWithBQ(`/cart?userId=${userId}`);
-        if (cartResult.error) return { error: cartResult.error };
-
-        const deletePromises = cartResult.data.map((item) =>
-          fetchWithBQ({ url: `/cart/${item.id}`, method: "DELETE" }),
-        );
-        await Promise.all(deletePromises);
-
-        return { data: { success: true } };
-      },
+      query: (userId) => ({
+        url: `/cart/clear/${userId}`,
+        method: "DELETE",
+      }),
       invalidatesTags: ["Cart"],
     }),
 
