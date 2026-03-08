@@ -119,10 +119,10 @@ const Dashboard = () => {
   return (
     <div className="space-y-[24px]">
       <div>
-        <h1 className="text-[24px] font-bold text-[#111827]">
+        <h1 className="text-[24px] font-bold text-foreground">
           {t("dashboard.title")}
         </h1>
-        <p className="text-[14px] text-[#6B7280] mt-[4px]">
+        <p className="text-[14px] text-muted-foreground mt-[4px]">
           {t("dashboard.subtitle")}
         </p>
       </div>

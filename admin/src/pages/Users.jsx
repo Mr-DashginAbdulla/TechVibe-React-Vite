@@ -147,17 +147,17 @@ const Users = () => {
     <div className="space-y-[20px]">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[12px]">
         <div>
-          <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
+          <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground">
             {t("users.title")}
           </h1>
-          <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-[2px]">
+          <p className="text-[13px] sm:text-[14px] text-muted-foreground mt-[2px]">
             {filteredUsers.length} {t("users.totalUsers")}
           </p>
         </div>
         {isSuperAdmin && (
           <button
             onClick={() => setShowModal(true)}
-            className="inline-flex items-center justify-center gap-[8px] px-[16px] py-[10px] bg-[#3B82F6] hover:bg-[#2563EB] text-white text-[14px] font-semibold rounded-[12px]"
+            className="inline-flex items-center justify-center gap-[8px] px-[16px] py-[10px] bg-primary hover:bg-primary/90 text-primary-foreground text-[14px] font-semibold rounded-[12px]"
           >
             <Plus className="w-[18px] h-[18px]" />
             {t("users.addUser")}
@@ -167,19 +167,19 @@ const Users = () => {
 
       <div className="flex flex-col sm:flex-row gap-[10px]">
         <div className="relative flex-1">
-          <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
+          <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted-foreground" />
           <input
             type="text"
             placeholder={t("users.searchUsers")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-[40px] pr-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
+            className="w-full pl-[40px] pr-[14px] py-[10px] bg-card border border-border rounded-[10px] text-[14px] text-foreground"
           />
         </div>
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="px-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
+          className="px-[14px] py-[10px] bg-card border border-border rounded-[10px] text-[14px] text-foreground"
         >
           <option value="">{t("users.allRoles")}</option>
           <option value="admin">{t("users.admin")}</option>
@@ -187,7 +187,7 @@ const Users = () => {
         </select>
       </div>
 
-      <div className="bg-white rounded-[16px] border border-[#E5E7EB] overflow-hidden">
+      <div className="bg-card rounded-[16px] border border-border overflow-hidden">
         <UsersTable
           users={currentUsers}
           canEditUser={canEditUser}

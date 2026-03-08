@@ -5,13 +5,13 @@ const SecurityTab = ({ passwordData, setPasswordData, onSave, saving }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[24px]">
-      <h2 className="text-[18px] font-semibold text-[#111827] mb-[24px]">
+    <div className="bg-card rounded-[16px] border border-border p-[24px]">
+      <h2 className="text-[18px] font-semibold text-foreground mb-[24px]">
         {t("settings.changePassword")}
       </h2>
       <form onSubmit={onSave} className="space-y-[20px] max-w-[400px]">
         <div>
-          <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+          <label className="block text-[14px] font-medium text-foreground mb-[8px]">
             {t("settings.currentPassword")}
           </label>
           <input
@@ -24,11 +24,11 @@ const SecurityTab = ({ passwordData, setPasswordData, onSave, saving }) => {
               })
             }
             required
-            className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+            className="w-full px-[16px] py-[12px] bg-secondary border border-border rounded-[12px] text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
         <div>
-          <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+          <label className="block text-[14px] font-medium text-foreground mb-[8px]">
             {t("settings.newPassword")}
           </label>
           <input
@@ -38,11 +38,11 @@ const SecurityTab = ({ passwordData, setPasswordData, onSave, saving }) => {
               setPasswordData({ ...passwordData, newPassword: e.target.value })
             }
             required
-            className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+            className="w-full px-[16px] py-[12px] bg-secondary border border-border rounded-[12px] text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
         <div>
-          <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+          <label className="block text-[14px] font-medium text-foreground mb-[8px]">
             {t("settings.confirmPassword")}
           </label>
           <input
@@ -55,14 +55,14 @@ const SecurityTab = ({ passwordData, setPasswordData, onSave, saving }) => {
               })
             }
             required
-            className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+            className="w-full px-[16px] py-[12px] bg-secondary border border-border rounded-[12px] text-[14px] text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
         <div className="flex justify-end pt-[8px]">
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-[8px] px-[24px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-[12px] disabled:opacity-50"
+            className="inline-flex items-center gap-[8px] px-[24px] py-[12px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-[12px] disabled:opacity-50"
           >
             <Shield className="w-[18px] h-[18px]" />
             {saving ? t("common.saving") : t("settings.changePassword")}

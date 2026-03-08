@@ -77,29 +77,29 @@ const Reviews = () => {
   return (
     <div className="space-y-[20px]">
       <div>
-        <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
+        <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground">
           {t("reviews.title")}
         </h1>
-        <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-[2px]">
+        <p className="text-[13px] sm:text-[14px] text-muted-foreground mt-[2px]">
           {filteredReviews.length} {t("reviews.totalReviews")}
         </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-[10px]">
         <div className="relative flex-1">
-          <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
+          <Search className="absolute left-[12px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted-foreground" />
           <input
             type="text"
             placeholder={t("reviews.searchReviews")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-[40px] pr-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
+            className="w-full pl-[40px] pr-[14px] py-[10px] bg-card border border-border rounded-[10px] text-[14px] text-foreground"
           />
         </div>
         <select
           value={ratingFilter}
           onChange={(e) => setRatingFilter(e.target.value)}
-          className="px-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[10px] text-[14px]"
+          className="px-[14px] py-[10px] bg-card border border-border rounded-[10px] text-[14px] text-foreground"
         >
           <option value="">{t("reviews.allRatings")}</option>
           {[5, 4, 3, 2, 1].map((r) => (
@@ -122,16 +122,16 @@ const Reviews = () => {
             />
           ))
         ) : (
-          <div className="bg-white rounded-[14px] border border-[#E5E7EB] p-[50px] text-center">
-            <MessageSquare className="w-[40px] h-[40px] text-[#D1D5DB] mx-auto mb-[10px]" />
-            <p className="text-[14px] text-[#6B7280]">
+          <div className="bg-card rounded-[14px] border border-border p-[50px] text-center">
+            <MessageSquare className="w-[40px] h-[40px] text-muted-foreground mx-auto mb-[10px]" />
+            <p className="text-[14px] text-muted-foreground">
               {t("reviews.noReviews")}
             </p>
           </div>
         )}
       </div>
 
-      <div className="bg-white rounded-[14px] border border-[#E5E7EB] overflow-hidden">
+      <div className="bg-card rounded-[14px] border border-border overflow-hidden">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

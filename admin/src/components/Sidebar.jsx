@@ -49,29 +49,29 @@ const Sidebar = ({ isOpen, onClose }) => {
       )}
 
       <aside
-        className={`fixed top-0 left-0 h-full w-[260px] bg-white border-r border-[#E5E7EB] z-50 transform transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed top-0 left-0 h-full w-[260px] bg-sidebar border-r border-sidebar-border z-50 transform transition-transform duration-300 lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="h-[72px] flex items-center justify-between px-[24px] border-b border-[#E5E7EB]">
+        <div className="h-[72px] flex items-center justify-between px-[24px] border-b border-sidebar-border">
           <Link to="/" className="flex items-center gap-[10px]">
             <img src={Logo} alt="TechVibe" className="h-[40px] w-auto" />
             <div>
-              <p className="text-[11px] text-[#6B7280] font-medium ml-1">
+              <p className="text-[11px] text-muted-foreground font-medium ml-1">
                 Admin Panel
               </p>
             </div>
           </Link>
           <button
             onClick={onClose}
-            className="lg:hidden p-[8px] rounded-[8px] hover:bg-[#F3F4F6]"
+            className="lg:hidden p-[8px] rounded-[8px] hover:bg-accent"
           >
-            <X className="w-[20px] h-[20px] text-[#6B7280]" />
+            <X className="w-[20px] h-[20px] text-muted-foreground" />
           </button>
         </div>
 
-        <div className="p-[16px] border-b border-[#E5E7EB]">
-          <div className="flex items-center gap-[12px] p-[12px] bg-[#F9FAFB] rounded-[12px]">
+        <div className="p-[16px] border-b border-sidebar-border">
+          <div className="flex items-center gap-[12px] p-[12px] bg-secondary rounded-[12px]">
             {user?.avatar ? (
               <img
                 src={user.avatar}
@@ -79,20 +79,20 @@ const Sidebar = ({ isOpen, onClose }) => {
                 className="w-[40px] h-[40px] rounded-full object-cover"
               />
             ) : (
-              <div className="w-[40px] h-[40px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white font-semibold">
+              <div className="w-[40px] h-[40px] bg-linear-to-br from-primary to-ring rounded-full flex items-center justify-center text-primary-foreground font-semibold">
                 {user?.firstName?.charAt(0)}
                 {user?.lastName?.charAt(0)}
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <p className="text-[14px] font-semibold text-[#111827] truncate">
+              <p className="text-[14px] font-semibold text-foreground truncate">
                 {user?.firstName} {user?.lastName}
               </p>
               <div className="flex items-center gap-[4px]">
                 <Shield
-                  className={`w-[12px] h-[12px] ${isSuperAdmin ? "text-amber-500" : "text-[#3B82F6]"}`}
+                  className={`w-[12px] h-[12px] ${isSuperAdmin ? "text-amber-500" : "text-primary"}`}
                 />
-                <span className="text-[12px] text-[#6B7280]">
+                <span className="text-[12px] text-muted-foreground">
                   {isSuperAdmin ? t("users.superAdmin") : t("users.admin")}
                 </span>
               </div>
@@ -108,8 +108,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               onClick={onClose}
               className={`flex items-center gap-[12px] px-[16px] py-[12px] rounded-[10px] transition-all ${
                 isActive(item.path)
-                  ? "bg-[#3B82F6] text-white"
-                  : "text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#111827]"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >
               <item.icon className="w-[20px] h-[20px]" />
@@ -118,10 +118,10 @@ const Sidebar = ({ isOpen, onClose }) => {
           ))}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-[16px] border-t border-[#E5E7EB]">
+        <div className="absolute bottom-0 left-0 right-0 p-[16px] border-t border-sidebar-border">
           <button
             onClick={logout}
-            className="flex items-center gap-[12px] w-full px-[16px] py-[12px] text-[#EF4444] hover:bg-red-50 rounded-[10px] transition-colors"
+            className="flex items-center gap-[12px] w-full px-[16px] py-[12px] text-destructive hover:bg-destructive/10 rounded-[10px] transition-colors"
           >
             <LogOut className="w-[20px] h-[20px]" />
             <span className="text-[14px] font-medium">

@@ -94,23 +94,23 @@ const Categories = () => {
     <div className="space-y-[24px]">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[16px]">
         <div>
-          <h1 className="text-[24px] font-bold text-[#111827]">
+          <h1 className="text-[24px] font-bold text-foreground">
             {t("categories.title")}
           </h1>
-          <p className="text-[14px] text-[#6B7280] mt-[4px]">
+          <p className="text-[14px] text-muted-foreground mt-[4px]">
             {categories.length} {t("categories.totalCategories")}
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="inline-flex items-center gap-[8px] px-[20px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold rounded-[12px] transition-colors"
+          className="inline-flex items-center gap-[8px] px-[20px] py-[12px] bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-[12px] transition-colors"
         >
           <Plus className="w-[20px] h-[20px]" />
           {t("categories.addCategory")}
         </button>
       </div>
 
-      <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
+      <div className="bg-card rounded-[16px] border border-border">
         <CategoryList
           parentCategories={parentCategories}
           getChildren={getChildren}

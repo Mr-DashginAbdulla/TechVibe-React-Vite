@@ -32,25 +32,25 @@ const Pagination = ({
 
   return (
     <div
-      className={`flex flex-col sm:flex-row items-center justify-between gap-[12px] px-[14px] py-[12px] border-t border-[#E5E7EB] bg-[#FAFAFA] ${className}`}
+      className={`flex flex-col sm:flex-row items-center justify-between gap-[12px] px-[14px] py-[12px] border-t border-border bg-secondary ${className}`}
     >
-      <p className="text-[12px] text-[#6B7280]">
+      <p className="text-[12px] text-muted-foreground">
         {startIndex + 1}-{Math.min(endIndex, totalItems)} / {totalItems}
       </p>
       <div className="flex items-center gap-[3px]">
         <button
           onClick={() => goToPage(1)}
           disabled={currentPage === 1}
-          className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
+          className="p-[6px] rounded-[6px] hover:bg-accent disabled:opacity-40"
         >
-          <ChevronsLeft className="w-[16px] h-[16px] text-[#374151]" />
+          <ChevronsLeft className="w-[16px] h-[16px] text-foreground" />
         </button>
         <button
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
+          className="p-[6px] rounded-[6px] hover:bg-accent disabled:opacity-40"
         >
-          <ChevronLeft className="w-[16px] h-[16px] text-[#374151]" />
+          <ChevronLeft className="w-[16px] h-[16px] text-foreground" />
         </button>
         <div className="flex items-center gap-[3px] mx-[6px]">
           {getPageNumbers().map((p) => (
@@ -59,8 +59,8 @@ const Pagination = ({
               onClick={() => goToPage(p)}
               className={`w-[32px] h-[32px] rounded-[6px] text-[13px] font-medium ${
                 currentPage === p
-                  ? "bg-[#3B82F6] text-white"
-                  : "text-[#374151] hover:bg-[#E5E7EB]"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-accent"
               }`}
             >
               {p}
@@ -70,16 +70,16 @@ const Pagination = ({
         <button
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
+          className="p-[6px] rounded-[6px] hover:bg-accent disabled:opacity-40"
         >
-          <ChevronRight className="w-[16px] h-[16px] text-[#374151]" />
+          <ChevronRight className="w-[16px] h-[16px] text-foreground" />
         </button>
         <button
           onClick={() => goToPage(totalPages)}
           disabled={currentPage === totalPages}
-          className="p-[6px] rounded-[6px] hover:bg-[#E5E7EB] disabled:opacity-40"
+          className="p-[6px] rounded-[6px] hover:bg-accent disabled:opacity-40"
         >
-          <ChevronsRight className="w-[16px] h-[16px] text-[#374151]" />
+          <ChevronsRight className="w-[16px] h-[16px] text-foreground" />
         </button>
       </div>
     </div>

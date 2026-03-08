@@ -7,8 +7,8 @@ const CategoryList = ({ parentCategories, getChildren, onEdit, onDelete }) => {
   if (parentCategories.length === 0) {
     return (
       <div className="p-[60px] text-center">
-        <FolderTree className="w-[48px] h-[48px] text-[#D1D5DB] mx-auto mb-[12px]" />
-        <p className="text-[16px] font-medium text-[#6B7280]">
+        <FolderTree className="w-[48px] h-[48px] text-muted-foreground mx-auto mb-[12px]" />
+        <p className="text-[16px] font-medium text-muted-foreground">
           {t("categories.noCategories")}
         </p>
       </div>
@@ -16,21 +16,21 @@ const CategoryList = ({ parentCategories, getChildren, onEdit, onDelete }) => {
   }
 
   return (
-    <div className="divide-y divide-[#E5E7EB]">
+    <div className="divide-y divide-border">
       {parentCategories.map((parent) => {
         const children = getChildren(parent.id);
         return (
           <div key={parent.id}>
-            <div className="flex items-center justify-between p-[20px] hover:bg-[#F9FAFB]">
+            <div className="flex items-center justify-between p-[20px] hover:bg-secondary">
               <div className="flex items-center gap-[16px]">
-                <div className="w-[48px] h-[48px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-[12px] flex items-center justify-center">
+                <div className="w-[48px] h-[48px] bg-linear-to-br from-primary to-ring rounded-[12px] flex items-center justify-center">
                   <FolderTree className="w-[24px] h-[24px] text-white" />
                 </div>
                 <div>
-                  <p className="text-[16px] font-semibold text-[#111827]">
+                  <p className="text-[16px] font-semibold text-foreground">
                     {parent.name}
                   </p>
-                  <p className="text-[13px] text-[#6B7280]">
+                  <p className="text-[13px] text-muted-foreground">
                     {children.length} {t("categories.subcategories")}
                   </p>
                 </div>
@@ -38,28 +38,28 @@ const CategoryList = ({ parentCategories, getChildren, onEdit, onDelete }) => {
               <div className="flex items-center gap-[8px]">
                 <button
                   onClick={() => onEdit(parent)}
-                  className="p-[10px] hover:bg-[#F3F4F6] rounded-[10px]"
+                  className="p-[10px] hover:bg-accent rounded-[10px]"
                 >
-                  <Edit className="w-[18px] h-[18px] text-[#6B7280]" />
+                  <Edit className="w-[18px] h-[18px] text-muted-foreground" />
                 </button>
                 <button
                   onClick={() => onDelete(parent)}
                   className="p-[10px] hover:bg-red-50 rounded-[10px]"
                 >
-                  <Trash2 className="w-[18px] h-[18px] text-[#EF4444]" />
+                  <Trash2 className="w-[18px] h-[18px] text-destructive" />
                 </button>
               </div>
             </div>
 
             {children.length > 0 && (
-              <div className="bg-[#F9FAFB] border-t border-[#E5E7EB]">
+              <div className="bg-secondary border-t border-border">
                 {children.map((child) => (
                   <div
                     key={child.id}
-                    className="flex items-center justify-between px-[14px] py-[14px] pl-[36px] sm:px-[20px] sm:py-[16px] sm:pl-[64px] hover:bg-[#F3F4F6]"
+                    className="flex items-center justify-between px-[14px] py-[14px] pl-[36px] sm:px-[20px] sm:py-[16px] sm:pl-[64px] hover:bg-accent"
                   >
                     <div className="flex items-center gap-[12px]">
-                      <ChevronRight className="w-[16px] h-[16px] text-[#9CA3AF]" />
+                      <ChevronRight className="w-[16px] h-[16px] text-muted-foreground" />
                       {child.image && (
                         <img
                           src={child.image}
@@ -67,22 +67,22 @@ const CategoryList = ({ parentCategories, getChildren, onEdit, onDelete }) => {
                           className="w-[36px] h-[36px] rounded-[8px] object-cover"
                         />
                       )}
-                      <span className="text-[14px] font-medium text-[#374151]">
+                      <span className="text-[14px] font-medium text-foreground">
                         {child.name}
                       </span>
                     </div>
                     <div className="flex items-center gap-[8px]">
                       <button
                         onClick={() => onEdit(child)}
-                        className="p-[8px] hover:bg-white rounded-[8px]"
+                        className="p-[8px] hover:bg-card rounded-[8px]"
                       >
-                        <Edit className="w-[16px] h-[16px] text-[#6B7280]" />
+                        <Edit className="w-[16px] h-[16px] text-muted-foreground" />
                       </button>
                       <button
                         onClick={() => onDelete(child)}
                         className="p-[8px] hover:bg-red-50 rounded-[8px]"
                       >
-                        <Trash2 className="w-[16px] h-[16px] text-[#EF4444]" />
+                        <Trash2 className="w-[16px] h-[16px] text-destructive" />
                       </button>
                     </div>
                   </div>

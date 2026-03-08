@@ -82,10 +82,10 @@ const Orders = () => {
   return (
     <div className="space-y-[20px]">
       <div>
-        <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
+        <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground">
           {t("orders.title")}
         </h1>
-        <p className="text-[13px] sm:text-[14px] text-[#6B7280] mt-[2px]">
+        <p className="text-[13px] sm:text-[14px] text-muted-foreground mt-[2px]">
           {filteredOrders.length} {t("orders.totalOrders")}
         </p>
       </div>
@@ -97,7 +97,7 @@ const Orders = () => {
         setStatusFilter={setStatusFilter}
       />
 
-      <div className="bg-white rounded-[16px] border border-[#E5E7EB] overflow-hidden">
+      <div className="bg-card rounded-[16px] border border-border overflow-hidden">
         <OrdersTable orders={currentOrders} getStatusBadge={getStatusBadge} />
         <OrdersMobileList
           orders={currentOrders}

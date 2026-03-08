@@ -7,7 +7,7 @@ const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB] relative selection:bg-blue-500/30">
+    <div className="min-h-screen bg-background relative selection:bg-primary/30">
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="lg:ml-[260px]">
         <Header onMenuClick={() => setSidebarOpen(true)} />

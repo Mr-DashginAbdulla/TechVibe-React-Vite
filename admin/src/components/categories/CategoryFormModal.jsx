@@ -12,15 +12,15 @@ const CategoryFormModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
-      <div className="bg-white rounded-[20px] p-[24px] w-full max-w-[450px]">
-        <h3 className="text-[18px] font-bold text-[#111827] mb-[20px]">
+      <div className="bg-card rounded-[20px] p-[24px] w-full max-w-[450px]">
+        <h3 className="text-[18px] font-bold text-foreground mb-[20px]">
           {isEditing
             ? t("categories.editCategory")
             : t("categories.addCategory")}
         </h3>
         <form onSubmit={onSubmit} className="space-y-[16px]">
           <div>
-            <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+            <label className="block text-[14px] font-medium text-foreground mb-[8px]">
               {t("categories.categoryId")} *
             </label>
             <input
@@ -34,11 +34,11 @@ const CategoryFormModal = ({
               }
               required
               disabled={isEditing}
-              className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px] disabled:opacity-50"
+              className="w-full px-[16px] py-[12px] bg-secondary border border-border rounded-[12px] text-[14px] text-foreground disabled:opacity-50"
             />
           </div>
           <div>
-            <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+            <label className="block text-[14px] font-medium text-foreground mb-[8px]">
               {t("categories.categoryName")} *
             </label>
             <input
@@ -48,11 +48,11 @@ const CategoryFormModal = ({
                 setFormData({ ...formData, name: e.target.value })
               }
               required
-              className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px]"
+              className="w-full px-[16px] py-[12px] bg-secondary border border-border rounded-[12px] text-[14px] text-foreground"
             />
           </div>
           <div>
-            <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+            <label className="block text-[14px] font-medium text-foreground mb-[8px]">
               {t("categories.imageUrl")}
             </label>
             <input
@@ -61,11 +61,11 @@ const CategoryFormModal = ({
               onChange={(e) =>
                 setFormData({ ...formData, image: e.target.value })
               }
-              className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px]"
+              className="w-full px-[16px] py-[12px] bg-secondary border border-border rounded-[12px] text-[14px] text-foreground"
             />
           </div>
           <div>
-            <label className="block text-[14px] font-medium text-[#374151] mb-[8px]">
+            <label className="block text-[14px] font-medium text-foreground mb-[8px]">
               {t("categories.parentCategory")}
             </label>
             <select
@@ -76,7 +76,7 @@ const CategoryFormModal = ({
                   parentId: e.target.value || null,
                 })
               }
-              className="w-full px-[16px] py-[12px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[12px] text-[14px]"
+              className="w-full px-[16px] py-[12px] bg-secondary border border-border rounded-[12px] text-[14px] text-foreground"
             >
               <option value="">{t("categories.noParent")}</option>
               {parentCategories.map((cat) => (
@@ -90,13 +90,13 @@ const CategoryFormModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-[20px] py-[12px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[12px] hover:bg-[#F3F4F6]"
+              className="flex-1 px-[20px] py-[12px] border border-border text-foreground font-medium rounded-[12px] hover:bg-accent"
             >
               {t("common.cancel")}
             </button>
             <button
               type="submit"
-              className="flex-1 px-[20px] py-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium rounded-[12px]"
+              className="flex-1 px-[20px] py-[12px] bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-[12px]"
             >
               {t("common.save")}
             </button>

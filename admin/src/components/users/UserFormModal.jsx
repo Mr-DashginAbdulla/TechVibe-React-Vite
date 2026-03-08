@@ -50,10 +50,10 @@ const UserFormModal = ({
   };
 
   const inputClass = (field) =>
-    `w-full px-[12px] py-[10px] bg-[#F9FAFB] border rounded-[10px] text-[14px] transition-colors ${
+    `w-full px-[12px] py-[10px] bg-secondary border rounded-[10px] text-[14px] text-foreground transition-colors ${
       fieldErrors[field]
         ? "border-red-500 bg-red-50 focus:ring-red-400"
-        : "border-[#E5E7EB]"
+        : "border-border"
     }`;
 
   const renderErrors = (field) => {
@@ -73,14 +73,14 @@ const UserFormModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-[16px]">
-      <div className="bg-white rounded-[16px] p-[20px] w-full max-w-[400px] max-h-[90vh] overflow-y-auto">
-        <h3 className="text-[17px] font-bold text-[#111827] mb-[16px]">
+      <div className="bg-card rounded-[16px] p-[20px] w-full max-w-[400px] max-h-[90vh] overflow-y-auto">
+        <h3 className="text-[17px] font-bold text-foreground mb-[16px]">
           {isEditing ? t("users.editUser") : t("users.addUser")}
         </h3>
         <form onSubmit={handleFormSubmit} className="space-y-[12px]">
           <div className="grid grid-cols-2 gap-[10px]">
             <div>
-              <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+              <label className="block text-[13px] font-medium text-foreground mb-[6px]">
                 {t("users.firstName")} *
               </label>
               <input
@@ -92,7 +92,7 @@ const UserFormModal = ({
               />
             </div>
             <div>
-              <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+              <label className="block text-[13px] font-medium text-foreground mb-[6px]">
                 {t("users.lastName")} *
               </label>
               <input
@@ -143,13 +143,13 @@ const UserFormModal = ({
           </div>
           {isSuperAdmin && (
             <div>
-              <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+              <label className="block text-[13px] font-medium text-foreground mb-[6px]">
                 {t("users.role")}
               </label>
               <select
                 value={formData.role}
                 onChange={(e) => handleChange("role", e.target.value)}
-                className="w-full px-[12px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+                className="w-full px-[12px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
               >
                 <option value="user">{t("users.customer")}</option>
                 <option value="admin">{t("users.admin")}</option>
@@ -160,13 +160,13 @@ const UserFormModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-[14px] py-[10px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[10px]"
+              className="flex-1 px-[14px] py-[10px] border border-border text-foreground font-medium rounded-[10px]"
             >
               {t("common.cancel")}
             </button>
             <button
               type="submit"
-              className="flex-1 px-[14px] py-[10px] bg-[#3B82F6] text-white font-medium rounded-[10px]"
+              className="flex-1 px-[14px] py-[10px] bg-primary text-primary-foreground font-medium rounded-[10px]"
             >
               {t("common.save")}
             </button>

@@ -22,15 +22,15 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] p-[24px]">
+        <div className="min-h-screen flex items-center justify-center bg-background p-[24px]">
           <div className="text-center max-w-[480px]">
             <div className="inline-flex items-center justify-center w-[72px] h-[72px] bg-red-100 rounded-full mb-[24px]">
               <AlertTriangle className="w-[36px] h-[36px] text-red-500" />
             </div>
-            <h1 className="text-[28px] font-bold text-[#0F172A] mb-[12px]">
+            <h1 className="text-[28px] font-bold text-foreground mb-[12px]">
               Something went wrong
             </h1>
-            <p className="text-[15px] text-[#64748B] mb-[32px]">
+            <p className="text-[15px] text-muted-foreground mb-[32px]">
               An unexpected error occurred. Please reload the page or contact
               support if the problem persists.
             </p>
@@ -43,7 +43,7 @@ class ErrorBoundary extends Component {
             </button>
             {this.state.error && (
               <details className="mt-[24px] text-left">
-                <summary className="text-[13px] text-[#94A3B8] cursor-pointer hover:text-[#64748B] transition-colors">
+                <summary className="text-[13px] text-muted-foreground cursor-pointer hover:text-foreground transition-colors">
                   Error Details
                 </summary>
                 <pre className="mt-[8px] p-[16px] bg-[#1E293B] text-[#F8D7DA] text-[12px] rounded-[8px] overflow-auto max-h-[200px]">

@@ -37,8 +37,8 @@ const ImagesSection = ({ images, setImages }) => {
   };
 
   return (
-    <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
-      <h2 className="text-[16px] font-semibold text-[#111827] mb-[16px]">
+    <div className="bg-card rounded-[16px] border border-border p-[20px]">
+      <h2 className="text-[16px] font-semibold text-foreground mb-[16px]">
         {t("products.productImages")}
       </h2>
       <div className="space-y-[14px]">
@@ -48,34 +48,34 @@ const ImagesSection = ({ images, setImages }) => {
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
             placeholder={t("productForm.enterImageUrl")}
-            className="flex-1 px-[14px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+            className="flex-1 px-[14px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
           />
           <button
             type="button"
             onClick={addImageUrl}
-            className="px-[14px] py-[10px] bg-[#3B82F6] text-white rounded-[10px] text-[14px] font-medium hover:bg-[#2563EB]"
+            className="px-[14px] py-[10px] bg-primary text-primary-foreground rounded-[10px] text-[14px] font-medium hover:bg-primary/90"
           >
             <Plus className="w-[18px] h-[18px]" />
           </button>
         </div>
 
         <div className="flex items-center gap-[8px]">
-          <div className="h-px flex-1 bg-[#E5E7EB]" />
-          <span className="text-[12px] text-[#6B7280]">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-[12px] text-muted-foreground">
             {t("products.upload")}
           </span>
-          <div className="h-px flex-1 bg-[#E5E7EB]" />
+          <div className="h-px flex-1 bg-border" />
         </div>
 
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="w-full py-[20px] border-2 border-dashed border-[#E5E7EB] rounded-[10px] text-center hover:border-[#3B82F6] hover:bg-[#EFF6FF] transition-colors"
+          className="w-full py-[20px] border-2 border-dashed border-border rounded-[10px] text-center hover:border-primary hover:bg-primary/5 transition-colors"
         >
-          <Upload className="w-[24px] h-[24px] text-[#9CA3AF] mx-auto mb-[4px]" />
-          <p className="text-[13px] text-[#6B7280]">
+          <Upload className="w-[24px] h-[24px] text-muted-foreground mx-auto mb-[4px]" />
+          <p className="text-[13px] text-muted-foreground">
             {t("products.clickToUpload")}{" "}
-            <span className="text-[#3B82F6] font-medium">
+            <span className="text-primary font-medium">
               {t("products.click")}
             </span>
           </p>
@@ -97,12 +97,12 @@ const ImagesSection = ({ images, setImages }) => {
                   src={img}
                   alt=""
                   className={`w-full aspect-square object-cover rounded-[10px] border-2 ${
-                    index === 0 ? "border-[#3B82F6]" : "border-transparent"
+                    index === 0 ? "border-primary" : "border-transparent"
                   }`}
                 />
                 {index === 0 && (
                   <div className="absolute top-[4px] left-[4px]">
-                    <Star className="w-[16px] h-[16px] text-[#3B82F6] fill-[#3B82F6]" />
+                    <Star className="w-[16px] h-[16px] text-primary fill-primary" />
                   </div>
                 )}
                 <div className="absolute top-[4px] right-[4px] opacity-0 group-hover:opacity-100 flex gap-[4px]">
@@ -110,25 +110,25 @@ const ImagesSection = ({ images, setImages }) => {
                     <button
                       type="button"
                       onClick={() => setMainImage(index)}
-                      className="p-[4px] bg-white rounded-full shadow-sm"
+                      className="p-[4px] bg-card rounded-full shadow-sm"
                       title={t("products.setMainImage")}
                     >
-                      <Star className="w-[12px] h-[12px] text-[#6B7280]" />
+                      <Star className="w-[12px] h-[12px] text-muted-foreground" />
                     </button>
                   )}
                   <button
                     type="button"
                     onClick={() => removeImage(index)}
-                    className="p-[4px] bg-white rounded-full shadow-sm"
+                    className="p-[4px] bg-card rounded-full shadow-sm"
                   >
-                    <X className="w-[12px] h-[12px] text-[#EF4444]" />
+                    <X className="w-[12px] h-[12px] text-destructive" />
                   </button>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-[13px] text-[#9CA3AF] text-center py-[10px]">
+          <p className="text-[13px] text-muted-foreground text-center py-[10px]">
             {t("products.noImages")}
           </p>
         )}

@@ -14,14 +14,16 @@ const UsersMobileList = ({
   if (users.length === 0) {
     return (
       <div className="p-[40px] text-center">
-        <UsersIcon className="w-[40px] h-[40px] text-[#D1D5DB] mx-auto mb-[10px]" />
-        <p className="text-[14px] text-[#6B7280]">{t("users.noUsers")}</p>
+        <UsersIcon className="w-[40px] h-[40px] text-muted-foreground mx-auto mb-[10px]" />
+        <p className="text-[14px] text-muted-foreground">
+          {t("users.noUsers")}
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="md:hidden divide-y divide-[#E5E7EB]">
+    <div className="md:hidden divide-y divide-border">
       {users.map((u) => (
         <div key={u.id} className="p-[14px]">
           <div className="flex items-start gap-[12px]">
@@ -32,20 +34,22 @@ const UsersMobileList = ({
                 className="w-[44px] h-[44px] rounded-full object-cover"
               />
             ) : (
-              <div className="w-[44px] h-[44px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white font-semibold">
+              <div className="w-[44px] h-[44px] bg-linear-to-br from-primary to-ring rounded-full flex items-center justify-center text-white font-semibold">
                 {u.firstName?.charAt(0)}
                 {u.lastName?.charAt(0)}
               </div>
             )}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-[8px]">
-                <p className="text-[14px] font-semibold text-[#111827]">
+                <p className="text-[14px] font-semibold text-foreground">
                   {u.firstName} {u.lastName}
                 </p>
                 {getRoleBadge(u.role)}
               </div>
-              <p className="text-[13px] text-[#6B7280] truncate">{u.email}</p>
-              <p className="text-[12px] text-[#9CA3AF] mt-[2px]">
+              <p className="text-[13px] text-muted-foreground truncate">
+                {u.email}
+              </p>
+              <p className="text-[12px] text-muted-foreground mt-[2px]">
                 {new Date(u.createdAt).toLocaleDateString()}
               </p>
             </div>
@@ -53,9 +57,9 @@ const UsersMobileList = ({
               {canEditUser(u) && (
                 <button
                   onClick={() => onEdit(u)}
-                  className="p-[8px] bg-[#F3F4F6] rounded-[8px]"
+                  className="p-[8px] bg-accent rounded-[8px]"
                 >
-                  <Edit className="w-[16px] h-[16px] text-[#6B7280]" />
+                  <Edit className="w-[16px] h-[16px] text-muted-foreground" />
                 </button>
               )}
               {canDeleteUser(u) && (
@@ -63,7 +67,7 @@ const UsersMobileList = ({
                   onClick={() => onDelete(u)}
                   className="p-[8px] bg-red-50 rounded-[8px]"
                 >
-                  <Trash2 className="w-[16px] h-[16px] text-[#EF4444]" />
+                  <Trash2 className="w-[16px] h-[16px] text-destructive" />
                 </button>
               )}
             </div>

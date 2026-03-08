@@ -5,35 +5,35 @@ const RecentOrdersList = ({ orders, getStatusBadge }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
-      <div className="flex items-center justify-between p-[20px] border-b border-[#E5E7EB]">
-        <h2 className="text-[16px] font-semibold text-[#111827]">
+    <div className="bg-card rounded-[16px] border border-border">
+      <div className="flex items-center justify-between p-[20px] border-b border-border">
+        <h2 className="text-[16px] font-semibold text-foreground">
           {t("dashboard.recentOrders")}
         </h2>
         <Link
           to="/orders"
-          className="text-[14px] font-medium text-[#3B82F6] hover:text-[#2563EB]"
+          className="text-[14px] font-medium text-primary hover:text-primary/80"
         >
           {t("common.viewAll")}
         </Link>
       </div>
-      <div className="divide-y divide-[#E5E7EB]">
+      <div className="divide-y divide-border">
         {orders.length > 0 ? (
           orders.map((order) => (
             <div
               key={order.id}
-              className="flex items-center justify-between p-[16px] hover:bg-[#F9FAFB]"
+              className="flex items-center justify-between p-[16px] hover:bg-secondary"
             >
               <div>
-                <p className="text-[14px] font-medium text-[#111827]">
+                <p className="text-[14px] font-medium text-foreground">
                   #{order.orderNumber || order.id}
                 </p>
-                <p className="text-[13px] text-[#6B7280]">
+                <p className="text-[13px] text-muted-foreground">
                   {new Date(order.createdAt).toLocaleDateString()}
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-[14px] font-semibold text-[#111827]">
+                <p className="text-[14px] font-semibold text-foreground">
                   ${order.total?.toFixed(2)}
                 </p>
                 {getStatusBadge(order.status)}
@@ -41,7 +41,7 @@ const RecentOrdersList = ({ orders, getStatusBadge }) => {
             </div>
           ))
         ) : (
-          <div className="p-[40px] text-center text-[#6B7280]">
+          <div className="p-[40px] text-center text-muted-foreground">
             {t("dashboard.noOrdersFound")}
           </div>
         )}

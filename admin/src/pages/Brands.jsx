@@ -113,16 +113,16 @@ function Brands() {
     <div className="space-y-[24px]">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-[16px]">
         <div>
-          <h1 className="text-[24px] font-bold text-[#111827]">
+          <h1 className="text-[24px] font-bold text-foreground">
             {t("brands.title")}
           </h1>
-          <p className="text-[14px] text-[#6B7280] mt-[4px]">
+          <p className="text-[14px] text-muted-foreground mt-[4px]">
             {t("brands.subtitle")}
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="inline-flex items-center gap-[8px] px-[20px] py-[10px] bg-[#3B82F6] text-white font-semibold rounded-[12px] hover:bg-[#2563EB] transition-colors"
+          className="inline-flex items-center gap-[8px] px-[20px] py-[10px] bg-primary text-primary-foreground font-semibold rounded-[12px] hover:bg-primary/90 transition-colors"
         >
           <Plus className="w-[18px] h-[18px]" />
           {t("brands.addBrand")}
@@ -130,35 +130,35 @@ function Brands() {
       </div>
 
       <div className="relative">
-        <Search className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
+        <Search className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted-foreground" />
         <input
           type="text"
           placeholder={t("categories.searchCategories")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-[42px] pr-[14px] py-[10px] bg-white border border-[#E5E7EB] rounded-[12px] text-[14px]"
+          className="w-full pl-[42px] pr-[14px] py-[10px] bg-card border border-border rounded-[12px] text-[14px] text-foreground"
         />
       </div>
 
       {filteredBrands.length > 0 ? (
-        <div className="bg-white rounded-[16px] border border-[#E5E7EB] overflow-hidden">
+        <div className="bg-card rounded-[16px] border border-border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-[#E5E7EB] bg-[#F9FAFB]">
-                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-[#6B7280] uppercase">
+                <tr className="border-b border-border bg-secondary">
+                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-muted-foreground uppercase">
                     {t("brands.brandName")}
                   </th>
-                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-[#6B7280] uppercase">
+                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-muted-foreground uppercase">
                     {t("brands.logo")}
                   </th>
-                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-[#6B7280] uppercase">
+                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-muted-foreground uppercase">
                     {t("brands.website")}
                   </th>
-                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-[#6B7280] uppercase">
+                  <th className="text-left px-[24px] py-[14px] text-[12px] font-semibold text-muted-foreground uppercase">
                     {t("common.status")}
                   </th>
-                  <th className="text-right px-[24px] py-[14px] text-[12px] font-semibold text-[#6B7280] uppercase">
+                  <th className="text-right px-[24px] py-[14px] text-[12px] font-semibold text-muted-foreground uppercase">
                     {t("common.actions")}
                   </th>
                 </tr>
@@ -178,9 +178,11 @@ function Brands() {
           </div>
         </div>
       ) : (
-        <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[60px] text-center">
-          <Award className="w-[48px] h-[48px] text-[#D1D5DB] mx-auto mb-[12px]" />
-          <p className="text-[15px] text-[#6B7280]">{t("brands.noBrands")}</p>
+        <div className="bg-card rounded-[16px] border border-border p-[60px] text-center">
+          <Award className="w-[48px] h-[48px] text-muted-foreground mx-auto mb-[12px]" />
+          <p className="text-[15px] text-muted-foreground">
+            {t("brands.noBrands")}
+          </p>
         </div>
       )}
 

@@ -9,13 +9,27 @@ import {
   LogOut,
   Settings,
   Globe,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 
 const Header = ({ onMenuClick }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { user, logout, isSuperAdmin } = useAuth();
+  const { theme, setTheme } = useTheme();
+
+  const resolvedTheme =
+    theme === "system"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
+
+  const toggleTheme = () =>
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,25 +75,25 @@ const Header = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="sticky top-0 z-30 h-[72px] bg-white border-b border-[#E5E7EB] px-[24px]">
+    <header className="sticky top-0 z-30 h-[72px] bg-card border-b border-border px-[24px]">
       <div className="flex items-center justify-between h-full">
         <div className="flex items-center gap-[16px]">
           <button
             onClick={onMenuClick}
-            className="lg:hidden p-[10px] rounded-[10px] hover:bg-[#F3F4F6] transition-colors"
+            className="lg:hidden p-[10px] rounded-[10px] hover:bg-accent transition-colors"
           >
-            <Menu className="w-[22px] h-[22px] text-[#374151]" />
+            <Menu className="w-[22px] h-[22px] text-foreground" />
           </button>
 
           <div className="hidden md:block relative">
-            <Search className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-[#9CA3AF]" />
+            <Search className="absolute left-[14px] top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-muted-foreground" />
             <input
               type="text"
               placeholder={t("header.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearch}
-              className="w-[300px] pl-[42px] pr-[16px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-all"
+              className="w-[300px] pl-[42px] pr-[16px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             />
           </div>
         </div>
@@ -88,7 +102,7 @@ const Header = ({ onMenuClick }) => {
           <div className="relative" ref={langDropdownRef}>
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="flex items-center gap-[6px] px-[12px] py-[8px] rounded-[10px] hover:bg-[#F3F4F6] transition-colors text-[14px] font-medium text-[#374151]"
+              className="flex items-center gap-[6px] px-[12px] py-[8px] rounded-[10px] hover:bg-accent transition-colors text-[14px] font-medium text-foreground"
             >
               <Globe className="w-[18px] h-[18px]" />
               <span>{currentLang}</span>
@@ -96,33 +110,33 @@ const Header = ({ onMenuClick }) => {
             </button>
 
             {langDropdownOpen && (
-              <div className="absolute right-0 mt-[8px] w-[140px] bg-white rounded-[12px] shadow-lg border border-[#E5E7EB] py-[8px]">
+              <div className="absolute right-0 mt-[8px] w-[140px] bg-popover rounded-[12px] shadow-lg border border-border py-[8px]">
                 <button
                   onClick={() => changeLanguage("en")}
-                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-[#F3F4F6] ${
+                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-accent ${
                     currentLang === "EN"
-                      ? "text-[#3B82F6] font-medium"
-                      : "text-[#374151]"
+                      ? "text-primary font-medium"
+                      : "text-foreground"
                   }`}
                 >
                   🇺🇸 English
                 </button>
                 <button
                   onClick={() => changeLanguage("az")}
-                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-[#F3F4F6] ${
+                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-accent ${
                     currentLang === "AZ"
-                      ? "text-[#3B82F6] font-medium"
-                      : "text-[#374151]"
+                      ? "text-primary font-medium"
+                      : "text-foreground"
                   }`}
                 >
                   🇦🇿 Azərbaycan
                 </button>
                 <button
                   onClick={() => changeLanguage("ru")}
-                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-[#F3F4F6] ${
+                  className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-accent ${
                     currentLang === "RU"
-                      ? "text-[#3B82F6] font-medium"
-                      : "text-[#374151]"
+                      ? "text-primary font-medium"
+                      : "text-foreground"
                   }`}
                 >
                   🇷🇺 Русский
@@ -131,15 +145,27 @@ const Header = ({ onMenuClick }) => {
             )}
           </div>
 
-          <button className="relative p-[10px] rounded-[10px] hover:bg-[#F3F4F6] transition-colors">
-            <Bell className="w-[22px] h-[22px] text-[#374151]" />
-            <span className="absolute top-[6px] right-[6px] w-[8px] h-[8px] bg-[#EF4444] rounded-full"></span>
+          <button
+            onClick={toggleTheme}
+            className="p-[10px] rounded-[10px] hover:bg-accent transition-colors"
+            title={resolvedTheme === "dark" ? "Light mode" : "Dark mode"}
+          >
+            {resolvedTheme === "dark" ? (
+              <Sun className="w-[22px] h-[22px] text-foreground" />
+            ) : (
+              <Moon className="w-[22px] h-[22px] text-foreground" />
+            )}
+          </button>
+
+          <button className="relative p-[10px] rounded-[10px] hover:bg-accent transition-colors">
+            <Bell className="w-[22px] h-[22px] text-foreground" />
+            <span className="absolute top-[6px] right-[6px] w-[8px] h-[8px] bg-destructive rounded-full"></span>
           </button>
 
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-[10px] pl-[6px] pr-[14px] py-[6px] rounded-[12px] hover:bg-[#F3F4F6] transition-colors"
+              className="flex items-center gap-[10px] pl-[6px] pr-[14px] py-[6px] rounded-[12px] hover:bg-accent transition-colors"
             >
               {user?.avatar ? (
                 <img
@@ -148,43 +174,45 @@ const Header = ({ onMenuClick }) => {
                   className="w-[36px] h-[36px] rounded-full object-cover"
                 />
               ) : (
-                <div className="w-[36px] h-[36px] bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-full flex items-center justify-center text-white text-[14px] font-semibold">
+                <div className="w-[36px] h-[36px] bg-linear-to-br from-primary to-ring rounded-full flex items-center justify-center text-primary-foreground text-[14px] font-semibold">
                   {user?.firstName?.charAt(0)}
                   {user?.lastName?.charAt(0)}
                 </div>
               )}
               <div className="hidden sm:block text-left">
-                <p className="text-[14px] font-semibold text-[#111827]">
+                <p className="text-[14px] font-semibold text-foreground">
                   {user?.firstName} {user?.lastName}
                 </p>
-                <p className="text-[12px] text-[#6B7280]">
+                <p className="text-[12px] text-muted-foreground">
                   {isSuperAdmin ? t("users.superAdmin") : t("users.admin")}
                 </p>
               </div>
-              <ChevronDown className="w-[16px] h-[16px] text-[#6B7280]" />
+              <ChevronDown className="w-[16px] h-[16px] text-muted-foreground" />
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-[8px] w-[220px] bg-white rounded-[12px] shadow-lg border border-[#E5E7EB] py-[8px]">
-                <div className="px-[16px] py-[10px] border-b border-[#E5E7EB]">
-                  <p className="text-[14px] font-semibold text-[#111827]">
+              <div className="absolute right-0 mt-[8px] w-[220px] bg-popover rounded-[12px] shadow-lg border border-border py-[8px]">
+                <div className="px-[16px] py-[10px] border-b border-border">
+                  <p className="text-[14px] font-semibold text-foreground">
                     {user?.firstName} {user?.lastName}
                   </p>
-                  <p className="text-[12px] text-[#6B7280]">{user?.email}</p>
+                  <p className="text-[12px] text-muted-foreground">
+                    {user?.email}
+                  </p>
                 </div>
                 <button
                   onClick={() => {
                     navigate("/settings");
                     setDropdownOpen(false);
                   }}
-                  className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-[#374151] hover:bg-[#F3F4F6]"
+                  className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-foreground hover:bg-accent"
                 >
                   <Settings className="w-[16px] h-[16px]" />
                   {t("header.settings")}
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-[#EF4444] hover:bg-red-50"
+                  className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-destructive hover:bg-destructive/10"
                 >
                   <LogOut className="w-[16px] h-[16px]" />
                   {t("header.logout")}

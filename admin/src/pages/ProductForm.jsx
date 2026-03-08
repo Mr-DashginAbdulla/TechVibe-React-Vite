@@ -113,15 +113,15 @@ const ProductForm = () => {
       <div className="flex items-center gap-[16px]">
         <Link
           to="/products"
-          className="p-[10px] hover:bg-[#F3F4F6] rounded-[10px]"
+          className="p-[10px] hover:bg-accent rounded-[10px]"
         >
-          <ArrowLeft className="w-[20px] h-[20px] text-[#374151]" />
+          <ArrowLeft className="w-[20px] h-[20px] text-foreground" />
         </Link>
         <div>
-          <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
+          <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground">
             {isEditing ? t("products.editProduct") : t("products.addProduct")}
           </h1>
-          <p className="text-[13px] text-[#6B7280] mt-[2px]">
+          <p className="text-[13px] text-muted-foreground mt-[2px]">
             {isEditing ? t("products.editSubtitle") : t("products.addSubtitle")}
           </p>
         </div>
@@ -145,14 +145,14 @@ const ProductForm = () => {
         <div className="flex justify-end gap-[12px] pt-[8px]">
           <Link
             to="/products"
-            className="px-[20px] py-[10px] border border-[#E5E7EB] text-[#374151] font-medium rounded-[10px] hover:bg-[#F3F4F6]"
+            className="px-[20px] py-[10px] border border-border text-foreground font-medium rounded-[10px] hover:bg-accent"
           >
             {t("common.cancel")}
           </Link>
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-[8px] px-[24px] py-[10px] bg-[#3B82F6] text-white font-semibold rounded-[10px] hover:bg-[#2563EB] disabled:opacity-50"
+            className="inline-flex items-center gap-[8px] px-[24px] py-[10px] bg-primary text-primary-foreground font-semibold rounded-[10px] hover:bg-primary/90 disabled:opacity-50"
           >
             <Save className="w-[18px] h-[18px]" />
             {saving ? t("common.saving") : t("common.save")}

@@ -12,10 +12,10 @@ const BrandRow = ({ brand, onEdit, onDelete, onToggle }) => {
   const { t } = useTranslation();
 
   return (
-    <tr className="border-b border-[#F3F4F6] hover:bg-[#F9FAFB] transition-colors">
+    <tr className="border-b border-border hover:bg-secondary transition-colors">
       <td className="px-[24px] py-[16px]">
         <div className="flex items-center gap-[12px]">
-          <div className="w-[40px] h-[40px] bg-[#F3F4F6] rounded-[10px] flex items-center justify-center overflow-hidden">
+          <div className="w-[40px] h-[40px] bg-accent rounded-[10px] flex items-center justify-center overflow-hidden">
             {brand.logo?.light || brand.logo?.dark ? (
               <div className="flex gap-1">
                 {brand.logo.light && (
@@ -36,21 +36,21 @@ const BrandRow = ({ brand, onEdit, onDelete, onToggle }) => {
                 )}
               </div>
             ) : (
-              <Award className="w-[20px] h-[20px] text-[#9CA3AF]" />
+              <Award className="w-[20px] h-[20px] text-muted-foreground" />
             )}
           </div>
-          <span className="text-[14px] font-semibold text-[#111827]">
+          <span className="text-[14px] font-semibold text-foreground">
             {brand.name}
           </span>
         </div>
       </td>
       <td className="px-[24px] py-[16px]">
-        <span className="text-[13px] text-[#6B7280] truncate max-w-[200px] block">
+        <span className="text-[13px] text-muted-foreground truncate max-w-[200px] block">
           <div className="flex flex-col gap-1">
-            <span className="text-[11px] text-[#6B7280]">
+            <span className="text-[11px] text-muted-foreground">
               Light: {brand.logo?.light}
             </span>
-            <span className="text-[11px] text-[#6B7280]">
+            <span className="text-[11px] text-muted-foreground">
               Dark: {brand.logo?.dark}
             </span>
           </div>
@@ -61,7 +61,7 @@ const BrandRow = ({ brand, onEdit, onDelete, onToggle }) => {
           href={brand.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[13px] text-[#3B82F6] hover:underline flex items-center gap-[4px]"
+          className="text-[13px] text-primary hover:underline flex items-center gap-[4px]"
         >
           {brand.website}
           <ExternalLink className="w-[12px] h-[12px]" />
@@ -81,8 +81,8 @@ const BrandRow = ({ brand, onEdit, onDelete, onToggle }) => {
             </>
           ) : (
             <>
-              <ToggleLeft className="w-[24px] h-[24px] text-[#9CA3AF]" />
-              <span className="text-[13px] text-[#9CA3AF] font-medium">
+              <ToggleLeft className="w-[24px] h-[24px] text-muted-foreground" />
+              <span className="text-[13px] text-muted-foreground font-medium">
                 {t("common.inactive")}
               </span>
             </>
@@ -93,14 +93,14 @@ const BrandRow = ({ brand, onEdit, onDelete, onToggle }) => {
         <div className="flex items-center justify-end gap-[8px]">
           <button
             onClick={() => onEdit(brand)}
-            className="p-[8px] rounded-[8px] hover:bg-[#EFF6FF] text-[#3B82F6] transition-colors"
+            className="p-[8px] rounded-[8px] hover:bg-primary/10 text-primary transition-colors"
             title={t("common.edit")}
           >
             <Edit className="w-[16px] h-[16px]" />
           </button>
           <button
             onClick={() => onDelete(brand.id)}
-            className="p-[8px] rounded-[8px] hover:bg-[#FEF2F2] text-[#EF4444] transition-colors"
+            className="p-[8px] rounded-[8px] hover:bg-destructive/10 text-destructive transition-colors"
             title={t("common.delete")}
           >
             <Trash2 className="w-[16px] h-[16px]" />

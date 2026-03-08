@@ -1,7 +1,7 @@
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 
 const StatCard = ({ stat }) => (
-  <div className="bg-white rounded-[16px] p-[20px] border border-[#E5E7EB]">
+  <div className="bg-card rounded-[16px] p-[20px] border border-border">
     <div className="flex items-center justify-between mb-[16px]">
       <div
         className={`w-[48px] h-[48px] rounded-[12px] bg-linear-to-br ${stat.color} flex items-center justify-center`}
@@ -21,8 +21,8 @@ const StatCard = ({ stat }) => (
         {stat.change}
       </div>
     </div>
-    <p className="text-[24px] font-bold text-[#111827]">{stat.value}</p>
-    <p className="text-[14px] text-[#6B7280] mt-[4px]">{stat.title}</p>
+    <p className="text-[24px] font-bold text-foreground">{stat.value}</p>
+    <p className="text-[14px] text-muted-foreground mt-[4px]">{stat.title}</p>
   </div>
 );
 

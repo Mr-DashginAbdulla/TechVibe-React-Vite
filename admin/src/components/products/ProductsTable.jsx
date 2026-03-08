@@ -9,30 +9,30 @@ const ProductsTable = ({ products, getCategoryName, onDelete }) => {
     <div className="hidden md:block overflow-x-auto">
       <table className="w-full">
         <thead>
-          <tr className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
-            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
+          <tr className="bg-secondary border-b border-border">
+            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-muted-foreground uppercase">
               {t("products.productName")}
             </th>
-            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
+            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-muted-foreground uppercase">
               {t("products.category")}
             </th>
-            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
+            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-muted-foreground uppercase">
               {t("products.price")}
             </th>
-            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
+            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-muted-foreground uppercase">
               {t("products.stock")}
             </th>
-            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
+            <th className="text-left px-[16px] py-[12px] text-[12px] font-semibold text-muted-foreground uppercase">
               {t("products.rating")}
             </th>
-            <th className="text-right px-[16px] py-[12px] text-[12px] font-semibold text-[#6B7280] uppercase">
+            <th className="text-right px-[16px] py-[12px] text-[12px] font-semibold text-muted-foreground uppercase">
               {t("common.actions")}
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#E5E7EB]">
+        <tbody className="divide-y divide-border">
           {products.map((product) => (
-            <tr key={product.id} className="hover:bg-[#F9FAFB]">
+            <tr key={product.id} className="hover:bg-secondary">
               <td className="px-[16px] py-[14px]">
                 <div className="flex items-center gap-[12px]">
                   <img
@@ -41,24 +41,24 @@ const ProductsTable = ({ products, getCategoryName, onDelete }) => {
                     className="w-[44px] h-[44px] rounded-[10px] object-cover"
                   />
                   <div className="min-w-0">
-                    <p className="text-[14px] font-medium text-[#111827] truncate">
+                    <p className="text-[14px] font-medium text-foreground truncate">
                       {product.name}
                     </p>
-                    <p className="text-[12px] text-[#6B7280]">
+                    <p className="text-[12px] text-muted-foreground">
                       {product.brand}
                     </p>
                   </div>
                 </div>
               </td>
-              <td className="px-[16px] py-[14px] text-[14px] text-[#374151]">
+              <td className="px-[16px] py-[14px] text-[14px] text-foreground">
                 {getCategoryName(product.categoryId)}
               </td>
               <td className="px-[16px] py-[14px]">
-                <p className="text-[14px] font-semibold text-[#111827]">
+                <p className="text-[14px] font-semibold text-foreground">
                   ${product.price}
                 </p>
                 {product.discount > 0 && (
-                  <p className="text-[12px] text-[#EF4444]">
+                  <p className="text-[12px] text-destructive">
                     -{product.discount}%
                   </p>
                 )}
@@ -81,7 +81,7 @@ const ProductsTable = ({ products, getCategoryName, onDelete }) => {
                   ({product.stock})
                 </span>
               </td>
-              <td className="px-[16px] py-[14px] text-[14px] text-[#374151]">
+              <td className="px-[16px] py-[14px] text-[14px] text-foreground">
                 <div className="flex items-center gap-[4px]">
                   <span className="text-[#F59E0B]">★</span>
                   {product.rating?.toFixed(1) || "—"}
@@ -91,15 +91,15 @@ const ProductsTable = ({ products, getCategoryName, onDelete }) => {
                 <div className="flex items-center justify-end gap-[6px]">
                   <Link
                     to={`/products/${product.id}/edit`}
-                    className="p-[7px] hover:bg-[#F3F4F6] rounded-[6px]"
+                    className="p-[7px] hover:bg-accent rounded-[6px]"
                   >
-                    <Edit className="w-[16px] h-[16px] text-[#6B7280]" />
+                    <Edit className="w-[16px] h-[16px] text-muted-foreground" />
                   </Link>
                   <button
                     onClick={() => onDelete(product)}
                     className="p-[7px] hover:bg-red-50 rounded-[6px]"
                   >
-                    <Trash2 className="w-[16px] h-[16px] text-[#EF4444]" />
+                    <Trash2 className="w-[16px] h-[16px] text-destructive" />
                   </button>
                 </div>
               </td>

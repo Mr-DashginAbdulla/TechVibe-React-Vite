@@ -5,23 +5,23 @@ const TopProductsList = ({ products }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white rounded-[16px] border border-[#E5E7EB]">
-      <div className="flex items-center justify-between p-[20px] border-b border-[#E5E7EB]">
-        <h2 className="text-[16px] font-semibold text-[#111827]">
+    <div className="bg-card rounded-[16px] border border-border">
+      <div className="flex items-center justify-between p-[20px] border-b border-border">
+        <h2 className="text-[16px] font-semibold text-foreground">
           {t("dashboard.topProducts")}
         </h2>
         <Link
           to="/products"
-          className="text-[14px] font-medium text-[#3B82F6] hover:text-[#2563EB]"
+          className="text-[14px] font-medium text-primary hover:text-primary/80"
         >
           {t("common.viewAll")}
         </Link>
       </div>
-      <div className="divide-y divide-[#E5E7EB]">
+      <div className="divide-y divide-border">
         {products.map((product) => (
           <div
             key={product.id}
-            className="flex items-center gap-[12px] p-[16px] hover:bg-[#F9FAFB]"
+            className="flex items-center gap-[12px] p-[16px] hover:bg-secondary"
           >
             <img
               src={product.image}
@@ -29,13 +29,15 @@ const TopProductsList = ({ products }) => {
               className="w-[48px] h-[48px] rounded-[10px] object-cover"
             />
             <div className="flex-1 min-w-0">
-              <p className="text-[14px] font-medium text-[#111827] truncate">
+              <p className="text-[14px] font-medium text-foreground truncate">
                 {product.name}
               </p>
-              <p className="text-[13px] text-[#6B7280]">{product.brand}</p>
+              <p className="text-[13px] text-muted-foreground">
+                {product.brand}
+              </p>
             </div>
             <div className="text-right">
-              <p className="text-[14px] font-semibold text-[#111827]">
+              <p className="text-[14px] font-semibold text-foreground">
                 ${product.price}
               </p>
               <div className="flex items-center gap-[4px] text-[13px] text-[#F59E0B]">

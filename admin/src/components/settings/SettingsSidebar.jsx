@@ -11,15 +11,15 @@ const SettingsSidebar = ({ activeTab, setActiveTab, user, isSuperAdmin }) => {
 
   return (
     <div className="lg:w-[240px]">
-      <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[8px]">
+      <div className="bg-card rounded-[16px] border border-border p-[8px]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-[12px] w-full px-[16px] py-[12px] rounded-[10px] text-left transition-all ${
               activeTab === tab.id
-                ? "bg-[#3B82F6] text-white"
-                : "text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#111827]"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:bg-accent hover:text-foreground"
             }`}
           >
             <tab.icon className="w-[20px] h-[20px]" />
@@ -28,7 +28,7 @@ const SettingsSidebar = ({ activeTab, setActiveTab, user, isSuperAdmin }) => {
         ))}
       </div>
 
-      <div className="bg-linear-to-br from-[#3B82F6] to-[#6366F1] rounded-[16px] p-[20px] mt-[16px]">
+      <div className="bg-linear-to-br from-primary to-ring rounded-[16px] p-[20px] mt-[16px]">
         <div className="flex items-center gap-[12px]">
           {user?.avatar ? (
             <img

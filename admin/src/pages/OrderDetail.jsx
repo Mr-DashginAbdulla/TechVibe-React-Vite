@@ -101,8 +101,10 @@ const OrderDetail = () => {
   if (!order) {
     return (
       <div className="text-center py-[60px]">
-        <p className="text-[16px] text-[#6B7280]">{t("orders.notFound")}</p>
-        <Link to="/orders" className="text-[#3B82F6] mt-[12px] inline-block">
+        <p className="text-[16px] text-muted-foreground">
+          {t("orders.notFound")}
+        </p>
+        <Link to="/orders" className="text-primary mt-[12px] inline-block">
           {t("common.back")}
         </Link>
       </div>
@@ -112,19 +114,16 @@ const OrderDetail = () => {
   return (
     <div className="space-y-[20px]">
       <div className="flex items-center gap-[16px]">
-        <Link
-          to="/orders"
-          className="p-[10px] hover:bg-[#F3F4F6] rounded-[10px]"
-        >
-          <ArrowLeft className="w-[20px] h-[20px] text-[#374151]" />
+        <Link to="/orders" className="p-[10px] hover:bg-accent rounded-[10px]">
+          <ArrowLeft className="w-[20px] h-[20px] text-foreground" />
         </Link>
         <div>
-          <h1 className="text-[20px] sm:text-[24px] font-bold text-[#111827]">
+          <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground">
             {t("orders.orderDetails")} #{order.orderNumber || order.id}
           </h1>
           <div className="flex items-center gap-[10px] mt-[4px]">
             {getStatusBadge(order.status)}
-            <span className="text-[13px] text-[#6B7280]">
+            <span className="text-[13px] text-muted-foreground">
               {t("orders.createdAt")}{" "}
               {new Date(order.createdAt).toLocaleString()}
             </span>

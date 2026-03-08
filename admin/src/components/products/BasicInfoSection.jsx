@@ -4,13 +4,13 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
-      <h2 className="text-[16px] font-semibold text-[#111827] mb-[16px]">
+    <div className="bg-card rounded-[16px] border border-border p-[20px]">
+      <h2 className="text-[16px] font-semibold text-foreground mb-[16px]">
         {t("products.basicInfo")}
       </h2>
       <div className="space-y-[14px]">
         <div>
-          <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+          <label className="block text-[13px] font-medium text-foreground mb-[6px]">
             {t("products.productName")} *
           </label>
           <input
@@ -19,12 +19,12 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder={t("productForm.enterName")}
             required
-            className="w-full px-[14px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+            className="w-full px-[14px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("products.brand")} *
             </label>
             <input
@@ -36,7 +36,7 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
               placeholder={t("productForm.enterBrand")}
               required
               list="brand-list"
-              className="w-full px-[14px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+              className="w-full px-[14px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
             />
             {brands && (
               <datalist id="brand-list">
@@ -47,7 +47,7 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
             )}
           </div>
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("products.category")} *
             </label>
             <select
@@ -56,7 +56,7 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
                 setFormData({ ...formData, categoryId: e.target.value })
               }
               required
-              className="w-full px-[14px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+              className="w-full px-[14px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
             >
               <option value="">{t("productForm.selectCategory")}</option>
               {categories.map((cat) => (
@@ -68,7 +68,7 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
           </div>
         </div>
         <div>
-          <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+          <label className="block text-[13px] font-medium text-foreground mb-[6px]">
             {t("products.description")}
           </label>
           <textarea
@@ -83,7 +83,7 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-[14px]">
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("products.price")} *
             </label>
             <input
@@ -99,11 +99,11 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
               required
               min="0"
               step="0.01"
-              className="w-full px-[14px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+              className="w-full px-[14px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
             />
           </div>
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("products.stock")} *
             </label>
             <input
@@ -118,11 +118,11 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
               placeholder={t("productForm.enterStock")}
               required
               min="0"
-              className="w-full px-[14px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+              className="w-full px-[14px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
             />
           </div>
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("products.discountPercent")}
             </label>
             <input
@@ -137,7 +137,7 @@ const BasicInfoSection = ({ formData, setFormData, categories, brands }) => {
               placeholder={t("productForm.enterDiscount")}
               min="0"
               max="100"
-              className="w-full px-[14px] py-[10px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[10px] text-[14px]"
+              className="w-full px-[14px] py-[10px] bg-secondary border border-border rounded-[10px] text-[14px] text-foreground"
             />
           </div>
         </div>

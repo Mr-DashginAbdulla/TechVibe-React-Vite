@@ -59,22 +59,22 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-[16px]">
-      <div className="bg-white rounded-[20px] w-full max-w-[520px] shadow-xl">
+      <div className="bg-card rounded-[20px] w-full max-w-[520px] shadow-xl">
         {/* Header */}
-        <div className="flex items-center justify-between px-[24px] py-[20px] border-b border-[#E5E7EB]">
+        <div className="flex items-center justify-between px-[24px] py-[20px] border-b border-border">
           <div className="flex items-center gap-[10px]">
             <div className="w-[36px] h-[36px] bg-blue-50 rounded-[10px] flex items-center justify-center">
-              <Tag className="w-[18px] h-[18px] text-[#3B82F6]" />
+              <Tag className="w-[18px] h-[18px] text-primary" />
             </div>
-            <h2 className="text-[18px] font-bold text-[#111827]">
+            <h2 className="text-[18px] font-bold text-foreground">
               {promo ? t("promoCodes.editCode") : t("promoCodes.addCode")}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-[8px] hover:bg-[#F3F4F6] rounded-[8px] transition-colors"
+            className="p-[8px] hover:bg-accent rounded-[8px] transition-colors"
           >
-            <X className="w-[20px] h-[20px] text-[#6B7280]" />
+            <X className="w-[20px] h-[20px] text-muted-foreground" />
           </button>
         </div>
 
@@ -82,7 +82,7 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
         <form onSubmit={handleSubmit} className="p-[24px] space-y-[16px]">
           {/* Code */}
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("promoCodes.code")} *
             </label>
             <input
@@ -92,21 +92,21 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
               onChange={handleChange}
               required
               placeholder="E.g. SUMMER20"
-              className="w-full px-[14px] py-[10px] border border-[#E5E7EB] rounded-[10px] text-[14px] font-mono uppercase focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent"
+              className="w-full px-[14px] py-[10px] border border-border rounded-[10px] text-[14px] text-foreground bg-secondary font-mono uppercase focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
           </div>
 
           {/* Type + Discount */}
           <div className="grid grid-cols-2 gap-[12px]">
             <div>
-              <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+              <label className="block text-[13px] font-medium text-foreground mb-[6px]">
                 {t("promoCodes.type")} *
               </label>
               <select
                 name="type"
                 value={form.type}
                 onChange={handleChange}
-                className="w-full px-[14px] py-[10px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="w-full px-[14px] py-[10px] border border-border rounded-[10px] text-[14px] text-foreground bg-secondary focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="percentage">
                   {t("promoCodes.percentage")} (%)
@@ -115,7 +115,7 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
               </select>
             </div>
             <div>
-              <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+              <label className="block text-[13px] font-medium text-foreground mb-[6px]">
                 {t("promoCodes.discount")}{" "}
                 {form.type === "percentage" ? "(%)" : "($)"} *
               </label>
@@ -129,7 +129,7 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
                 max={form.type === "percentage" ? "100" : undefined}
                 step="0.01"
                 placeholder={form.type === "percentage" ? "10" : "15.00"}
-                className="w-full px-[14px] py-[10px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="w-full px-[14px] py-[10px] border border-border rounded-[10px] text-[14px] text-foreground bg-secondary focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           </div>
@@ -137,7 +137,7 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
           {/* Min Order + Max Uses */}
           <div className="grid grid-cols-2 gap-[12px]">
             <div>
-              <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+              <label className="block text-[13px] font-medium text-foreground mb-[6px]">
                 {t("promoCodes.minOrder")} ($)
               </label>
               <input
@@ -148,13 +148,13 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
                 min="0"
                 step="0.01"
                 placeholder="0"
-                className="w-full px-[14px] py-[10px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="w-full px-[14px] py-[10px] border border-border rounded-[10px] text-[14px] text-foreground bg-secondary focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
             <div>
-              <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+              <label className="block text-[13px] font-medium text-foreground mb-[6px]">
                 {t("promoCodes.maxUses")}{" "}
-                <span className="text-[#9CA3AF] font-normal">
+                <span className="text-muted-foreground font-normal">
                   ({t("promoCodes.optional")})
                 </span>
               </label>
@@ -165,14 +165,14 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
                 onChange={handleChange}
                 min="1"
                 placeholder={t("promoCodes.unlimited")}
-                className="w-full px-[14px] py-[10px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+                className="w-full px-[14px] py-[10px] border border-border rounded-[10px] text-[14px] text-foreground bg-secondary focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           </div>
 
           {/* Expiry */}
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("promoCodes.expires")}{" "}
               <span className="text-[#9CA3AF] font-normal">
                 ({t("promoCodes.optional")})
@@ -183,13 +183,13 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
               name="expiresAt"
               value={form.expiresAt}
               onChange={handleChange}
-              className="w-full px-[14px] py-[10px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+              className="w-full px-[14px] py-[10px] border border-border rounded-[10px] text-[14px] text-foreground bg-secondary focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-[13px] font-medium text-[#374151] mb-[6px]">
+            <label className="block text-[13px] font-medium text-foreground mb-[6px]">
               {t("promoCodes.description")}{" "}
               <span className="text-[#9CA3AF] font-normal">
                 ({t("promoCodes.optional")})
@@ -201,7 +201,7 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
               value={form.description}
               onChange={handleChange}
               placeholder={t("promoCodes.descriptionPlaceholder")}
-              className="w-full px-[14px] py-[10px] border border-[#E5E7EB] rounded-[10px] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]"
+              className="w-full px-[14px] py-[10px] border border-border rounded-[10px] text-[14px] text-foreground bg-secondary focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 
@@ -215,9 +215,9 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
                 onChange={handleChange}
                 className="sr-only peer"
               />
-              <div className="w-[44px] h-[24px] bg-[#D1D5DB] peer-focus:ring-2 peer-focus:ring-[#3B82F6] rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#3B82F6] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all"></div>
+              <div className="w-[44px] h-[24px] bg-border peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[20px] after:w-[20px] after:transition-all"></div>
             </label>
-            <span className="text-[14px] font-medium text-[#374151]">
+            <span className="text-[14px] font-medium text-foreground">
               {t("promoCodes.isActive")}
             </span>
           </div>
@@ -227,13 +227,13 @@ const PromoCodeFormModal = ({ promo, onSave, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-[20px] py-[10px] border border-[#E5E7EB] text-[#374151] text-[14px] font-medium rounded-[10px] hover:bg-[#F9FAFB] transition-colors"
+              className="px-[20px] py-[10px] border border-border text-foreground text-[14px] font-medium rounded-[10px] hover:bg-secondary transition-colors"
             >
               {t("common.cancel")}
             </button>
             <button
               type="submit"
-              className="px-[20px] py-[10px] bg-[#3B82F6] hover:bg-[#2563EB] text-white text-[14px] font-semibold rounded-[10px] transition-colors"
+              className="px-[20px] py-[10px] bg-primary hover:bg-primary/90 text-primary-foreground text-[14px] font-semibold rounded-[10px] transition-colors"
             >
               {promo ? t("common.save") : t("promoCodes.create")}
             </button>

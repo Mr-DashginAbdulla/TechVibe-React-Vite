@@ -19,15 +19,15 @@ const ColorOptionsSection = ({ colors, setColors }) => {
   };
 
   return (
-    <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
+    <div className="bg-card rounded-[16px] border border-border p-[20px]">
       <div className="flex items-center justify-between mb-[16px]">
-        <h2 className="text-[16px] font-semibold text-[#111827]">
+        <h2 className="text-[16px] font-semibold text-foreground">
           {t("products.colorOptions")}
         </h2>
         <button
           type="button"
           onClick={addColor}
-          className="inline-flex items-center gap-[4px] text-[13px] text-[#3B82F6] font-medium hover:text-[#2563EB]"
+          className="inline-flex items-center gap-[4px] text-[13px] text-primary font-medium hover:text-primary/80"
         >
           <Plus className="w-[16px] h-[16px]" />
           {t("products.addColor")}
@@ -40,28 +40,28 @@ const ColorOptionsSection = ({ colors, setColors }) => {
               type="color"
               value={color.code}
               onChange={(e) => updateColor(index, "code", e.target.value)}
-              className="w-[40px] h-[36px] rounded-[6px] border border-[#E5E7EB] cursor-pointer"
+              className="w-[40px] h-[36px] rounded-[6px] border border-border cursor-pointer"
             />
             <input
               type="text"
               value={color.name}
               onChange={(e) => updateColor(index, "name", e.target.value)}
               placeholder={t("products.colorName")}
-              className="flex-1 px-[12px] py-[8px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[8px] text-[13px]"
+              className="flex-1 px-[12px] py-[8px] bg-secondary border border-border rounded-[8px] text-[13px] text-foreground"
             />
             <input
               type="text"
               value={color.code}
               onChange={(e) => updateColor(index, "code", e.target.value)}
               placeholder={t("products.colorCode")}
-              className="w-[100px] px-[12px] py-[8px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[8px] text-[13px]"
+              className="w-[100px] px-[12px] py-[8px] bg-secondary border border-border rounded-[8px] text-[13px] text-foreground"
             />
             <button
               type="button"
               onClick={() => removeColor(index)}
               className="p-[6px] hover:bg-red-50 rounded-[6px]"
             >
-              <X className="w-[16px] h-[16px] text-[#EF4444]" />
+              <X className="w-[16px] h-[16px] text-destructive" />
             </button>
           </div>
         ))}

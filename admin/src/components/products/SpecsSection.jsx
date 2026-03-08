@@ -28,15 +28,15 @@ const SpecsSection = ({ specs, setSpecs }) => {
   };
 
   return (
-    <div className="bg-white rounded-[16px] border border-[#E5E7EB] p-[20px]">
+    <div className="bg-card rounded-[16px] border border-border p-[20px]">
       <div className="flex items-center justify-between mb-[16px]">
-        <h2 className="text-[16px] font-semibold text-[#111827]">
+        <h2 className="text-[16px] font-semibold text-foreground">
           {t("products.specifications")}
         </h2>
         <button
           type="button"
           onClick={addSpec}
-          className="inline-flex items-center gap-[4px] text-[13px] text-[#3B82F6] font-medium hover:text-[#2563EB]"
+          className="inline-flex items-center gap-[4px] text-[13px] text-primary font-medium hover:text-primary/80"
         >
           <Plus className="w-[16px] h-[16px]" />
           {t("productForm.addSpec")}
@@ -50,21 +50,21 @@ const SpecsSection = ({ specs, setSpecs }) => {
               value={key}
               onChange={(e) => updateSpecKey(key, e.target.value)}
               placeholder={t("productForm.specKey")}
-              className="flex-1 px-[12px] py-[8px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[8px] text-[13px]"
+              className="flex-1 px-[12px] py-[8px] bg-secondary border border-border rounded-[8px] text-[13px] text-foreground"
             />
             <input
               type="text"
               value={value}
               onChange={(e) => updateSpecValue(key, e.target.value)}
               placeholder={t("productForm.specValue")}
-              className="flex-1 px-[12px] py-[8px] bg-[#F9FAFB] border border-[#E5E7EB] rounded-[8px] text-[13px]"
+              className="flex-1 px-[12px] py-[8px] bg-secondary border border-border rounded-[8px] text-[13px] text-foreground"
             />
             <button
               type="button"
               onClick={() => removeSpec(key)}
               className="p-[6px] hover:bg-red-50 rounded-[6px]"
             >
-              <X className="w-[16px] h-[16px] text-[#EF4444]" />
+              <X className="w-[16px] h-[16px] text-destructive" />
             </button>
           </div>
         ))}
