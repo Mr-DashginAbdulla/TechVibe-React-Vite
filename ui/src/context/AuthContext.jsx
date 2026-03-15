@@ -10,19 +10,24 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const initAuth = async () => {
-      const storedUserId = localStorage.getItem("auth_token");
+      const token = localStorage.getItem("auth_token");
 
-      if (storedUserId) {
+      if (token) {
         try {
           const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/users/${storedUserId}`,
+            `${import.meta.env.VITE_API_URL}/auth/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
           );
 
           if (response.ok) {
             const userData = await response.json();
             setUser(userData);
           } else {
-            console.warn("User not found via token");
+            console.warn("Token invalid or expired");
             logout();
           }
         } catch (error) {
@@ -38,7 +43,9 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem("auth_token", userData.id);
+    if (userData.token) {
+      localStorage.setItem("auth_token", userData.token);
+    }
   };
 
   const logout = () => {

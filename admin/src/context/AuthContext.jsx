@@ -15,38 +15,40 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchUser = useCallback(async (userId) => {
+  const fetchUser = useCallback(async () => {
     try {
-      const response = await fetch(`${API_URL}/users/${userId}`);
-      if (!response.ok) throw new Error("User not found");
+      const token = localStorage.getItem("admin_auth_token");
+      if (!token) return null;
+
+      const response = await fetch(`${API_URL}/auth/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) throw new Error("Token invalid");
+
       const userData = await response.json();
-      const { password, ...userWithoutPassword } = userData;
-      setUser(userWithoutPassword);
+      setUser(userData);
     } catch {
-      localStorage.removeItem("adminUserId");
+      localStorage.removeItem("admin_auth_token");
       setUser(null);
     }
   }, []);
 
   useEffect(() => {
-    const storedUserId = localStorage.getItem("adminUserId");
-    if (storedUserId) {
-      fetchUser(storedUserId).finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
-    }
+    fetchUser().finally(() => setIsLoading(false));
   }, [fetchUser]);
 
   const login = async (email, password) => {
     const userData = await authService.login(email, password);
     setUser(userData);
-    localStorage.setItem("adminUserId", userData.id);
     return userData;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("adminUserId");
+    localStorage.removeItem("admin_auth_token");
   };
 
   const isLoggedIn = !!user;

@@ -1,9 +1,18 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("auth_token");
+  return {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+};
+
 export const wishlistService = {
   async getByUserId(userId) {
     const response = await fetch(
       `${API_URL}/wishlist?userId=${userId}&_sort=addedAt&_order=desc`,
+      { headers: getAuthHeaders() },
     );
     if (!response.ok) throw new Error("İstək siyahısı yüklənmədi");
     return response.json();
@@ -12,6 +21,7 @@ export const wishlistService = {
   async isInWishlist(userId, productId) {
     const response = await fetch(
       `${API_URL}/wishlist?userId=${userId}&productId=${productId}`,
+      { headers: getAuthHeaders() },
     );
     const items = await response.json();
     return items.length > 0 ? items[0] : null;
@@ -28,7 +38,7 @@ export const wishlistService = {
 
     const response = await fetch(`${API_URL}/wishlist`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify({
         ...wishlistData,
         addedAt: new Date().toISOString(),
@@ -41,6 +51,7 @@ export const wishlistService = {
   async remove(id) {
     const response = await fetch(`${API_URL}/wishlist/${id}`, {
       method: "DELETE",
+      headers: getAuthHeaders(),
     });
     if (!response.ok) throw new Error("Məhsul silinmədi");
     return true;

@@ -1,16 +1,25 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("admin_auth_token");
+  return {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+};
+
 const fetchApi = async (endpoint, options = {}) => {
   const response = await fetch(`${API_URL}${endpoint}`, {
     headers: {
-      "Content-Type": "application/json",
+      ...getAuthHeaders(),
       ...options.headers,
     },
     ...options,
   });
 
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.error || `API Error: ${response.status}`);
   }
 
   return response.json();
@@ -134,21 +143,33 @@ export const promoCodeService = {
     }),
 };
 
+export const statsService = {
+  getStats: () => fetchApi("/stats"),
+};
+
 export const authService = {
   login: async (email, password) => {
-    const users = await fetchApi(`/users?email=${email}`);
-    if (users.length === 0) {
-      throw new Error("USER_NOT_FOUND");
+    const response = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.error || "LOGIN_FAILED");
     }
-    const user = users[0];
-    if (user.password !== password) {
-      throw new Error("WRONG_PASSWORD");
-    }
-    if (user.role !== "admin" && user.role !== "super-admin") {
+
+    const userData = await response.json();
+
+    if (userData.role !== "admin" && userData.role !== "super-admin") {
       throw new Error("UNAUTHORIZED_ROLE");
     }
-    const { password: _, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+
+    // Store admin token
+    localStorage.setItem("admin_auth_token", userData.token);
+
+    return userData;
   },
 };
 
@@ -160,4 +181,5 @@ export default {
   reviewService,
   brandService,
   authService,
+  statsService,
 };

@@ -4,7 +4,16 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: BASE_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("auth_token");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ["Product", "Review", "Cart", "Wishlist"],
   endpoints: (builder) => ({
     getProductById: builder.query({

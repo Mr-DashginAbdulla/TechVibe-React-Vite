@@ -1,41 +1,59 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("auth_token");
+  return {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+};
+
 export const userService = {
   async getById(id) {
-    const response = await fetch(`${API_URL}/users/${id}`);
+    const response = await fetch(`${API_URL}/users/${id}`, {
+      headers: getAuthHeaders(),
+    });
     if (!response.ok) throw new Error("USER_NOT_FOUND");
-    const user = await response.json();
-    const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    return response.json();
   },
 
   async updateProfile(id, data) {
     const response = await fetch(`${API_URL}/users/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error("PROFILE_UPDATE_FAILED");
-    const user = await response.json();
-    const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    return response.json();
   },
 
   async updateAvatar(id, avatarBase64) {
     return this.updateProfile(id, { avatar: avatarBase64 });
   },
+
   async changePassword(id, currentPassword, newPassword) {
-    const user = await fetch(`${API_URL}/users/${id}`).then((r) => r.json());
-    if (user.password !== currentPassword) {
-      throw new Error("WRONG_CURRENT_PASSWORD");
-    }
-    return this.updateProfile(id, { password: newPassword });
+    // First verify current password by trying to login
+    const user = await this.getById(id);
+    // The backend now handles password hashing, so we send both passwords
+    // and let the backend verify
+    const response = await fetch(`${API_URL}/users/${id}`, {
+      method: "PATCH",
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ password: newPassword }),
+    });
+    if (!response.ok) throw new Error("PASSWORD_CHANGE_FAILED");
+    return response.json();
   },
 
   async getStats(userId) {
+    const headers = getAuthHeaders();
     const [orders, wishlist] = await Promise.all([
-      fetch(`${API_URL}/orders?userId=${userId}`).then((r) => r.json()),
-      fetch(`${API_URL}/wishlist?userId=${userId}`).then((r) => r.json()),
+      fetch(`${API_URL}/orders?userId=${userId}`, { headers }).then((r) =>
+        r.json(),
+      ),
+      fetch(`${API_URL}/wishlist?userId=${userId}`, { headers }).then((r) =>
+        r.json(),
+      ),
     ]);
 
     const totalOrders = orders.length;

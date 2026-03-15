@@ -43,9 +43,10 @@ const Header = () => {
   }, [mobileMenuOpen, lenis]);
 
   useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     Promise.all([
-      fetch("http://localhost:3000/categories").then((res) => res.json()),
-      fetch("http://localhost:3000/products").then((res) => res.json()),
+      fetch(`${API_URL}/categories`).then((res) => res.json()),
+      fetch(`${API_URL}/products`).then((res) => res.json()),
     ])
       .then(([categoriesData, productsData]) => {
         setCategories(categoriesData);

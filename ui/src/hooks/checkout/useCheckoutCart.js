@@ -85,9 +85,9 @@ export const useCheckoutCart = (user, buyNowItem, editOrderItems) => {
 
   // Promo Code Handler
   const handleApplyPromo = async (code) => {
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     try {
-      const response = await fetch(`${API_URL}/validate-promo`, {
+      const response = await fetch(`${API_URL}/promoCodes/validate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: code.toUpperCase(), subtotal }),

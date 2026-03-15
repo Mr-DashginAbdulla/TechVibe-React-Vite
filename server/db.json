@@ -7260,49 +7260,7 @@
       "id": 1
     }
   ],
-  "orders": [
-    {
-      "userId": "mkth60qz-s7vce3",
-      "items": [
-        {
-          "productId": "3",
-          "name": "Dell XPS 13 Plus",
-          "price": 1399,
-          "quantity": 1,
-          "image": "https://notebooks.az/image/cache/catalog/Dell%20Xps%2013%20Plus/snimok-500x500-500x500.jpg",
-          "selectedOptions": {}
-        }
-      ],
-      "shippingAddress": {
-        "label": "Home",
-        "firstName": "John",
-        "lastName": "Doe",
-        "address": "Yasamal",
-        "city": "Bakı",
-        "state": "Bakı",
-        "zipCode": "1001",
-        "country": "Azerbaijan",
-        "phone": "+994 12 345 67 89"
-      },
-      "paymentMethod": "cash",
-      "subtotal": 1399,
-      "shippingCost": 0,
-      "discount": 0,
-      "promoCode": null,
-      "total": 1399,
-      "status": "pending",
-      "createdAt": "2026-03-08T13:50:40.335Z",
-      "orderNumber": "ORD-2026-MMHT891R",
-      "timeline": [
-        {
-          "status": "ordered",
-          "date": "2026-03-08T13:50:40.335Z",
-          "description": "Order placed"
-        }
-      ],
-      "id": 1
-    }
-  ],
+  "orders": [],
   "cart": [],
   "wishlist": [],
   "brands": [

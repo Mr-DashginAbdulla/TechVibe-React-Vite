@@ -1,14 +1,26 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("auth_token");
+  return {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+};
+
 export const addressService = {
   async getByUserId(userId) {
-    const response = await fetch(`${API_URL}/addresses?userId=${userId}`);
+    const response = await fetch(`${API_URL}/addresses?userId=${userId}`, {
+      headers: getAuthHeaders(),
+    });
     if (!response.ok) throw new Error("ADDRESSES_LOAD_FAILED");
     return response.json();
   },
 
   async getById(id) {
-    const response = await fetch(`${API_URL}/addresses/${id}`);
+    const response = await fetch(`${API_URL}/addresses/${id}`, {
+      headers: getAuthHeaders(),
+    });
     if (!response.ok) throw new Error("ADDRESS_NOT_FOUND");
     return response.json();
   },
@@ -16,7 +28,7 @@ export const addressService = {
   async create(addressData) {
     const response = await fetch(`${API_URL}/addresses`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify(addressData),
     });
     if (!response.ok) throw new Error("ADDRESS_CREATE_FAILED");
@@ -26,7 +38,7 @@ export const addressService = {
   async update(id, data) {
     const response = await fetch(`${API_URL}/addresses/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error("ADDRESS_UPDATE_FAILED");
@@ -36,6 +48,7 @@ export const addressService = {
   async delete(id) {
     const response = await fetch(`${API_URL}/addresses/${id}`, {
       method: "DELETE",
+      headers: getAuthHeaders(),
     });
     if (!response.ok) throw new Error("ADDRESS_DELETE_FAILED");
     return true;
