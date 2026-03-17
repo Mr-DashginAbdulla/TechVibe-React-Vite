@@ -4,10 +4,10 @@
  */
 require("dotenv").config();
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const fs = require("fs");
 const path = require("path");
 
+const firebaseAdmin = require("./config/firebase-admin");
 const User = require("./models/User");
 const Product = require("./models/Product");
 const Category = require("./models/Category");
@@ -38,18 +38,43 @@ async function seed() {
       PromoCode.deleteMany({}),
     ]);
 
-    // Seed Users (passwords will be hashed by User model pre-save hook)
+    // Seed Users (Creates Firebase accounts and links to MongoDB)
     if (data.users && data.users.length > 0) {
-      console.log(`Seeding ${data.users.length} users...`);
+      console.log(`Seeding ${data.users.length} users with Firebase integration...`);
       for (const user of data.users) {
+        let firebaseUser;
+        const passwordToSet = user.password || "defaultPassword123";
+
+        try {
+           // Try to find the user in Firebase first
+           firebaseUser = await firebaseAdmin.auth().getUserByEmail(user.email);
+           // Update their password if they exist so the seeder config works
+           await firebaseAdmin.auth().updateUser(firebaseUser.uid, { password: passwordToSet });
+           console.log(`Updated existing Firebase user: ${user.email}`);
+        } catch (error) {
+           if (error.code === 'auth/user-not-found') {
+              // Create the user in Firebase
+              firebaseUser = await firebaseAdmin.auth().createUser({
+                 email: user.email,
+                 password: passwordToSet,
+                 displayName: `${user.firstName} ${user.lastName}`,
+                 emailVerified: user.isVerified || true
+              });
+              console.log(`Created new Firebase user: ${user.email}`);
+           } else {
+              throw error;
+           }
+        }
+
+        // Insert into MongoDB
         await User.create({
+          firebaseUid: firebaseUser.uid,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          password: user.password || "defaultPassword123",
           role: user.role || "user",
           phone: user.phone || "",
-          isVerified: user.isVerified || false,
+          isVerified: user.isVerified || true, // Force true to avoid login blockers for seed data
           avatar: user.avatar || "",
           memberSince: user.createdAt || new Date().toISOString(),
         });

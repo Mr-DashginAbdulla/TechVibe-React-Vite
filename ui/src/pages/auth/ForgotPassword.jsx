@@ -47,27 +47,9 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
-      const userExists = await authService.checkEmailExists(email);
-
-      if (userExists) {
-        const verificationCode = Math.floor(
-          100000 + Math.random() * 900000,
-        ).toString();
-
-        toast.info(`🔐 Demo: Your verification code is ${verificationCode}`, {
-          autoClose: 15000,
-          position: "top-center",
-        });
-
-        navigate("/auth/verify-code", {
-          state: {
-            email,
-            verificationCode,
-          },
-        });
-      } else {
-        toast.error(t("messages.userNotFound"));
-      }
+      await authService.resetPassword(email);
+      toast.success(t("messages.resetLinkSent", "A password reset link has been sent to your email."));
+      navigate("/auth/login");
     } catch (err) {
       toast.error(err.message || t("common.error"));
     } finally {

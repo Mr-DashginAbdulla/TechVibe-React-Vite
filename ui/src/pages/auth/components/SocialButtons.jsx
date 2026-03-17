@@ -1,7 +1,30 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { authService } from "@/services/authService";
+import { useAuth } from "@/context/AuthContext";
+import { showToast as toast } from "@/components/shared/StyledToast";
 
 const SocialButtons = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  const handleGoogleLogin = async () => {
+    if (isGoogleLoading) return;
+    setIsGoogleLoading(true);
+    try {
+      const user = await authService.loginWithGoogle();
+      login(user);
+      toast.success(t("messages.loginSuccess", { name: user.firstName || "User" }));
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message || t("messages.loginError"));
+    } finally {
+      setIsGoogleLoading(false);
+    }
+  };
 
   return (
     <>
@@ -14,7 +37,11 @@ const SocialButtons = () => {
       </div>
 
       <div className="flex items-center justify-center gap-[12px]">
-        <button className="flex-1 h-[48px] bg-card border border-border rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-muted/50 transition-colors">
+        <button 
+          onClick={handleGoogleLogin}
+          disabled={isGoogleLoading}
+          className="flex-1 h-[48px] bg-card border border-border rounded-[12px] flex items-center justify-center gap-[8px] hover:bg-muted/50 disabled:opacity-70 transition-colors"
+        >
           <svg className="w-[20px] h-[20px]" viewBox="0 0 24 24">
             <path
               fill="#4285F4"

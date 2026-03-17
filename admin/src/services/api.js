@@ -1,3 +1,6 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const getAuthHeaders = () => {
@@ -149,27 +152,44 @@ export const statsService = {
 
 export const authService = {
   login: async (email, password) => {
-    const response = await fetch(`${API_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      // Authenticate with Firebase
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error(error.error || "LOGIN_FAILED");
+      // Get ID Token
+      const idToken = await user.getIdToken();
+
+      // Login to our Backend using the token
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`
+        }
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new Error(error.error || "LOGIN_FAILED");
+      }
+
+      const userData = await response.json();
+
+      if (userData.role !== "admin" && userData.role !== "super-admin") {
+        throw new Error("UNAUTHORIZED_ROLE");
+      }
+
+      // Store token
+      localStorage.setItem("admin_auth_token", userData.token);
+
+      return userData;
+    } catch (error) {
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+         throw new Error("WRONG_PASSWORD"); // To match admin UI translation
+      }
+      throw error;
     }
-
-    const userData = await response.json();
-
-    if (userData.role !== "admin" && userData.role !== "super-admin") {
-      throw new Error("UNAUTHORIZED_ROLE");
-    }
-
-    // Store admin token
-    localStorage.setItem("admin_auth_token", userData.token);
-
-    return userData;
   },
 };
 

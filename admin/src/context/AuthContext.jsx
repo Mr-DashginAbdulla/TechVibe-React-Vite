@@ -6,6 +6,8 @@ import {
   useCallback,
 } from "react";
 import { authService } from "@/services/api";
+import { signOut } from "firebase/auth";
+import { auth } from "@/config/firebase";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -46,7 +48,12 @@ export const AuthProvider = ({ children }) => {
     return userData;
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error("Firebase sign out error", err);
+    }
     setUser(null);
     localStorage.removeItem("admin_auth_token");
   };

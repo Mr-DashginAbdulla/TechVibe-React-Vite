@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const firebaseAdmin = require("../config/firebase-admin");
 
-// Verify JWT token
+// Verify Firebase ID Token
 const auth = async (req, res, next) => {
   try {
     const authHeader = req.header("Authorization");
@@ -10,18 +10,22 @@ const auth = async (req, res, next) => {
     }
 
     const token = authHeader.replace("Bearer ", "");
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id).select("-password");
+    
+    // Verify with Firebase
+    const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+    
+    // Fetch MongoDB User profile
+    const user = await User.findOne({ firebaseUid: decodedToken.uid });
 
     if (!user) {
-      return res.status(401).json({ error: "User not found" });
+      return res.status(401).json({ error: "User not found in system" });
     }
 
     req.user = user;
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ error: "Invalid or expired token" });
+    res.status(401).json({ error: "Invalid or expired Firebase token" });
   }
 };
 
@@ -45,8 +49,8 @@ const optionalAuth = async (req, res, next) => {
     const authHeader = req.header("Authorization");
     if (authHeader && authHeader.startsWith("Bearer ")) {
       const token = authHeader.replace("Bearer ", "");
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await User.findById(decoded.id).select("-password");
+      const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+      const user = await User.findOne({ firebaseUid: decodedToken.uid });
       if (user) {
         req.user = user;
       }

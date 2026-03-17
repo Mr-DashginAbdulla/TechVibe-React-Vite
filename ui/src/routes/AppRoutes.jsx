@@ -18,7 +18,6 @@ const OrderSuccess = lazy(
 const Login = lazy(() => import("@/pages/auth/Login"));
 const Register = lazy(() => import("@/pages/auth/Register"));
 const ForgotPassword = lazy(() => import("@/pages/auth/ForgotPassword"));
-const VerifyCode = lazy(() => import("@/pages/auth/VerifyCode"));
 const ResetSuccess = lazy(() => import("@/pages/auth/ResetSuccess"));
 const AuthWelcome = lazy(() => import("@/pages/auth/AuthWelcome"));
 
@@ -92,7 +91,6 @@ export default function AppRoutes() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="verify-code" element={<VerifyCode />} />
           <Route path="reset-success" element={<ResetSuccess />} />
         </Route>
 

@@ -96,7 +96,7 @@ const Register = () => {
     try {
       const { confirmPassword, ...userData } = formData;
       await authService.register(userData);
-      toast.success(t("messages.registerSuccess"));
+      toast.success(t("messages.registerSuccess", "Account created! Please check your email to verify it before logging in."));
       navigate("/auth/login", { state: { registered: true } });
     } catch (err) {
       toast.error(err.message || t("messages.registerError"));
