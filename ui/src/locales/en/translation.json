@@ -32,7 +32,8 @@
     "language": "Language",
     "theme": "Theme",
     "remove": "Remove",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "currency": "Currency"
   },
   "theme": {
     "light": "Light",

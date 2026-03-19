@@ -32,7 +32,8 @@
     "language": "Dil",
     "theme": "Tema",
     "remove": "Sil",
-    "viewDetails": "Detallara bax"
+    "viewDetails": "Detallara bax",
+    "currency": "Valyuta"
   },
   "theme": {
     "light": "Açıq",

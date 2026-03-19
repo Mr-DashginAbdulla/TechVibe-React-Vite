@@ -2,6 +2,7 @@ import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const ProductCard = ({
   id,
@@ -20,6 +21,7 @@ const ProductCard = ({
   onToggleFavorite,
 }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   if (viewMode === "list") {
     return (
@@ -91,11 +93,11 @@ const ProductCard = ({
 
             <div className="flex flex-col items-end gap-[4px] min-w-[100px]">
               <span className="text-[24px] font-bold text-primary">
-                ${Number(price).toFixed(2)}
+                {formatPrice(price)}
               </span>
               {originalPrice && originalPrice > price && (
                 <span className="text-[16px] text-muted-foreground line-through">
-                  ${Number(originalPrice).toFixed(2)}
+                  {formatPrice(originalPrice)}
                 </span>
               )}
             </div>
@@ -197,11 +199,11 @@ const ProductCard = ({
         <div className="mt-auto flex items-center justify-between">
           <div className="flex items-center gap-[8px]">
             <span className="text-[18px] font-bold text-foreground">
-              ${Number(price).toFixed(2)}
+              {formatPrice(price)}
             </span>
             {originalPrice && originalPrice > price && (
               <span className="text-[14px] text-muted-foreground line-through">
-                ${Number(originalPrice).toFixed(2)}
+                {formatPrice(originalPrice)}
               </span>
             )}
           </div>

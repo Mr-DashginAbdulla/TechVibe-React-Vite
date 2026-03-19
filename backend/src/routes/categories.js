@@ -1,10 +1,11 @@
 const express = require("express");
 const Category = require("../models/Category");
 const { adminAuth } = require("../middleware/auth");
+const { cacheMiddleware } = require("../middleware/cache");
 const router = express.Router();
 
 // GET /api/categories
-router.get("/", async (req, res, next) => {
+router.get("/", cacheMiddleware, async (req, res, next) => {
   try {
     const categories = await Category.find();
     res.json(categories);

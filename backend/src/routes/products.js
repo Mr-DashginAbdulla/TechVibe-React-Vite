@@ -1,23 +1,36 @@
 const express = require("express");
 const Product = require("../models/Product");
 const { adminAuth } = require("../middleware/auth");
+const { cacheMiddleware } = require("../middleware/cache");
 const router = express.Router();
 
 // GET /api/products - Get all products (with optional filters)
-router.get("/", async (req, res, next) => {
+router.get("/", cacheMiddleware, async (req, res, next) => {
   try {
-    const { category, brand, isFeatured, isNew, _limit, _sort, _order, id_ne } = req.query;
+    const { category, brand, isFeatured, isNew, _limit, _sort, _order, id_ne, search, minPrice, maxPrice } = req.query;
     const filter = {};
 
+    if (search) {
+      filter.$text = { $search: search };
+    }
     if (category) filter.category = category;
     if (brand) filter.brand = brand;
     if (isFeatured) filter.isFeatured = isFeatured === "true";
     if (isNew) filter.isNewProduct = isNew === "true";
     if (id_ne) filter._id = { $ne: id_ne };
 
+    if (minPrice !== undefined || maxPrice !== undefined) {
+      filter.price = {};
+      if (minPrice !== undefined) filter.price.$gte = Number(minPrice);
+      if (maxPrice !== undefined) filter.price.$lte = Number(maxPrice);
+    }
+
     let query = Product.find(filter);
 
-    if (_sort) {
+    if (search && !_sort) {
+      // Sort by text score relevance if searching and no explicit sort provided
+      query = query.sort({ score: { $meta: "textScore" } });
+    } else if (_sort) {
       const sortOrder = _order === "desc" ? -1 : 1;
       query = query.sort({ [_sort]: sortOrder });
     }

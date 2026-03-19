@@ -1,6 +1,9 @@
 const express = require("express");
 const Order = require("../models/Order");
+const User = require("../models/User"); // Needed to get user email
 const { auth, adminAuth } = require("../middleware/auth");
+const sendEmail = require("../utils/sendEmail");
+const { orderConfirmationTemplate, orderStatusUpdateTemplate } = require("../utils/emailTemplates");
 const router = express.Router();
 
 // GET /api/orders - Get orders (admin: all, user: own)
@@ -72,6 +75,22 @@ router.post("/", auth, async (req, res, next) => {
         },
       ],
     });
+
+    // Send confirmation email
+    try {
+      const user = await User.findById(req.user._id);
+      if (user && user.email) {
+        await sendEmail({
+          to: user.email,
+          subject: `TechVibe Sifariş Təsdiqi - ${order.orderNumber}`,
+          html: orderConfirmationTemplate(order, user)
+        });
+      }
+    } catch (emailError) {
+      console.error("Failed to send order confirmation email:", emailError);
+      // We don't fail the order creation if email fails
+    }
+
     res.status(201).json(order);
   } catch (error) {
     next(error);
@@ -81,6 +100,8 @@ router.post("/", auth, async (req, res, next) => {
 // PATCH /api/orders/:id - Update order (status, items etc.)
 router.patch("/:id", auth, async (req, res, next) => {
   try {
+    // Determine if status is being updated to trigger email
+    const originalOrder = await Order.findById(req.params.id);
     const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -88,6 +109,23 @@ router.patch("/:id", auth, async (req, res, next) => {
     if (!order) {
       return res.status(404).json({ error: "ORDER_NOT_FOUND" });
     }
+
+    // Send status update email if status changed
+    if (req.body.status && originalOrder && originalOrder.status !== req.body.status) {
+      try {
+        const user = await User.findById(order.userId);
+        if (user && user.email) {
+          await sendEmail({
+            to: user.email,
+            subject: `TechVibe Sifariş Statusu: ${order.status.toUpperCase()} - ${order.orderNumber}`,
+            html: orderStatusUpdateTemplate(order, user)
+          });
+        }
+      } catch (emailError) {
+        console.error("Failed to send status update email:", emailError);
+      }
+    }
+
     res.json(order);
   } catch (error) {
     next(error);

@@ -32,7 +32,8 @@
     "language": "Язык",
     "theme": "Тема",
     "remove": "Удалить",
-    "viewDetails": "Подробнее"
+    "viewDetails": "Подробнее",
+    "currency": "Валюта"
   },
   "theme": {
     "light": "Светлая",

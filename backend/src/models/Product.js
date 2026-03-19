@@ -34,6 +34,9 @@ const productSchema = new mongoose.Schema(
   { timestamps: true, _id: false }
 );
 
+// Add text indexes for advanced search capabilities
+productSchema.index({ name: 'text', description: 'text', brand: 'text', category: 'text' });
+
 productSchema.methods.toJSON = function () {
   const obj = this.toObject();
   obj.id = obj._id;

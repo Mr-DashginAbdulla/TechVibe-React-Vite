@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Settings, Sun, Moon, Laptop } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const SettingsDropdown = () => {
   const { t, i18n } = useTranslation();
   const { theme, setTheme } = useTheme();
+  const { currency, changeCurrency } = useCurrency();
   const [isOpen, setIsOpen] = useState(false);
   const settingsRef = useRef(null);
 
@@ -79,6 +81,30 @@ const SettingsDropdown = () => {
                 >
                   <Icon className="w-[18px] h-[18px]" />
                   <span className="text-[11px] font-medium">{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-px bg-border my-[8px]" />
+
+          <div className="px-[8px] pb-[4px]">
+            <p className="text-[12px] font-medium text-muted-foreground mb-[8px] uppercase tracking-wider">
+              {t("common.currency") || "Currency"}
+            </p>
+            <div className="grid grid-cols-3 gap-[4px]">
+              {["AZN", "USD", "EUR"].map((curr) => (
+                <button
+                  key={curr}
+                  onClick={() => changeCurrency(curr)}
+                  className={`px-[8px] py-[6px] text-[13px] font-medium rounded-[8px] transition-all
+                    ${
+                      currency === curr
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-foreground hover:bg-accent"
+                    }`}
+                >
+                  {curr}
                 </button>
               ))}
             </div>

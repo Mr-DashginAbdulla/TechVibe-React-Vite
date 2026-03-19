@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const rateLimit = require("express-rate-limit");
 
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/products");
@@ -17,15 +18,45 @@ const addressRoutes = require("./routes/addresses");
 const userRoutes = require("./routes/users");
 const promoCodeRoutes = require("./routes/promoCodes");
 const statsRoutes = require("./routes/stats");
+const uploadRoutes = require("./routes/upload");
 
 const errorHandler = require("./middleware/errorHandler");
 
+// Start generic background jobs
+require("./utils/cronJobs");
+
 const app = express();
+
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100, // limit each IP to 100 requests per windowMs
+  message: { error: "Too many requests from this IP, please try again after 15 minutes" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Security middleware
 app.use(helmet());
-app.use(cors());
+
+// CORS Configuration
+const allowedOrigins = process.env.CORS_ORIGIN 
+  ? process.env.CORS_ORIGIN.split(",") 
+  : ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 app.use(morgan("dev"));
+app.use("/api", limiter); // Apply rate limiter to all API routes
 
 // Body parser
 app.use(express.json({ limit: "10mb" }));
@@ -44,6 +75,7 @@ app.use("/api/addresses", addressRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/promoCodes", promoCodeRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/upload", uploadRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

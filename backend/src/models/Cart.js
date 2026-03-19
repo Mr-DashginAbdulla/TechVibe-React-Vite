@@ -11,6 +11,7 @@ const cartSchema = new mongoose.Schema(
     selectedColor: { type: String, default: "" },
     selectedMemory: { type: String, default: "" },
     stock: { type: Number, default: 0 },
+    abandonedNotified: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
