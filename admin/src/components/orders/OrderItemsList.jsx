@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const OrderItemsList = ({ items }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="bg-card rounded-[16px] border border-border">
@@ -35,7 +37,7 @@ const OrderItemsList = ({ items }) => {
             </div>
             <div className="text-right">
               <p className="text-[14px] font-semibold text-foreground">
-                ${item.price?.toFixed(2)}
+                {formatPrice(item.price || 0)}
               </p>
               <p className="text-[12px] text-muted-foreground">
                 x{item.quantity}

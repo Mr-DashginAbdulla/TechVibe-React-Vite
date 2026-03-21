@@ -17,11 +17,13 @@ import {
   useRemoveFromCartMutation,
 } from "@/store/api/apiSlice";
 import { useAuth } from "@/context/AuthContext";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const Basket = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { formatPrice } = useCurrency();
 
   const { data: cartItems = [], isLoading } = useGetCartQuery(user?.id, {
     skip: !user?.id,
@@ -158,7 +160,7 @@ const Basket = () => {
                   {item.name}
                 </Link>
                 <p className="text-lg font-bold text-primary mt-1">
-                  ${(item.price || 0).toFixed(2)}
+                  {formatPrice(item.price || 0)}
                 </p>
 
                 <div className="flex items-center gap-3 mt-3">
@@ -195,7 +197,7 @@ const Basket = () => {
 
               <div className="text-right">
                 <p className="text-lg font-bold text-foreground">
-                  ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
+                  {formatPrice((item.price || 0) * (item.quantity || 1))}
                 </p>
               </div>
             </div>
@@ -212,7 +214,7 @@ const Basket = () => {
               <div className="flex justify-between text-muted-foreground">
                 <span>{t("basket.subtotal")}</span>
                 <span className="text-foreground font-medium">
-                  ${subtotal.toFixed(2)}
+                  {formatPrice(subtotal)}
                 </span>
               </div>
               <div className="flex justify-between text-muted-foreground">
@@ -224,7 +226,7 @@ const Basket = () => {
               <div className="h-px bg-border"></div>
               <div className="flex justify-between text-lg font-bold text-foreground">
                 <span>{t("basket.total")}</span>
-                <span className="text-primary">${subtotal.toFixed(2)}</span>
+                <span className="text-primary">{formatPrice(subtotal)}</span>
               </div>
             </div>
 

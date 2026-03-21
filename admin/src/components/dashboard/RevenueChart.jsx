@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   AreaChart,
   Area,
@@ -11,6 +12,7 @@ import {
 
 const RevenueChart = ({ orders }) => {
   const { t } = useTranslation();
+  const { formatPrice, symbols, currency } = useCurrency();
 
   // Group orders by month and calculate revenue
   const monthlyData = (() => {
@@ -51,7 +53,7 @@ const RevenueChart = ({ orders }) => {
         <div className="bg-popover border border-border rounded-[10px] px-[14px] py-[10px] shadow-lg">
           <p className="text-[13px] font-semibold text-foreground">{label}</p>
           <p className="text-[12px] text-primary mt-[2px]">
-            {t("dashboard.revenue")}: ${payload[0].value.toLocaleString()}
+            {t("dashboard.revenue")}: {formatPrice(payload[0].value)}
           </p>
           {payload[1] && (
             <p className="text-[12px] text-muted-foreground mt-px">
@@ -112,7 +114,7 @@ const RevenueChart = ({ orders }) => {
               tickLine={false}
               tick={{ fontSize: 12, fill: "var(--color-muted-foreground)" }}
               tickFormatter={(v) =>
-                `$${v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v}`
+                `${v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v} ${symbols[currency]}`
               }
             />
             <Tooltip content={<CustomTooltip />} />

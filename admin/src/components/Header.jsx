@@ -6,20 +6,20 @@ import {
   Bell,
   Menu,
   ChevronDown,
-  LogOut,
-  Settings,
   Globe,
   Sun,
   Moon,
+  Coins,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const Header = ({ onMenuClick }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const { user, logout, isSuperAdmin } = useAuth();
   const { theme, setTheme } = useTheme();
+  const { currency, changeCurrency, symbols } = useCurrency();
 
   const resolvedTheme =
     theme === "system"
@@ -30,11 +30,11 @@ const Header = ({ onMenuClick }) => {
 
   const toggleTheme = () =>
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const dropdownRef = useRef(null);
   const langDropdownRef = useRef(null);
+  const currencyDropdownRef = useRef(null);
 
   const currentLang = i18n.language?.startsWith("az")
     ? "AZ"
@@ -44,24 +44,22 @@ const Header = ({ onMenuClick }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
       if (
         langDropdownRef.current &&
         !langDropdownRef.current.contains(event.target)
       ) {
         setLangDropdownOpen(false);
       }
+      if (
+        currencyDropdownRef.current &&
+        !currencyDropdownRef.current.contains(event.target)
+      ) {
+        setCurrencyDropdownOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
 
   const handleSearch = (e) => {
     if (e.key === "Enter" && searchQuery.trim()) {
@@ -145,6 +143,38 @@ const Header = ({ onMenuClick }) => {
             )}
           </div>
 
+          <div className="relative" ref={currencyDropdownRef}>
+            <button
+              onClick={() => setCurrencyDropdownOpen(!currencyDropdownOpen)}
+              className="flex items-center gap-[6px] px-[12px] py-[8px] rounded-[10px] hover:bg-accent transition-colors text-[14px] font-medium text-foreground"
+            >
+              <Coins className="w-[18px] h-[18px]" />
+              <span>{symbols[currency]} {currency}</span>
+              <ChevronDown className="w-[14px] h-[14px]" />
+            </button>
+
+            {currencyDropdownOpen && (
+              <div className="absolute right-0 mt-[8px] w-[140px] bg-popover rounded-[12px] shadow-lg border border-border py-[8px] z-50">
+                {["AZN", "USD", "EUR"].map((cur) => (
+                  <button
+                    key={cur}
+                    onClick={() => {
+                      changeCurrency(cur);
+                      setCurrencyDropdownOpen(false);
+                    }}
+                    className={`flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] hover:bg-accent ${
+                      currency === cur
+                        ? "text-primary font-medium"
+                        : "text-foreground"
+                    }`}
+                  >
+                    {symbols[cur]} {cur}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <button
             onClick={toggleTheme}
             className="p-[10px] rounded-[10px] hover:bg-accent transition-colors"
@@ -161,65 +191,6 @@ const Header = ({ onMenuClick }) => {
             <Bell className="w-[22px] h-[22px] text-foreground" />
             <span className="absolute top-[6px] right-[6px] w-[8px] h-[8px] bg-destructive rounded-full"></span>
           </button>
-
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-[10px] pl-[6px] pr-[14px] py-[6px] rounded-[12px] hover:bg-accent transition-colors"
-            >
-              {user?.avatar ? (
-                <img
-                  src={user.avatar}
-                  alt=""
-                  className="w-[36px] h-[36px] rounded-full object-cover"
-                />
-              ) : (
-                <div className="w-[36px] h-[36px] bg-linear-to-br from-primary to-ring rounded-full flex items-center justify-center text-primary-foreground text-[14px] font-semibold">
-                  {user?.firstName?.charAt(0)}
-                  {user?.lastName?.charAt(0)}
-                </div>
-              )}
-              <div className="hidden sm:block text-left">
-                <p className="text-[14px] font-semibold text-foreground">
-                  {user?.firstName} {user?.lastName}
-                </p>
-                <p className="text-[12px] text-muted-foreground">
-                  {isSuperAdmin ? t("users.superAdmin") : t("users.admin")}
-                </p>
-              </div>
-              <ChevronDown className="w-[16px] h-[16px] text-muted-foreground" />
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-[8px] w-[220px] bg-popover rounded-[12px] shadow-lg border border-border py-[8px]">
-                <div className="px-[16px] py-[10px] border-b border-border">
-                  <p className="text-[14px] font-semibold text-foreground">
-                    {user?.firstName} {user?.lastName}
-                  </p>
-                  <p className="text-[12px] text-muted-foreground">
-                    {user?.email}
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    navigate("/settings");
-                    setDropdownOpen(false);
-                  }}
-                  className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-foreground hover:bg-accent"
-                >
-                  <Settings className="w-[16px] h-[16px]" />
-                  {t("header.settings")}
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-[10px] w-full px-[16px] py-[10px] text-[14px] text-destructive hover:bg-destructive/10"
-                >
-                  <LogOut className="w-[16px] h-[16px]" />
-                  {t("header.logout")}
-                </button>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </header>

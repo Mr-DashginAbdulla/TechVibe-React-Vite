@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Edit, Trash2, Package } from "lucide-react";
 
 const ProductsMobileList = ({ products, getCategoryName, onDelete }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   if (products.length === 0) {
     return (
@@ -35,7 +37,7 @@ const ProductsMobileList = ({ products, getCategoryName, onDelete }) => {
               </p>
               <div className="flex items-center justify-between mt-[6px]">
                 <span className="text-[14px] font-bold text-foreground">
-                  ${product.price}
+                  {formatPrice(product.price)}
                 </span>
                 <div className="flex items-center gap-[6px]">
                   <Link

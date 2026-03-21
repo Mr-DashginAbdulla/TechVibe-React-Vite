@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { ShoppingCart, Trash2, Star } from "lucide-react";
 
 const WishlistItemCard = ({ item, onRemove, onAddToCart }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="group relative bg-card rounded-[16px] overflow-hidden shadow-sm hover:shadow-lg border border-border transition-all duration-300 hover:-translate-y-1">
@@ -44,7 +46,7 @@ const WishlistItemCard = ({ item, onRemove, onAddToCart }) => {
 
         <div className="flex items-center justify-between">
           <span className="text-[18px] font-bold text-foreground">
-            ${Number(item.price || 0).toFixed(2)}
+            {formatPrice(Number(item.price || 0))}
           </span>
 
           <button

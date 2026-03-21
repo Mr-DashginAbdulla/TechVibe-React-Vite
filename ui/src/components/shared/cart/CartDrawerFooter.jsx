@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { ArrowRight } from "lucide-react";
 
 const CartDrawerFooter = ({ subtotal, onCheckout, onViewCart }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="p-[16px] border-t border-border bg-muted/30">
@@ -10,7 +12,7 @@ const CartDrawerFooter = ({ subtotal, onCheckout, onViewCart }) => {
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("basket.subtotal")}</span>
           <span className="text-foreground font-medium">
-            ${subtotal.toFixed(2)}
+            {formatPrice(subtotal)}
           </span>
         </div>
         <div className="flex justify-between text-[14px]">
@@ -20,7 +22,7 @@ const CartDrawerFooter = ({ subtotal, onCheckout, onViewCart }) => {
         <div className="h-px bg-border" />
         <div className="flex justify-between text-[16px] font-bold">
           <span className="text-foreground">{t("basket.total")}</span>
-          <span className="text-primary">${subtotal.toFixed(2)}</span>
+          <span className="text-primary">{formatPrice(subtotal)}</span>
         </div>
       </div>
 

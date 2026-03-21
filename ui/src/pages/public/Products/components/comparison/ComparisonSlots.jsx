@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Plus, X, ArrowLeftRight } from "lucide-react";
 import ProductPicker from "./ProductPicker";
 
@@ -17,6 +18,7 @@ const ComparisonSlots = ({
   onTogglePicker,
 }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="flex items-center gap-3 md:gap-4 mb-6">
@@ -30,7 +32,7 @@ const ComparisonSlots = ({
           {product.name}
         </span>
         <span className="text-xs md:text-sm font-bold text-primary">
-          ${product.price}
+          {formatPrice(product.price)}
         </span>
         <span className="inline-block px-2 py-0.5 bg-primary text-primary-foreground rounded-full text-[0.65rem] font-bold uppercase tracking-wide">
           {t("productDetails.thisProduct")}
@@ -59,7 +61,7 @@ const ComparisonSlots = ({
             {selectedProduct.name}
           </span>
           <span className="text-xs md:text-sm font-bold text-primary">
-            ${selectedProduct.price}
+            {formatPrice(selectedProduct.price)}
           </span>
           <Link
             to={`/product/${selectedProduct.id}`}

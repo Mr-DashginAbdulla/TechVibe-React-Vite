@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   PieChart,
   Pie,
@@ -21,6 +22,7 @@ const BRAND_COLORS = [
 
 const BrandRevenueChart = ({ orders, products }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const brandData = (() => {
     const productMap = {};
@@ -65,7 +67,7 @@ const BrandRevenueChart = ({ orders, products }) => {
             {data.name}
           </p>
           <p className="text-[12px] text-primary mt-[2px]">
-            ${data.value.toLocaleString()} (
+            {formatPrice(data.value)} (
             {total > 0 ? ((data.value / total) * 100).toFixed(1) : 0}%)
           </p>
         </div>

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   BarChart,
   Bar,
@@ -12,6 +13,7 @@ import {
 
 const CategoryRevenueChart = ({ orders, products }) => {
   const { t } = useTranslation();
+  const { formatPrice, symbols, currency } = useCurrency();
 
   // Build product → category lookup and compute revenue per category
   const categoryData = (() => {
@@ -64,7 +66,7 @@ const CategoryRevenueChart = ({ orders, products }) => {
             {payload[0].payload.fullName}
           </p>
           <p className="text-[12px] text-primary mt-[2px]">
-            ${payload[0].value.toLocaleString()}
+            {formatPrice(payload[0].value)}
           </p>
         </div>
       );
@@ -102,7 +104,7 @@ const CategoryRevenueChart = ({ orders, products }) => {
               tickLine={false}
               tick={{ fontSize: 12, fill: "var(--color-muted-foreground)" }}
               tickFormatter={(v) =>
-                `$${v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v}`
+                `${v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v} ${symbols[currency]}`
               }
             />
             <YAxis

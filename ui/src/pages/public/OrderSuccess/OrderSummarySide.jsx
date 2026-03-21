@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { CreditCard, ArrowRight, ShoppingBag } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const OrderSummarySide = ({ order }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="bg-card rounded-[24px] shadow-sm border border-border p-[24px] sticky top-[24px]">
@@ -15,33 +17,33 @@ const OrderSummarySide = ({ order }) => {
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("basket.subtotal")}</span>
           <span className="text-foreground font-medium">
-            ${(order.subtotal || 0).toFixed(2)}
+            {formatPrice(order.subtotal || 0)}
           </span>
         </div>
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("basket.shipping")}</span>
           <span className="text-foreground font-medium">
-            ${(order.shippingCost || 0).toFixed(2)}
+            {formatPrice(order.shippingCost || 0)}
           </span>
         </div>
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("checkout.tax")}</span>
           <span className="text-foreground font-medium">
-            ${(order.tax || 0).toFixed(2)}
+            {formatPrice(order.tax || 0)}
           </span>
         </div>
         {order.discount > 0 && (
           <div className="flex justify-between text-[14px]">
             <span className="text-success">{t("checkout.discount")}</span>
             <span className="text-success font-medium">
-              -${(order.discount || 0).toFixed(2)}
+              -{formatPrice(order.discount || 0)}
             </span>
           </div>
         )}
         <div className="h-px bg-border" />
         <div className="flex justify-between text-[18px] font-bold">
           <span className="text-foreground">{t("basket.total")}</span>
-          <span className="text-primary">${(order.total || 0).toFixed(2)}</span>
+          <span className="text-primary">{formatPrice(order.total || 0)}</span>
         </div>
       </div>
 

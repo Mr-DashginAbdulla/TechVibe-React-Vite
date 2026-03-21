@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Search, ArrowRight, X } from "lucide-react";
 
 const SearchBar = ({ products, className = "", onSearch }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   const navigate = useNavigate();
   const searchRef = useRef(null);
 
@@ -131,7 +133,7 @@ const SearchBar = ({ products, className = "", onSearch }) => {
                           {product.name}
                         </p>
                         <p className="text-[12px] text-muted-foreground">
-                          ${product.price?.toFixed(2)}
+                          {formatPrice(product.price || 0)}
                         </p>
                       </div>
                       <button
@@ -181,7 +183,7 @@ const SearchBar = ({ products, className = "", onSearch }) => {
                           {product.name}
                         </p>
                         <p className="text-[13px] text-muted-foreground">
-                          ${product.price.toFixed(2)}
+                          {formatPrice(product.price)}
                         </p>
                       </div>
                       <ArrowRight className="w-[16px] h-[16px] text-muted-foreground" />

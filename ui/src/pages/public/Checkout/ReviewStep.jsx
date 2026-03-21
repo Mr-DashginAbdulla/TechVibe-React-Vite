@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   MapPin,
   CreditCard,
@@ -16,6 +17,7 @@ const ReviewStep = ({
   onChangeStep,
 }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const getPaymentIcon = () => {
     switch (paymentMethod) {
@@ -69,7 +71,7 @@ const ReviewStep = ({
                 </p>
               </div>
               <p className="text-[16px] font-bold text-primary">
-                ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
+                {formatPrice((item.price || 0) * (item.quantity || 1))}
               </p>
             </div>
           ))}

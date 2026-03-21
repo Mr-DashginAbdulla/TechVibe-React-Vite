@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   if (!options || options.length === 0) return null;
 
@@ -64,7 +66,7 @@ const VariantSelector = ({ options = [], selectedOptions, onOptionSelect }) => {
                   )}
                   {val.priceModifier > 0 && (
                     <span className="absolute top-4 right-4 text-xs font-medium text-muted-foreground">
-                      +${val.priceModifier}
+                      +{formatPrice(val.priceModifier)}
                     </span>
                   )}
                 </button>

@@ -1,8 +1,10 @@
 import { Package } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const OrderItemsList = ({ items }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="bg-card rounded-[24px] shadow-sm border border-border p-[24px]">
@@ -32,7 +34,7 @@ const OrderItemsList = ({ items }) => {
               </p>
             </div>
             <p className="text-[16px] font-bold text-foreground">
-              ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
+              {formatPrice((item.price || 0) * (item.quantity || 1))}
             </p>
           </div>
         ))}

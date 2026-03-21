@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const OrderSidebar = ({ order, onStatusUpdate, getStatusBadge }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const statusOptions = [
     "pending",
@@ -71,7 +73,7 @@ const OrderSidebar = ({ order, onStatusUpdate, getStatusBadge }) => {
               {t("orders.subtotal")}
             </span>
             <span className="text-foreground">
-              ${order.subtotal?.toFixed(2) || order.total?.toFixed(2)}
+              {formatPrice(order.subtotal || order.total || 0)}
             </span>
           </div>
           {order.shipping !== undefined && (
@@ -80,14 +82,14 @@ const OrderSidebar = ({ order, onStatusUpdate, getStatusBadge }) => {
                 {t("orders.shipping")}
               </span>
               <span className="text-foreground">
-                ${order.shipping?.toFixed(2)}
+                {formatPrice(order.shipping || 0)}
               </span>
             </div>
           )}
           {order.tax !== undefined && (
             <div className="flex justify-between">
               <span className="text-muted-foreground">{t("orders.tax")}</span>
-              <span className="text-foreground">${order.tax?.toFixed(2)}</span>
+              <span className="text-foreground">{formatPrice(order.tax || 0)}</span>
             </div>
           )}
           <div className="flex justify-between pt-[8px] border-t border-border">
@@ -95,7 +97,7 @@ const OrderSidebar = ({ order, onStatusUpdate, getStatusBadge }) => {
               {t("orders.grandTotal")}
             </span>
             <span className="text-foreground font-bold">
-              ${order.total?.toFixed(2)}
+              {formatPrice(order.total || 0)}
             </span>
           </div>
         </div>

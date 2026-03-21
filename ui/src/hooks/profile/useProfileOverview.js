@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { userService } from "@/services/userService";
 import { orderService } from "@/services/orderService";
 import { ShoppingBag, Package, DollarSign, Heart } from "lucide-react";
@@ -8,6 +9,7 @@ import { ShoppingBag, Package, DollarSign, Heart } from "lucide-react";
 export const useProfileOverview = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { formatPrice } = useCurrency();
   const [stats, setStats] = useState(null);
   const [recentOrders, setRecentOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +48,7 @@ export const useProfileOverview = () => {
     },
     {
       name: t("profile.totalSpent"),
-      value: `$${(stats?.totalSpent || 0).toFixed(2)}`,
+      value: formatPrice(stats?.totalSpent || 0),
       icon: DollarSign,
       color: "purple",
     },

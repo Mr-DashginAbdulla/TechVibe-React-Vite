@@ -1,12 +1,14 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Pencil, Trash2, ToggleLeft, ToggleRight } from "lucide-react";
 
 const PromoCodesTable = ({ promoCodes, onEdit, onDelete, onToggleActive }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const formatDiscount = (promo) => {
     if (promo.type === "percentage") return `${promo.discount}%`;
-    return `$${promo.discount}`;
+    return formatPrice(promo.discount);
   };
 
   const formatDate = (dateStr) => {
@@ -75,7 +77,7 @@ const PromoCodesTable = ({ promoCodes, onEdit, onDelete, onToggleActive }) => {
                   {formatDiscount(promo)}
                 </td>
                 <td className="px-[20px] py-[16px] text-[14px] text-foreground">
-                  ${promo.minOrder}
+                  {formatPrice(promo.minOrder)}
                 </td>
                 <td className="px-[20px] py-[16px] text-[14px] text-foreground">
                   {promo.usedCount}
@@ -167,7 +169,7 @@ const PromoCodesTable = ({ promoCodes, onEdit, onDelete, onToggleActive }) => {
                   {t("promoCodes.minOrder")}:{" "}
                 </span>
                 <span className="font-medium text-foreground">
-                  ${promo.minOrder}
+                  {formatPrice(promo.minOrder)}
                 </span>
               </div>
               <div>

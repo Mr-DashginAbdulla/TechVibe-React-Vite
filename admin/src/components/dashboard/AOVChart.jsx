@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   BarChart,
   Bar,
@@ -11,6 +12,7 @@ import {
 
 const AOVChart = ({ orders }) => {
   const { t } = useTranslation();
+  const { formatPrice, symbols, currency } = useCurrency();
 
   const monthlyAOV = (() => {
     const now = new Date();
@@ -60,7 +62,7 @@ const AOVChart = ({ orders }) => {
         <div className="bg-popover border border-border rounded-[10px] px-[14px] py-[10px] shadow-lg">
           <p className="text-[13px] font-semibold text-foreground">{label}</p>
           <p className="text-[12px] text-primary mt-[2px]">
-            AOV: ${payload[0].value.toLocaleString()}
+            AOV: {formatPrice(payload[0].value)}
           </p>
           <p className="text-[12px] text-muted-foreground mt-px">
             {payload[0].payload.orders} {t("dashboard.orders")}
@@ -79,7 +81,7 @@ const AOVChart = ({ orders }) => {
             {t("dashboard.avgOrderValue")}
           </h2>
           <p className="text-[13px] text-muted-foreground mt-[2px]">
-            {t("dashboard.overall")}: ${overallAOV}
+            {t("dashboard.overall")}: {formatPrice(overallAOV)}
           </p>
         </div>
       </div>
@@ -104,7 +106,7 @@ const AOVChart = ({ orders }) => {
               axisLine={false}
               tickLine={false}
               tick={{ fontSize: 12, fill: "var(--color-muted-foreground)" }}
-              tickFormatter={(v) => `$${v}`}
+              tickFormatter={(v) => `${v} ${symbols[currency]}`}
             />
             <Tooltip content={<CustomTooltip />} />
             <Bar

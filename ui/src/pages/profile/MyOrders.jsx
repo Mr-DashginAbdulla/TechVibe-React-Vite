@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { orderService } from "@/services/orderService";
 import { Package, ChevronRight, Loader2 } from "lucide-react";
 
 const MyOrders = () => {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
+  const { formatPrice } = useCurrency();
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
@@ -149,7 +151,7 @@ const MyOrders = () => {
                 <div className="flex items-center gap-[16px]">
                   <div className="text-right">
                     <p className="text-[18px] font-bold text-foreground">
-                      ${(order.total || 0).toFixed(2)}
+                      {formatPrice(order.total || 0)}
                     </p>
                     <span
                       className={`inline-flex px-[12px] py-[4px] rounded-full text-[12px] font-medium ${getStatusColor(order.status)}`}

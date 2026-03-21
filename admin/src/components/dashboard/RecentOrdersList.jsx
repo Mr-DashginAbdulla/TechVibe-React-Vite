@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const RecentOrdersList = ({ orders, getStatusBadge }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="bg-card rounded-[16px] border border-border">
@@ -34,7 +36,7 @@ const RecentOrdersList = ({ orders, getStatusBadge }) => {
               </div>
               <div className="text-right">
                 <p className="text-[14px] font-semibold text-foreground">
-                  ${order.total?.toFixed(2)}
+                  {formatPrice(order.total || 0)}
                 </p>
                 {getStatusBadge(order.status)}
               </div>

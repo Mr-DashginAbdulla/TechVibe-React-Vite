@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   Tag,
   ShieldCheck,
@@ -24,6 +25,7 @@ const CheckoutSummary = ({
   currentStep,
 }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   const [inputCode, setInputCode] = useState("");
   const [isApplying, setIsApplying] = useState(false);
 
@@ -121,7 +123,7 @@ const CheckoutSummary = ({
               </div>
             </div>
             <p className="text-[14px] font-semibold text-foreground">
-              ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
+              {formatPrice((item.price || 0) * (item.quantity || 1))}
             </p>
           </div>
         ))}
@@ -144,7 +146,7 @@ const CheckoutSummary = ({
               </div>
               <div className="flex items-center gap-[8px]">
                 <span className="text-[14px] font-bold text-success">
-                  -{discount.toFixed(2)}$
+                  -{formatPrice(discount)}
                 </span>
                 <button
                   onClick={onRemovePromo}
@@ -182,7 +184,7 @@ const CheckoutSummary = ({
             {t("basket.subtotal")} ({cartItems.length} {t("basket.items")})
           </span>
           <span className="text-foreground font-medium">
-            ${subtotal.toFixed(2)}
+            {formatPrice(subtotal)}
           </span>
         </div>
 
@@ -194,7 +196,7 @@ const CheckoutSummary = ({
             </span>
           ) : (
             <span className="text-foreground font-medium">
-              ${shippingCost.toFixed(2)}
+              {formatPrice(shippingCost)}
             </span>
           )}
         </div>
@@ -203,7 +205,7 @@ const CheckoutSummary = ({
           <div className="flex justify-between text-[14px]">
             <span className="text-success">{t("checkout.discount")}</span>
             <span className="text-success font-medium">
-              -${discount.toFixed(2)}
+              -{formatPrice(discount)}
             </span>
           </div>
         )}
@@ -212,7 +214,7 @@ const CheckoutSummary = ({
 
         <div className="flex justify-between text-[18px] font-bold">
           <span className="text-foreground">{t("basket.total")}</span>
-          <span className="text-primary">${total.toFixed(2)}</span>
+          <span className="text-primary">{formatPrice(total)}</span>
         </div>
       </div>
 

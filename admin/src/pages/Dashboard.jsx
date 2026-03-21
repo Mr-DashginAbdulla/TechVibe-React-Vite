@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   DollarSign,
   ShoppingCart,
@@ -28,6 +29,7 @@ import AOVChart from "@/components/dashboard/AOVChart";
 
 const Dashboard = () => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -146,7 +148,7 @@ const Dashboard = () => {
   const statCards = [
     {
       title: t("dashboard.totalRevenue"),
-      value: `$${data.totalRevenue.toLocaleString("en-US", { minimumFractionDigits: 2 })}`,
+      value: formatPrice(data.totalRevenue),
       icon: DollarSign,
       color: "from-[#10B981] to-[#059669]",
       change: "+12.5%",

@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Package } from "lucide-react";
 
 const OrderItemsList = ({ items, subtotal, shipping, total }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="lg:col-span-2 bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
@@ -67,7 +69,7 @@ const OrderItemsList = ({ items, subtotal, shipping, total }) => {
                   {t("product.quantity")}: {item.quantity}
                 </p>
                 <p className="text-[16px] font-bold text-foreground">
-                  ${(item.price || 0).toFixed(2)}
+                  {formatPrice(item.price || 0)}
                 </p>
               </div>
             </div>
@@ -78,15 +80,15 @@ const OrderItemsList = ({ items, subtotal, shipping, total }) => {
       <div className="mt-[24px] pt-[20px] border-t border-border space-y-[12px]">
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("cart.subtotal")}</span>
-          <span className="text-foreground">${(subtotal || 0).toFixed(2)}</span>
+          <span className="text-foreground">{formatPrice(subtotal || 0)}</span>
         </div>
         <div className="flex justify-between text-[14px]">
           <span className="text-muted-foreground">{t("cart.shipping")}</span>
-          <span className="text-foreground">${(shipping || 0).toFixed(2)}</span>
+          <span className="text-foreground">{formatPrice(shipping || 0)}</span>
         </div>
         <div className="flex justify-between text-[16px] font-bold pt-[12px] border-t border-border">
           <span className="text-foreground">{t("cart.total")}</span>
-          <span className="text-primary">${(total || 0).toFixed(2)}</span>
+          <span className="text-primary">{formatPrice(total || 0)}</span>
         </div>
       </div>
     </div>

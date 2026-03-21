@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import {
   LineChart,
   Line,
@@ -11,6 +12,7 @@ import {
 
 const DailyOrdersChart = ({ orders }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const dailyData = (() => {
     const now = new Date();
@@ -58,7 +60,7 @@ const DailyOrdersChart = ({ orders }) => {
           </p>
           {payload[1] && (
             <p className="text-[12px] text-muted-foreground mt-px">
-              ${payload[1].value.toLocaleString()}
+              {formatPrice(payload[1].value)}
             </p>
           )}
         </div>

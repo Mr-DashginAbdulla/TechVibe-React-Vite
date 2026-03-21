@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Eye } from "lucide-react";
 
 const OrdersTable = ({ orders, getStatusBadge }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="hidden md:block overflow-x-auto">
@@ -51,7 +53,7 @@ const OrdersTable = ({ orders, getStatusBadge }) => {
                 {order.items?.length || 0}
               </td>
               <td className="px-[16px] py-[14px] text-[14px] font-semibold text-foreground">
-                ${order.total?.toFixed(2)}
+                {formatPrice(order.total || 0)}
               </td>
               <td className="px-[16px] py-[14px]">
                 {getStatusBadge(order.status)}

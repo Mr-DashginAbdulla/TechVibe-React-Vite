@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Search } from "lucide-react";
 
 const ProductPicker = ({
@@ -9,6 +10,7 @@ const ProductPicker = ({
   onSelect,
 }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="absolute top-full left-1/2 -translate-x-1/2 z-50 w-[220px] md:w-[280px] max-h-[360px] bg-card border border-border rounded-xl shadow-2xl mt-2 overflow-hidden animate-in fade-in slide-in-from-top-1 duration-150">
@@ -49,7 +51,7 @@ const ProductPicker = ({
                   {p.name}
                 </span>
                 <span className="text-[0.7rem] font-bold text-primary">
-                  ${p.price}
+                  {formatPrice(p.price)}
                 </span>
               </div>
             </button>

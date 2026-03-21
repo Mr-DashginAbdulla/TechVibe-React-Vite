@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Plus, Minus, Trash2 } from "lucide-react";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const CartItemCard = ({ item, onQuantityChange, onRemove }) => {
+  const { formatPrice } = useCurrency();
   return (
     <div className="flex gap-[16px] p-[20px] hover:bg-muted/50 transition-colors">
       <Link
@@ -22,7 +24,7 @@ const CartItemCard = ({ item, onQuantityChange, onRemove }) => {
           {item.name}
         </Link>
         <p className="text-[17px] font-bold text-primary mt-[4px]">
-          ${(item.price || 0).toFixed(2)}
+          {formatPrice(item.price || 0)}
         </p>
         <div className="flex items-center gap-[16px] mt-[10px]">
           <div className="flex items-center border border-border rounded-[8px]">
@@ -53,7 +55,7 @@ const CartItemCard = ({ item, onQuantityChange, onRemove }) => {
       </div>
       <div className="text-right">
         <p className="text-[16px] font-bold text-foreground">
-          ${((item.price || 0) * (item.quantity || 1)).toFixed(2)}
+          {formatPrice((item.price || 0) * (item.quantity || 1))}
         </p>
       </div>
     </div>

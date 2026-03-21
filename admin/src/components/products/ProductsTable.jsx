@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Edit, Trash2, Eye, Package } from "lucide-react";
 
 const ProductsTable = ({ products, getCategoryName, onDelete }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="hidden md:block overflow-x-auto">
@@ -55,7 +57,7 @@ const ProductsTable = ({ products, getCategoryName, onDelete }) => {
               </td>
               <td className="px-[16px] py-[14px]">
                 <p className="text-[14px] font-semibold text-foreground">
-                  ${product.price}
+                  {formatPrice(product.price)}
                 </p>
                 {product.discount > 0 && (
                   <p className="text-[12px] text-destructive">

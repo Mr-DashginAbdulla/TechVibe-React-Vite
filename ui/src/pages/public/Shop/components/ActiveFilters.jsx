@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { X } from "lucide-react";
 
 const ActiveFilters = ({ filters, categories, onRemove }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
   const tags = [];
 
   if (filters.search) {
@@ -26,7 +28,7 @@ const ActiveFilters = ({ filters, categories, onRemove }) => {
     tags.push({
       type: "minPrice",
       value: filters.minPrice,
-      label: `Min: $${filters.minPrice}`,
+      label: `Min: ${formatPrice(filters.minPrice)}`,
     });
   }
 
@@ -34,7 +36,7 @@ const ActiveFilters = ({ filters, categories, onRemove }) => {
     tags.push({
       type: "maxPrice",
       value: filters.maxPrice,
-      label: `Max: $${filters.maxPrice}`,
+      label: `Max: ${formatPrice(filters.maxPrice)}`,
     });
   }
 

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Package, ChevronRight } from "lucide-react";
 
 const RecentOrdersList = ({ recentOrders, getStatusColor, getStatusText }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="bg-card rounded-[20px] shadow-sm border border-border p-[24px]">
@@ -48,8 +50,8 @@ const RecentOrdersList = ({ recentOrders, getStatusColor, getStatusText }) => {
                     {order.orderNumber}
                   </p>
                   <p className="text-[13px] text-muted-foreground">
-                    {order.items?.length || 0} {t("order.items")} • $
-                    {(order.total || 0).toFixed(2)}
+                    {order.items?.length || 0} {t("order.items")} •{" "}
+                    {formatPrice(order.total || 0)}
                   </p>
                 </div>
               </div>

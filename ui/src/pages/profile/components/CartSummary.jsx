@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { ArrowRight } from "lucide-react";
 
 const CartSummary = ({ subtotal }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="p-[20px] bg-muted/30 border-t border-border">
@@ -12,7 +14,7 @@ const CartSummary = ({ subtotal }) => {
           {t("basket.subtotal")}
         </span>
         <span className="text-[15px] font-medium text-foreground">
-          ${subtotal.toFixed(2)}
+          {formatPrice(subtotal)}
         </span>
       </div>
       <div className="flex items-center justify-between mb-[16px]">
@@ -29,7 +31,7 @@ const CartSummary = ({ subtotal }) => {
           {t("basket.total")}
         </span>
         <span className="text-[20px] font-bold text-primary">
-          ${subtotal.toFixed(2)}
+          {formatPrice(subtotal)}
         </span>
       </div>
       <Link

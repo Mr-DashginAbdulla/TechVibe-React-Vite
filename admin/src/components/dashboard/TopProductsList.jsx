@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const TopProductsList = ({ products }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="bg-card rounded-[16px] border border-border">
@@ -38,7 +40,7 @@ const TopProductsList = ({ products }) => {
             </div>
             <div className="text-right">
               <p className="text-[14px] font-semibold text-foreground">
-                ${product.price}
+                {formatPrice(product.price)}
               </p>
               <div className="flex items-center gap-[4px] text-[13px] text-[#F59E0B]">
                 <span>★</span>

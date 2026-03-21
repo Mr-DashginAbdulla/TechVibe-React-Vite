@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { ShoppingCart } from "lucide-react";
 
 const OrdersMobileList = ({ orders, getStatusBadge }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   if (orders.length === 0) {
     return (
@@ -35,7 +37,7 @@ const OrdersMobileList = ({ orders, getStatusBadge }) => {
               {order.customer?.name || order.userId}
             </span>
             <span className="text-[14px] font-semibold text-foreground">
-              ${order.total?.toFixed(2)}
+              {formatPrice(order.total || 0)}
             </span>
           </div>
           <p className="text-[12px] text-muted-foreground mt-[4px]">

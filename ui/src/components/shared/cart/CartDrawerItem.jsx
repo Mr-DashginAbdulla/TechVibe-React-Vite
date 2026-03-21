@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Minus, Plus, Trash2 } from "lucide-react";
 
 const CartDrawerItem = ({
@@ -10,6 +11,7 @@ const CartDrawerItem = ({
   maxStock,
 }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   return (
     <div className="flex gap-[12px] p-[12px] bg-card rounded-[14px] border border-border hover:border-primary/20 transition-colors">
@@ -33,7 +35,7 @@ const CartDrawerItem = ({
           {item.name}
         </Link>
         <p className="text-[15px] font-bold text-primary mt-[4px]">
-          ${(item.price || 0).toFixed(2)}
+          {formatPrice(item.price || 0)}
         </p>
         <div className="flex items-center justify-between mt-[8px]">
           <div className="flex items-center border border-border rounded-[8px] bg-background">
