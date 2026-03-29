@@ -4,6 +4,8 @@ const User = require("../models/User"); // Needed to get user email
 const { auth, adminAuth } = require("../middleware/auth");
 const sendEmail = require("../utils/sendEmail");
 const { orderConfirmationTemplate, orderStatusUpdateTemplate } = require("../utils/emailTemplates");
+const Notification = require("../models/Notification");
+const { getIO } = require("../utils/socket");
 const router = express.Router();
 
 // GET /api/orders - Get orders (admin: all, user: own)
@@ -91,6 +93,24 @@ router.post("/", auth, async (req, res, next) => {
       // We don't fail the order creation if email fails
     }
 
+    // Create Notification for Admins
+    try {
+      const notification = await Notification.create({
+        recipient: "admin",
+        type: "NEW_ORDER",
+        title: "Yeni Sifariş",
+        message: `Yeni sifariş məlumatı daxil oldu: ${order.orderNumber}`,
+        relatedId: order._id
+      });
+      // Emit to admin room
+      const io = getIO();
+      if (io) {
+        io.to("admin").emit("new_notification", notification);
+      }
+    } catch (notificationErr) {
+      console.error("Failed to create admin notification:", notificationErr);
+    }
+
     res.status(201).json(order);
   } catch (error) {
     next(error);
@@ -123,6 +143,34 @@ router.patch("/:id", auth, async (req, res, next) => {
         }
       } catch (emailError) {
         console.error("Failed to send status update email:", emailError);
+      }
+
+      // Create Notification for User
+      try {
+        const statusTranslations = {
+          pending: 'Gözləyir',
+          processing: 'Hazırlanır',
+          shipped: 'Göndərildi',
+          delivered: 'Çatdırıldı',
+          cancelled: 'Ləğv edildi'
+        };
+        const statusText = statusTranslations[order.status] || order.status;
+
+        const notification = await Notification.create({
+          recipient: order.userId,
+          type: "ORDER_STATUS_UPDATE",
+          title: "Sifarişinizin statusu dəyişdi",
+          message: `Sifariş (${order.orderNumber}) statusu: ${statusText}`,
+          relatedId: order._id
+        });
+        
+        // Emit to user room
+        const io = getIO();
+        if (io) {
+          io.to(order.userId.toString()).emit("new_notification", notification);
+        }
+      } catch (notificationErr) {
+        console.error("Failed to create user notification:", notificationErr);
       }
     }
 

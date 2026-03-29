@@ -10,10 +10,14 @@ import {
   Sun,
   Moon,
   Coins,
+  CheckCircle2
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { useCurrency } from "@/context/CurrencyContext";
+import { useNotifications } from "@/context/NotificationContext";
+import { formatDistanceToNow } from "date-fns";
+import { az, ru, enUS } from "date-fns/locale";
 
 const Header = ({ onMenuClick }) => {
   const { t, i18n } = useTranslation();
@@ -32,9 +36,12 @@ const Header = ({ onMenuClick }) => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
+  const [notifDropdownOpen, setNotifDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const langDropdownRef = useRef(null);
   const currencyDropdownRef = useRef(null);
+  const notifDropdownRef = useRef(null);
+  const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications();
 
   const currentLang = i18n.language?.startsWith("az")
     ? "AZ"
@@ -42,19 +49,19 @@ const Header = ({ onMenuClick }) => {
       ? "RU"
       : "EN";
 
+  const localeMap = { "AZ": az, "RU": ru, "EN": enUS };
+  const currentLocale = localeMap[currentLang];
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        langDropdownRef.current &&
-        !langDropdownRef.current.contains(event.target)
-      ) {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(event.target)) {
         setLangDropdownOpen(false);
       }
-      if (
-        currencyDropdownRef.current &&
-        !currencyDropdownRef.current.contains(event.target)
-      ) {
+      if (currencyDropdownRef.current && !currencyDropdownRef.current.contains(event.target)) {
         setCurrencyDropdownOpen(false);
+      }
+      if (notifDropdownRef.current && !notifDropdownRef.current.contains(event.target)) {
+        setNotifDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -187,10 +194,69 @@ const Header = ({ onMenuClick }) => {
             )}
           </button>
 
-          <button className="relative p-[10px] rounded-[10px] hover:bg-accent transition-colors">
-            <Bell className="w-[22px] h-[22px] text-foreground" />
-            <span className="absolute top-[6px] right-[6px] w-[8px] h-[8px] bg-destructive rounded-full"></span>
-          </button>
+          <div className="relative" ref={notifDropdownRef}>
+            <button 
+              onClick={() => setNotifDropdownOpen(!notifDropdownOpen)}
+              className="relative p-[10px] rounded-[10px] hover:bg-accent transition-colors"
+            >
+              <Bell className="w-[22px] h-[22px] text-foreground" />
+              {unreadCount > 0 && (
+                <span className="absolute top-[4px] right-[4px] flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-destructive px-[4px] text-[10px] font-bold text-white shadow-sm ring-2 ring-card">
+                  {unreadCount > 99 ? '99+' : unreadCount}
+                </span>
+              )}
+            </button>
+
+            {notifDropdownOpen && (
+              <div className="absolute right-[-10px] sm:right-0 mt-[8px] w-[320px] max-w-[calc(100vw-32px)] bg-popover rounded-[12px] shadow-lg border border-border py-[8px] max-h-[400px] overflow-hidden flex flex-col z-50">
+                <div className="flex items-center justify-between px-[16px] pb-[8px] border-b border-border">
+                  <h3 className="font-semibold text-foreground text-[14px]">Bildirişlər</h3>
+                  {unreadCount > 0 && (
+                    <button 
+                      onClick={markAllAsRead} 
+                      className="text-[12px] text-primary hover:underline flex items-center gap-[4px]"
+                    >
+                      <CheckCircle2 className="w-[12px] h-[12px]"/>
+                      Hamısını oxunmuş et
+                    </button>
+                  )}
+                </div>
+                
+                <div className="overflow-y-auto flex-1 custom-scrollbar">
+                  {notifications.length === 0 ? (
+                    <div className="p-[16px] text-center text-muted-foreground text-[13px]">
+                      Yeni bildiriş yoxdur
+                    </div>
+                  ) : (
+                    notifications.map((notif) => (
+                      <div 
+                        key={notif._id} 
+                        onClick={() => {
+                          if (!notif.read) markAsRead(notif._id);
+                          setNotifDropdownOpen(false);
+                          if (notif.relatedId) navigate(`/orders/${notif.relatedId}`);
+                        }}
+                        className={`flex flex-col gap-[4px] p-[12px] px-[16px] cursor-pointer hover:bg-accent/50 border-b border-border/50 transition-colors ${!notif.read ? 'bg-primary/5' : ''}`}
+                      >
+                        <div className="flex justify-between items-start gap-[8px]">
+                          <span className={`text-[14px] leading-tight ${!notif.read ? 'font-semibold text-foreground' : 'font-medium text-foreground/80'}`}>
+                            {notif.title}
+                          </span>
+                          {!notif.read && <span className="w-[8px] h-[8px] rounded-full bg-primary flex-shrink-0 mt-[4px]"></span>}
+                        </div>
+                        <p className="text-[13px] text-muted-foreground line-clamp-2 leading-snug">
+                          {notif.message}
+                        </p>
+                        <span className="text-[11px] text-muted-foreground/70 mt-[2px]">
+                          {formatDistanceToNow(new Date(notif.createdAt), { addSuffix: true, locale: currentLocale })}
+                        </span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

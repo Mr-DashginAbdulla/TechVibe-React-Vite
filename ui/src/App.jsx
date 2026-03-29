@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { AuthModalProvider } from "@/context/AuthModalContext";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
+import { NotificationProvider } from "@/context/NotificationContext";
 import { LenisProvider } from "@/context/LenisProvider";
 import AppRoutes from "@/routes/AppRoutes";
 import store from "@/store/store";
@@ -51,11 +52,13 @@ function App() {
             <ScrollToTop />
             <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
               <AuthProvider>
-                <AuthModalProvider>
-                  <AppRoutes />
-                  <AuthModal />
-                  <ThemedToastContainer />
-                </AuthModalProvider>
+                <NotificationProvider>
+                  <AuthModalProvider>
+                    <AppRoutes />
+                    <AuthModal />
+                    <ThemedToastContainer />
+                  </AuthModalProvider>
+                </NotificationProvider>
               </AuthProvider>
             </ThemeProvider>
           </LenisProvider>

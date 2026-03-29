@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { CurrencyProvider } from "@/context/CurrencyContext";
+import { NotificationProvider } from "@/context/NotificationContext";
 import AppRoutes from "@/routes/AppRoutes";
 import ErrorBoundary from "@/components/shared/ErrorBoundary";
 
@@ -35,16 +36,18 @@ function ToastWrapper() {
 function App() {
   return (
     <AuthProvider>
-      <CurrencyProvider>
-        <ThemeProvider storageKey="admin-theme">
-          <ErrorBoundary>
-            <BrowserRouter>
-              <AppRoutes />
-              <ToastWrapper />
-            </BrowserRouter>
-          </ErrorBoundary>
-        </ThemeProvider>
-      </CurrencyProvider>
+      <NotificationProvider>
+        <CurrencyProvider>
+          <ThemeProvider storageKey="admin-theme">
+            <ErrorBoundary>
+              <BrowserRouter>
+                <AppRoutes />
+                <ToastWrapper />
+              </BrowserRouter>
+            </ErrorBoundary>
+          </ThemeProvider>
+        </CurrencyProvider>
+      </NotificationProvider>
     </AuthProvider>
   );
 }

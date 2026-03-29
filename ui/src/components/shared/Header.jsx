@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { ShoppingCart, Menu, X, Search, Bell, CheckCircle2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useGetCartQuery } from "@/store/api/apiSlice";
@@ -12,10 +12,15 @@ import SettingsDropdown from "./header/SettingsDropdown";
 import ProfileDropdown from "./header/ProfileDropdown";
 import MobileMenu from "./header/MobileMenu";
 import CartDrawer from "./CartDrawer";
+import { useNotifications } from "@/context/NotificationContext";
+import { formatDistanceToNow } from "date-fns";
+import { az, ru, enUS } from "date-fns/locale";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const { user } = useAuth();
   const lenis = useLenisContext();
+  const navigate = useNavigate();
 
   const { data: cartItems = [] } = useGetCartQuery(user?.id, {
     skip: !user?.id,
@@ -27,6 +32,14 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  
+  const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications();
+  const [notifDropdownOpen, setNotifDropdownOpen] = useState(false);
+  const { i18n } = useTranslation();
+  
+  const currentLang = i18n.language?.startsWith("az") ? "AZ" : i18n.language?.startsWith("ru") ? "RU" : "EN";
+  const localeMap = { "AZ": az, "RU": ru, "EN": enUS };
+  const currentLocale = localeMap[currentLang];
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -91,6 +104,71 @@ const Header = () => {
 
             <div className="hidden lg:flex items-center gap-[12px]">
               <SettingsDropdown />
+            </div>
+
+            {/* Notification Bell */}
+            <div className="relative">
+              <button
+                onClick={() => setNotifDropdownOpen(!notifDropdownOpen)}
+                className="relative p-[10px] rounded-[12px] hover:bg-accent text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Bell className="w-[22px] h-[22px]" />
+                {unreadCount > 0 && (
+                  <span className="absolute top-[2px] right-[2px] w-[18px] h-[18px] bg-destructive rounded-full text-[11px] font-bold text-destructive-foreground flex items-center justify-center">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
+              </button>
+
+              {notifDropdownOpen && (
+                <div className="absolute right-[-60px] sm:right-[-20px] md:right-0 mt-[8px] w-[320px] max-w-[calc(100vw-32px)] bg-popover rounded-[12px] shadow-lg border border-border py-[8px] max-h-[400px] overflow-hidden flex flex-col z-50">
+                  <div className="flex items-center justify-between px-[16px] pb-[8px] border-b border-border">
+                    <h3 className="font-semibold text-foreground text-[14px]">Bildirişlər</h3>
+                    {unreadCount > 0 && (
+                      <button 
+                        onClick={markAllAsRead} 
+                        className="text-[12px] text-primary hover:underline flex items-center gap-[4px]"
+                      >
+                        <CheckCircle2 className="w-[12px] h-[12px]"/>
+                        Hamısnı oxunmuş et
+                      </button>
+                    )}
+                  </div>
+                  
+                  <div className="overflow-y-auto flex-1 custom-scrollbar">
+                    {notifications.length === 0 ? (
+                      <div className="p-[16px] text-center text-muted-foreground text-[13px]">
+                        Yeni bildiriş yoxdur
+                      </div>
+                    ) : (
+                      notifications.map((notif) => (
+                        <div 
+                          key={notif._id} 
+                          onClick={() => {
+                            if (!notif.read) markAsRead(notif._id);
+                            setNotifDropdownOpen(false);
+                            if (notif.relatedId) navigate(`/profile/orders/${notif.relatedId}`);
+                          }}
+                          className={`flex flex-col gap-[4px] p-[12px] px-[16px] cursor-pointer hover:bg-accent/50 border-b border-border/50 transition-colors ${!notif.read ? 'bg-primary/5' : ''}`}
+                        >
+                          <div className="flex justify-between items-start gap-[8px]">
+                            <span className={`text-[14px] leading-tight ${!notif.read ? 'font-semibold text-foreground' : 'font-medium text-foreground/80'}`}>
+                              {notif.title}
+                            </span>
+                            {!notif.read && <span className="w-[8px] h-[8px] rounded-full bg-primary flex-shrink-0 mt-[4px]"></span>}
+                          </div>
+                          <p className="text-[13px] text-muted-foreground line-clamp-2 leading-snug">
+                            {notif.message}
+                          </p>
+                          <span className="text-[11px] text-muted-foreground/70 mt-[2px]">
+                            {formatDistanceToNow(new Date(notif.createdAt), { addSuffix: true, locale: currentLocale })}
+                          </span>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             <button

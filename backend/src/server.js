@@ -19,6 +19,7 @@ const userRoutes = require("./routes/users");
 const promoCodeRoutes = require("./routes/promoCodes");
 const statsRoutes = require("./routes/stats");
 const uploadRoutes = require("./routes/upload");
+const notificationRoutes = require("./routes/notificationRoutes");
 
 const errorHandler = require("./middleware/errorHandler");
 
@@ -76,6 +77,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/promoCodes", promoCodeRoutes);
 app.use("/api/stats", statsRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {
@@ -92,9 +94,25 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("MongoDB connected successfully");
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
       console.log(`TechVibe Backend running on port ${PORT}`);
     });
+
+    // Initialize Socket.io
+    const io = require("./utils/socket").init(server);
+    io.on("connection", (socket) => {
+      console.log("A user connected via WebSocket:", socket.id);
+      
+      socket.on("join", (room) => {
+        socket.join(room);
+        console.log(`Socket ${socket.id} joined room ${room}`);
+      });
+
+      socket.on("disconnect", () => {
+        console.log("User disconnected:", socket.id);
+      });
+    });
+
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err.message);
