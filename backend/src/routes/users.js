@@ -2,17 +2,20 @@ const express = require("express");
 const User = require("../models/User");
 const firebaseAdmin = require("../config/firebase-admin");
 const { auth, adminAuth } = require("../middleware/auth");
+const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
 const router = express.Router();
 
-// GET /api/users - Admin only
+// GET /api/users - Admin only (paginated)
 router.get("/", adminAuth, async (req, res, next) => {
   try {
     const { email } = req.query;
     const filter = {};
     if (email) filter.email = email;
 
-    const users = await User.find(filter).select("-password");
-    res.json(users);
+    const total = await User.countDocuments(filter);
+    const { page, limit, skip } = getPaginationParams(req.query);
+    const users = await User.find(filter).select("-password").skip(skip).limit(limit);
+    res.json(paginatedResponse(users, total, page, limit));
   } catch (error) {
     next(error);
   }
@@ -41,12 +44,22 @@ router.post("/", adminAuth, async (req, res, next) => {
   }
 });
 
-// PATCH /api/users/:id
+// PATCH /api/users/:id (owner or admin only)
 router.patch("/:id", auth, async (req, res, next) => {
   try {
-    const updates = { ...req.body };
-    const user = await User.findById(req.params.id);
+    // Only owner or admin can update
+    if (req.params.id !== req.user._id.toString() && req.user.role !== "admin" && req.user.role !== "super-admin") {
+      return res.status(403).json({ error: "Access denied" });
+    }
 
+    const updates = { ...req.body };
+
+    // Non-admins cannot change their own role
+    if (req.user.role === "user" && updates.role) {
+      delete updates.role;
+    }
+
+    const user = await User.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ error: "USER_NOT_FOUND" });
     }
@@ -65,10 +78,7 @@ router.patch("/:id", auth, async (req, res, next) => {
       runValidators: true,
     });
 
-    if (!user) {
-      return res.status(404).json({ error: "USER_NOT_FOUND" });
-    }
-    res.json(user);
+    res.json(updatedUser);
   } catch (error) {
     next(error);
   }
@@ -88,7 +98,6 @@ router.delete("/:id", adminAuth, async (req, res, next) => {
           await firebaseAdmin.auth().deleteUser(user.firebaseUid);
        } catch (firebaseErr) {
           console.error("Failed to delete user from Firebase:", firebaseErr);
-          // We don't throw here to avoid failing the API request if Firebase delete fails but DB delete succeeds.
        }
     }
     res.json({});

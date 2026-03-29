@@ -38,11 +38,11 @@ function Deals() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/products`,
+          `${import.meta.env.VITE_API_URL}/products?_limit=1000`,
         );
         if (!response.ok) throw new Error("Server error");
         const data = await response.json();
-        setProducts(data);
+        setProducts(data.data || data);
       } catch (error) {
         console.error("Error fetching data:", error);
         toast.error(t("messages.errorOccurred"));

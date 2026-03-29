@@ -242,7 +242,7 @@ const Header = ({ onMenuClick }) => {
                           <span className={`text-[14px] leading-tight ${!notif.read ? 'font-semibold text-foreground' : 'font-medium text-foreground/80'}`}>
                             {notif.title}
                           </span>
-                          {!notif.read && <span className="w-[8px] h-[8px] rounded-full bg-primary flex-shrink-0 mt-[4px]"></span>}
+                          {!notif.read && <span className="w-[8px] h-[8px] rounded-full bg-primary shrink-0 mt-[4px]"></span>}
                         </div>
                         <p className="text-[13px] text-muted-foreground line-clamp-2 leading-snug">
                           {notif.message}

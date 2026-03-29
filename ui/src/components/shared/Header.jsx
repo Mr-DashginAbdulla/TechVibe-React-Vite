@@ -59,11 +59,11 @@ const Header = () => {
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     Promise.all([
       fetch(`${API_URL}/categories`).then((res) => res.json()),
-      fetch(`${API_URL}/products`).then((res) => res.json()),
+      fetch(`${API_URL}/products?_limit=1000`).then((res) => res.json()),
     ])
       .then(([categoriesData, productsData]) => {
         setCategories(categoriesData);
-        setProducts(productsData);
+        setProducts(productsData.data || productsData);
       })
       .catch((err) => console.error("Failed to fetch data:", err));
   }, []);
@@ -155,7 +155,7 @@ const Header = () => {
                             <span className={`text-[14px] leading-tight ${!notif.read ? 'font-semibold text-foreground' : 'font-medium text-foreground/80'}`}>
                               {notif.title}
                             </span>
-                            {!notif.read && <span className="w-[8px] h-[8px] rounded-full bg-primary flex-shrink-0 mt-[4px]"></span>}
+                            {!notif.read && <span className="w-[8px] h-[8px] rounded-full bg-primary shrink-0 mt-[4px]"></span>}
                           </div>
                           <p className="text-[13px] text-muted-foreground line-clamp-2 leading-snug">
                             {notif.message}

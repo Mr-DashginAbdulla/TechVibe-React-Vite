@@ -3,7 +3,7 @@ const Cart = require("../models/Cart");
 const { auth } = require("../middleware/auth");
 const router = express.Router();
 
-// GET /api/cart?userId=xxx
+// GET /api/cart - Get current user's cart
 router.get("/", auth, async (req, res, next) => {
   try {
     const userId = req.user._id.toString();
@@ -27,22 +27,26 @@ router.post("/", auth, async (req, res, next) => {
   }
 });
 
-// PATCH /api/cart/:id - Update cart item
+// PATCH /api/cart/:id - Update cart item (owner only)
 router.patch("/:id", auth, async (req, res, next) => {
   try {
-    const item = await Cart.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const item = await Cart.findById(req.params.id);
     if (!item) {
       return res.status(404).json({ error: "Cart item not found" });
     }
-    res.json(item);
+    if (item.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+    const updated = await Cart.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(updated);
   } catch (error) {
     next(error);
   }
 });
 
-// DELETE /api/cart/clear/:userId - Clear entire cart for user
+// DELETE /api/cart/clear - Clear entire cart for current user
 router.delete("/clear/:userId", auth, async (req, res, next) => {
   try {
     const userId = req.user._id.toString();
@@ -53,13 +57,17 @@ router.delete("/clear/:userId", auth, async (req, res, next) => {
   }
 });
 
-// DELETE /api/cart/:id - Remove single item from cart
+// DELETE /api/cart/:id - Remove single item from cart (owner only)
 router.delete("/:id", auth, async (req, res, next) => {
   try {
-    const item = await Cart.findByIdAndDelete(req.params.id);
+    const item = await Cart.findById(req.params.id);
     if (!item) {
       return res.status(404).json({ error: "Cart item not found" });
     }
+    if (item.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+    await Cart.findByIdAndDelete(req.params.id);
     res.json({});
   } catch (error) {
     next(error);

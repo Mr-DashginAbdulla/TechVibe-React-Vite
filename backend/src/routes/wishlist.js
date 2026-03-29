@@ -3,10 +3,10 @@ const Wishlist = require("../models/Wishlist");
 const { auth } = require("../middleware/auth");
 const router = express.Router();
 
-// GET /api/wishlist?userId=xxx
+// GET /api/wishlist
 router.get("/", auth, async (req, res, next) => {
   try {
-    const { userId, productId } = req.query;
+    const { productId } = req.query;
     const filter = { userId: req.user._id.toString() };
     if (productId) filter.productId = productId;
 
@@ -31,13 +31,17 @@ router.post("/", auth, async (req, res, next) => {
   }
 });
 
-// DELETE /api/wishlist/:id
+// DELETE /api/wishlist/:id (owner only)
 router.delete("/:id", auth, async (req, res, next) => {
   try {
-    const item = await Wishlist.findByIdAndDelete(req.params.id);
+    const item = await Wishlist.findById(req.params.id);
     if (!item) {
       return res.status(404).json({ error: "Wishlist item not found" });
     }
+    if (item.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+    await Wishlist.findByIdAndDelete(req.params.id);
     res.json({});
   } catch (error) {
     next(error);

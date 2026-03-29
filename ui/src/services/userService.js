@@ -47,8 +47,8 @@ export const userService = {
 
   async getStats(userId) {
     const headers = getAuthHeaders();
-    const [orders, wishlist] = await Promise.all([
-      fetch(`${API_URL}/orders?userId=${userId}`, { headers }).then((r) =>
+    const [ordersRes, wishlist] = await Promise.all([
+      fetch(`${API_URL}/orders?userId=${userId}&_limit=100`, { headers }).then((r) =>
         r.json(),
       ),
       fetch(`${API_URL}/wishlist?userId=${userId}`, { headers }).then((r) =>
@@ -56,6 +56,7 @@ export const userService = {
       ),
     ]);
 
+    const orders = ordersRes.data || ordersRes;
     const totalOrders = orders.length;
     const delivered = orders.filter((o) => o.status === "delivered").length;
     const totalSpent = orders.reduce((sum, o) => sum + o.total, 0);

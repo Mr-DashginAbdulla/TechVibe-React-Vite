@@ -29,7 +29,7 @@ const fetchApi = async (endpoint, options = {}) => {
 };
 
 export const productService = {
-  getAll: () => fetchApi("/products"),
+  getAll: (params = "") => fetchApi(`/products?_limit=1000${params ? "&" + params : ""}`).then(res => res.data || res),
   getById: (id) => fetchApi(`/products/${id}`),
   create: (data) =>
     fetchApi("/products", {
@@ -67,7 +67,7 @@ export const categoryService = {
 };
 
 export const orderService = {
-  getAll: () => fetchApi("/orders"),
+  getAll: () => fetchApi("/orders?_limit=1000").then(res => res.data || res),
   getById: (id) => fetchApi(`/orders/${id}`),
   updateStatus: (id, status, timeline) =>
     fetchApi(`/orders/${id}`, {
@@ -81,7 +81,7 @@ export const orderService = {
 };
 
 export const userService = {
-  getAll: () => fetchApi("/users"),
+  getAll: () => fetchApi("/users?_limit=1000").then(res => res.data || res),
   getById: (id) => fetchApi(`/users/${id}`),
   create: (data) =>
     fetchApi("/users", {
@@ -100,8 +100,8 @@ export const userService = {
 };
 
 export const reviewService = {
-  getAll: () => fetchApi("/reviews"),
-  getByProductId: (productId) => fetchApi(`/reviews?productId=${productId}`),
+  getAll: () => fetchApi("/reviews?_limit=1000").then(res => res.data || res),
+  getByProductId: (productId) => fetchApi(`/reviews?productId=${productId}&_limit=1000`).then(res => res.data || res),
   delete: (id) =>
     fetchApi(`/reviews/${id}`, {
       method: "DELETE",
@@ -128,7 +128,7 @@ export const brandService = {
 };
 
 export const promoCodeService = {
-  getAll: () => fetchApi("/promoCodes"),
+  getAll: () => fetchApi("/promoCodes?_limit=1000").then(res => res.data || res),
   getById: (id) => fetchApi(`/promoCodes/${id}`),
   create: (data) =>
     fetchApi("/promoCodes", {

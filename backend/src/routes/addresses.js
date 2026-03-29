@@ -3,7 +3,7 @@ const Address = require("../models/Address");
 const { auth } = require("../middleware/auth");
 const router = express.Router();
 
-// GET /api/addresses?userId=xxx
+// GET /api/addresses - Get current user's addresses
 router.get("/", auth, async (req, res, next) => {
   try {
     const addresses = await Address.find({ userId: req.user._id.toString() });
@@ -13,12 +13,15 @@ router.get("/", auth, async (req, res, next) => {
   }
 });
 
-// GET /api/addresses/:id
+// GET /api/addresses/:id (owner only)
 router.get("/:id", auth, async (req, res, next) => {
   try {
     const address = await Address.findById(req.params.id);
     if (!address) {
       return res.status(404).json({ error: "ADDRESS_NOT_FOUND" });
+    }
+    if (address.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Access denied" });
     }
     res.json(address);
   } catch (error) {
@@ -39,28 +42,36 @@ router.post("/", auth, async (req, res, next) => {
   }
 });
 
-// PATCH /api/addresses/:id
+// PATCH /api/addresses/:id (owner only)
 router.patch("/:id", auth, async (req, res, next) => {
   try {
-    const address = await Address.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const address = await Address.findById(req.params.id);
     if (!address) {
       return res.status(404).json({ error: "ADDRESS_NOT_FOUND" });
     }
-    res.json(address);
+    if (address.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+    const updated = await Address.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.json(updated);
   } catch (error) {
     next(error);
   }
 });
 
-// DELETE /api/addresses/:id
+// DELETE /api/addresses/:id (owner only)
 router.delete("/:id", auth, async (req, res, next) => {
   try {
-    const address = await Address.findByIdAndDelete(req.params.id);
+    const address = await Address.findById(req.params.id);
     if (!address) {
       return res.status(404).json({ error: "ADDRESS_NOT_FOUND" });
     }
+    if (address.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+    await Address.findByIdAndDelete(req.params.id);
     res.json({});
   } catch (error) {
     next(error);

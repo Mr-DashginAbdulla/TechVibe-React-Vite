@@ -11,11 +11,12 @@ const getAuthHeaders = () => {
 export const orderService = {
   async getByUserId(userId) {
     const response = await fetch(
-      `${API_URL}/orders?userId=${userId}&_sort=createdAt&_order=desc`,
+      `${API_URL}/orders?userId=${userId}&_sort=createdAt&_order=desc&_limit=100`,
       { headers: getAuthHeaders() },
     );
     if (!response.ok) throw new Error("ORDERS_LOAD_FAILED");
-    return response.json();
+    const result = await response.json();
+    return result.data || result;
   },
 
   async getByStatus(userId, status) {
@@ -23,11 +24,12 @@ export const orderService = {
       return this.getByUserId(userId);
     }
     const response = await fetch(
-      `${API_URL}/orders?userId=${userId}&status=${status}&_sort=createdAt&_order=desc`,
+      `${API_URL}/orders?userId=${userId}&status=${status}&_sort=createdAt&_order=desc&_limit=100`,
       { headers: getAuthHeaders() },
     );
     if (!response.ok) throw new Error("ORDERS_LOAD_FAILED");
-    return response.json();
+    const result = await response.json();
+    return result.data || result;
   },
 
   async getById(id) {

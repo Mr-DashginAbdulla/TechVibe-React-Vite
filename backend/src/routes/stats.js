@@ -5,24 +5,24 @@ const Order = require("../models/Order");
 const { adminAuth } = require("../middleware/auth");
 const router = express.Router();
 
-// GET /api/stats - Admin dashboard statistics
+// GET /api/stats - Admin dashboard statistics (optimized with aggregation)
 router.get("/", adminAuth, async (req, res, next) => {
   try {
-    const [users, products, orders] = await Promise.all([
+    const [users, products, orderCount, revenueResult] = await Promise.all([
       User.countDocuments(),
       Product.countDocuments(),
-      Order.find(),
+      Order.countDocuments(),
+      Order.aggregate([
+        { $group: { _id: null, total: { $sum: { $ifNull: ["$totalAmount", "$total"] } } } }
+      ]),
     ]);
 
-    const revenue = orders.reduce(
-      (sum, order) => sum + (order.totalAmount || order.total || 0),
-      0
-    );
+    const revenue = revenueResult.length > 0 ? revenueResult[0].total : 0;
 
     res.json({
       users,
       products,
-      orders: orders.length,
+      orders: orderCount,
       revenue,
     });
   } catch (error) {

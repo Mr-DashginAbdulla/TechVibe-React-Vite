@@ -1,28 +1,32 @@
 const Notification = require("../models/Notification");
 const { getIO } = require("../utils/socket");
+const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
 
-// Get notifications for current user or admin
+// Get notifications for current user or admin (paginated)
 exports.getNotifications = async (req, res, next) => {
   try {
     const userId = req.user._id.toString();
     const role = req.user.role;
     
-    // Admin gets both "admin" directed and their own. User gets their own.
-    const query = role === "admin" 
+    // Admin/super-admin gets both "admin" directed and their own. User gets their own.
+    const query = (role === "admin" || role === "super-admin")
       ? { $or: [{ recipient: "admin" }, { recipient: userId }] }
       : { recipient: userId };
 
+    const total = await Notification.countDocuments(query);
+    const { page, limit, skip } = getPaginationParams(req.query);
     const notifications = await Notification.find(query)
       .sort({ createdAt: -1 })
-      .limit(50);
+      .skip(skip)
+      .limit(limit);
 
-    res.status(200).json({ success: true, count: notifications.length, data: notifications });
+    res.status(200).json(paginatedResponse(notifications, total, page, limit));
   } catch (err) {
     next(err);
   }
 };
 
-// Mark sub-set of or specific notification as read
+// Mark specific notification as read
 exports.markAsRead = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -34,8 +38,8 @@ exports.markAsRead = async (req, res, next) => {
       return res.status(404).json({ success: false, message: "Bildiriş tapılmadı" });
     }
 
-    // Verify ownership
-    if (role !== "admin" && notification.recipient.toString() !== userId) {
+    // Verify ownership (admin and super-admin can read admin-directed notifications)
+    if (role !== "admin" && role !== "super-admin" && notification.recipient.toString() !== userId) {
       return res.status(403).json({ success: false, message: "İcazəniz yoxdur" });
     }
 
@@ -65,7 +69,7 @@ exports.markAllAsRead = async (req, res, next) => {
     const userId = req.user._id.toString();
     const role = req.user.role;
     
-    const query = role === "admin" 
+    const query = (role === "admin" || role === "super-admin")
       ? { $or: [{ recipient: "admin" }, { recipient: userId }] }
       : { recipient: userId };
 
@@ -75,7 +79,7 @@ exports.markAllAsRead = async (req, res, next) => {
     try {
       const io = getIO();
       if (io) {
-        const room = role === "admin" ? "admin" : userId;
+        const room = (role === "admin" || role === "super-admin") ? "admin" : userId;
         io.to(room).emit("all_notifications_read");
       }
     } catch (err) {

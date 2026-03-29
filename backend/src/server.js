@@ -5,6 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/products");
@@ -39,6 +40,7 @@ const limiter = rateLimit({
 
 // Security middleware
 app.use(helmet());
+app.use(mongoSanitize());
 
 // CORS Configuration
 const allowedOrigins = process.env.CORS_ORIGIN 

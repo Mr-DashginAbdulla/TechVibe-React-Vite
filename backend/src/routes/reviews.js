@@ -1,17 +1,20 @@
 const express = require("express");
 const Review = require("../models/Review");
 const { auth, adminAuth, optionalAuth } = require("../middleware/auth");
+const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
 const router = express.Router();
 
-// GET /api/reviews - Get all reviews (with optional productId filter)
+// GET /api/reviews - Get all reviews (with optional productId filter, paginated)
 router.get("/", async (req, res, next) => {
   try {
     const { productId } = req.query;
     const filter = {};
     if (productId) filter.productId = productId;
 
-    const reviews = await Review.find(filter).sort({ createdAt: -1 });
-    res.json(reviews);
+    const total = await Review.countDocuments(filter);
+    const { page, limit, skip } = getPaginationParams(req.query);
+    const reviews = await Review.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit);
+    res.json(paginatedResponse(reviews, total, page, limit));
   } catch (error) {
     next(error);
   }

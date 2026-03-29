@@ -48,7 +48,7 @@ function Home() {
     const fetchData = async () => {
       try {
         const [productsRes, categoriesRes] = await Promise.all([
-          fetch(`${import.meta.env.VITE_API_URL}/products`),
+          fetch(`${import.meta.env.VITE_API_URL}/products?_limit=1000`),
           fetch(`${import.meta.env.VITE_API_URL}/categories`),
         ]);
 
@@ -58,7 +58,8 @@ function Home() {
         const productsData = await productsRes.json();
         const categoriesData = await categoriesRes.json();
 
-        const formattedProducts = productsData.map((product) => ({
+        const productsList = productsData.data || productsData;
+        const formattedProducts = productsList.map((product) => ({
           id: product.id,
           name: product.name,
           price: product.price,

@@ -2,12 +2,13 @@ const express = require("express");
 const Product = require("../models/Product");
 const { adminAuth } = require("../middleware/auth");
 const { cacheMiddleware } = require("../middleware/cache");
+const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
 const router = express.Router();
 
-// GET /api/products - Get all products (with optional filters)
+// GET /api/products - Get all products (with optional filters, paginated)
 router.get("/", cacheMiddleware, async (req, res, next) => {
   try {
-    const { category, brand, isFeatured, isNew, _limit, _sort, _order, id_ne, search, minPrice, maxPrice } = req.query;
+    const { category, brand, isFeatured, isNew, _sort, _order, id_ne, search, minPrice, maxPrice } = req.query;
     const filter = {};
 
     if (search) {
@@ -28,19 +29,18 @@ router.get("/", cacheMiddleware, async (req, res, next) => {
     let query = Product.find(filter);
 
     if (search && !_sort) {
-      // Sort by text score relevance if searching and no explicit sort provided
       query = query.sort({ score: { $meta: "textScore" } });
     } else if (_sort) {
       const sortOrder = _order === "desc" ? -1 : 1;
       query = query.sort({ [_sort]: sortOrder });
     }
 
-    if (_limit) {
-      query = query.limit(parseInt(_limit));
-    }
+    const total = await Product.countDocuments(filter);
+    const { page, limit, skip } = getPaginationParams(req.query);
+    query = query.skip(skip).limit(limit);
 
     const products = await query;
-    res.json(products);
+    res.json(paginatedResponse(products, total, page, limit));
   } catch (error) {
     next(error);
   }

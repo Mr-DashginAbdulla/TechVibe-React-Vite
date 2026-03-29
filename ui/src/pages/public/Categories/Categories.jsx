@@ -16,7 +16,7 @@ function Categories() {
       try {
         const [categoriesRes, productsRes] = await Promise.all([
           fetch(`${import.meta.env.VITE_API_URL}/categories`),
-          fetch(`${import.meta.env.VITE_API_URL}/products`),
+          fetch(`${import.meta.env.VITE_API_URL}/products?_limit=1000`),
         ]);
 
         if (!categoriesRes.ok || !productsRes.ok)
@@ -26,7 +26,7 @@ function Categories() {
         const productsData = await productsRes.json();
 
         setCategories(categoriesData);
-        setProducts(productsData);
+        setProducts(productsData.data || productsData);
       } catch (error) {
         console.error("Error fetching data:", error);
         toast.error(t("messages.errorOccurred"));

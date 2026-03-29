@@ -64,7 +64,7 @@ function Shop() {
     const fetchData = async () => {
       try {
         const [productsRes, categoriesRes] = await Promise.all([
-          fetch(`${import.meta.env.VITE_API_URL}/products`),
+          fetch(`${import.meta.env.VITE_API_URL}/products?_limit=1000`),
           fetch(`${import.meta.env.VITE_API_URL}/categories`),
         ]);
 
@@ -74,7 +74,7 @@ function Shop() {
         const productsData = await productsRes.json();
         const categoriesData = await categoriesRes.json();
 
-        setProducts(productsData);
+        setProducts(productsData.data || productsData);
         setCategories(categoriesData);
       } catch (error) {
         console.error("Error fetching data:", error);

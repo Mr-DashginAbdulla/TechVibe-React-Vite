@@ -22,18 +22,21 @@ export const apiSlice = createApi({
     }),
 
     getAllProducts: builder.query({
-      query: () => "/products",
+      query: (params) => `/products${params ? "?" + params : ""}`,
+      transformResponse: (response) => response.data || response,
       providesTags: ["Product"],
     }),
 
     getRelatedProducts: builder.query({
       query: ({ category, excludeId, limit = 4 }) =>
         `/products?category=${category}&id_ne=${excludeId}&_limit=${limit}`,
+      transformResponse: (response) => response.data || response,
       providesTags: ["Product"],
     }),
 
     getProductReviews: builder.query({
-      query: (productId) => `/reviews?productId=${productId}`,
+      query: (productId) => `/reviews?productId=${productId}&_limit=100`,
+      transformResponse: (response) => response.data || response,
       providesTags: (result, error, productId) => [
         { type: "Review", id: productId },
       ],

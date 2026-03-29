@@ -1,13 +1,16 @@
 const express = require("express");
 const PromoCode = require("../models/PromoCode");
 const { adminAuth } = require("../middleware/auth");
+const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
 const router = express.Router();
 
-// GET /api/promoCodes - Admin only
+// GET /api/promoCodes - Admin only (paginated)
 router.get("/", adminAuth, async (req, res, next) => {
   try {
-    const promoCodes = await PromoCode.find();
-    res.json(promoCodes);
+    const total = await PromoCode.countDocuments();
+    const { page, limit, skip } = getPaginationParams(req.query);
+    const promoCodes = await PromoCode.find().skip(skip).limit(limit);
+    res.json(paginatedResponse(promoCodes, total, page, limit));
   } catch (error) {
     next(error);
   }
