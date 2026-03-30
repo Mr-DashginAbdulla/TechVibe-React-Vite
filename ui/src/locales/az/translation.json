@@ -588,7 +588,21 @@
     "subtitle": "Məhdud müddətli təkliflər - qaçırmayın!",
     "saveUp": "{{percent}}%-ə qədər qənaət",
     "endsSoon": "Tezliklə bitir",
-    "noDeals": "Hazırda aktiv endirim yoxdur"
+    "noLogsDesc": "Sistemdə qeydə alınmış heç bir admin əməliyyatı yoxdur."
+  },
+  "compare": {
+    "title": "Məhsulların Müqayisəsi",
+    "emptyTitle": "Müqayisə siyahısı boşdur",
+    "emptyDesc": "Məhsulları biri-biri ilə müqayisə etmək üçün onları siyahıya əlavə edin.",
+    "continueShopping": "Alış-verişə davam et",
+    "itemsCount": "məhsul müqayisə edilir",
+    "clearAll": "Hamısını Təmizlə",
+    "features": "Xüsusiyyətlər",
+    "remove": "Çıxar",
+    "add": "Müqayisəyə əlavə et",
+    "addMore": "Məhsul əlavə et",
+    "limitReached": "Maksimum 4 məhsul müqayisə edilə bilər",
+    "compareNow": "Müqayisə et"
   },
   "specs": {
     "Processor": "Prosessor",

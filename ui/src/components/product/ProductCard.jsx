@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCurrency } from "@/context/CurrencyContext";
+import CompareButton from "./CompareButton";
 
 const ProductCard = ({
   id,
@@ -19,6 +20,7 @@ const ProductCard = ({
   viewMode = "grid",
   onAddToCart,
   onToggleFavorite,
+  product = null,
 }) => {
   const { t } = useTranslation();
   const { formatPrice } = useCurrency();
@@ -53,6 +55,10 @@ const ProductCard = ({
               }`}
             />
           </button>
+          
+          <CompareButton 
+            product={product || { id, name, price, originalPrice: originalPrice || null, image, rating, reviewsCount: reviewCount, description, defaultImage: image }} 
+          />
 
           <Link
             to={`/product/${id}`}
@@ -161,6 +167,10 @@ const ProductCard = ({
           }`}
         />
       </button>
+
+      <CompareButton 
+        product={product || { id, name, price, originalPrice: originalPrice || null, image, rating, reviewsCount: reviewCount, description, defaultImage: image }} 
+      />
 
       <Link
         to={`/product/${id}`}

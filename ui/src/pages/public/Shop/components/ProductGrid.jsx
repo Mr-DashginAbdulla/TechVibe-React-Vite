@@ -49,6 +49,7 @@ const ProductGrid = ({
           viewMode={viewMode}
           onAddToCart={onAddToCart}
           onToggleFavorite={onToggleFavorite}
+          product={product}
         />
       ))}
     </div>

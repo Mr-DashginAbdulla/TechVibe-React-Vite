@@ -1,6 +1,7 @@
 const express = require("express");
 const PromoCode = require("../models/PromoCode");
 const { adminAuth } = require("../middleware/auth");
+const { auditMiddleware } = require("../middleware/auditLog");
 const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
 const router = express.Router();
 
@@ -30,7 +31,7 @@ router.get("/:id", adminAuth, async (req, res, next) => {
 });
 
 // POST /api/promoCodes - Admin only
-router.post("/", adminAuth, async (req, res, next) => {
+router.post("/", adminAuth, auditMiddleware("promoCode"), async (req, res, next) => {
   try {
     const promoCode = await PromoCode.create(req.body);
     res.status(201).json(promoCode);
@@ -91,7 +92,7 @@ router.post("/validate", async (req, res, next) => {
 });
 
 // PATCH /api/promoCodes/:id - Admin only
-router.patch("/:id", adminAuth, async (req, res, next) => {
+router.patch("/:id", adminAuth, auditMiddleware("promoCode"), async (req, res, next) => {
   try {
     const promoCode = await PromoCode.findByIdAndUpdate(
       req.params.id,
@@ -108,7 +109,7 @@ router.patch("/:id", adminAuth, async (req, res, next) => {
 });
 
 // DELETE /api/promoCodes/:id - Admin only
-router.delete("/:id", adminAuth, async (req, res, next) => {
+router.delete("/:id", adminAuth, auditMiddleware("promoCode"), async (req, res, next) => {
   try {
     const promoCode = await PromoCode.findByIdAndDelete(req.params.id);
     if (!promoCode) {

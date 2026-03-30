@@ -9,6 +9,8 @@ const PromoCode = require("../models/PromoCode");
 const Notification = require("../models/Notification");
 const { getIO } = require("../utils/socket");
 const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
+const { generateInvoice } = require("../utils/invoiceGenerator");
+const { auditMiddleware } = require("../middleware/auditLog");
 const router = express.Router();
 
 // GET /api/orders - Get orders (admin: all, user: own)
@@ -62,6 +64,33 @@ router.get("/:id", auth, async (req, res, next) => {
     }
 
     res.json(order);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET /api/orders/:id/invoice
+router.get("/:id/invoice", auth, async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ error: "ORDER_NOT_FOUND" });
+    }
+
+    // Regular users can only download their own orders
+    if (req.user.role === "user" && order.userId !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+
+    const orderUser = await User.findById(order.userId);
+    if (!orderUser) {
+        return res.status(404).json({ error: "USER_NOT_FOUND" });
+    }
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename=invoice-${order.orderNumber}.pdf`);
+
+    generateInvoice(order, orderUser, res);
   } catch (error) {
     next(error);
   }
@@ -159,7 +188,7 @@ router.post("/", auth, async (req, res, next) => {
 });
 
 // PATCH /api/orders/:id - Update order (Admin or Owner for cancellation)
-router.patch("/:id", auth, async (req, res, next) => {
+router.patch("/:id", auth, auditMiddleware("order"), async (req, res, next) => {
   try {
     const originalOrder = await Order.findById(req.params.id);
     if (!originalOrder) {

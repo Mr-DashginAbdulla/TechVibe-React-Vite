@@ -3,6 +3,7 @@ const User = require("../models/User");
 const firebaseAdmin = require("../config/firebase-admin");
 const { auth, adminAuth } = require("../middleware/auth");
 const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
+const { auditMiddleware } = require("../middleware/auditLog");
 const router = express.Router();
 
 // GET /api/users - Admin only (paginated)
@@ -35,7 +36,7 @@ router.get("/:id", auth, async (req, res, next) => {
 });
 
 // POST /api/users - Admin create user
-router.post("/", adminAuth, async (req, res, next) => {
+router.post("/", adminAuth, auditMiddleware("user"), async (req, res, next) => {
   try {
     const user = await User.create(req.body);
     res.status(201).json(user);
@@ -45,7 +46,7 @@ router.post("/", adminAuth, async (req, res, next) => {
 });
 
 // PATCH /api/users/:id (owner or admin only)
-router.patch("/:id", auth, async (req, res, next) => {
+router.patch("/:id", auth, auditMiddleware("user"), async (req, res, next) => {
   try {
     // Only owner or admin can update
     if (req.params.id !== req.user._id.toString() && req.user.role !== "admin" && req.user.role !== "super-admin") {
@@ -85,7 +86,7 @@ router.patch("/:id", auth, async (req, res, next) => {
 });
 
 // DELETE /api/users/:id - Admin only
-router.delete("/:id", adminAuth, async (req, res, next) => {
+router.delete("/:id", adminAuth, auditMiddleware("user"), async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { toast } from "react-toastify";
 import { orderService, productService } from "@/services/api";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
@@ -79,6 +79,15 @@ const OrderDetail = () => {
     }
   };
 
+  const handleDownloadInvoice = async () => {
+    try {
+      await orderService.downloadInvoice(id);
+      toast.success(t("orders.invoiceDownloaded") || "Invoice downloaded successfully");
+    } catch {
+      toast.error(t("messages.error"));
+    }
+  };
+
   const getStatusBadge = (status) => {
     const styles = {
       pending: "bg-yellow-100 text-yellow-700",
@@ -113,21 +122,32 @@ const OrderDetail = () => {
 
   return (
     <div className="space-y-[20px]">
-      <div className="flex items-center gap-[16px]">
-        <Link to="/orders" className="p-[10px] hover:bg-accent rounded-[10px]">
-          <ArrowLeft className="w-[20px] h-[20px] text-foreground" />
-        </Link>
-        <div>
-          <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground">
-            {t("orders.orderDetails")} #{order.orderNumber || order.id}
-          </h1>
-          <div className="flex items-center gap-[10px] mt-[4px]">
-            {getStatusBadge(order.status)}
-            <span className="text-[13px] text-muted-foreground">
-              {t("orders.createdAt")}{" "}
-              {new Date(order.createdAt).toLocaleString()}
-            </span>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[16px]">
+        <div className="flex items-center gap-[16px]">
+          <Link to="/orders" className="p-[10px] hover:bg-accent rounded-[10px]">
+            <ArrowLeft className="w-[20px] h-[20px] text-foreground" />
+          </Link>
+          <div>
+            <h1 className="text-[20px] sm:text-[24px] font-bold text-foreground">
+              {t("orders.orderDetails")} #{order.orderNumber || order.id}
+            </h1>
+            <div className="flex items-center gap-[10px] mt-[4px]">
+              {getStatusBadge(order.status)}
+              <span className="text-[13px] text-muted-foreground">
+                {t("orders.createdAt")}{" "}
+                {new Date(order.createdAt).toLocaleString()}
+              </span>
+            </div>
           </div>
+        </div>
+        <div>
+          <button
+            onClick={handleDownloadInvoice}
+            className="flex items-center gap-[8px] px-[16px] py-[8px] bg-primary text-primary-foreground rounded-[10px] hover:bg-primary/90 transition-colors text-[14px] font-medium"
+          >
+            <Download className="w-[16px] h-[16px]" />
+            {t("orders.downloadInvoice") || "Download Invoice"}
+          </button>
         </div>
       </div>
 

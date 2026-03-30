@@ -2,6 +2,7 @@ const express = require("express");
 const Review = require("../models/Review");
 const { auth, adminAuth, optionalAuth } = require("../middleware/auth");
 const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
+const { auditMiddleware } = require("../middleware/auditLog");
 const router = express.Router();
 
 // GET /api/reviews - Get all reviews (with optional productId filter, paginated)
@@ -34,7 +35,7 @@ router.post("/", auth, async (req, res, next) => {
 });
 
 // PATCH /api/reviews/:id - Update review (owner only)
-router.patch("/:id", auth, async (req, res, next) => {
+router.patch("/:id", auth, auditMiddleware("review"), async (req, res, next) => {
   try {
     const review = await Review.findById(req.params.id);
     if (!review) {
@@ -60,7 +61,7 @@ router.patch("/:id", auth, async (req, res, next) => {
 });
 
 // DELETE /api/reviews/:id - Delete review (owner or admin)
-router.delete("/:id", auth, async (req, res, next) => {
+router.delete("/:id", auth, auditMiddleware("review"), async (req, res, next) => {
   try {
     const review = await Review.findById(req.params.id);
     if (!review) {

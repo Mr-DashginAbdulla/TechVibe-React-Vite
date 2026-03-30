@@ -27,7 +27,7 @@ const cacheMiddleware = (req, res, next) => {
 
 /**
  * Invalidate all cache entries that start with the given prefix.
- * Example: invalidateCache("/api/products") clears all product-related cache entries.
+ * Example: invalidateCache("/api/v1/products") clears all product-related cache entries.
  * @param {string} prefix - URL prefix to match against cached keys
  */
 const invalidateCache = (prefix) => {

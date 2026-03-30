@@ -950,5 +950,19 @@
       "title": "Under Maintenance",
       "description": "We're performing scheduled maintenance. We'll be back online shortly. Thank you for your patience."
     }
+  },
+  "compare": {
+    "title": "Compare Products",
+    "itemsCount": "products compared",
+    "clearAll": "Clear All",
+    "features": "Features",
+    "remove": "Remove",
+    "addMore": "Add Product",
+    "emptyTitle": "Comparison list is empty",
+    "emptyDesc": "Add products to the list to compare them with each other.",
+    "continueShopping": "Continue Shopping",
+    "limitReached": "You can compare up to 4 products at the same time",
+    "productAdded": "Product added to comparison",
+    "productRemoved": "Product removed from comparison"
   }
 }

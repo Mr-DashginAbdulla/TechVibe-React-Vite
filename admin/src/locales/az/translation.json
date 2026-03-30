@@ -52,6 +52,7 @@
     "brands": "Brendlər",
     "promoCodes": "Promokodlar",
     "settings": "Parametrlər",
+    "auditLogs": "Audit Logları",
     "logout": "Çıxış"
   },
   "header": {
@@ -245,7 +246,8 @@
     "notFound": "Sifariş tapılmadı",
     "createdAt": "Yaradılma tarixi",
     "quantity": "Say",
-    "orderHistory": "Sifariş tarixçəsi"
+    "orderHistory": "Sifariş tarixçəsi",
+    "downloadInvoice": "Fakturanı Yüklə"
   },
   "users": {
     "title": "İstifadəçilər",
@@ -484,5 +486,19 @@
     "passwordNumber": "Ən azı bir rəqəm olmalıdır (0-9)",
     "passwordSpecial": "Ən azı bir xüsusi simvol olmalıdır (!@#$%^&*...)",
     "passwordNoPersonalInfo": "Şifrədə adınız və ya emailiniz olmamalıdır"
+  },
+  "auditLogs": {
+    "title": "Audit Logları",
+    "subtitle": "Sistemdəki admin əməliyyatlarını izləyin",
+    "searchAdmin": "Admin axtar...",
+    "allActions": "Bütün Əməliyyatlar",
+    "allResources": "Bütün Resurslar",
+    "admin": "Admin",
+    "action": "Əməliyyat",
+    "resource": "Resurs",
+    "date": "Tarix",
+    "ip": "IP Ünvanı",
+    "noLogs": "Log tapılmadı",
+    "noLogsDesc": "Sistemdə qeydə alınmış heç bir admin əməliyyatı yoxdur."
   }
 }

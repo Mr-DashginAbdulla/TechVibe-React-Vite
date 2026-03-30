@@ -16,6 +16,7 @@ const Reviews = lazy(() => import("@/pages/Reviews"));
 const Brands = lazy(() => import("@/pages/Brands"));
 const Settings = lazy(() => import("@/pages/Settings"));
 const PromoCodes = lazy(() => import("@/pages/PromoCodes"));
+const AuditLogs = lazy(() => import("@/pages/AuditLogs"));
 
 const AppRoutes = () => {
   return (
@@ -36,6 +37,7 @@ const AppRoutes = () => {
             <Route path="brands" element={<Brands />} />
             <Route path="settings" element={<Settings />} />
             <Route path="promo-codes" element={<PromoCodes />} />
+            <Route path="audit-logs" element={<AuditLogs />} />
           </Route>
         </Route>
       </Routes>

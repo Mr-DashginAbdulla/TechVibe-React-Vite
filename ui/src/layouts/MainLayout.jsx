@@ -5,6 +5,7 @@ import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import ScrollToTop from "@/components/shared/ScrollToTop";
 import BackToTopButton from "@/components/shared/BackToTopButton";
+import CompareBar from "@/components/shared/CompareBar";
 
 const MainLayout = () => {
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ const MainLayout = () => {
       </main>
       <Footer />
       <BackToTopButton />
+      <CompareBar />
     </div>
   );
 };

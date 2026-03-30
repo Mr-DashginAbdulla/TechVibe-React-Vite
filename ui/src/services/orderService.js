@@ -113,6 +113,25 @@ export const orderService = {
     if (!response.ok) throw new Error("ORDER_ITEMS_UPDATE_FAILED");
     return response.json();
   },
+
+  async downloadInvoice(id) {
+    const response = await fetch(`${API_URL}/orders/${id}/invoice`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+    if (!response.ok) {
+        throw new Error("DOWNLOAD_FAILED");
+    }
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invoice-${id}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }
 };
 
 export default orderService;

@@ -54,11 +54,12 @@ const ProductActionPanel = ({
       />
 
       <ActionButtons
+        productId={product._id || product.id}
+        stock={product.stock}
         onAddToCart={onAddToCart}
         onBuyNow={onBuyNow}
         onToggleWishlist={onToggleWishlist}
         isInWishlist={isInWishlist}
-        disabled={product.stock <= 0}
       />
 
       <TrustBadges />

@@ -52,6 +52,7 @@
     "brands": "Brands",
     "promoCodes": "Promo Codes",
     "settings": "Settings",
+    "auditLogs": "Audit Logs",
     "logout": "Logout"
   },
   "header": {
@@ -243,9 +244,10 @@
     "addNote": "Add Note",
     "internalNotes": "Internal Notes",
     "notFound": "Order not found",
-    "createdAt": "Created on",
+    "createdAt": "Created At",
     "quantity": "Quantity",
-    "orderHistory": "Order History"
+    "orderHistory": "Order History",
+    "downloadInvoice": "Download Invoice"
   },
   "users": {
     "title": "Users",
@@ -484,5 +486,19 @@
     "passwordNumber": "Must contain at least one number (0-9)",
     "passwordSpecial": "Must contain at least one special character (!@#$%^&*...)",
     "passwordNoPersonalInfo": "Password must not contain your name or email"
+  },
+  "auditLogs": {
+    "title": "Audit Logs",
+    "subtitle": "Track admin activities in the system",
+    "searchAdmin": "Search Admin...",
+    "allActions": "All Actions",
+    "allResources": "All Resources",
+    "admin": "Admin",
+    "action": "Action",
+    "resource": "Resource",
+    "date": "Date",
+    "ip": "IP Address",
+    "noLogs": "No logs found",
+    "noLogsDesc": "There are no admin actions recorded in the system."
   }
 }

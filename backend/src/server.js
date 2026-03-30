@@ -21,6 +21,8 @@ const promoCodeRoutes = require("./routes/promoCodes");
 const statsRoutes = require("./routes/stats");
 const uploadRoutes = require("./routes/upload");
 const notificationRoutes = require("./routes/notificationRoutes");
+const auditLogRoutes = require("./routes/auditLogs");
+const stockAlertRoutes = require("./routes/stockAlerts");
 
 const errorHandler = require("./middleware/errorHandler");
 
@@ -65,25 +67,35 @@ app.use("/api", limiter); // Apply rate limiter to all API routes
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/products", productRoutes);
-app.use("/api/categories", categoryRoutes);
-app.use("/api/brands", brandRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/reviews", reviewRoutes);
-app.use("/api/cart", cartRoutes);
-app.use("/api/wishlist", wishlistRoutes);
-app.use("/api/addresses", addressRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/promoCodes", promoCodeRoutes);
-app.use("/api/stats", statsRoutes);
-app.use("/api/upload", uploadRoutes);
-app.use("/api/notifications", notificationRoutes);
+// API v1 Routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/products", productRoutes);
+app.use("/api/v1/categories", categoryRoutes);
+app.use("/api/v1/brands", brandRoutes);
+app.use("/api/v1/orders", orderRoutes);
+app.use("/api/v1/reviews", reviewRoutes);
+app.use("/api/v1/cart", cartRoutes);
+app.use("/api/v1/wishlist", wishlistRoutes);
+app.use("/api/v1/addresses", addressRoutes);
+app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/promoCodes", promoCodeRoutes);
+app.use("/api/v1/stats", statsRoutes);
+app.use("/api/v1/upload", uploadRoutes);
+app.use("/api/v1/notifications", notificationRoutes);
+app.use("/api/v1/audit-logs", auditLogRoutes);
+app.use("/api/v1/stock-alerts", stockAlertRoutes);
 
 // Health check
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
+app.get("/api/v1/health", (req, res) => {
+  res.json({ status: "ok", version: "v1", timestamp: new Date().toISOString() });
+});
+
+// Backward compatibility: redirect /api/* to /api/v1/*
+app.use("/api", (req, res, next) => {
+  // Avoid redirect loops for /api/v1 paths
+  if (req.originalUrl.startsWith("/api/v1")) return next();
+  const newUrl = req.originalUrl.replace(/^\/api/, "/api/v1");
+  res.redirect(307, newUrl);
 });
 
 // Error handler

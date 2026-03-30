@@ -140,6 +140,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Review"],
     }),
+
+    createStockAlert: builder.mutation({
+      query: (productId) => ({
+        url: "/stock-alerts",
+        method: "POST",
+        body: { productId },
+      }),
+    }),
   }),
 });
 
@@ -161,4 +169,5 @@ export const {
   useAddReviewMutation,
   useUpdateReviewMutation,
   useDeleteReviewMutation,
+  useCreateStockAlertMutation,
 } = apiSlice;

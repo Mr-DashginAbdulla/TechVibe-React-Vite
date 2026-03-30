@@ -138,6 +138,15 @@ export const useOrderDetails = (id) => {
     }
   };
 
+  const handleDownloadInvoice = async () => {
+    try {
+      await orderService.downloadInvoice(id);
+      toast.success(t("orders.invoiceDownloaded") || "Invoice downloaded successfully");
+    } catch (error) {
+      toast.error(t("messages.error"));
+    }
+  };
+
   return {
     order,
     isLoading,
@@ -153,5 +162,6 @@ export const useOrderDetails = (id) => {
     handleReorder,
     handleEditOrder,
     handleCancelOrder,
+    handleDownloadInvoice,
   };
 };

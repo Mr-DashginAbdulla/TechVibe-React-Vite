@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Edit3, RefreshCw } from "lucide-react";
+import { ArrowLeft, Edit3, RefreshCw, Download } from "lucide-react";
 
 const OrderDetailsHeader = ({
   order,
@@ -12,6 +12,7 @@ const OrderDetailsHeader = ({
   onEdit,
   onReorder,
   isReordering,
+  onDownloadInvoice,
 }) => {
   const { t } = useTranslation();
 
@@ -58,6 +59,13 @@ const OrderDetailsHeader = ({
               {t("order.cancelOrder")}
             </button>
           )}
+          <button
+            onClick={onDownloadInvoice}
+            className="flex items-center gap-[6px] px-[10px] sm:px-[12px] py-[6px] sm:py-[8px] text-[12px] sm:text-[13px] font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors"
+          >
+            <Download className="w-[14px] h-[14px]" />
+            {t("orders.downloadInvoice") || "Download Invoice"}
+          </button>
           {canEditOrder && (
             <button
               onClick={onEdit}

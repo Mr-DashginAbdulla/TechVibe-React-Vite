@@ -66,6 +66,7 @@ const FeaturedProducts = ({
                   isFavorite={isInWishlist(product.id)}
                   onAddToCart={onAddToCart}
                   onToggleFavorite={onToggleFavorite}
+                  product={product}
                 />
               </div>
             ))}

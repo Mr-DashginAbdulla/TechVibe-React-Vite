@@ -78,6 +78,25 @@ export const orderService = {
     fetchApi(`/orders/${id}`, {
       method: "DELETE",
     }),
+  downloadInvoice: async (id) => {
+    const token = localStorage.getItem("admin_auth_token");
+    const response = await fetch(`${API_URL}/orders/${id}/invoice`, {
+      method: 'GET',
+      headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+    });
+    if (!response.ok) {
+        throw new Error("Download failed");
+    }
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invoice-${id}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }
 };
 
 export const userService = {
@@ -150,6 +169,11 @@ export const statsService = {
   getStats: () => fetchApi("/stats"),
 };
 
+export const auditLogService = {
+  getAll: (params = "") => fetchApi(`/audit-logs${params ? "?" + params : ""}`),
+  getById: (id) => fetchApi(`/audit-logs/${id}`),
+};
+
 export const authService = {
   login: async (email, password) => {
     try {
@@ -202,4 +226,5 @@ export default {
   brandService,
   authService,
   statsService,
+  auditLogService,
 };

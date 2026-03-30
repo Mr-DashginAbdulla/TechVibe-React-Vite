@@ -2,6 +2,7 @@ const express = require("express");
 const Category = require("../models/Category");
 const { adminAuth } = require("../middleware/auth");
 const { cacheMiddleware, invalidateCacheMiddleware } = require("../middleware/cache");
+const { auditMiddleware } = require("../middleware/auditLog");
 const router = express.Router();
 
 // GET /api/categories
@@ -28,7 +29,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST /api/categories - Admin only
-router.post("/", adminAuth, invalidateCacheMiddleware("/api/categories"), async (req, res, next) => {
+router.post("/", adminAuth, auditMiddleware("category"), invalidateCacheMiddleware("/api/v1/categories"), async (req, res, next) => {
   try {
     const data = { ...req.body };
     if (!data._id) {
@@ -42,7 +43,7 @@ router.post("/", adminAuth, invalidateCacheMiddleware("/api/categories"), async 
 });
 
 // PATCH /api/categories/:id - Admin only
-router.patch("/:id", adminAuth, invalidateCacheMiddleware("/api/categories"), async (req, res, next) => {
+router.patch("/:id", adminAuth, auditMiddleware("category"), invalidateCacheMiddleware("/api/v1/categories"), async (req, res, next) => {
   try {
     const category = await Category.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -58,7 +59,7 @@ router.patch("/:id", adminAuth, invalidateCacheMiddleware("/api/categories"), as
 });
 
 // DELETE /api/categories/:id - Admin only
-router.delete("/:id", adminAuth, invalidateCacheMiddleware("/api/categories"), async (req, res, next) => {
+router.delete("/:id", adminAuth, auditMiddleware("category"), invalidateCacheMiddleware("/api/v1/categories"), async (req, res, next) => {
   try {
     const category = await Category.findByIdAndDelete(req.params.id);
     if (!category) {

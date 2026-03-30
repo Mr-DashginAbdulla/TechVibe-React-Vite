@@ -1,6 +1,7 @@
 const express = require("express");
 const Brand = require("../models/Brand");
 const { adminAuth } = require("../middleware/auth");
+const { auditMiddleware } = require("../middleware/auditLog");
 const router = express.Router();
 
 // GET /api/brands
@@ -27,7 +28,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST /api/brands - Admin only
-router.post("/", adminAuth, async (req, res, next) => {
+router.post("/", adminAuth, auditMiddleware("brand"), async (req, res, next) => {
   try {
     const data = { ...req.body };
     if (!data._id) {
@@ -41,7 +42,7 @@ router.post("/", adminAuth, async (req, res, next) => {
 });
 
 // PATCH /api/brands/:id - Admin only
-router.patch("/:id", adminAuth, async (req, res, next) => {
+router.patch("/:id", adminAuth, auditMiddleware("brand"), async (req, res, next) => {
   try {
     const brand = await Brand.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -57,7 +58,7 @@ router.patch("/:id", adminAuth, async (req, res, next) => {
 });
 
 // DELETE /api/brands/:id - Admin only
-router.delete("/:id", adminAuth, async (req, res, next) => {
+router.delete("/:id", adminAuth, auditMiddleware("brand"), async (req, res, next) => {
   try {
     const brand = await Brand.findByIdAndDelete(req.params.id);
     if (!brand) {

@@ -28,6 +28,7 @@ const OrderDetails = () => {
     handleReorder,
     handleEditOrder,
     handleCancelOrder,
+    handleDownloadInvoice,
   } = useOrderDetails(id);
 
   if (isLoading) {
@@ -70,6 +71,7 @@ const OrderDetails = () => {
         onEdit={handleEditOrder}
         onReorder={handleReorder}
         isReordering={isReordering}
+        onDownloadInvoice={handleDownloadInvoice}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[24px]">

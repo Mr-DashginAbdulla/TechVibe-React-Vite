@@ -13,6 +13,7 @@ import {
   Shield,
   X,
   Tag,
+  FileText,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import Logo from "@/assets/images/TechVibeLogo-LightTransparent.png";
@@ -31,8 +32,13 @@ const Sidebar = ({ isOpen, onClose }) => {
     { path: "/reviews", icon: Star, label: t("sidebar.reviews") },
     { path: "/brands", icon: Award, label: t("sidebar.brands") },
     { path: "/promo-codes", icon: Tag, label: t("sidebar.promoCodes") },
-    { path: "/settings", icon: Settings, label: t("sidebar.settings") },
   ];
+
+  if (isSuperAdmin) {
+    menuItems.push({ path: "/audit-logs", icon: FileText, label: t("sidebar.auditLogs") });
+  }
+
+  menuItems.push({ path: "/settings", icon: Settings, label: t("sidebar.settings") });
 
   const isActive = (path) => {
     if (path === "/") return location.pathname === "/";

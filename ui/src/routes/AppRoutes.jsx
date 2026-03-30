@@ -10,6 +10,7 @@ const Deals = lazy(() => import("@/pages/public/Deals/Deals"));
 const ProductDetails = lazy(
   () => import("@/pages/public/Products/ProductDetails"),
 );
+const Compare = lazy(() => import("@/pages/public/Compare/Compare"));
 const Checkout = lazy(() => import("@/pages/public/Checkout/Checkout"));
 const OrderSuccess = lazy(
   () => import("@/pages/public/OrderSuccess/OrderSuccess"),
@@ -63,6 +64,7 @@ export default function AppRoutes() {
           <Route path="/deals" element={<Deals />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/compare" element={<Compare />} />
           <Route
             path="/basket"
             element={<Navigate to="/profile/cart" replace />}

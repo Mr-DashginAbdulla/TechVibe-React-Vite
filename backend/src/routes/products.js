@@ -1,8 +1,13 @@
 const express = require("express");
 const Product = require("../models/Product");
+const Category = require("../models/Category");
+const Brand = require("../models/Brand");
+const StockAlert = require("../models/StockAlert");
+const Notification = require("../models/Notification");
 const { adminAuth } = require("../middleware/auth");
 const { cacheMiddleware, invalidateCacheMiddleware } = require("../middleware/cache");
 const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
+const { auditMiddleware } = require("../middleware/auditLog");
 const router = express.Router();
 
 // GET /api/products - Get all products (with optional filters, paginated)
@@ -60,7 +65,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST /api/products - Admin only
-router.post("/", adminAuth, invalidateCacheMiddleware("/api/products"), async (req, res, next) => {
+router.post("/", adminAuth, auditMiddleware("product"), invalidateCacheMiddleware("/api/v1/products"), async (req, res, next) => {
   try {
     const data = { ...req.body };
     if (!data._id) {
@@ -78,7 +83,7 @@ router.post("/", adminAuth, invalidateCacheMiddleware("/api/products"), async (r
 });
 
 // PATCH /api/products/:id - Admin only
-router.patch("/:id", adminAuth, invalidateCacheMiddleware("/api/products"), async (req, res, next) => {
+router.patch("/:id", adminAuth, auditMiddleware("product"), invalidateCacheMiddleware("/api/v1/products"), async (req, res, next) => {
   try {
     const updates = { ...req.body };
     if (updates.isNew !== undefined) {
@@ -92,6 +97,34 @@ router.patch("/:id", adminAuth, invalidateCacheMiddleware("/api/products"), asyn
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
+
+    // Əgər stok > 0 və stok yenilənibsə, istifadəçilərə bildiriş göndər
+    if (updates.stock !== undefined && product.stock > 0) {
+      const alerts = await StockAlert.find({ 
+        productId: product._id, 
+        notified: false 
+      });
+
+      if (alerts.length > 0) {
+        // Hər bir istifadəçiyə bildiriş yarat
+        const notifications = alerts.map(alert => ({
+          userId: alert.userId,
+          title: "Məhsul yenidən anbarda!",
+          message: `${product.name} məhsulu indi satışdadır. Tələsin!`,
+          type: "system",
+          read: false
+        }));
+
+        await Notification.insertMany(notifications);
+
+        // Alertləri işarələ ki, təkrar göndərilməsin
+        await StockAlert.updateMany(
+          { _id: { $in: alerts.map(a => a._id) } },
+          { $set: { notified: true } }
+        );
+      }
+    }
+
     res.json(product);
   } catch (error) {
     next(error);
@@ -99,7 +132,7 @@ router.patch("/:id", adminAuth, invalidateCacheMiddleware("/api/products"), asyn
 });
 
 // DELETE /api/products/:id - Admin only
-router.delete("/:id", adminAuth, invalidateCacheMiddleware("/api/products"), async (req, res, next) => {
+router.delete("/:id", adminAuth, auditMiddleware("product"), invalidateCacheMiddleware("/api/v1/products"), async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
     if (!product) {
