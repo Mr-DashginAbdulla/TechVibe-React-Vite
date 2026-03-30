@@ -152,7 +152,7 @@ const Compare = () => {
 
   return (
     <div className="container mx-auto px-[20px] py-[40px]">
-      <div className="flex flex-col sm:flex-row items-center justify-between border-b border-border pb-[20px] mb-[30px] gap-[16px]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-border pb-[20px] mb-[30px] gap-[16px]">
         <div>
           <h1 className="text-[28px] font-bold text-foreground">
             {t("compare.title") || "Məhsulların Müqayisəsi"}
@@ -163,14 +163,15 @@ const Compare = () => {
         </div>
         <button
           onClick={() => dispatch(clearCompare())}
-          className="flex items-center gap-[8px] text-destructive hover:bg-destructive/10 px-[16px] py-[8px] rounded-[8px] transition"
+          className="flex items-center gap-[8px] text-destructive hover:bg-destructive/10 px-[16px] py-[8px] rounded-[8px] transition w-full sm:w-auto justify-center sm:justify-start"
         >
           <Trash2 className="w-[18px] h-[18px]" />
           <span>{t("compare.clearAll") || "Hamısını Təmizlə"}</span>
         </button>
       </div>
 
-      <div className="overflow-x-auto pb-[20px]">
+      {/* DESKTOP VIEW (TABLE) */}
+      <div className="hidden md:block overflow-x-auto pb-[20px]">
         <table className="w-full border-collapse min-w-[800px]">
           <tbody>
             {/* PRODUCT HEADER */}
@@ -323,6 +324,133 @@ const Compare = () => {
             })}
           </tbody>
         </table>
+      </div>
+
+      {/* MOBILE VIEW */}
+      <div className="md:hidden space-y-[24px]">
+        {/* Mobile Product Cards horizontal slider */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-[12px] pb-[16px] -mx-[20px] px-[20px] no-scrollbar">
+          {populatedItems.map((item) => (
+            <div key={item.id} className="min-w-[200px] w-[200px] sm:min-w-[240px] sm:w-[240px] shrink-0 snap-center rounded-[12px] border border-border bg-card p-[16px] flex flex-col relative shadow-sm">
+              <button
+                onClick={() => dispatch(removeFromCompare(item.id))}
+                className="absolute top-[8px] right-[8px] p-[6px] bg-background/80 hover:bg-destructive hover:text-white rounded-full text-muted-foreground transition z-10 shadow-sm"
+              >
+                <Trash2 className="w-[14px] h-[14px]" />
+              </button>
+              <Link to={`/product/${item.slug || item.id}`} className="flex h-[120px] w-full mb-[12px] items-center justify-center p-[10px] bg-secondary/50 rounded-[8px]">
+                <img
+                  src={item.mainImage || item.images?.[0] || 'https://via.placeholder.com/150'}
+                  alt={item.name}
+                  className="max-h-full max-w-full object-contain mix-blend-multiply"
+                />
+              </Link>
+              <Link to={`/product/${item.slug || item.id}`} className="text-[14px] font-semibold text-foreground hover:text-primary transition-colors line-clamp-2 h-[40px] mb-[8px]">
+                {item.name}
+              </Link>
+              <div className="text-[16px] font-bold text-foreground mb-[12px] mt-auto">
+                {item.salePrice ? (
+                  <div className="flex flex-wrap items-center gap-[6px]">
+                    <span>{formatPrice(item.salePrice)}</span>
+                    <span className="text-[12px] text-muted-foreground line-through">{formatPrice(item.price)}</span>
+                  </div>
+                ) : (
+                  <span>{formatPrice(item.price)}</span>
+                )}
+              </div>
+              <button
+                onClick={() => handleAddToCart(item)}
+                className="w-full py-[8px] bg-primary text-primary-foreground rounded-[6px] flex items-center justify-center gap-[6px] font-medium text-[13px] hover:bg-primary/90 transition"
+              >
+                <ShoppingCart className="w-[14px] h-[14px]" />
+                {t("product.addToCart", { defaultValue: "Səbətə At" })}
+              </button>
+            </div>
+          ))}
+
+          {/* Add more slot for mobile */}
+          {populatedItems.length < 4 && (
+            <div className="min-w-[200px] w-[200px] sm:min-w-[240px] sm:w-[240px] shrink-0 snap-center rounded-[12px] border border-dashed border-border p-[16px] flex flex-col items-center justify-center bg-secondary/20 relative">
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowPicker(!showPicker);
+                }}
+                className="w-[50px] h-[50px] rounded-full bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-colors focus:outline-none mb-[12px]"
+              >
+                <span className="text-[20px] text-muted-foreground">+</span>
+              </button>
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowPicker(!showPicker);
+                }} 
+                className="text-[13px] font-medium text-primary hover:underline focus:outline-none text-center"
+              >
+                {t("compare.addMore") || "Məhsul əlavə et"}
+              </button>
+              
+              {showPicker && (
+                <div ref={dropdownRef} className="absolute z-50 left-1/2 -translate-x-1/2 top-[50%] w-[200px]">
+                  <ProductPicker
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    searchInputRef={searchInputRef}
+                    availableProducts={availableProducts}
+                    onSelect={handleAddProduct}
+                  />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Mobile Specs List Mode (Vertical Grouped Cards) */}
+        <div className="bg-card border border-border rounded-xl p-[16px] shadow-sm">
+          <h3 className="text-[14px] font-bold uppercase tracking-wide text-foreground mb-[16px] pb-[8px] border-b border-border flex items-center justify-between">
+            <span>{t("product.brand", { defaultValue: "Brend" })} & {t("product.category", { defaultValue: "Kateqoriya" })}</span>
+          </h3>
+          <div className="space-y-[12px]">
+            {populatedItems.map((item) => (
+              <div key={`bc-${item.id}`} className="flex justify-between items-center text-[13px] pb-[8px] border-b border-border border-dashed last:border-0 last:pb-0">
+                <span className="font-semibold text-foreground text-left w-1/2 pr-[8px] line-clamp-1">{item.name}</span>
+                <span className="text-muted-foreground w-1/2 text-right">
+                  {item.brand?.name || item.brand || "-"} / {item.category?.name || item.category || "-"}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {specKeys.map(key => {
+          // Check if values are different across products (for highlighting differences)
+          const values = populatedItems.map(item => item.specs ? item.specs[key] : null);
+          const hasValues = values.some(v => v !== null && v !== undefined);
+          if (!hasValues) return null; // skip if completely empty for all
+          
+          const isDifferent = new Set(values).size > 1;
+
+          return (
+            <div key={`mobile-spec-${key}`} className={`rounded-xl p-[16px] shadow-sm transition-colors border ${isDifferent ? "bg-accent/20 border-accent/20" : "bg-card border-border"}`}>
+              <h3 className="text-[14px] font-bold uppercase tracking-wide text-foreground mb-[12px] pb-[8px] border-b border-border/50">
+                {t(`specs.${key.replace(/\s+/g, "")}`, { defaultValue: key })}
+              </h3>
+              <div className="space-y-[10px]">
+                {populatedItems.map((item) => {
+                  const value = item.specs?.[key] || "-";
+                  return (
+                    <div key={`spec-val-${item.id}-${key}`} className="flex justify-between items-start text-[13px] gap-[12px]">
+                      <span className="font-semibold text-foreground/80 w-5/12 text-left leading-snug line-clamp-2">{item.name}</span>
+                      <span className={`w-7/12 text-right leading-snug ${isDifferent ? "text-primary font-medium" : "text-muted-foreground"}`}>
+                        {value}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
