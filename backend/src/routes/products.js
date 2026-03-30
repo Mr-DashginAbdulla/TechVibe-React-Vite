@@ -1,7 +1,7 @@
 const express = require("express");
 const Product = require("../models/Product");
 const { adminAuth } = require("../middleware/auth");
-const { cacheMiddleware } = require("../middleware/cache");
+const { cacheMiddleware, invalidateCacheMiddleware } = require("../middleware/cache");
 const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
 const router = express.Router();
 
@@ -60,7 +60,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST /api/products - Admin only
-router.post("/", adminAuth, async (req, res, next) => {
+router.post("/", adminAuth, invalidateCacheMiddleware("/api/products"), async (req, res, next) => {
   try {
     const data = { ...req.body };
     if (!data._id) {
@@ -78,7 +78,7 @@ router.post("/", adminAuth, async (req, res, next) => {
 });
 
 // PATCH /api/products/:id - Admin only
-router.patch("/:id", adminAuth, async (req, res, next) => {
+router.patch("/:id", adminAuth, invalidateCacheMiddleware("/api/products"), async (req, res, next) => {
   try {
     const updates = { ...req.body };
     if (updates.isNew !== undefined) {
@@ -99,7 +99,7 @@ router.patch("/:id", adminAuth, async (req, res, next) => {
 });
 
 // DELETE /api/products/:id - Admin only
-router.delete("/:id", adminAuth, async (req, res, next) => {
+router.delete("/:id", adminAuth, invalidateCacheMiddleware("/api/products"), async (req, res, next) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
     if (!product) {

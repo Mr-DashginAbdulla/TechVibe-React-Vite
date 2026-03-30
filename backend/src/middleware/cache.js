@@ -25,4 +25,38 @@ const cacheMiddleware = (req, res, next) => {
   }
 };
 
-module.exports = { cache, cacheMiddleware };
+/**
+ * Invalidate all cache entries that start with the given prefix.
+ * Example: invalidateCache("/api/products") clears all product-related cache entries.
+ * @param {string} prefix - URL prefix to match against cached keys
+ */
+const invalidateCache = (prefix) => {
+  const keys = cache.keys();
+  const keysToDelete = keys.filter((key) => key.startsWith(prefix));
+  if (keysToDelete.length > 0) {
+    cache.del(keysToDelete);
+  }
+};
+
+/**
+ * Middleware factory that invalidates cache for a given route prefix
+ * after a successful POST/PATCH/DELETE operation.
+ * Usage: router.post("/", invalidateCacheMiddleware("/api/products"), handler)
+ * @param {string} prefix - URL prefix to invalidate
+ */
+const invalidateCacheMiddleware = (prefix) => {
+  return (req, res, next) => {
+    // Hook into res.json to invalidate cache after successful response
+    const originalJson = res.json;
+    res.json = function (body) {
+      // Only invalidate on successful operations (2xx status codes)
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        invalidateCache(prefix);
+      }
+      originalJson.call(this, body);
+    };
+    next();
+  };
+};
+
+module.exports = { cache, cacheMiddleware, invalidateCache, invalidateCacheMiddleware };

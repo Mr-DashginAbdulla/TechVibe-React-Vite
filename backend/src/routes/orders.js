@@ -5,6 +5,7 @@ const User = require("../models/User");
 const { auth, adminAuth } = require("../middleware/auth");
 const sendEmail = require("../utils/sendEmail");
 const { orderConfirmationTemplate, orderStatusUpdateTemplate } = require("../utils/emailTemplates");
+const PromoCode = require("../models/PromoCode");
 const Notification = require("../models/Notification");
 const { getIO } = require("../utils/socket");
 const { getPaginationParams, paginatedResponse } = require("../utils/pagination");
@@ -107,14 +108,27 @@ router.post("/", auth, async (req, res, next) => {
       });
     }
 
-    // Send confirmation email
+    // Increment promo code usage counter if a promo code was used
+    if (req.body.promoCode) {
+      try {
+        await PromoCode.findOneAndUpdate(
+          { code: req.body.promoCode.toUpperCase() },
+          { $inc: { usedCount: 1 } }
+        );
+      } catch (promoErr) {
+        console.error("Failed to increment promo code usage:", promoErr);
+      }
+    }
+
+    // Send confirmation email (multilingual)
     try {
       const user = await User.findById(req.user._id);
+      const lang = req.headers['accept-language']?.substring(0, 2) || 'az';
       if (user && user.email) {
         await sendEmail({
           to: user.email,
-          subject: `TechVibe Sifariş Təsdiqi - ${order.orderNumber}`,
-          html: orderConfirmationTemplate(order, user)
+          subject: `TechVibe - ${order.orderNumber}`,
+          html: orderConfirmationTemplate(order, user, lang)
         });
       }
     } catch (emailError) {
@@ -184,15 +198,16 @@ router.patch("/:id", auth, async (req, res, next) => {
       }
     }
 
-    // Send status update email if status changed
+    // Send status update email if status changed (multilingual)
     if (req.body.status && originalOrder.status !== req.body.status) {
       try {
         const user = await User.findById(order.userId);
+        const lang = req.headers['accept-language']?.substring(0, 2) || 'az';
         if (user && user.email) {
           await sendEmail({
             to: user.email,
-            subject: `TechVibe Sifariş Statusu: ${order.status.toUpperCase()} - ${order.orderNumber}`,
-            html: orderStatusUpdateTemplate(order, user)
+            subject: `TechVibe - ${order.orderNumber} [${order.status.toUpperCase()}]`,
+            html: orderStatusUpdateTemplate(order, user, lang)
           });
         }
       } catch (emailError) {

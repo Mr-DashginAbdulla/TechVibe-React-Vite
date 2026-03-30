@@ -76,7 +76,7 @@ router.patch("/:id", auth, async (req, res, next) => {
     const updatedUser = await User.findByIdAndUpdate(req.params.id, updates, {
       new: true,
       runValidators: true,
-    });
+    }).select("-password");
 
     res.json(updatedUser);
   } catch (error) {
